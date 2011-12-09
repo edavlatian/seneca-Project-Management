@@ -1,0 +1,108 @@
+﻿/* 
+Style Sheet for PRJ566 Screen Mock-ups
+By: Edouard Davlatian
+
+*/
+/* ---------------------------------------*/
+/*General Styles */
+/* ---------------------------------------*/
+body{
+background-color:white;
+font-family:Tahoma, Verdana, Arial, Helvetica, "Bitstream Versa Sans", sans-serif;
+}
+
+img{
+padding: 0px;
+margin: -3px;
+}
+
+/* ---------------------------------------*/
+/*Styles for Admin Pages
+/* ---------------------------------------*/
+
+ul#at-ul{
+list-style-type:none;
+padding-left:0px;
+padding-top:0px;
+margin-top:0px;
+
+}
+
+li.at-li{
+display:block;
+}
+
+hr.at-hr{
+color:#2F4F4F;
+background-color:#2F4F4F;
+border:0px;
+height:5px;
+clear:both;
+}
+
+/* ---------------------------------------*/
+/* Styles for Sponsor Pages
+/* ---------------------------------------*/
+
+hr.s-hr{
+	color:red;
+	background-color:red;
+	border:0px;
+	height:2px;
+	clear:both;
+}
+/* ---------------------------------------*/
+textarea#notif-ta{
+	height:65px;
+	width:50%;
+	background-color:white;
+	font-size:15px;
+}
+/* ---------------------------------------*/
+/* Menu Style */
+ul#menu{
+	list-style-type:none;
+	height:30px;
+	margin:0px;
+	padding:0px;
+	background-color:#059;
+}
+
+li.menu-item{
+	margin:2px;
+	float:left;
+	background-color:#38C;
+}
+
+ul#menu a{
+	padding-right:5px;
+	padding-left:5px;
+	display:block;
+	font-size:20px;
+	color:white;
+}
+/* Menu Style end */
+/* ---------------------------------------*/
+/*Table Style */
+table, th, td{
+	border:1px;
+	padding:0px;
+	margin:1px;
+}
+
+table#prj-table{
+	width:80%;
+}
+
+th.prj-col{
+	font-size:18px;
+	font-weight:bold;
+	text-align:left;
+}
+
+td.prj-col{
+	font-size:15px;
+	text-align:left;
+}
+/*Table Style End*/
+/* ---------------------------------------*/

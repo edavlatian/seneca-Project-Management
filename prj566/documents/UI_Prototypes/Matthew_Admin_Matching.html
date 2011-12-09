@@ -1,0 +1,194 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html lang='en' xml:lang='en' xmlns='http://www.w3.org/1999/xhtml'>
+  <head>
+    <title>PRJ566 - Admin Matching</title>
+  </head>
+  <body>
+    <table> 
+      <tr>
+        <td colspan="2">
+          <table width="100%">
+            <tr>
+              <td width="402" style="background-image: url('header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('header_bg.jpg'); background-repeat: repeat;" width="1300"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr valign="top">
+        <td rowspan="5" align="left" width="200"> 
+          <img src="seneca_logo.gif" title="Seneca logo"/>
+          <br/>
+          <img src="cs_logo.gif" title="CS Logo"/>
+          <br/>
+          <a href="Matthew_Home.html">Home Page</a>
+          <br/>
+          <a href="aboutPRJ566.html">About PRJ566</a>
+          <br/>
+          <a href="http://cs.senecac.on.ca">CS Home</a>
+          <br/>
+          <a href="pastTeams.html">Past Teams</a>
+          <br/>
+          <a href="previousProjects.html">Previous Projects</a>
+          <br/>
+          <a href="currentProjects.html">Current Projects</a>
+          <br/>
+          <a href="pendingSponsorApps.html">Pending Sponsor Applications</a>
+          <br/>
+          <a href="pendingSponsorProj.html">Pending Sponsor Projects</a>
+          <br/>
+          <a href="matchTeamsSponsors.html">Match Sponsors and Teams</a>
+          <br/>
+          <a href="createTeams.html">Create Team Accounts</a>
+          <br/>
+          <br/> 
+          <div style="margin:2px; width:200px;">
+	  <script src="twitter.js"></script> 
+	  <script> 
+		new TWTR.Widget({
+  		version: 2,
+  		type: 'profile',
+  		rpp: 5,
+ 		interval: 6000,
+  		width: 'auto',
+  		height: 300,
+  		theme: {
+    		shell: {
+      		background: '#d5e7e9',
+      		color: '#000000'
+    		},
+    		tweets: {
+      		background: '#fffaff',
+     		color: '#000000',
+      		links: '#0772eb'
+    		}
+  		},	
+  		features: {
+    		scrollbar: false,
+    		loop: false,
+    		live: false,
+    		hashtags: true,
+    		timestamp: true,
+    		avatars: false,
+    		behavior: 'all'
+  		}
+		}).render().setUser('Seneca_College').start();
+		</script>
+		</div>
+          <br/>
+          <br/>
+          <table border="1">
+           <tr>
+            <td><u><b>Project Name</b></u><br/>
+                Here is a Comment<br/>
+                <br/>
+                <br/>
+                Another Comment<br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <a href="linkToProjectsArchive.html">Previous Projects Archive</a>
+             </td>
+            </tr>
+           </table>
+        </td>
+        <td align="right">
+          <p><b>Welcome, Admin_User!</b></p>
+          <input type="button" value="  Logout    " style="background-image: url('header_bg.jpg'); background-repeat: repeat;font-weight: bold"/>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            To initiate the matching process, click on the following button.
+            <input type="button" value="Initiate Matching" style="background-image: url('header_bg.jpg'); background-repeat: repeat;font-weight: bold"/><br/>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>The following will pop up after the matching has been completed successfully. Obviously conditions need to be discussed, but perhaps only allow it to be run on specific days of the year.
+             For example, days 20-20, 130-135 and 260-265. Otherwise, the button would be either inoperable or a message would be displayed saying that the current day isn't a valid day.
+          </p>
+          <br/>
+          <table width="50%" align="center">
+            <tr>
+              <th>Team/Sponsor</th>
+              <th>Accept</th>
+              <th>Decline</th>
+            </tr>
+            <tr>
+              <td>B.E.A.M Solutions w/ Seneca College
+              </td>
+              <td>
+                Yes&nbsp;<input type="checkbox" name="accept" value="accept" />
+              </td>
+              <td>
+                No&nbsp;<input type="checkbox" name="decline" value="decline" />
+              </td>
+            </tr>
+            <tr>
+              <td>Team Disarray w/ Uh.... Whoever
+              </td>
+              <td>
+                Yes&nbsp;<input type="checkbox" name="accept" value="accept" />
+              </td>
+              <td>
+                No&nbsp;<input type="checkbox" name="decline" value="decline" />
+              </td>
+            </tr>
+            <tr>
+              <td>Zombie Coder w/ City of Vaughn
+                <br/>
+		<br/>
+                <select name="Available Teams">
+                  <option value="bestbuy">Best Buy</option>
+                  <option value="tsc">Thornhill Soccer Club</option>
+                  <option value="futureshop">Future Shop</option>
+                </select>
+		<br/>
+		<br/>
+		<textarea rows="4" cols="50"></textarea>
+		<br/>
+		<input type="button" value="Update Match Information" style="background-image: url('header_bg.jpg'); background-repeat: repeat;font-weight: bold"/>
+              </td>
+              <td>
+                Yes&nbsp;<input type="checkbox" name="accept" value="accept" />
+              </td>
+              <td>
+                No&nbsp;<input type="checkbox" name="decline" value="decline" checked/>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <p>
+            If a match is declined by the administrator, the above drop-down list will be displayed below their Team/Sponsor with any Sponsors that have not been matched. Once a new sponsor has
+            been selected the drop-down list will be removed, the "Yes" checkbox will become checked and the sponsor will switch to the new updated sponsor. </br> <br/>
+            
+            After the admin is done accepting matches they will click the button below acknowledging that they have accepted the matches. When clicked it will launch of all appropriate notifications
+            to teams and sponsors, along with changing all appropriate status fields in the database.
+            
+            <br/>
+            <br/>
+            <center>
+              <input type="button" value="   Finalize Team Matches   " style="background-image: url('header_bg.jpg'); background-repeat: repeat;font-weight: bold"/>
+            </center>
+          </p>
+          <br/>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
