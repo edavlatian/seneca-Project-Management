@@ -4,7 +4,6 @@ The intent is to have a place where we can keep everyones code available all at 
 history of all work each memeber has done through the awesomesauceness that is git.
 
 Team Members:
-Anastasia Semionova (asemionova1@learn.senecac.on.ca) - Team Leader
-Matthew Schranz (mjschranz@learn.senecac.on.ca, schranz.m@gmail.com, @mjschranz) - Git Guy/Repo Manager?
+Matthew Schranz (mjschranz@learn.senecac.on.ca, schranz.m@gmail.com, @mjschranz) - Team Leader/Repo Manager
 Eouard Davlatian (edavlatian@learn.senecac.on.ca)
 Bryan Cohen (bmcohen@learn.senecac.on.ca)
