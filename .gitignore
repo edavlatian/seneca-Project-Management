@@ -1,0 +1,10 @@
+# .gitignore - List of filenames git should ignore
+
+# Filenames that should be ignored wherever they appear
+*~
+*.pyc
+*.pyo
+TAGS
+tags
+ID
+.DS_Store*
