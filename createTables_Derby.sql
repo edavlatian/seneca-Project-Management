@@ -20,7 +20,7 @@ ALTER TABLE COMPANY DROP CONSTRAINT fk_RepId;
 ALTER TABLE MILESTONE DROP CONSTRAINT fk_MilestoneProjectId;
 
 /* COMMENT Table Constraints */
-ALTER TABLE COMMENT DROP CONSTRAINT fk_CommentProjectId;
+ALTER TABLE COMMENTS DROP CONSTRAINT fk_CommentProjectId;
 
 /* TEAMMEMBER Table Constraints */
 ALTER TABLE TEAMMEMBER DROP CONSTRAINT fk_MemberTeamId;
@@ -36,7 +36,7 @@ ALTER TABLE PROJECTFILE DROP CONSTRAINT fk_FileProjectId;
 DROP TABLE PROJECTFILE;
 DROP TABLE TEAMPROJECTRANKING;
 DROP TABLE TEAMMEMBER;
-DROP TABLE COMMENT;
+DROP TABLE COMMENTS;
 DROP TABLE MILESTONE;
 DROP TABLE PROJECTS;
 DROP TABLE TEAMS;
@@ -47,23 +47,24 @@ CREATE TABLE USERS (
   userId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   userFName varchar(16) NOT NULL,
   userLName varchar(16) NOT NULL,
-  userEmail varchar(30) NOT NULL,
-  userIdentifier varchar(15) NOT NULL,
+  userEmail varchar(50) NOT NULL,
+  userIdentifier varchar(25) NOT NULL,
   userRole char(2) NOT NULL,
-  password varchar(40) NOT NULL,
-  accountStatus varchar(1) DEFAULT '1',
+  password varchar(50) NOT NULL,
+  accountStatus SMALLINT DEFAULT 1,
   CONSTRAINT pk_UserId PRIMARY KEY (userId)
 );
 
 CREATE TABLE TEAMS (
   teamId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   teamIdentifier varchar(16) NOT NULL,
-  teamEmail varchar(60) NOT NULL,
-  teamStatus varchar(1) DEFAULT '1',
+  teamEmail varchar(200) NOT NULL,
+  teamStatus SMALLINT DEFAULT 1,
   teamName varchar(20) NOT NULL,
-  projectConstraints varchar(100) NOT NULL,
+  teamConstraints varchar(100) NOT NULL,
   projectId INTEGER,
   userId INTEGER NOT NULL,
+  hasRegistered varchar(1) DEFAULT '0',
   CONSTRAINT fk_UserId FOREIGN KEY (userId) REFERENCES USERS (userId),
   CONSTRAINT pk_TeamId PRIMARY KEY (teamId)  
 );
@@ -72,7 +73,7 @@ CREATE TABLE COMPANY (
   companyId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   companyName varchar(25) NOT NULL,
   companyPhone varchar(12) NOT NULL,
-  projectStatus varchar(1) DEFAULT '0',
+  projectStatus SMALLINT DEFAULT 0,
   repId INTEGER NOT NULL,
   CONSTRAINT fk_RepId FOREIGN KEY (repId) REFERENCES USERS (userId),
   CONSTRAINT pk_CompanyId PRIMARY KEY (companyId)
@@ -107,9 +108,10 @@ CREATE TABLE MILESTONE (
   CONSTRAINT fk_MilestoneProjectId FOREIGN KEY (projectId) REFERENCES PROJECTS (projectId) 
 );
 
-CREATE TABLE COMMENT (
+CREATE TABLE COMMENTS (
   commentId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
-  commentStatus varchar(1) DEFAULT '0',
+  commentStatus SMALLINT DEFAULT 0,
+  commentDescription varchar(500) NOT NULL,
   projectId INTEGER NOT NULL,
   CONSTRAINT pk_CommentId PRIMARY KEY (commentId),
   CONSTRAINT fk_CommentProjectId FOREIGN KEY (projectId) REFERENCES PROJECTS (projectId)
@@ -119,10 +121,10 @@ CREATE TABLE TEAMMEMBER (
   memberId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   firstName varchar(15) NOT NULL,
   lastName varchar(15) NOT NULL,
-  email varchar(25) NOT NULL,
+  email varchar(50) NOT NULL,
   image BLOB,
   description varchar(250),
-  teamLeader varchar(1) DEFAULT '0',
+  teamLeader SMALLINT DEFAULT 0,
   teamId INTEGER,
   CONSTRAINT pk_MemberId PRIMARY KEY (memberId),
   CONSTRAINT fk_MemberTeamId FOREIGN KEY (teamId) REFERENCES TEAMS (teamId)
@@ -141,7 +143,7 @@ CREATE TABLE TEAMPROJECTRANKING (
 CREATE TABLE PROJECTFILE (
   fileId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   fileName varchar(16) NOT NULL,
-  fileDescription varchar(50) NOT NULL,
+  fileDescription varchar(120) NOT NULL,
   theFile BLOB NOT NULL,
   projectId INTEGER NOT NULL,
   CONSTRAINT pk_FileId PRIMARY KEY (fileId),
