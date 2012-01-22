@@ -64,7 +64,7 @@ CREATE TABLE TEAMS (
   teamConstraints varchar(100) NOT NULL,
   projectId INTEGER,
   userId INTEGER NOT NULL,
-  hasRegistered varchar(1) DEFAULT '0',
+  hasRegistered SMALLINT DEFAULT 0,
   CONSTRAINT fk_UserId FOREIGN KEY (userId) REFERENCES USERS (userId),
   CONSTRAINT pk_TeamId PRIMARY KEY (teamId)  
 );
