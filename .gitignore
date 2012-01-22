@@ -1,4 +1,7 @@
 # .gitignore - List of filenames git should ignore
+InitialMeeting.txt
+contact.txt
+prj566_zenit_Files/*
 
 # Filenames that should be ignored wherever they appear
 *~
