@@ -1,7 +1,3 @@
-/*
-  NOTE: There is no generation of the PROJECTFILES table because we have to insert binary data when making an entry to the database.
-*/
-
 /* USERS Table COMMANDS */
 /* password is 12345, TEAM LEADER*/
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
@@ -152,4 +148,17 @@ INSERT INTO TEAMPROJECTRANKING (teamId, projectId, whoRanked, ranking)
   
 INSERT INTO TEAMPROJECTRANKING (teamId, projectId, whoRanked, ranking)
   VALUES (1, 4, 'C', 1);
+  
+/* PROJECTFILE Table Commands */
+INSERT INTO PROJECTFILE (fileName, fileDescription, theFile, projectId)
+  VALUES ('Sample Data', 'Containts Sample data for use in design', 'http://www.reddit.com/r/funny/', 4);
+  
+INSERT INTO PROJECTFILE (fileName, fileDescription, theFile, projectId)
+  VALUES ('Sample Stuff', 'Containts Sample data for use with system design', 'http://www.reddit.com/r/gaming/', 3);
+  
+INSERT INTO PROJECTFILE (fileName, fileDescription, theFile, projectId)
+  VALUES ('Sample Images', 'Containts Sample data for use in implementation', 'http://www.reddit.com/r/politics/', 2);
+  
+INSERT INTO PROJECTFILE (fileName, fileDescription, theFile, projectId)
+  VALUES ('Sample Names', 'Containts Sample data for use in design process', 'http://www.reddit.com/r/music/', 1);
   
