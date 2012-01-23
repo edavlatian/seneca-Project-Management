@@ -144,7 +144,7 @@ CREATE TABLE PROJECTFILE (
   fileId INTEGER GENERATED ALWAYS AS IDENTITY (START WITH 1, INCREMENT BY 1),
   fileName varchar(16) NOT NULL,
   fileDescription varchar(120) NOT NULL,
-  theFile BLOB NOT NULL,
+  theFile varchar(500) NOT NULL,
   projectId INTEGER NOT NULL,
   CONSTRAINT pk_FileId PRIMARY KEY (fileId),
   CONSTRAINT fk_FileProjectId FOREIGN KEY (projectId) REFERENCES PROJECTS (projectId)
