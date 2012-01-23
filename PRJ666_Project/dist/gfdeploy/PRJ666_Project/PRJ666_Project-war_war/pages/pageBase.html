@@ -1,0 +1,216 @@
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../jqueryui/css/jquery-ui-1.8.16.custom.css" />
+    <script type="text/javascript" src="resources/js/twitter.js"></script>
+    <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        $('#nav li').hover(
+        function () {
+          //show its submenu
+          $('ul', this).show();
+        }, function () {
+          //hide its submenu
+          $('ul', this).hide();
+        });
+      });
+    </script>
+    <title>PRJ566 - Home</title>
+  </head>
+  <body>
+    <table> 
+      <tr>
+        <td colspan="2">
+          <table width="100%">
+            <tr>
+              <td width="402" style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr valign="top">
+        <td rowspan="5" align="left" width="200"> 
+          <img src="resources/images/seneca_logo.gif" title="Seneca logo"/>
+          <br/>
+          <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
+          <br/>
+          <div style="margin:2px; width:200px;">
+            <script type="text/javascript"> 
+		          new TWTR.Widget( {
+  		          version: 2,
+  		          type: "profile",
+  		          rpp: 5,
+ 		            interval: 6000,
+  		          width: "auto",
+  		          height: 300,
+  		          theme: {
+    		          shell: {
+      		          background: "#d5e7e9",
+      		          color: "#000000"
+    		          },
+    		          tweets: {
+      		          background: "#fffaff",
+     		            color: "#000000",
+      		          links: "#0772eb"
+    		          }
+  		          },	
+  		          features: {
+    		          scrollbar: false,
+    		          loop: false,
+    		          live: false,
+    		          hashtags: true,
+    		          timestamp: true,
+    	    	      avatars: false,
+    		          behavior: "all"
+  		          }
+		          } ).render().setUser( "Seneca_College" ).start();
+		        </script>
+		      </div>
+        </td>
+        <td>
+          <div id="menu">
+	          <ul id="nav" class="menuitem">	
+	            <li class="blacklink"><a href="#"> Team Leader </a>
+		            <ul>
+			            <li class="blacklink"><a href="createitem.html">Rank Projects</a></li>
+		              <li class="blacklink"><a href="edititem.html">Manage Team Page</a></li>
+		              <li class="blacklink"><a href="createitem.html">Manage Project Milestones</a></li>
+		            </ul>
+	            </li>
+	            <li class="blacklink"><a href="#"> Company Rep </a>
+		            <ul>
+			            <li class="blacklink"><a href="createuser.html">View Teams</a></li>
+			            <li class="blacklink"><a href="editaccount.html">Manage Company Account</a></li>
+			            <li class="blacklink"><a href="edituser.html">View Project Milestones</a></li>
+			            <li class="blacklink"><a href="createitem.html">View Project Status</a></li>
+			            <li class="blacklink"><a href="createitem.html">Rank Teams</a></li>
+			            <li class="blacklink"><a href="createitem.html">Add Project Comment</a></li>
+			            <li class="blacklink"><a href="createitem.html">Manage Project Files</a></li>
+		            </ul>
+	            </li>
+	            <li class="blacklink"><a href="#"> Supervisor </a>
+		            <ul>
+			            <li class="blacklink"><a href="createsupp.html">View Projects</a></li>
+			            <li class="blacklink"><a href="editsupplier.html">Change Project Status</a></li>
+		            </ul>
+	            </li>	
+	            <li id="poMenu" class="blacklink"><a href="#"> Instructor </a>
+		            <ul>
+			            <li class="blacklink"><a href="createpo.html">Approve Project</a></li>
+			            <li class="blacklink"><a href="modifypo.html">Match Projects/Teams</a></li>
+			            <li class="blacklink"><a href="receivepo.html">Pending Company Accounts</a></li>
+			            <li class="blacklink"><a href="returnpo.html">Create Team Account</a></li>
+			            <li class="blacklink"><a href="viewpo.html">Deactivate Team Account</a></li>
+			            <li class="blacklink"><a href="createitem.html">Change Project Status</a></li>
+			            <li class="blacklink"><a href="createitem.html">Add Projects to Semester</a></li>
+		            </ul>
+	            </li>
+	          </ul>
+	        </div>
+          <a href="login.jsp">Login</a>
+          &nbsp;&nbsp;&nbsp;
+          <a href="register.jsp">Register</a>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><u>News Title 1</u></b>
+          <p> 
+            Insert News Here.................................................................................<br/>
+            N<br/>
+            S<br/>
+            E<br/>
+            R<br/>
+            T<br/>
+            <br/>
+            N<br/>
+            E<br/>
+            W<br/>
+            S<br/>
+            <br/>
+            H<br/>
+            E<br/>
+            R<br/>
+	          E<br/>
+          </p>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><u>News Title 2</u></b>
+          <p>
+            Insert News Here.................................................................................<br/>
+            N<br/>
+            S<br/>
+            E<br/>
+            R<br/>
+            T<br/>
+            <br/>
+            N<br/>
+            E<br/>
+            W<br/>
+            S<br/>
+            <br/>
+            H<br/>
+            E<br/>
+            R<br/>
+            E<br/>
+          </p>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><u>News Title 3</u></b>
+          <p>
+            Insert News Here.................................................................................<br/>
+            N<br/>
+            S<br/>
+            E<br/>
+            R<br/>
+            T<br/>
+            <br/>
+            N<br/>
+            E<br/>
+            W<br/>
+            S<br/>
+            <br/>
+            H<br/>
+            E<br/>
+            R<br/>
+            E<br/>
+          </p>
+          <hr/>
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <b><u>News Title 4</u></b>
+          <p>
+            Insert News Here.................................................................................<br/>
+            N<br/>
+            S<br/>
+            E<br/>
+            R<br/>
+            T<br/>
+            <br/>
+            N<br/>
+            E<br/>
+            W<br/>
+            S<br/>
+            <br/>
+            H<br/>
+            E<br/>
+            R<br/>
+            E<br/>
+          </p>
+          <hr/>
+        </td>
+      </tr>             
+    </table>
+  </body>
+</html>

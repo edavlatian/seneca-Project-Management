@@ -1,43 +1,43 @@
 /* USERS Table COMMANDS */
 /* password is 12345, TEAM LEADER*/
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', '8cb2237d0679ca88db6464eac60da96345513964', 1);  
+  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);  
 
 /* password is 12345, TEAM LEADER*/
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, TEAM LEADER*/
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
 
 /* password is 12345, SUPERVISOR */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Emile', 'Ohan', 'emile.ohan@senecac.on.ca', 'PRJ666Supervisor', 'SU', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Emile', 'Ohan', 'emile.ohan@senecac.on.ca', 'PRJ666Supervisor', 'SU', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, INSTRUCTOR */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Mark', 'Buchner', 'mark.buchner@senecac.on.ca', 'PRJ566Instructor', 'IN', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Mark', 'Buchner', 'mark.buchner@senecac.on.ca', 'PRJ566Instructor', 'IN', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, ADMIN */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Evan', 'Weaver', 'evan.weaver@senecac.on.ca', 'ADMIN', 'AD', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Evan', 'Weaver', 'evan.weaver@senecac.on.ca', 'ADMIN', 'AD', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, COMPANYREP */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Mark', 'Schranz', 'mark.schranz@gmail.com', 'COMPANYREP', 'CR', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Mark', 'Schranz', 'mark.schranz@gmail.com', 'COMPANYREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, COMPANYREP */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Robin', 'Williams', 'robin.williams@yahoo.com', 'COMPANYREP', 'CR', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Robin', 'Williams', 'robin.williams@yahoo.com', 'COMPANYREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, COMPANYREP */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Bill', 'Maher', 'bmaher@gmail.com', 'COMPANYREP', 'CR', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Bill', 'Maher', 'bmaher@gmail.com', 'COMPANYREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
   
 /* password is 12345, COMPANYREP */  
 INSERT INTO USERS (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'COMPANYREP', 'CR', '8cb2237d0679ca88db6464eac60da96345513964', 1);
+  VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'COMPANYREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
 
   
 /* TEAMS Table Commands */
