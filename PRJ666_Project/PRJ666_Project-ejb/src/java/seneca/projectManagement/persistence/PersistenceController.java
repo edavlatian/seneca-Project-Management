@@ -12,26 +12,30 @@ import seneca.projectManagement.entity.Users;
  * @author matthewschranz
  */
 public class PersistenceController extends EntityControllerBase {
-  private static PersistenceController instance = new PersistenceController();
-  
-  public static synchronized PersistenceController getInstance() {
-    return instance;
-  }
+  private EntityManager em;
   
   public boolean addUser (Users aUser) {
-    EntityManager em = getEntityManager();
+    em = getEntityManager();
     
     try {
       em.getTransaction().begin();
       em.persist(aUser);
       em.getTransaction().commit();
-      em.close();
       return true;
     }
-    catch (Exception e) {
+    catch (IllegalArgumentException e) {
       e.printStackTrace();
-      em.close();
+      System.out.println("Caught an IllegalArgumentException");
       return false;
     }
+    catch (Exception e){
+      e.printStackTrace();
+      return false;
+    }
+    finally {
+      System.out.println("In finally clause");
+      em.close();
+    }
   }
+  
 }

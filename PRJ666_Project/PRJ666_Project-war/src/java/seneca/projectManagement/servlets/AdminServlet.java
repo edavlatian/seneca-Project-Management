@@ -20,7 +20,7 @@ public class AdminServlet extends HttpServlet {
   private PersistenceController persistence;
   
   public void init(ServletConfig config) throws ServletException {
-    persistence = PersistenceController.getInstance();
+    persistence = new PersistenceController();
   }
                
   /** 
@@ -36,7 +36,13 @@ public class AdminServlet extends HttpServlet {
     try {
       boolean result;
       
-      Users aUser = new Users("Chris", "De Cairos", "cdecairos@learn.senecac.on.ca", "PRJ566SUM2012", "TL", "puppies");
+      Users aUser = new Users();
+      aUser.setUserfname("Chris");
+      aUser.setUserlname("De Cairos");
+      aUser.setUseremail("cdecairos@learn.senecac.on.ca");
+      aUser.setUseridentifier("PRJ566SUM2012");
+      aUser.setUserrole("TL");
+      aUser.setPassword("puppies");
       result = persistence.addUser(aUser);
       
       out.print("The result of adding the user was " + String.valueOf(result));

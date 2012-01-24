@@ -18,15 +18,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "PROJECTFILE", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "PROJECTFILE")
 @NamedQueries({
   @NamedQuery(name = "Projectfile.findAll", query = "SELECT p FROM Projectfile p"),
   @NamedQuery(name = "Projectfile.findByFileid", query = "SELECT p FROM Projectfile p WHERE p.fileid = :fileid"),

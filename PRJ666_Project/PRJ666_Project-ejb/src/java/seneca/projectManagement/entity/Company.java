@@ -21,16 +21,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "COMPANY", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "COMPANY")
 @NamedQueries({
   @NamedQuery(name = "Company.findAll", query = "SELECT c FROM Company c"),
   @NamedQuery(name = "Company.findByCompanyid", query = "SELECT c FROM Company c WHERE c.companyid = :companyid"),
@@ -116,7 +113,6 @@ public class Company implements Serializable {
     this.repid = repid;
   }
 
-  @XmlTransient
   public Collection<Projects> getProjectsCollection() {
     return projectsCollection;
   }

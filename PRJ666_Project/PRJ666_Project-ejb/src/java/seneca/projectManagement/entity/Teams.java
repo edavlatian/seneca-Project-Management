@@ -21,16 +21,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "TEAMS", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "TEAMS")
 @NamedQueries({
   @NamedQuery(name = "Teams.findAll", query = "SELECT t FROM Teams t"),
   @NamedQuery(name = "Teams.findByTeamid", query = "SELECT t FROM Teams t WHERE t.teamid = :teamid"),
@@ -74,7 +71,7 @@ public class Teams implements Serializable {
   private Short hasregistered;
   @OneToMany(mappedBy = "teamid")
   private Collection<Teammember> teammemberCollection;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "teams")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "teamid")
   private Collection<Teamprojectranking> teamprojectrankingCollection;
   @OneToMany(mappedBy = "teamid")
   private Collection<Projects> projectsCollection;
@@ -156,7 +153,6 @@ public class Teams implements Serializable {
     this.hasregistered = hasregistered;
   }
 
-  @XmlTransient
   public Collection<Teammember> getTeammemberCollection() {
     return teammemberCollection;
   }
@@ -165,7 +161,6 @@ public class Teams implements Serializable {
     this.teammemberCollection = teammemberCollection;
   }
 
-  @XmlTransient
   public Collection<Teamprojectranking> getTeamprojectrankingCollection() {
     return teamprojectrankingCollection;
   }
@@ -174,7 +169,6 @@ public class Teams implements Serializable {
     this.teamprojectrankingCollection = teamprojectrankingCollection;
   }
 
-  @XmlTransient
   public Collection<Projects> getProjectsCollection() {
     return projectsCollection;
   }

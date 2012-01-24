@@ -13,7 +13,7 @@ import seneca.projectManagement.entity.Teamprojectranking;
 import seneca.projectManagement.entity.Teams;
 import seneca.projectManagement.entity.Users;
 
-@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-01-23T16:07:53")
+@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-01-23T23:01:56")
 @StaticMetamodel(Projects.class)
 public class Projects_ { 
 

@@ -5,8 +5,6 @@
 
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
-<jsp:useBean id="myBean" class="seneca.projectManagement.persistence.DataPersistence" scope="session"/>
-<jsp:setProperty name="myBean" property="*"/> 
 
 <!DOCTYPE html>
 <html>

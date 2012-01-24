@@ -18,15 +18,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "COMMENTS", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "COMMENTS")
 @NamedQueries({
   @NamedQuery(name = "Comments.findAll", query = "SELECT c FROM Comments c"),
   @NamedQuery(name = "Comments.findByCommentid", query = "SELECT c FROM Comments c WHERE c.commentid = :commentid"),

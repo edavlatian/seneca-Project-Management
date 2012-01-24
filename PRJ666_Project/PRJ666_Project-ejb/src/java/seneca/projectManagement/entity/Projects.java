@@ -24,16 +24,13 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "PROJECTS", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "PROJECTS")
 @NamedQueries({
   @NamedQuery(name = "Projects.findAll", query = "SELECT p FROM Projects p"),
   @NamedQuery(name = "Projects.findByProjectid", query = "SELECT p FROM Projects p WHERE p.projectid = :projectid"),
@@ -83,7 +80,7 @@ public class Projects implements Serializable {
   private Collection<Projectfile> projectfileCollection;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
   private Collection<Comments> commentsCollection;
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "projects")
+  @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
   private Collection<Teamprojectranking> teamprojectrankingCollection;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "projectid")
   private Collection<Milestone> milestoneCollection;
@@ -171,7 +168,6 @@ public class Projects implements Serializable {
     this.agreementdate = agreementdate;
   }
 
-  @XmlTransient
   public Collection<Projectfile> getProjectfileCollection() {
     return projectfileCollection;
   }
@@ -180,7 +176,6 @@ public class Projects implements Serializable {
     this.projectfileCollection = projectfileCollection;
   }
 
-  @XmlTransient
   public Collection<Comments> getCommentsCollection() {
     return commentsCollection;
   }
@@ -189,7 +184,6 @@ public class Projects implements Serializable {
     this.commentsCollection = commentsCollection;
   }
 
-  @XmlTransient
   public Collection<Teamprojectranking> getTeamprojectrankingCollection() {
     return teamprojectrankingCollection;
   }
@@ -198,7 +192,6 @@ public class Projects implements Serializable {
     this.teamprojectrankingCollection = teamprojectrankingCollection;
   }
 
-  @XmlTransient
   public Collection<Milestone> getMilestoneCollection() {
     return milestoneCollection;
   }
@@ -231,7 +224,6 @@ public class Projects implements Serializable {
     this.companyid = companyid;
   }
 
-  @XmlTransient
   public Collection<Teams> getTeamsCollection() {
     return teamsCollection;
   }

@@ -8,7 +8,7 @@ import seneca.projectManagement.entity.Company;
 import seneca.projectManagement.entity.Projects;
 import seneca.projectManagement.entity.Teams;
 
-@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-01-23T16:07:53")
+@Generated(value="EclipseLink-2.2.0.v20110202-r8913", date="2012-01-23T23:01:56")
 @StaticMetamodel(Users.class)
 public class Users_ { 
 

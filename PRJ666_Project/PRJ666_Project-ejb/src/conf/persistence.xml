@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="PRJ666_Project-ejbPU" transaction-type="JTA">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/sample</jta-data-source>
-    <exclude-unlisted-classes>false</exclude-unlisted-classes>
-    <properties/>
+    <class>seneca.projectManagement.entity.Comments</class>
+    <class>seneca.projectManagement.entity.Company</class>
+    <class>seneca.projectManagement.entity.Milestone</class>
+    <class>seneca.projectManagement.entity.Projectfile</class>
+    <class>seneca.projectManagement.entity.Projects</class>
+    <class>seneca.projectManagement.entity.Teammember</class>
+    <class>seneca.projectManagement.entity.Teamprojectranking</class>
+    <class>seneca.projectManagement.entity.Teams</class>
+    <class>seneca.projectManagement.entity.Users</class>
+    <exclude-unlisted-classes>true</exclude-unlisted-classes>
+    <properties>
+      <property name="eclipselink.logging.level" value="FINEST"/>
+    </properties>
   </persistence-unit>
 </persistence>

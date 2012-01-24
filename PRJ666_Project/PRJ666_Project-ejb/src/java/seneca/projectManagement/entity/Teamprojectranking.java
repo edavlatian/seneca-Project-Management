@@ -7,66 +7,78 @@ package seneca.projectManagement.entity;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "TEAMPROJECTRANKING", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "TEAMPROJECTRANKING")
 @NamedQueries({
   @NamedQuery(name = "Teamprojectranking.findAll", query = "SELECT t FROM Teamprojectranking t"),
-  @NamedQuery(name = "Teamprojectranking.findByTeamid", query = "SELECT t FROM Teamprojectranking t WHERE t.teamprojectrankingPK.teamid = :teamid"),
-  @NamedQuery(name = "Teamprojectranking.findByProjectid", query = "SELECT t FROM Teamprojectranking t WHERE t.teamprojectrankingPK.projectid = :projectid"),
-  @NamedQuery(name = "Teamprojectranking.findByWhoranked", query = "SELECT t FROM Teamprojectranking t WHERE t.teamprojectrankingPK.whoranked = :whoranked"),
+  @NamedQuery(name = "Teamprojectranking.findById", query = "SELECT t FROM Teamprojectranking t WHERE t.id = :id"),
+  @NamedQuery(name = "Teamprojectranking.findByWhoranked", query = "SELECT t FROM Teamprojectranking t WHERE t.whoranked = :whoranked"),
   @NamedQuery(name = "Teamprojectranking.findByRanking", query = "SELECT t FROM Teamprojectranking t WHERE t.ranking = :ranking")})
 public class Teamprojectranking implements Serializable {
   private static final long serialVersionUID = 1L;
-  @EmbeddedId
-  protected TeamprojectrankingPK teamprojectrankingPK;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "ID")
+  private Integer id;
+  @Basic(optional = false)
+  @NotNull
+  @Column(name = "WHORANKED")
+  private char whoranked;
   @Basic(optional = false)
   @NotNull
   @Column(name = "RANKING")
   private short ranking;
-  @JoinColumn(name = "TEAMID", referencedColumnName = "TEAMID", insertable = false, updatable = false)
+  @JoinColumn(name = "TEAMID", referencedColumnName = "TEAMID")
   @ManyToOne(optional = false)
-  private Teams teams;
-  @JoinColumn(name = "PROJECTID", referencedColumnName = "PROJECTID", insertable = false, updatable = false)
+  private Teams teamid;
+  @JoinColumn(name = "PROJECTID", referencedColumnName = "PROJECTID")
   @ManyToOne(optional = false)
-  private Projects projects;
+  private Projects projectid;
 
   public Teamprojectranking() {
   }
 
-  public Teamprojectranking(TeamprojectrankingPK teamprojectrankingPK) {
-    this.teamprojectrankingPK = teamprojectrankingPK;
+  public Teamprojectranking(Integer id) {
+    this.id = id;
   }
 
-  public Teamprojectranking(TeamprojectrankingPK teamprojectrankingPK, short ranking) {
-    this.teamprojectrankingPK = teamprojectrankingPK;
+  public Teamprojectranking(Integer id, char whoranked, short ranking) {
+    this.id = id;
+    this.whoranked = whoranked;
     this.ranking = ranking;
   }
 
-  public Teamprojectranking(int teamid, int projectid, char whoranked) {
-    this.teamprojectrankingPK = new TeamprojectrankingPK(teamid, projectid, whoranked);
+  public Integer getId() {
+    return id;
   }
 
-  public TeamprojectrankingPK getTeamprojectrankingPK() {
-    return teamprojectrankingPK;
+  public void setId(Integer id) {
+    this.id = id;
   }
 
-  public void setTeamprojectrankingPK(TeamprojectrankingPK teamprojectrankingPK) {
-    this.teamprojectrankingPK = teamprojectrankingPK;
+  public char getWhoranked() {
+    return whoranked;
+  }
+
+  public void setWhoranked(char whoranked) {
+    this.whoranked = whoranked;
   }
 
   public short getRanking() {
@@ -77,26 +89,26 @@ public class Teamprojectranking implements Serializable {
     this.ranking = ranking;
   }
 
-  public Teams getTeams() {
-    return teams;
+  public Teams getTeamid() {
+    return teamid;
   }
 
-  public void setTeams(Teams teams) {
-    this.teams = teams;
+  public void setTeamid(Teams teamid) {
+    this.teamid = teamid;
   }
 
-  public Projects getProjects() {
-    return projects;
+  public Projects getProjectid() {
+    return projectid;
   }
 
-  public void setProjects(Projects projects) {
-    this.projects = projects;
+  public void setProjectid(Projects projectid) {
+    this.projectid = projectid;
   }
 
   @Override
   public int hashCode() {
     int hash = 0;
-    hash += (teamprojectrankingPK != null ? teamprojectrankingPK.hashCode() : 0);
+    hash += (id != null ? id.hashCode() : 0);
     return hash;
   }
 
@@ -107,7 +119,7 @@ public class Teamprojectranking implements Serializable {
       return false;
     }
     Teamprojectranking other = (Teamprojectranking) object;
-    if ((this.teamprojectrankingPK == null && other.teamprojectrankingPK != null) || (this.teamprojectrankingPK != null && !this.teamprojectrankingPK.equals(other.teamprojectrankingPK))) {
+    if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
       return false;
     }
     return true;
@@ -115,7 +127,7 @@ public class Teamprojectranking implements Serializable {
 
   @Override
   public String toString() {
-    return "seneca.projectManagement.entity.Teamprojectranking[ teamprojectrankingPK=" + teamprojectrankingPK + " ]";
+    return "seneca.projectManagement.entity.Teamprojectranking[ id=" + id + " ]";
   }
   
 }

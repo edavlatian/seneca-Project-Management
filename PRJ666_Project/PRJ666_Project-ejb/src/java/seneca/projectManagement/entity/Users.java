@@ -19,17 +19,13 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import seneca.projectManagement.utils.CryptoUtil;
 
 /**
  *
  * @author matthewschranz
  */
 @Entity
-@Table(name = "USERS", catalog = "", schema = "APP")
-@XmlRootElement
+@Table(name = "USERS")
 @NamedQueries({
   @NamedQuery(name = "Users.findAll", query = "SELECT u FROM Users u"),
   @NamedQuery(name = "Users.findByUserid", query = "SELECT u FROM Users u WHERE u.userid = :userid"),
@@ -90,13 +86,18 @@ public class Users implements Serializable {
   public Users() {
   }
 
-  public Users(String userfname, String userlname, String useremail, String useridentifier, String userrole, String passphrase) {
+  public Users(Integer userid) {
+    this.userid = userid;
+  }
+
+  public Users(Integer userid, String userfname, String userlname, String useremail, String useridentifier, String userrole, String password) {
+    this.userid = userid;
     this.userfname = userfname;
     this.userlname = userlname;
     this.useremail = useremail;
     this.useridentifier = useridentifier;
     this.userrole = userrole;
-    this.password = CryptoUtil.encodeBase64(CryptoUtil.digestSHA(passphrase));
+    this.password = password;
   }
 
   public Integer getUserid() {
@@ -163,7 +164,6 @@ public class Users implements Serializable {
     this.accountstatus = accountstatus;
   }
 
-  @XmlTransient
   public Collection<Company> getCompanyCollection() {
     return companyCollection;
   }
@@ -172,7 +172,6 @@ public class Users implements Serializable {
     this.companyCollection = companyCollection;
   }
 
-  @XmlTransient
   public Collection<Projects> getProjectsCollection() {
     return projectsCollection;
   }
@@ -181,7 +180,6 @@ public class Users implements Serializable {
     this.projectsCollection = projectsCollection;
   }
 
-  @XmlTransient
   public Collection<Teams> getTeamsCollection() {
     return teamsCollection;
   }
