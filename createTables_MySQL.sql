@@ -18,6 +18,7 @@ DROP TABLE teams;
 DROP TABLE company;
 DROP TABLE accounts;
 
+
 CREATE TABLE accounts (
   userId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   userFName varchar(16) NOT NULL,
@@ -31,15 +32,15 @@ CREATE TABLE accounts (
 
 CREATE TABLE teams (
   teamId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  teamIdentifier varchar(16) NOT NULL,
   teamEmail varchar(200) NOT NULL,
   teamStatus int DEFAULT 1,
-  teamName varchar(20) NOT NULL,
-  teamConstraints varchar(100) NOT NULL,
+  teamName varchar(20),
+  teamConstraints varchar(100),
+  teamLogo BLOB,
   projectId int,
-  userId int NOT NULL,
   hasRegistered int DEFAULT 0,
-  CONSTRAINT fk_UserId FOREIGN KEY (userId) REFERENCES accounts (userId) 
+  userId int NOT NULL,
+  CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId) 
 )TYPE=innodb;
 
 CREATE TABLE company (
@@ -48,7 +49,7 @@ CREATE TABLE company (
   companyPhone varchar(12) NOT NULL,
   projectStatus int DEFAULT 0,
   repId int NOT NULL,
-  CONSTRAINT fk_RepId FOREIGN KEY (repId) REFERENCES accounts (userId)
+  CONSTRAINT fk_CompanyAccount FOREIGN KEY (repId) REFERENCES accounts (userId)
 )TYPE=innodb;
 
 CREATE TABLE projects (
@@ -99,7 +100,7 @@ CREATE TABLE teammember (
 )TYPE=innodb;
 
 CREATE TABLE teamprojectranking (
-  rankid int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  rankId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   teamId INT NOT NULL,
   projectId INT NOT NULL,
   whoRanked varchar(1) NOT NULL,
