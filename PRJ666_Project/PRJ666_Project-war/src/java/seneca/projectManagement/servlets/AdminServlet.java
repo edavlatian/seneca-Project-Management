@@ -2,12 +2,11 @@ package seneca.projectManagement.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import seneca.projectManagement.entity.Users;
+import seneca.projectManagement.databaseClasses.Accounts;
 import seneca.projectManagement.persistence.PersistenceController;
 
 /**
@@ -16,13 +15,7 @@ import seneca.projectManagement.persistence.PersistenceController;
  */
 
 public class AdminServlet extends HttpServlet {
-  
-  private PersistenceController persistence;
-  
-  public void init(ServletConfig config) throws ServletException {
-    persistence = new PersistenceController();
-  }
-               
+                 
   /** 
    * Processes requests for both HTTP <code>GET</code> and <code>POST</code> methods.
    * @param request servlet request
@@ -36,14 +29,14 @@ public class AdminServlet extends HttpServlet {
     try {
       boolean result;
       
-      Users aUser = new Users();
-      aUser.setUserfname("Chris");
-      aUser.setUserlname("De Cairos");
-      aUser.setUseremail("cdecairos@learn.senecac.on.ca");
-      aUser.setUseridentifier("PRJ566SUM2012");
-      aUser.setUserrole("TL");
-      aUser.setPassword("puppies");
-      result = persistence.addUser(aUser);
+      Accounts aAccount = new Accounts();
+      aAccount.setUserfname("Chris");
+      aAccount.setUserlname("De Cairos");
+      aAccount.setUseremail("cdecairos@learn.senecac.on.ca");
+      aAccount.setUseridentifier("PRJ566SUM2012");
+      aAccount.setUserrole("TL");
+      aAccount.setPassword("puppies");
+      result = PersistenceController.addAccount(aAccount);
       
       out.print("The result of adding the user was " + String.valueOf(result));
     } finally {      

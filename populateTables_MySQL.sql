@@ -90,17 +90,17 @@ INSERT INTO company (companyName, companyPhone, repId)
 
   
 /* projects Table Commands */
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, agreementDate, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', '06/21/2012', 4, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PRJ566SUM2012', 'PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5);
   
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, agreementDate, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', '06/19/2012', 3, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PRJ566SUM2012', 'PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5);
 
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, agreementDate, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', '06/20/2012', 2, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PRJ566SUM2012', 'PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5);
 
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, agreementDate, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', '05/19/2012', 1, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PRJ566SUM2012', 'PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
   
 
 /* comments Table Commands */
@@ -118,29 +118,29 @@ INSERT INTO comments (projectId, commentDescription)
 
  
 /* milestone Table Commands */
-INSERT INTO milestone (description, projectId, dueDate)
-  VALUES ('Design Underway', 1, '06/30/2012');
+INSERT INTO milestone (description, projectId)
+  VALUES ('Design Underway', 1);
   
-INSERT INTO milestone (description, projectId, dueDate)
-  VALUES ('Design Underway', 2, '06/30/2012');
+INSERT INTO milestone (description, projectId)
+  VALUES ('Design Underway', 2);
   
-INSERT INTO milestone (description, projectId, dueDate)
-  VALUES ('Design Underway', 3, '06/30/2012');
+INSERT INTO milestone (description, projectId)
+  VALUES ('Design Underway', 3);
   
-INSERT INTO milestone (description, projectId, dueDate)
-  VALUES ('Design Underway', 4, '06/30/2012');
+INSERT INTO milestone (description, projectId)
+  VALUES ('Design Underway', 4);
   
-INSERT INTO milestone (description, milestoneStatus, projectId, dueDate)
-  VALUES ('PID Completion', 'CO', 1, '08/30/2012');
+INSERT INTO milestone (description, milestoneStatus, projectId)
+  VALUES ('PID Completion', 'CO', 1);
   
-INSERT INTO milestone (description, milestoneStatus, projectId, dueDate)
-  VALUES ('PID Completion', 'CO', 2, '08/30/2012');
+INSERT INTO milestone (description, milestoneStatus, projectId)
+  VALUES ('PID Completion', 'CO', 2);
   
-INSERT INTO milestone (description, milestoneStatus, projectId, dueDate)
-  VALUES ('PID Completion', 'CO', 3, '08/30/2012');
+INSERT INTO milestone (description, milestoneStatus, projectId)
+  VALUES ('PID Completion', 'CO', 3);
   
-INSERT INTO milestone (description, milestoneStatus, projectId, dueDate)
-  VALUES ('PID Completion', 'CO', 4, '08/30/2012');
+INSERT INTO milestone (description, milestoneStatus, projectId)
+  VALUES ('PID Completion', 'CO', 4);
   
 /* teamprojectranking Table Command 
   Note: Only doing two here because pre populated data isn't nearly as useful, as we obviously need to see if ranking is being saved properly when being done.

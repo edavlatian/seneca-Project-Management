@@ -1,7 +1,8 @@
 /*
-  For now I am manually dropping all constraints to prevent the issues I had when
-  just simply dropping the tables. Might change this later so there is less code
-  needed to do the same thing.
+  NOTE:
+  
+  IF YOU ARE CREATING THE TABLES FOR THE FIRST TIME YOU MUST REMOVE THE DROP TABLE COMMANDS SINCE THOSE TABLES
+  WON'T EXIST YET.
 */
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -57,7 +58,7 @@ CREATE TABLE projects (
   prjName varchar(20),
   description varchar(500) NOT NULL,
   prjConstraints varchar(250) NOT NULL,
-  agreementDate DATE NOT NULL,
+  agreementDate TIMESTAMP DEFAULT NOW(),
   companyId int NOT NULL,
   teamId int,
   instructorId int,
@@ -73,7 +74,7 @@ CREATE TABLE milestone (
   description varchar(125) NOT NULL,
   projectId INTEGER NOT NULL,
   milestoneStatus char(2) DEFAULT 'NS',
-  dueDate DATE NOT NULL,
+  dueDate TIMESTAMP DEFAULT NOW(),
   CONSTRAINT fk_MilestoneProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId) 
 )TYPE=innodb;
 

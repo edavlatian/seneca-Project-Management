@@ -4,29 +4,26 @@
  */
 package seneca.projectManagement.persistence;
 
-import javax.persistence.EntityManager;
-import seneca.projectManagement.entity.Users;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import seneca.projectManagement.databaseClasses.Accounts;
 
 /**
  *
  * @author matthewschranz
  */
-public class PersistenceController extends EntityControllerBase {
-  private EntityManager em;
+public final class PersistenceController {
   
-  public boolean addUser (Users aUser) {
-    em = getEntityManager();
+  private static Connection conn;
+  
+  public static boolean addAccount (Accounts aUser) {
     
     try {
-      em.getTransaction().begin();
-      em.persist(aUser);
-      em.getTransaction().commit();
+      Class.forName(DBConnect.getDriver()).newInstance();
+      conn = DriverManager.getConnection(DBConnect.getDbUrl()+DBConnect.getDb(),
+              DBConnect.getDbUser(), DBConnect.getDbPass());
+      System.out.println("Connected to the database");
       return true;
-    }
-    catch (IllegalArgumentException e) {
-      e.printStackTrace();
-      System.out.println("Caught an IllegalArgumentException");
-      return false;
     }
     catch (Exception e){
       e.printStackTrace();
@@ -34,7 +31,7 @@ public class PersistenceController extends EntityControllerBase {
     }
     finally {
       System.out.println("In finally clause");
-      em.close();
+      //em.close();
     }
   }
   

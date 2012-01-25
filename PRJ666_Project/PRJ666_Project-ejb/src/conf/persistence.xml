@@ -3,15 +3,15 @@
   <persistence-unit name="PRJ666_Project-ejbPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <jta-data-source>jdbc/sample</jta-data-source>
-    <class>seneca.projectManagement.entity.Comments</class>
-    <class>seneca.projectManagement.entity.Company</class>
-    <class>seneca.projectManagement.entity.Milestone</class>
-    <class>seneca.projectManagement.entity.Projectfile</class>
-    <class>seneca.projectManagement.entity.Projects</class>
-    <class>seneca.projectManagement.entity.Teammember</class>
-    <class>seneca.projectManagement.entity.Teamprojectranking</class>
-    <class>seneca.projectManagement.entity.Teams</class>
-    <class>seneca.projectManagement.entity.Users</class>
+    <class>seneca.projectManagement.databaseClasses.Teams</class>
+    <class>seneca.projectManagement.databaseClasses.Projectfile</class>
+    <class>seneca.projectManagement.databaseClasses.Teammember</class>
+    <class>seneca.projectManagement.databaseClasses.Milestone</class>
+    <class>seneca.projectManagement.databaseClasses.Comments</class>
+    <class>seneca.projectManagement.databaseClasses.Company</class>
+    <class>seneca.projectManagement.databaseClasses.Projects</class>
+    <class>seneca.projectManagement.databaseClasses.Teamprojectranking</class>
+    <class>seneca.projectManagement.databaseClasses.Accounts</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
       <property name="eclipselink.logging.level" value="FINEST"/>
