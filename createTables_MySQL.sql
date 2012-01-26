@@ -28,20 +28,21 @@ CREATE TABLE accounts (
   userRole varchar(2) NOT NULL,
   password varchar(50) NOT NULL,
   accountStatus int DEFAULT 1
-)TYPE=innodb;
+);
 
 CREATE TABLE teams (
   teamId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  teamEmail varchar(200) NOT NULL,
+  teamEmail varchar(400) NOT NULL,
   teamStatus int DEFAULT 1,
   teamName varchar(20),
-  teamConstraints varchar(100),
+  teamConstraints varchar(120),
+  teamDescription varchar(400),
   teamLogo BLOB,
   projectId int,
   hasRegistered int DEFAULT 0,
   userId int NOT NULL,
   CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId) 
-)TYPE=innodb;
+);
 
 CREATE TABLE company (
   companyId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -50,13 +51,13 @@ CREATE TABLE company (
   projectStatus int DEFAULT 0,
   repId int NOT NULL,
   CONSTRAINT fk_CompanyAccount FOREIGN KEY (repId) REFERENCES accounts (userId)
-)TYPE=innodb;
+);
 
 CREATE TABLE projects (
   projectId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  prjIdentifier varchar(13) NOT NULL,
-  status char(2) NOT NULL,
-  prjName varchar(20),
+  prjIdentifier varchar(18) NOT NULL, /* Is there a point in this one? */
+  status varchar(2) NOT NULL,
+  prjName varchar(20) NOT NULL,
   description varchar(500) NOT NULL,
   prjConstraints varchar(250) NOT NULL,
   agreementDate TIMESTAMP DEFAULT NOW(),
@@ -66,7 +67,7 @@ CREATE TABLE projects (
   CONSTRAINT fk_CompanyId FOREIGN KEY (companyId) REFERENCES COMPANY (companyId),
   CONSTRAINT fk_TeamId FOREIGN KEY (teamId) REFERENCES teams (teamId),
   CONSTRAINT fk_InstructorId FOREIGN KEY (instructorId) REFERENCES accounts(userId)
-)TYPE=innodb;
+);
 
 ALTER TABLE teams ADD CONSTRAINT fk_ProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId);
 
@@ -77,7 +78,7 @@ CREATE TABLE milestone (
   milestoneStatus char(2) DEFAULT 'NS',
   dueDate TIMESTAMP DEFAULT NOW(),
   CONSTRAINT fk_MilestoneProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId) 
-)TYPE=innodb;
+);
 
 CREATE TABLE comments (
   commentId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -85,7 +86,7 @@ CREATE TABLE comments (
   commentDescription varchar(500) NOT NULL,
   projectId INT NOT NULL,
   CONSTRAINT fk_CommentProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
-)TYPE=innodb;
+);
 
 CREATE TABLE teammember (
   memberId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -97,7 +98,7 @@ CREATE TABLE teammember (
   teamLeader INT DEFAULT 0,
   teamId INTEGER NOT NULL,
   CONSTRAINT fk_MemberTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId)
-)TYPE=innodb;
+);
 
 CREATE TABLE teamprojectranking (
   rankId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -107,7 +108,7 @@ CREATE TABLE teamprojectranking (
   ranking INT NOT NULL,
   CONSTRAINT fk_RankingTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId),
   CONSTRAINT fk_RankingProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
-)TYPE=innodb;
+);
 
 CREATE TABLE projectfile (
   fileId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -116,6 +117,6 @@ CREATE TABLE projectfile (
   theFile varchar(500) NOT NULL,
   projectId INT NOT NULL,
   CONSTRAINT fk_FileProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
-)TYPE=innodb;
+);
 
 SET FOREIGN_KEY_CHECKS = 1;

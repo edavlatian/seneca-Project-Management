@@ -2,55 +2,58 @@ SET FOREIGN_KEY_CHECKS=0;
 
 /* accounts Table COMMANDS */
 /* password is 12345, TEAM LEADER*/
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);  
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Matthew', 'Schranz', 'mjschranz@learn.senecac.on.ca', 'PRJ566Sum2012_1', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');  
 
 /* password is 12345, TEAM LEADER*/
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Edouard', 'Davlatian', 'edavlatian@learn.senecac.on.ca', 'PRJ566Sum2012_2', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, TEAM LEADER*/
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Sum2012', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Alana', 'Marinucci', 'alana.marinucci@learn.senecac.on.ca', 'PRJ566Sum2012_3', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
 /* password is 12345, SUPERVISOR */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Emile', 'Ohan', 'emile.ohan@senecac.on.ca', 'PRJ666Supervisor', 'SU', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Emile', 'Ohan', 'emile.ohan@senecac.on.ca', 'emile.ohan', 'SU', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, INSTRUCTOR */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Mark', 'Buchner', 'mark.buchner@senecac.on.ca', 'PRJ566Instructor', 'IN', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Mark', 'Buchner', 'mark.buchner@senecac.on.ca', 'mark.buchner', 'IN', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, ADMIN */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Evan', 'Weaver', 'evan.weaver@senecac.on.ca', 'ADMIN', 'AD', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Evan', 'Weaver', 'evan.weaver@senecac.on.ca', 'evan.weaver', 'AD', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, companyREP */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Mark', 'Schranz', 'mark.schranz@gmail.com', 'companyREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Mark', 'Schranz', 'mark.schranz@gmail.com', 'mark.schranz', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, companyREP */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Robin', 'Williams', 'robin.williams@yahoo.com', 'companyREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Robin', 'Williams', 'robin.williams@yahoo.com', 'robin.williams', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, companyREP */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Bill', 'Maher', 'bmaher@gmail.com', 'companyREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Bill', 'Maher', 'bmaher@gmail.com', 'bill.maher', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, companyREP */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
-  VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'companyREP', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 1);
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'olivia.wilde', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
   
 /* teams Table Commands */
-INSERT INTO teams (teamIdentifier, teamEmail, teamName, teamConstraints, userId)
-  VALUES ('prj566ASUM2012_1', 'mjschranz@learn.senecac.on.ca;sara.underwood@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1);
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
+  VALUES ('mjschranz@learn.senecac.on.ca;sara.underwood@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
+    'WE LIKE PUPPIES AND RAINBOWS');
   
-INSERT INTO teams (teamIdentifier, teamEmail, teamName, teamConstraints, userId)
-  VALUES ('prj566ASUM2012_2', 'edavlatian@learn.senecac.on.ca;bmcohen@learn.senecac.on.ca;klcaliso1@learn.senecac.on.ca', 'NRA Solutions', 'C#<br/>SQLite<br/>Apache', 2);
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
+  VALUES ('edavlatian@learn.senecac.on.ca;bmcohen@learn.senecac.on.ca;klcaliso1@learn.senecac.on.ca', 'NRA Solutions', 'C#<br/>SQLite<br/>Apache', 2,
+    'WE LIKE CATS AND OTHER STUFF TOO');
 
-INSERT INTO teams (teamIdentifier, teamEmail, teamName, teamConstraints, userId)
-  VALUES ('prj566ASUM2012_3', 'alana.marinucci@learn.senecac.on.ca;batman.batman@learn.senecac.on.ca', 'BATMAAAAAANN', 'PHP<br/>DERBY<br/>JBoss', 3);
+INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
+  VALUES ('alana.marinucci@learn.senecac.on.ca;batman.batman@learn.senecac.on.ca', 'BATMAAAAAANN', 'PHP<br/>DERBY<br/>JBoss', 3,
+    'RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE RABBLE');
 
 /* teammember Table Commands */
 INSERT INTO teammember (firstName, lastName, email, description, teamLeader, teamId)
@@ -90,31 +93,31 @@ INSERT INTO company (companyName, companyPhone, repId)
 
   
 /* projects Table Commands */
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PRJ566SUM2012', 'PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
   
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PRJ566SUM2012', 'PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
 
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5);
+INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PRJ566SUM2012', 'PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
 
 INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
   VALUES ('PRJ566SUM2012', 'PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
   
 
 /* comments Table Commands */
-INSERT INTO comments (projectId, commentDescription)
-  VALUES (1, 'This is a comment. Your groups work sucked. I hope you all failed.');
+INSERT INTO comments (projectId, commentDescription, commentStatus)
+  VALUES (1, 'This is a comment. Your groups work sucked. I hope you all failed.', 1);
   
-INSERT INTO comments (projectId, commentDescription)
-  VALUES (2, 'JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI!');
+INSERT INTO comments (projectId, commentDescription, commentStatus)
+  VALUES (2, 'JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI! JUMANJI!', 1);
 
-INSERT INTO comments (projectId, commentDescription)
-  VALUES (3, 'This is a comment. Your groups work sucked. I hope you all failed.');
+INSERT INTO comments (projectId, commentDescription, commentStatus)
+  VALUES (3, 'This is a comment. Your groups work sucked. I hope you all failed.', 1);
   
-INSERT INTO comments (projectId, commentDescription)
-  VALUES (4, 'This is a comment. Your groups work was awesome. Have my babies.');
+INSERT INTO comments (projectId, commentDescription, commentStatus)
+  VALUES (4, 'This is a comment. Your groups work was awesome. Have my babies.', 1);
 
  
 /* milestone Table Commands */
@@ -142,14 +145,81 @@ INSERT INTO milestone (description, milestoneStatus, projectId)
 INSERT INTO milestone (description, milestoneStatus, projectId)
   VALUES ('PID Completion', 'CO', 4);
   
-/* teamprojectranking Table Command 
-  Note: Only doing two here because pre populated data isn't nearly as useful, as we obviously need to see if ranking is being saved properly when being done.
-*/
+/* teamprojectranking Table Command */
+/* THESE ARE RANKINGS DONE BY TEAMS */
 INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 4, 'T', 1);
+  VALUES (1, 4, 'T', 4);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 3, 'T', 2);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 2, 'T', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 1, 'T', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 4, 'T', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 3, 'T', 2);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 2, 'T', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 1, 'T', 4);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 4, 'T', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 3, 'T', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 2, 'T', 4);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 1, 'T', 2);
+  
+/* RANKING DONE MY COMPANIES */
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 1, 'C', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 1, 'C', 2);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 1, 'C', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 2, 'C', 2);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 2, 'C', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 2, 'C', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (1, 3, 'C', 2);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 3, 'C', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 3, 'C', 1);
   
 INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
   VALUES (1, 4, 'C', 1);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (2, 4, 'C', 3);
+  
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
+  VALUES (3, 4, 'C', 2);
+  
   
 /* projectfile Table Commands */
 INSERT INTO projectfile (fileName, fileDescription, theFile, projectId)
