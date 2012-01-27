@@ -4,6 +4,7 @@
  */
 package seneca.projectManagement.entity;
 
+import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -36,7 +37,6 @@ public class UserSession {
   private Connection conn;
   private Statement stmt;
   private String query;
-  private ArrayList<Matching> databaseMatches;
 
   public Accounts getLoggedUser() {
     return loggedUser;
@@ -44,10 +44,6 @@ public class UserSession {
 
   public void setLoggedUser(Accounts loggedUser) {
     this.loggedUser = loggedUser;
-  }
-
-  public ArrayList<Matching> getDatabaseMatches() {
-    return databaseMatches;
   }
   
   public boolean logIn(String aUsername, String aPassphrase){
@@ -110,7 +106,7 @@ public class UserSession {
     return false;
   }
   
-  public boolean matchTeamProjects (String semesterIdentifier) throws SQLException {
+  public ArrayList<Matching> matchTeamProjects (String semesterIdentifier) throws SQLException {
     /*
      * The expected string format will be like the following:
      * 
@@ -122,9 +118,10 @@ public class UserSession {
      * SELECT * FROM Teamprojectranking WHERE whenRanked = 'semesterIdentifier'
      * 
      * And convert the ResultSet into Matching Objects (Change the classname if you want)
-     * and then stored those in this beans ArrayList member variable.
+     * and then stored those in an ArrayList and return it.
      */
-    return false;
+    
+    return null;
   }
   
 }
