@@ -40,6 +40,14 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 /* password is 12345, companyREP */  
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
   VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'olivia.wilde', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  
+/* password is 12345, companyREP */  
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Jon', 'Buckley', 'jon@buckley.ca', 'j.buck', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+  
+/* password is 12345, companyREP */  
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Scott', 'Downe', 'scott.downe@gmail.com', 'scott.downe', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
   
 /* teams Table Commands */
@@ -91,20 +99,33 @@ INSERT INTO company (companyName, companyPhone, userId)
 INSERT INTO company (companyName, companyPhone, userId)
   VALUES ('Wilde Things', '123-456-7879', 10);
 
+INSERT INTO company (companyName, companyPhone, userId)
+  VALUES ('Downers', '123-456-4879', 12);
+  
+INSERT INTO company (companyName, companyPhone, userId)
+  VALUES ('Buckles', '123-356-7879', 11);
   
 /* projects Table Commands */
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
+  VALUES ('MA', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
   
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
+  VALUES ('MA', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
+  VALUES ('MA', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
+  VALUES ('PR', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
   
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6, 5);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6);  
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)
