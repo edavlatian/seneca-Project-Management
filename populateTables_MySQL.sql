@@ -93,17 +93,17 @@ INSERT INTO company (companyName, companyPhone, userId)
 
   
 /* projects Table Commands */
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PE', 'Gemini', 'We are going to be doing super awesome stuff. Our project is going to be the next Facebook!', 'Java<br/>MySQL', 4, 5, 1);
   
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PRJ566SUM2012', 'PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PE', 'McLovin', 'We are going to be doing super awesome stuff. Our project is going to be the next Twitter!', 'PHP<br/>MySQL', 3, 5, 2);
 
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId, teamId)
-  VALUES ('PRJ566SUM2012', 'PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId, teamId)
+  VALUES ('PE', 'Awesomesauce', 'We are going to be doing super awesome stuff. Our project is going to be the next World of Warcraft!', 'C#<br/>MySQL', 2, 5, 3);
 
-INSERT INTO projects (prjIdentifier, status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PRJ566SUM2012', 'PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
+  VALUES ('PE', 'EPIC MEAL TIME', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 1, 5);
   
 
 /* comments Table Commands */
