@@ -33,8 +33,12 @@ public class Accounts {
     setPassword(password);
   }
 
-  public Integer getUserid() {
+  public int getUserid() {
     return userid;
+  }
+  
+  public void setUserid(int id){
+    this.userid = id;
   }
 
   public String getUserfname() {

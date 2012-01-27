@@ -21,10 +21,10 @@ DROP TABLE accounts;
 
 CREATE TABLE accounts (
   userId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userIdentifier varchar(25) NOT NULL UNIQUE,
   userFName varchar(16) NOT NULL,
   userLName varchar(16) NOT NULL,
   userEmail varchar(50) NOT NULL,
-  userIdentifier varchar(25) NOT NULL,
   userRole varchar(2) NOT NULL,
   password varchar(50) NOT NULL,
   accountStatus int DEFAULT 1
@@ -37,10 +37,14 @@ CREATE TABLE teams (
   teamName varchar(20),
   teamConstraints varchar(120),
   teamDescription varchar(400),
-  teamLogo BLOB,
+  /*
+    teamLogo will contain the address of the location of the picture
+    that was saved to the server.
+  */
+  teamLogo varchar(200),
   projectId int,
   hasRegistered int DEFAULT 0,
-  userId int NOT NULL,
+  userId INT NOT NULL,
   CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId) 
 );
 
@@ -48,14 +52,12 @@ CREATE TABLE company (
   companyId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
   companyName varchar(25) NOT NULL,
   companyPhone varchar(12) NOT NULL,
-  projectStatus int DEFAULT 0,
-  repId int NOT NULL,
-  CONSTRAINT fk_CompanyAccount FOREIGN KEY (repId) REFERENCES accounts (userId)
+  userId int NOT NULL,
+  CONSTRAINT fk_CompanyAccount FOREIGN KEY (userId) REFERENCES accounts (userId)
 );
 
 CREATE TABLE projects (
   projectId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  prjIdentifier varchar(18) NOT NULL, /* Is there a point in this one? */
   status varchar(2) NOT NULL,
   prjName varchar(20) NOT NULL,
   description varchar(500) NOT NULL,
@@ -93,7 +95,11 @@ CREATE TABLE teammember (
   firstName varchar(15) NOT NULL,
   lastName varchar(15) NOT NULL,
   email varchar(50) NOT NULL,
-  image BLOB,
+  /*
+    memberImage will contain the address of the location of the picture
+    that was saved to the server.
+  */
+  memberImage varchar(200),
   description varchar(250),
   teamLeader INT DEFAULT 0,
   teamId INTEGER NOT NULL,
@@ -106,13 +112,14 @@ CREATE TABLE teamprojectranking (
   projectId INT NOT NULL,
   whoRanked varchar(1) NOT NULL,
   ranking INT NOT NULL,
+  whenRanked varchar(3),
   CONSTRAINT fk_RankingTeamId FOREIGN KEY (teamId) REFERENCES teams (teamId),
   CONSTRAINT fk_RankingProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId)
 );
 
 CREATE TABLE projectfile (
   fileId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-  fileName varchar(16) NOT NULL,
+  fileName varchar(40) NOT NULL,
   fileDescription varchar(120) NOT NULL,
   theFile varchar(500) NOT NULL,
   projectId INT NOT NULL,

@@ -79,16 +79,16 @@ INSERT INTO teammember (firstName, lastName, email, description, teamId)
 
 
 /* company Table Commands */
-INSERT INTO company (companyName, companyPhone, repId)
+INSERT INTO company (companyName, companyPhone, userId)
   VALUES ('Batman Anonymous', '123-456-7890', 7);
   
-INSERT INTO company (companyName, companyPhone, repId)
+INSERT INTO company (companyName, companyPhone, userId)
   VALUES ('JUMANJI', '123-456-7891', 9);
   
-INSERT INTO company (companyName, companyPhone, repId)
+INSERT INTO company (companyName, companyPhone, userId)
   VALUES ('Robin Anonymous', '123-456-7892', 8);
   
-INSERT INTO company (companyName, companyPhone, repId)
+INSERT INTO company (companyName, companyPhone, userId)
   VALUES ('Wilde Things', '123-456-7879', 10);
 
   
@@ -147,78 +147,78 @@ INSERT INTO milestone (description, milestoneStatus, projectId)
   
 /* teamprojectranking Table Command */
 /* THESE ARE RANKINGS DONE BY TEAMS */
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 4, 'T', 4);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 4, 'T', 4, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 3, 'T', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 3, 'T', 2, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 2, 'T', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 2, 'T', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 1, 'T', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 1, 'T', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 4, 'T', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 4, 'T', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 3, 'T', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 3, 'T', 2, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 2, 'T', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 2, 'T', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 1, 'T', 4);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 1, 'T', 4, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 4, 'T', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 4, 'T', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 3, 'T', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 3, 'T', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 2, 'T', 4);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 2, 'T', 4, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 1, 'T', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 1, 'T', 2, '122');
   
 /* RANKING DONE MY COMPANIES */
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 1, 'C', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 1, 'C', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 1, 'C', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 1, 'C', 2, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 1, 'C', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 1, 'C', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 2, 'C', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 2, 'C', 2, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 2, 'C', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 2, 'C', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 2, 'C', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 2, 'C', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 3, 'C', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 3, 'C', 2, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 3, 'C', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 3, 'C', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 3, 'C', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 3, 'C', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (1, 4, 'C', 1);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (1, 4, 'C', 1, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (2, 4, 'C', 3);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (2, 4, 'C', 3, '122');
   
-INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking)
-  VALUES (3, 4, 'C', 2);
+INSERT INTO teamprojectranking (teamId, projectId, whoRanked, ranking, whenRanked)
+  VALUES (3, 4, 'C', 2, '122');
   
   
 /* projectfile Table Commands */
