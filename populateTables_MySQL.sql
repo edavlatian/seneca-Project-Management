@@ -42,8 +42,8 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
   VALUES ('Olivia', 'Wilde', 'olivia.wilde@olivia-wilde.org', 'olivia.wilde', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* password is 12345, companyREP */  
-INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
-  VALUES ('Jon', 'Buckley', 'jon@buckley.ca', 'j.buck', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus) 
+  VALUES ('Jon', 'Buckley', 'jon@buckley.ca', 'j.buck', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=', 0);
   
 /* password is 12345, companyREP */  
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
@@ -122,7 +122,7 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
   VALUES ('PA', 'ZEEPIDY DO DA DAY', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
   
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId, instructorId)
-  VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6, 5);
+  VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
   VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6);  
