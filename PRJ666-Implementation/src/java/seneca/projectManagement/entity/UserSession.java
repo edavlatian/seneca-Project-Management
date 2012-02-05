@@ -4,14 +4,15 @@
  */
 package seneca.projectManagement.entity;
 
-import java.lang.reflect.Array;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
+import javax.ejb.StatefulTimeout;
 import seneca.projectManagement.databaseClasses.Accounts;
 import seneca.projectManagement.databaseClasses.Teams;
 import seneca.projectManagement.persistence.DBConnect;
@@ -31,6 +32,7 @@ import seneca.projectManagement.utils.Matching;
  */
 @Stateful
 @LocalBean
+@StatefulTimeout(unit = TimeUnit.MINUTES, value = 60)
 public class UserSession {
 
   private Accounts loggedUser;
