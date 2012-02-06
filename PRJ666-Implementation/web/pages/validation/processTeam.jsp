@@ -12,3 +12,9 @@
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
                scope="session" />
   <jsp:setProperty name="userBean" property="*" />
+  
+<%
+if ("true".equals(request.getParameter("publishPage"))){
+   
+}
+%>
