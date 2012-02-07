@@ -24,7 +24,7 @@
       <script src="../resources/js/pageStuff.js" type="text/javascript"></script>
     </head>
     <body>
-      <form method="post" action="../validation/processTeam.jsp" onsubmit="return validatePublish()">
+      <form method="post" action="../validation/processTeam.jsp" onsubmit="return validateTeamPublish()">
         <table id="teamInfo"> 
           <tr>
             <td colspan="2" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><center><h2>Welcome to Team Page Registration Form</h2></center>       
@@ -39,42 +39,42 @@
             <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team General Information</b></td>
           </tr> 
           <tr >
-            <td><b>Enter Team Name:</b></td>
+            <td>Enter Team Name:</td>
             <td><input type="text" size="20" name="teamName" onchange="validateTeamName( this )"/></td>
           </tr>
           <tr>
-            <td><b>Upload Team Logo: </b></td>
+            <td>Upload Team Logo:</td>
             <td><input type="file" name="teamLogo" size="40" /></td>
           </tr>
           <tr>
-            <td><b>Team Description: </b></td>
+            <td>Team Description:</td>
             <td><textarea rows="3" cols="40" name="teamDescription" onchange="validateTeamDescription( this )"></textarea></td>
           </tr>
           <tr >
-            <td><b>Enter Team Constraints:</b><br/><small> (e.g. availability for next term, technology limitations,<br /> programming language preferences, type of project)</small></td>
+            <td>Enter Team Constraints:<br/><small> (e.g. availability for next term, technology limitations,<br /> programming language preferences, type of project)</small></td>
             <td><textarea rows="3" cols="40" name="teamConstraints" onchange="validateTeamConstraints( this )"></textarea></td>
           </tr>
           <tr>
             <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Leader</b></td>
           </tr>
           <tr>
-            <td><b>Team Leader First Name: </b></td>
-            <td><input type="text" size="30" name="tlFirstName" onchange="validateName( this )"/></td>
+            <td>Team Leader First Name:</td>
+            <td><input type="text" size="30" name="tlFName" onchange="validateName( this )"/></td>
           </tr>
           <tr>
-            <td><b>Team Leader Last Name: </b></td>
-            <td><input type="text" size="30" name="tlLastName" onchange="validateName( this )"/></td>
+            <td>Team Leader Last Name:</td>
+            <td><input type="text" size="30" name="tlLName" onchange="validateName( this )"/></td>
           </tr>
           <tr>
-            <td><b>Upload Your Image: </b></td>
+            <td>Upload Your Image:</td>
             <td><input type="file" name="tlImage" size="40"/></td>
           </tr>
           <tr>
-            <td><b>Leader Description: </b></td>
+            <td>Leader Description:</td>
             <td><textarea rows="3" cols="40" name="tlDesc" onchange="validateMemberDescription( this )"></textarea></td>
           </tr>
           <tr>
-            <td><b>E-mail Address: </b></td>
+            <td>E-mail Address:</td>
             <td><input type='text' size='40' name="tlEmail" onchange="validateEmail( this )"/></td>
           </tr>
           <tr>
