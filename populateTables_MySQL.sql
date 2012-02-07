@@ -49,6 +49,9 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
   VALUES ('Scott', 'Downe', 'scott.downe@gmail.com', 'scott.downe', 'CR', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
 
+/* password is 12345, TEAM LEADER */
+INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
+  VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566Sum2012_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
 /* teams Table Commands */
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
