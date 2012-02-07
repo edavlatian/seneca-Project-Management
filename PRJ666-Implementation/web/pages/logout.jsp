@@ -4,7 +4,9 @@
     Author     : KepneR
 --%>
 
+<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
+    userBean.logout();
     session.invalidate();
     response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
 %>

@@ -8,7 +8,8 @@
 <%
     if(userBean.getIsLogged() == true) {
         if(userBean.getUserRole().equals("IN") == false) {
-            response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+            session.setAttribute("Error", "You don't have permission to access the instructor page.");
+            response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
     else {

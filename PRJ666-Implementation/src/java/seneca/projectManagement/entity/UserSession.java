@@ -155,7 +155,15 @@ public class UserSession {
   }
   
   public String getUserRole() {
-      return loggedUser.getUserrole();
+      String userRole = "";
+      if(loggedUser != null) {
+          userRole = loggedUser.getUserrole();
+      }
+      return userRole;
+  }
+  
+  public void logout() {
+      isLogged = false;
   }
   
   private boolean checkUser() {
@@ -170,6 +178,8 @@ public class UserSession {
             }
         }
         else {
+            loggedUser = null;
+            tempUser = null;
             value = false;
         }
       }
