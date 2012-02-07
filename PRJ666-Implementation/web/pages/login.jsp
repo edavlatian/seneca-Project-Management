@@ -4,17 +4,9 @@
     Author     : matthewschranz
 --%>
 
-<%@ page
-  import="seneca.projectManagement.utils.CryptoUtil,
-    seneca.projectManagement.databaseClasses.Accounts,
-    java.sql.SQLException,
-    seneca.projectManagement.persistence.PersistenceController"
-  language="java" contentType="text/html; charset=ISO-8859-1"
-  pageEncoding="ISO-8859-1"%>
-  
-  <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
-               scope="session" />
-  <jsp:setProperty name="userBean" property="*" />
+<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,7 +14,25 @@
     <title>JSP Page</title>
   </head>
   <body>
-    <h1>Hello World!</h1>
-    TESTING CHANGES
+      <jsp:include page="/pages/headers/loginHeader.jsp" />
+      <%
+        if(userBean.getIsLogged() == false) {
+      %>
+        <form method="POST" action="/PRJ666-Implementation/pages/redirect.jsp">
+            Username: <input id="username" name="username" type="text" value="emile.ohan" /><br/>
+            Password: <input id="password" name="password" type="password" value="12345" /><br/>
+            <input type="submit" value="Login Now!" />
+        </form>
+      <%
+            if(session.getAttribute("Error") != null) {
+                out.print("<font color=\"red\">" + session.getAttribute("Error").toString() + "</font>");
+                session.invalidate();
+            }
+        } else {
+      %>
+        You are already logged in! Do you want to <a href="/PRJ666-Implementation/pages/logout.jsp">logout</a>?<br/>
+      <%
+        }
+      %>
   </body>
 </html>

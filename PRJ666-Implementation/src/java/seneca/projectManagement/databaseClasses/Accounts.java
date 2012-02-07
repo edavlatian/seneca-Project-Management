@@ -88,6 +88,10 @@ public class Accounts {
   public void setPassword(String password) {
     this.password = CryptoUtil.encodeBase64(CryptoUtil.digestSHA(password));
   }
+  
+  public void setPasswordIsEncrypted(String password) {
+      this.password = password;
+  }
 
   public int getAccountstatus() {
     return accountstatus;
