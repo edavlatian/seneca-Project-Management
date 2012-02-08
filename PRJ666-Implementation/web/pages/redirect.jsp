@@ -32,7 +32,12 @@
                     response.sendRedirect("/PRJ666-Implementation/pages/HomeSupervisor.jsp");
                 }
                 else if(roleFilter.equals("TL")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/HomeTeamLeader.jsp");
+                    if(userBean.getHasRegistered() == 0) {
+                        response.sendRedirect("/PRJ666-Implementation/pages/HomePublish.jsp");
+                    }
+                    else {
+                        response.sendRedirect("/PRJ666-Implementation/pages/HomeTeamLeader.jsp");
+                    }
                 }
                 else {
                     response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");

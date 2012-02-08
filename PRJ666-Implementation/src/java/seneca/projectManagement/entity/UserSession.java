@@ -37,10 +37,12 @@ public class UserSession {
   // Holds the temporary login user for checking their credentials
   private Accounts tempUser;
   private boolean isLogged;
+  private int isRegistered;
 
   public UserSession() {
       tempUser = new Accounts();
       isLogged = false;
+      isRegistered = 0;
   }
   
   public Accounts getLoggedUser() {
@@ -162,6 +164,10 @@ public class UserSession {
       return userRole;
   }
   
+  public int getHasRegistered() {
+      return isRegistered;
+  }
+    
   public void logout() {
       isLogged = false;
   }
@@ -234,8 +240,16 @@ public class UserSession {
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
               DBConnect.getDbUser(), DBConnect.getDbPass());
       
+      /*
+      select * from accounts a 
+      join teams t on a.userid = t.userid
+      where useridentifier='PRJ566Sum2012_1'
+      */
+      
       stmt = conn.createStatement();
-      query = "select * from accounts where userIdentifier='" + userIdentifier + "'";
+      query = "select * from accounts a "
+              + "join teams t on a.userid = t.userid "
+              + "where userIdentifier='" + userIdentifier + "'";
       ResultSet rs = stmt.executeQuery(query);
       
       Accounts temp = new Accounts();;
@@ -248,6 +262,7 @@ public class UserSession {
           temp.setUserrole(rs.getString("userRole"));
           temp.setPasswordIsEncrypted(rs.getString("password"));
           temp.setAccountstatus(rs.getInt("accountStatus"));
+          isRegistered = rs.getInt("hasRegistered");
       }
       else {
           temp = null;
