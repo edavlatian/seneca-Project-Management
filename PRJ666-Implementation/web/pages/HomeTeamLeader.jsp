@@ -7,6 +7,9 @@
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
     if(userBean.getIsLogged() == true) {
+        if(userBean.getHasRegistered() == 0) {
+            response.sendRedirect("/PRJ666-Implementation/pages/HomePublish.jsp");
+        }
         if(userBean.getUserRole().equals("TL") == false) {
             session.setAttribute("Error", "You don't have permission to access the team leader page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
