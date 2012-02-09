@@ -235,7 +235,7 @@ public class UserSession {
     }
   }
   
-  public Accounts getAccounts(String userIdentifier) throws SQLException {
+  private Accounts getAccounts(String userIdentifier) throws SQLException {
       try {
       Class.forName(DBConnect.getDriver()).newInstance();
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
