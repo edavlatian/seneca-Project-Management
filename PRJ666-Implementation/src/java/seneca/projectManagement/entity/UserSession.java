@@ -36,13 +36,13 @@ public class UserSession {
   
   // Holds the temporary login user for checking their credentials
   private Accounts tempUser;
-  private boolean isLogged;
-  private int isRegistered;
-
+  private boolean isLogged ;
+  private int isRegistered ;
+  
   public UserSession() {
-      tempUser = new Accounts();
-      isLogged = false;
-      isRegistered = 0;
+    tempUser = new Accounts();
+    isLogged = false;
+    isRegistered = 0;
   }
   
   public Accounts getLoggedUser() {
@@ -190,6 +190,7 @@ public class UserSession {
         }
       }
       catch (SQLException e) {
+        System.out.println(e.getMessage());
         value = false;
       }
       return value;
@@ -234,7 +235,7 @@ public class UserSession {
     }
   }
   
-  private Accounts getAccounts(String userIdentifier) throws SQLException {
+  public Accounts getAccounts(String userIdentifier) throws SQLException {
       try {
       Class.forName(DBConnect.getDriver()).newInstance();
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
@@ -248,12 +249,13 @@ public class UserSession {
       
       stmt = conn.createStatement();
       query = "select * from accounts a "
-              + "join teams t on a.userid = t.userid "
+              + "left join teams t on a.userid = t.userid "
               + "where userIdentifier='" + userIdentifier + "'";
       ResultSet rs = stmt.executeQuery(query);
       
-      Accounts temp = new Accounts();;
+      Accounts temp = null;
       if(rs.next()) {
+          temp = new Accounts();
           temp.setUserid(rs.getInt("userId"));
           temp.setUseridentifier(rs.getString("userIdentifier"));
           temp.setUserfname(rs.getString("userFName"));
@@ -263,9 +265,6 @@ public class UserSession {
           temp.setPasswordIsEncrypted(rs.getString("password"));
           temp.setAccountstatus(rs.getInt("accountStatus"));
           isRegistered = rs.getInt("hasRegistered");
-      }
-      else {
-          temp = null;
       }
             
       return temp;

@@ -16,6 +16,7 @@
         <title>JSP Page</title>
     </head>
     <body>
+        
         <%
             if(userBean.logIn()) {
                 String roleFilter = userBean.getLoggedUser().getUserrole();
@@ -48,5 +49,6 @@
                 response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
             }
         %>
+        
     </body>
 </html>
