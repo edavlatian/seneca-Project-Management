@@ -1,11 +1,39 @@
+<<<<<<< HEAD
 <%-- 
     Document   : login
     Created on : Jan 26, 2012, 10:29:09 PM
     Author     : matthewschranz
 --%>
-<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
+
+<%@ page
+  import="seneca.projectManagement.utils.CryptoUtil,
+    seneca.projectManagement.databaseClasses.Accounts,
+    java.sql.SQLException"
+  language="java" contentType="text/html; charset=ISO-8859-1"
+  pageEncoding="ISO-8859-1"%>
+  
+  <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
                scope="session" />
-<jsp:setProperty name="userBean" property="*" />
+  <jsp:setProperty name="userBean" property="*" />
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title>JSP Page</title>
+  </head>
+  <body>
+    <h1>Hello World!</h1>
+  </body>
+</html>
+=======
+<%-- 
+    Document   : login
+    Created on : Jan 26, 2012, 10:29:09 PM
+    Author     : matthewschranz
+--%>
+
+<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -42,3 +70,4 @@
       %>
   </body>
 </html>
+>>>>>>> a9f7ccf305cdd20e5c7043d19fdc3028e87a7e60

@@ -39,7 +39,18 @@ public class UserSession {
   private Connection conn;
   private Statement stmt;
   private String query;
-
+  
+  // Holds the temporary login user for checking their credentials
+  private Accounts tempUser;
+  private boolean isLogged ;
+  private int isRegistered ;
+  
+  public UserSession() {
+    tempUser = new Accounts();
+    isLogged = false;
+    isRegistered = 0;
+  }
+  
   public Accounts getLoggedUser() {
     return loggedUser;
   }
@@ -48,14 +59,14 @@ public class UserSession {
     this.loggedUser = loggedUser;
   }
   
-  public boolean logIn(String aUsername, String aPassphrase){
+  public boolean logIn(){
     /*
      * If a row in Accounts is found with a userIdentifier equal to aUsername
      * and the CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)) hashed
      * password is equal then set our account member variable to the pulled down
      * account.
      */
-    return true;
+    return checkUser();
   }
   
   public boolean addAccount (Accounts aUser) throws SQLException {
@@ -124,6 +135,156 @@ public class UserSession {
      */
     
     return null;
+  }
+  
+  /*********************************************************************************
+   * 
+   * Kepner's Code
+   * 
+   *********************************************************************************/
+  public void setUsername(String value) {
+      tempUser.setUseridentifier(value);
+  }
+  
+  public String getUsername() {
+      return tempUser.getUseridentifier();
+  }
+  
+  public String getPassword() {
+      return tempUser.getPassword();
+  }
+  
+  public void setPassword(String value) {
+      tempUser.setPassword(value);
+  }
+  
+  public boolean getIsLogged() {
+      return isLogged;
+  }
+  
+  public String getUserRole() {
+      String userRole = "";
+      if(loggedUser != null) {
+          userRole = loggedUser.getUserrole();
+      }
+      return userRole;
+  }
+  
+  public int getHasRegistered() {
+      return isRegistered;
+  }
+    
+  public void logout() {
+      isLogged = false;
+  }
+  
+  private boolean checkUser() {
+      boolean value = false;
+      try {
+        Accounts account = getAccounts(tempUser.getUseridentifier());
+        if(account != null) {
+            if(tempUser.getPassword().equals(account.getPassword()) == true) {
+                loggedUser = account;
+                isLogged = true;
+                value = true;
+            }
+        }
+        else {
+            loggedUser = null;
+            tempUser = null;
+            value = false;
+        }
+      }
+      catch (SQLException e) {
+        System.out.println(e.getMessage());
+        value = false;
+      }
+      return value;
+  }
+  
+  private ArrayList<Accounts> getAccounts() throws SQLException {
+      try {
+      Class.forName(DBConnect.getDriver()).newInstance();
+      conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+              DBConnect.getDbUser(), DBConnect.getDbPass());
+      
+      stmt = conn.createStatement();
+      query = "select * from accounts";
+      ResultSet rs = stmt.executeQuery(query);
+      
+      ArrayList<Accounts> accounts = new ArrayList<Accounts>();
+      Accounts temp;
+      while(rs.next()) {
+          temp = new Accounts();
+          temp.setUserid(rs.getInt("userId"));
+          temp.setUseridentifier(rs.getString("userIdentifier"));
+          temp.setUserfname(rs.getString("userFName"));
+          temp.setUserlname(rs.getString("userLName"));
+          temp.setUseremail(rs.getString("userEmail"));
+          temp.setUserrole(rs.getString("userRole"));
+          temp.setPasswordIsEncrypted(rs.getString("password"));
+          temp.setAccountstatus(rs.getInt("accountStatus"));
+          accounts.add(temp);
+      }
+            
+      return accounts;
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      System.out.println("Caught some Exception");
+      return null;
+    }
+    finally {
+      System.out.println("In finally clause");
+      if (conn != null)
+        conn.close();
+    }
+  }
+  
+  private Accounts getAccounts(String userIdentifier) throws SQLException {
+      try {
+      Class.forName(DBConnect.getDriver()).newInstance();
+      conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+              DBConnect.getDbUser(), DBConnect.getDbPass());
+      
+      /*
+      select * from accounts a 
+      join teams t on a.userid = t.userid
+      where useridentifier='PRJ566Sum2012_1'
+      */
+      
+      stmt = conn.createStatement();
+      query = "select * from accounts a "
+              + "left join teams t on a.userid = t.userid "
+              + "where userIdentifier='" + userIdentifier + "'";
+      ResultSet rs = stmt.executeQuery(query);
+      
+      Accounts temp = null;
+      if(rs.next()) {
+          temp = new Accounts();
+          temp.setUserid(rs.getInt("userId"));
+          temp.setUseridentifier(rs.getString("userIdentifier"));
+          temp.setUserfname(rs.getString("userFName"));
+          temp.setUserlname(rs.getString("userLName"));
+          temp.setUseremail(rs.getString("userEmail"));
+          temp.setUserrole(rs.getString("userRole"));
+          temp.setPasswordIsEncrypted(rs.getString("password"));
+          temp.setAccountstatus(rs.getInt("accountStatus"));
+          isRegistered = rs.getInt("hasRegistered");
+      }
+            
+      return temp;
+    }
+    catch (Exception e){
+      e.printStackTrace();
+      System.out.println("Caught some Exception");
+      return null;
+    }
+    finally {
+      System.out.println("In finally clause");
+      if (conn != null)
+        conn.close();
+    }
   }
   
 }
