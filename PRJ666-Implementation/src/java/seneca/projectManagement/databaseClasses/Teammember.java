@@ -23,10 +23,11 @@ public class Teammember {
   public Teammember() {
   }
 
-  public Teammember(String firstname, String lastname, String email) {
-    this.firstname = firstname;
-    this.lastname = lastname;
-    this.email = email;
+  public Teammember(String aFirstname, String aLastname, String aEmail, int aTeamId) {
+    this.firstname = aFirstname;
+    this.lastname = aLastname;
+    this.email = aEmail;
+    this.teamid = aTeamId;
   }
 
   public Integer getMemberid() {

@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="seneca.projectManagement.databaseClasses.Teams"%>
 <%@ page
   import="seneca.projectManagement.utils.CryptoUtil"
   language="java" contentType="text/html; charset=ISO-8859-1"
@@ -34,6 +35,14 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
          teamCons = request.getParameter("teamConstraints"),
          teamName = request.getParameter("teamName"),
          teamLogo = request.getParameter("teamLogo");
-           
+
+  String emails = "";
+  emails = tlEmail + ";";
+  
+  for(int i = 0, len = tmEmail.length; i < len; i++){
+    emails += tmEmail[i] + ";";
+  }
+  
+  
 }
 %>

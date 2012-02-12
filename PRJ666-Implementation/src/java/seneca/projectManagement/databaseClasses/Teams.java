@@ -4,6 +4,8 @@
  */
 package seneca.projectManagement.databaseClasses;
 
+import java.sql.Blob;
+
 /**
  *
  * @author matthewschranz
@@ -11,12 +13,12 @@ package seneca.projectManagement.databaseClasses;
 
 public class Teams {
   private int teamid;
-  private String teamidentifier;
   private String teamemail;
   private int teamstatus;
   private String teamname;
   private String teamconstraints;
   private String teamDescription;
+  private Blob teamLogo;
   private int hasregistered;
   private int userid;
   private int projectid;
@@ -24,11 +26,19 @@ public class Teams {
   public Teams() {
   }
 
-  public Teams(String teamidentifier, String teamemail, String teamname, String teamconstraints) {
-    this.teamidentifier = teamidentifier;
-    this.teamemail = teamemail;
-    this.teamname = teamname;
-    this.teamconstraints = teamconstraints;
+  public Teams(int aUserId, String aTeamEmail, String aTeamName, String aTeamConstraints) {
+    this.userid = aUserId;
+    this.teamemail = aTeamEmail;
+    this.teamname = aTeamName;
+    this.teamconstraints = aTeamConstraints;
+  }
+
+  public Blob getTeamLogo() {
+    return teamLogo;
+  }
+
+  public void setTeamLogo(Blob teamLogo) {
+    this.teamLogo = teamLogo;
   }
 
   public int getTeamid() {
@@ -45,14 +55,6 @@ public class Teams {
 
   public void setTeamid(int teamid) {
     this.teamid = teamid;
-  }
-
-  public String getTeamidentifier() {
-    return teamidentifier;
-  }
-
-  public void setTeamidentifier(String teamidentifier) {
-    this.teamidentifier = teamidentifier;
   }
 
   public String getTeamemail() {
