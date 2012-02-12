@@ -21,23 +21,23 @@
             if(userBean.logIn()) {
                 String roleFilter = userBean.getLoggedUser().getUserrole();
                 if(roleFilter.equals("AD")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/HomeAdmin.jsp");
+                    response.sendRedirect("/PRJ666-Implementation/pages/Admin/HomeAdmin.jsp");
                 }
                 else if(roleFilter.equals("CR")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/HomeCompany.jsp");
+                    response.sendRedirect("/PRJ666-Implementation/pages/Company/HomeCompany.jsp");
                 }
                 else if(roleFilter.equals("IN")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/HomeInstructor.jsp");
+                    response.sendRedirect("/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp");
                 }
                 else if(roleFilter.equals("SU")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/HomeSupervisor.jsp");
+                    response.sendRedirect("/PRJ666-Implementation/pages/Supervisor/HomeSupervisor.jsp");
                 }
                 else if(roleFilter.equals("TL")) {
                     if(userBean.getHasRegistered() == 0) {
-                        response.sendRedirect("/PRJ666-Implementation/pages/HomePublish.jsp");
+                        response.sendRedirect("/PRJ666-Implementation/pages/Team/publishTeamPage.jsp");
                     }
                     else {
-                        response.sendRedirect("/PRJ666-Implementation/pages/HomeTeamLeader.jsp");
+                        response.sendRedirect("/PRJ666-Implementation/pages/Team/teamHome.jsp");
                     }
                 }
                 else {
