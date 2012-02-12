@@ -4,10 +4,7 @@
  */
 package seneca.projectManagement.entity;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.LocalBean;
