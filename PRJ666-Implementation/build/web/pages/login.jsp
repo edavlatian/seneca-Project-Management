@@ -19,7 +19,7 @@
       <%
         if(userBean.getIsLogged() == false) {
       %>
-        <form method="POST" action="/PRJ666-Implementation/pages/redirect.jsp">
+        <form method="POST" action="/PRJ666-Implementation/pages/validation/redirect.jsp">
             Username: <input id="username" name="username" type="text" value="evan.weaver" /><br/>
             Password: <input id="password" name="password" type="password" value="12345" /><br/>
             <input type="submit" value="Login Now!" />
