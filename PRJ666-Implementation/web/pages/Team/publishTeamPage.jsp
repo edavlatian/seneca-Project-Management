@@ -87,7 +87,7 @@
         <input type="submit" value="Publish Team Page" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
                name="publishTeam" />
         <br/>
-        <div id="errors" style="color: red;"></div>
+        <div id="errors" style="color: red;">${param.errors}</div>
         <input type="hidden" name="publishTeamPage" value="true"/>
       </form>
     </body>

@@ -4,8 +4,6 @@
  */
 package seneca.projectManagement.databaseClasses;
 
-import java.io.Serializable;
-
 /**
  *
  * @author matthewschranz
@@ -15,12 +13,13 @@ public class Teammember {
   private String firstname;
   private String lastname;
   private String email;
-  private Serializable image;
+  private String image;
   private String description;
   private int teamleader;
   private int teamid;
 
   public Teammember() {
+    firstname = lastname = email = image = description = "";
   }
 
   public Teammember(String aFirstname, String aLastname, String aEmail, int aTeamId) {
@@ -28,6 +27,7 @@ public class Teammember {
     this.lastname = aLastname;
     this.email = aEmail;
     this.teamid = aTeamId;
+    this.image = description =  "";
   }
 
   public Integer getMemberid() {
@@ -62,11 +62,11 @@ public class Teammember {
     this.email = email;
   }
 
-  public Serializable getImage() {
+  public String getImage() {
     return image;
   }
 
-  public void setImage(Serializable image) {
+  public void setImage(String image) {
     this.image = image;
   }
 
