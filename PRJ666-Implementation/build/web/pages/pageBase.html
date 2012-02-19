@@ -1,21 +1,9 @@
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="resources/css/pageStuffs.css" />
     <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="resources/js/twitter.js"></script>
     <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
-    <script type="text/javascript">
-      $(document).ready(function () {
-        $('#nav li').hover(
-        function () {
-          //show its submenu
-          $('ul', this).show();
-        }, function () {
-          //hide its submenu
-          $('ul', this).hide();
-        });
-      });
-    </script>
     <title>PRJ566 - Home</title>
   </head>
   <body>
@@ -69,50 +57,18 @@
 		        </script>
 		      </div>
         </td>
-        <td>
-          <div id="menu">
-	          <ul id="nav" class="menuitem">	
-	            <li class="blacklink"><a href="#"> Team Leader </a>
-		            <ul>
-			            <li class="blacklink"><a href="createitem.html">Rank Projects</a></li>
-		              <li class="blacklink"><a href="edititem.html">Manage Team Page</a></li>
-		              <li class="blacklink"><a href="createitem.html">Manage Project Milestones</a></li>
-		            </ul>
-	            </li>
-	            <li class="blacklink"><a href="#"> Company Rep </a>
-		            <ul>
-			            <li class="blacklink"><a href="createuser.html">View Teams</a></li>
-			            <li class="blacklink"><a href="editaccount.html">Manage Company Account</a></li>
-			            <li class="blacklink"><a href="edituser.html">View Project Milestones</a></li>
-			            <li class="blacklink"><a href="createitem.html">View Project Status</a></li>
-			            <li class="blacklink"><a href="createitem.html">Rank Teams</a></li>
-			            <li class="blacklink"><a href="createitem.html">Add Project Comment</a></li>
-			            <li class="blacklink"><a href="createitem.html">Manage Project Files</a></li>
-		            </ul>
-	            </li>
-	            <li class="blacklink"><a href="#"> Supervisor </a>
-		            <ul>
-			            <li class="blacklink"><a href="createsupp.html">View Projects</a></li>
-			            <li class="blacklink"><a href="editsupplier.html">Change Project Status</a></li>
-		            </ul>
-	            </li>	
-	            <li id="poMenu" class="blacklink"><a href="#"> Instructor </a>
-		            <ul>
-			            <li class="blacklink"><a href="createpo.html">Approve Project</a></li>
-			            <li class="blacklink"><a href="modifypo.html">Match Projects/Teams</a></li>
-			            <li class="blacklink"><a href="receivepo.html">Pending Company Accounts</a></li>
-			            <li class="blacklink"><a href="returnpo.html">Create Team Account</a></li>
-			            <li class="blacklink"><a href="viewpo.html">Deactivate Team Account</a></li>
-			            <li class="blacklink"><a href="createitem.html">Change Project Status</a></li>
-			            <li class="blacklink"><a href="createitem.html">Add Projects to Semester</a></li>
-		            </ul>
-	            </li>
-	          </ul>
-	        </div>
-          <a href="login.jsp">Login</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="register.jsp">Register</a>
-          <hr/>
+        <td style="background-image: url('resources/images/header_bg.jpg')">
+          <ul>
+			      <li><a href="#">Rank Projects</a></li>
+		        <li><a href="#">Manage Team Page</a></li>
+            <li><a href="#">Manage Project Milestones</a></li>
+		      </ul>
+          <div style="float: right;">
+            <ul>
+              <li><a href="login.jsp">Login</a></li>
+              <li><a href="register.jsp">Register</a></li>
+            </ul>
+          </div>
         </td>
       </tr>
       <tr>
