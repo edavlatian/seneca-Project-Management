@@ -64,9 +64,12 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
           teamMember.setLastname(tmLName[i]);
           teamMember.setTeamleader(0);
           
-          if (userBean.addTeamMember(teamMember))
+          if (userBean.addTeamMember(teamMember)){
             i++;
+            System.out.println("Added a team member");
+          }
           else {
+            System.out.println("Failed adding member");
             request.setAttribute("errors", "Error. Team Member could not be added.");
             request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
           }

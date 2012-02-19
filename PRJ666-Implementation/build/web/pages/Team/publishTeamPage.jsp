@@ -1,6 +1,6 @@
 <%-- 
     Document   : publishTeamPage
-    Created on : Feb 5, 2012, 11:44:45 AM
+    Created on : Feb 1, 2012, 11:44:45 AM
     Author     : matthewschranz
 --%>
 
@@ -40,7 +40,7 @@
           </tr> 
           <tr >
             <td>Enter Team Name:</td>
-            <td><input type="text" size="20" name="teamName" onchange="validateTeamName( this )"/></td>
+            <td><input type="text" size="20" name="teamName" onchange="validateTeamName( this )" value="${param.teamName}" /></td>
           </tr>
           <tr>
             <td>Upload Team Logo:</td>

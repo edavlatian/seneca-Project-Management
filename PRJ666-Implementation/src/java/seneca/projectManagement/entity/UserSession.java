@@ -306,10 +306,14 @@ public class UserSession {
       return stmt.executeUpdate(query);     
     }
     catch (Exception e){
-      
+      e.printStackTrace();
     }
     finally {
-      
+      try {
+        conn.close();
+      } catch (SQLException ex) {
+        Logger.getLogger(UserSession.class.getName()).log(Level.SEVERE, null, ex);
+      }
     }
     return 0;
   }
@@ -367,7 +371,7 @@ public class UserSession {
               DBConnect.getDbUser(), DBConnect.getDbPass());
       
       stmt = conn.createStatement();
-      query = "SELECT * FROM Teammember t " +
+      query = "SELECT * FROM teammember t " +
               "left JOIN teams te on t.teamId = te.teamId " +
               "where t.teamId = " + aTeamId + " AND t.teamLeader = 1";
       rs = stmt.executeQuery(query);
@@ -436,10 +440,9 @@ public class UserSession {
       query = "INSERT INTO teammember (firstName, lastName, email, memberImage, description, teamLeader, teamId)" +
               "VALUES ('" + aMember.getFirstname() + "', '" + aMember.getLastname() + "', '" + aMember.getEmail() + "', '" +
               aMember.getImage() + "', '" + aMember.getDescription() + "', " + aMember.getTeamleader() + ", " +
-              aMember.getTeamid();
-      rs = stmt.executeQuery(query);
+              aMember.getTeamid() + ")";
       
-      return true;
+      return stmt.executeUpdate(query) == 1 ? true : false;
     }
     catch (Exception e) {
       e.printStackTrace();

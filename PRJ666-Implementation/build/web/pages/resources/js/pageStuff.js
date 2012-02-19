@@ -94,16 +94,23 @@ function validateEmail( textControl ) {
 };
 
 function validateName( textControl ) {
-  var errorMessage = document.getElementById("errors"),
-  pattern = /^[A-Za-z\s]{3,15}$/;
+  var pattern = /^[A-Za-z\s]{3,15}$/,
+      errors,
+      cellNode = textControl.parentNode;
   
   if (pattern.test(textControl.value)) {
-    errorMessage.innerHTML = "";
+    cellNode.removeChild( cellNode.childNodes[1] );
     areErrors = false;
   }
   else {
-    errorMessage.innerHTML = "Error. Names must be under 15 characters and only letters " +
+    errors = document.createElement( "div" );
+    errors.setAttribute( "class", "errors" );
+    errors.innerHTML = "Error. Names must be under 15 characters and only letters " +
       "or spaces.";
+    
+    cellNode.appendChild( errors );
+    
+    console.log( cellNode );
     areErrors = true;
   }
 };
