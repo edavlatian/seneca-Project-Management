@@ -4,6 +4,8 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.io.Console"%>
+<%@page import="seneca.projectManagement.databaseClasses.Teams"%>
 <%@ page
   import="seneca.projectManagement.utils.CryptoUtil,
           seneca.projectManagement.databaseClasses.Teams,
@@ -71,31 +73,32 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
           else {
             System.out.println("Failed adding member");
             request.setAttribute("errors", "Error. Team Member could not be added.");
-            request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+            response.sendRedirect("../Team/publishTeamPage.jsp");
           }
         }
       }
       else {
         request.setAttribute("errors", "Error. Team Leader could not be updated.");
-        request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+        response.sendRedirect("../Team/publishTeamPage.jsp");
       }
     
     team.setTeamDescription(teamDesc);
     team.setTeamconstraints(teamCons);
     team.setTeamname(teamName);
     team.setTeamemail(emails);
+    team.setHasregistered(1);
     
     if (userBean.updateTeamAccount(team) == 1){
-      request.getRequestDispatcher("../Team/teamHome.jsp").forward(request, response);
+      response.sendRedirect("../Team/teamHome.jsp");
     }
     else {
       request.setAttribute("errors", "Error. Team Account could not be updated.");
-      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      response.sendRedirect("../Team/publishTeamPage.jsp");
     }
   }
   else {
     request.setAttribute("errors", "Error. Team Account could not be found.");
-    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    response.sendRedirect("../Team/publishTeamPage.jsp");
   }
 }
 %>

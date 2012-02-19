@@ -22,6 +22,7 @@
       <title>Publish Team Page</title>
       <script src="../resources/js/jquery-1.7.1.js" type="text/javascript"></script>
       <script src="../resources/js/pageStuff.js" type="text/javascript"></script>
+      <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     </head>
     <body>
       <form method="post" action="../validation/processTeam.jsp" onsubmit="return validateTeamPublish()">
@@ -44,38 +45,40 @@
           </tr>
           <tr>
             <td>Upload Team Logo:</td>
-            <td><input type="file" name="teamLogo" size="40" /></td>
+            <td><input type="file" name="teamLogo" onchange="validateFileSize( this )" accept="image/*"/></td>
           </tr>
           <tr>
             <td>Team Description:</td>
-            <td><textarea rows="3" cols="40" name="teamDescription" onchange="validateTeamDescription( this )"></textarea></td>
+            <td><textarea rows="3" cols="40" name="teamDescription" onchange="validateTeamDescription( this )" value="${param.teamDescription}"></textarea></td>
           </tr>
           <tr >
             <td>Enter Team Constraints:<br/><small> (e.g. availability for next term, technology limitations,<br /> programming language preferences, type of project)</small></td>
-            <td><textarea rows="3" cols="40" name="teamConstraints" onchange="validateTeamConstraints( this )"></textarea></td>
+            <td><textarea rows="3" cols="40" name="teamConstraints" onchange="validateTeamConstraints( this )"
+                          value="${param.teamConstraints}"></textarea></td>
           </tr>
           <tr>
             <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Leader</b></td>
           </tr>
           <tr>
             <td>Team Leader First Name:</td>
-            <td><input type="text" size="30" name="tlFName" onchange="validateName( this )"/></td>
+            <td><input type="text" size="30" name="tlFName" onchange="validateName( this )" value="${param.tlFName}"/></td>
           </tr>
           <tr>
             <td>Team Leader Last Name:</td>
-            <td><input type="text" size="30" name="tlLName" onchange="validateName( this )"/></td>
+            <td><input type="text" size="30" name="tlLName" onchange="validateName( this )" value="${param.tlLName}"/></td>
           </tr>
           <tr>
             <td>Upload Your Image:</td>
-            <td><input type="file" name="tlImage" size="40"/></td>
+            <td><input type="file" name="tlImage" onchange="validateFileSize( this )" accept="image/*"/></td>
           </tr>
           <tr>
             <td>Leader Description:</td>
-            <td><textarea rows="3" cols="40" name="tlDesc" onchange="validateMemberDescription( this )"></textarea></td>
+            <td><textarea rows="3" cols="40" name="tlDesc" onchange="validateMemberDescription( this )"
+                          value="${param.tlDesc}"></textarea></td>
           </tr>
           <tr>
             <td>E-mail Address:</td>
-            <td><input type='text' size='40' name="tlEmail" onchange="validateEmail( this )"/></td>
+            <td><input type='text' size='40' name="tlEmail" onchange="validateEmail( this )" value="${param.tlEmail}"/></td>
           </tr>
           <tr>
             <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Members</b></td>

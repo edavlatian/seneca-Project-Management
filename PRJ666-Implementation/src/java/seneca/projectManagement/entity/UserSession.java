@@ -4,6 +4,7 @@
  */
 package seneca.projectManagement.entity;
 
+import java.io.File;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
@@ -456,5 +457,4 @@ public class UserSession {
       }
     }
   }
-  
 }

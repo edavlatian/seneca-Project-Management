@@ -15,7 +15,7 @@ function addMember() {
     "</tr>" +
     "<tr>" +
     "<td><b>Upload Image: </b></td>" +
-    "<td><input type='file' name='tmImage' size='40'/></td>" +
+    "<td><input type='file' name='tmImage' onchange='validateFileSize( this )' accept='image/*'/></td>" +
     "</tr>" +
     "<tr>" +
     "<td><b>Member Description: </b></td>" +
@@ -34,10 +34,12 @@ function addMember() {
 function validateTeamPublish() {
   var errorMessage = document.getElementById("errors");
   
-  if (!areErrors)
-    return true;
+  if (areErrors){
+    errorMessage.innerHTML = "Errors still exist on the page.";
+    return false;
+  }
   
-  return false;
+  return true;
 };
 
 // Team Functions
@@ -80,15 +82,22 @@ function validateTeamConstraints( textControl ){
 
 // Team Member/Leader Functions
 function validateEmail( textControl ) {
-  var errorMessage = document.getElementById("errors"),
-      pattern = /^[\w\+\-\._]+(@learn.senecac.on.ca|@senecacollege.ca)$/;
+  var pattern = /^[\w\+\-\._]+(@learn.senecac.on.ca|@senecacollege.ca)$/,
+      errors,
+      cellNode = textControl.parentNode;
+      
   if (pattern.test(textControl.value) && textControl.value.length <= 50) {
-    errorMessage.innerHTML = "";
+    cellNode.removeChild( cellNode.childNodes[ 1 ] );
     areErrors = false;
   }
   else {
-    errorMessage.innerHTML = "Error. Emails must end with @learn.senecac.on.ca " +
+    errors = document.createElement( "div" );
+    errors.setAttribute( "class", "errors" );
+    errors.innerHTML = "Error. Emails must end with @learn.senecac.on.ca " +
       "or @senecacollege.ca and under 50 characters.";
+    
+    if( !cellNode.childNodes[ 1 ] )
+     cellNode.appendChild( errors );
     areErrors = true;
   }
 };
@@ -99,7 +108,7 @@ function validateName( textControl ) {
       cellNode = textControl.parentNode;
   
   if (pattern.test(textControl.value)) {
-    cellNode.removeChild( cellNode.childNodes[1] );
+    cellNode.removeChild( cellNode.childNodes[ 1 ] );
     areErrors = false;
   }
   else {
@@ -108,9 +117,8 @@ function validateName( textControl ) {
     errors.innerHTML = "Error. Names must be under 15 characters and only letters " +
       "or spaces.";
     
-    cellNode.appendChild( errors );
-    
-    console.log( cellNode );
+    if( !cellNode.childNodes[ 1 ] )
+     cellNode.appendChild( errors );
     areErrors = true;
   }
 };
@@ -125,4 +133,29 @@ function validateMemberDescription( textControl ) {
       "250 characters in length.";
     areErrors = true;
   }
+};
+
+/* Currently isn't functioning the way I intended */
+function validateFileSize( fileControl ) {
+  var errors,
+      cellNode = fileControl.parentNode;
+      
+  /*
+  if ( fileControl.fileSize <= 512800 ) {
+    cellNode.removeChild( cellNode.childNodes[ 1 ] );
+    areErrors = false;
+  }
+  else {
+    errors = document.createElement( "div" );
+    errors.setAttribute( "class", "errors" );
+    errors.innerHTML = "Error. File must be less than or equal to 500kb in size.";
+    
+    if( !cellNode.childNodes[ 1 ] )
+     cellNode.appendChild( errors );
+    
+    areErrors = true;
+  }
+  */
+
+  areErrors = false;
 };

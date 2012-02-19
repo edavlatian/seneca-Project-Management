@@ -1,20 +1,28 @@
 <%-- 
     Document   : teamHome
-    Created on : Feb 3, 2012, 10:05:52 AM
+    Created on : Feb 1, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
 
+<%@page import="seneca.projectManagement.databaseClasses.Teams"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
+               scope="session" />
+  <jsp:setProperty name="userBean" property="*" />
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="stylesheet" type="text/css" href="../resources/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <title>PRJ566 - Home</title>
+    <title>PRJ566 - Team Home</title>
   </head>
   <body>
+    <%
+      Teams team = userBean.getTeamAccount(userBean.getLoggedUser().getUserid());
+      String teamsName = team.getTeamname();
+    %>
     <table> 
       <tr>
         <td colspan="2">
@@ -65,21 +73,29 @@
 		        </script>
 		      </div>
         </td>
-        <td>
-          <a href="rankProjects.jsp">Rank Projects</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="manageTeamPage.jsp">Manage Team Page</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="manageMilestones.jsp">Manage Project Milestones</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="login.jsp">Login</a>
-          &nbsp;&nbsp;&nbsp;
-          <a href="register.jsp">Register</a>
-          <hr/>
+        <td style="background-image: url('../resources/images/header_bg.jpg')">
+          <ul>
+			      <li><a href="#">Rank Projects</a></li>
+		        <li><a href="#">Manage Team Page</a></li>
+            <li><a href="#">Manage Project Milestones</a></li>
+		      </ul>
+          <div style="float: right;">
+            <ul>
+              <li>
+              <%
+                if(userBean.getIsLogged()) { %>
+                <a href="../logout.jsp">Logout</a></li>
+              <%
+                } else {
+              %>
+                <a href="../login.jsp">Login</a></li>
+              <%  } %>
+            </ul>
+          </div>
         </td>
       </tr>
       <tr>
-        <td>Here is your Team Home Page, Insert User grabbing code here.</td>
+        <td>Here is your Team Home Page, Team <%=teamsName%> .</td>
       </tr>
     </table>
   </body>
