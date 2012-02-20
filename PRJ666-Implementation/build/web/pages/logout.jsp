@@ -8,5 +8,5 @@
 <%
     userBean.logout();
     session.invalidate();
-    response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+    response.sendRedirect("Home.jsp");
 %>
