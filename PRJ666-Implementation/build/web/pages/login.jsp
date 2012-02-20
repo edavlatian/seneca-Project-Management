@@ -35,9 +35,28 @@
             if(session.getAttribute("Error") != null) {
                 out.print("<font color=\"red\">" + session.getAttribute("Error").toString() + "</font><br/>");
             }
-      %>
-        Do you want to <a href="/PRJ666-Implementation/pages/logout.jsp">logout</a>?<br/>
-      <%
+            String roleFilter = userBean.getLoggedUser().getUserrole();
+            
+            if(roleFilter.equals("AD")) {
+              response.sendRedirect("/PRJ666-Implementation/pages/Admin/HomeAdmin.jsp");
+            }
+            else if(roleFilter.equals("CR")) {
+              response.sendRedirect("/PRJ666-Implementation/pages/Company/HomeCompany.jsp");
+            }
+            else if(roleFilter.equals("IN")) {
+              response.sendRedirect("/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp");
+            }
+            else if(roleFilter.equals("SU")) {
+              response.sendRedirect("/PRJ666-Implementation/pages/Supervisor/HomeSupervisor.jsp");
+            }
+            else if(roleFilter.equals("TL")) {
+              if(userBean.getHasRegistered() == 0) {
+                response.sendRedirect("/PRJ666-Implementation/pages/Team/publishTeamPage.jsp");
+              }
+              else {
+                response.sendRedirect("/PRJ666-Implementation/pages/Team/teamHome.jsp");
+              }
+            }
         }
       %>
   </body>
