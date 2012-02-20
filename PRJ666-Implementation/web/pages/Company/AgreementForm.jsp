@@ -12,8 +12,9 @@
         <title>JSP Page</title>
     </head>
     <body>
+        <jsp:include page="/pages/headers/loginHeader.jsp" />
         <h1>Agreement Form</h1>
-        <form method="POST" action="RegisterForm.jsp">
+        <form method="POST" action="Agreed.jsp">
             <div style="width: 700px">
                 <iframe width="700" height="300" src="Agreement.html"></iframe><br/>
             </div>
@@ -26,6 +27,7 @@
                 if(session.getAttribute("AgreementError") != null) {
                     out.println(session.getAttribute("AgreementError"));
                     session.removeAttribute("AgreementError");
+                    session.invalidate();
                 }
             %>
             </div>

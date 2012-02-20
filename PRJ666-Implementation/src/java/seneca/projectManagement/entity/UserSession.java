@@ -13,9 +13,7 @@ import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
-import seneca.projectManagement.databaseClasses.Accounts;
-import seneca.projectManagement.databaseClasses.Teammember;
-import seneca.projectManagement.databaseClasses.Teams;
+import seneca.projectManagement.databaseClasses.*;
 import seneca.projectManagement.persistence.DBConnect;
 import seneca.projectManagement.utils.Matching;
 
@@ -89,10 +87,10 @@ public class UserSession {
               DBConnect.getDbUser(), DBConnect.getDbPass());
       
       stmt = conn.createStatement();
-      query = "INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password)" +
+      query = "INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password, accountStatus)" +
               "VALUES ('" + aUser.getUserfname() + "', '" + aUser.getUserlname() + "', '" +
               aUser.getUseremail() + "', '" + aUser.getUseridentifier() + "', '" + aUser.getUserrole() +
-              "' , '" + aUser.getPassword() + "')";
+              "' , '" + aUser.getPassword() + "' , '" + aUser.getAccountstatus() + "')";
       stmt.executeUpdate(query);
             
       return true;
@@ -253,7 +251,7 @@ public class UserSession {
     }
   }
   
-  private Accounts getAccounts(String userIdentifier) throws SQLException {
+  public Accounts getAccounts(String userIdentifier) throws SQLException {
       try {
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
               DBConnect.getDbUser(), DBConnect.getDbPass());
@@ -294,6 +292,35 @@ public class UserSession {
       if (conn != null)
         conn.close();
     }
+  }
+  
+  public boolean addCompany(Company company) throws SQLException {
+        try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            stmt = conn.createStatement();
+            query = "INSERT INTO company (companyName, companyPhone, userId)" +
+                    "VALUES ('" + company.getCompanyname() + "', '" + company.getCompanyphone() + "', '" +
+                    company.getRepid() + "')";
+            stmt.executeUpdate(query);
+
+            return true;
+        }
+            catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Caught some Exception");
+            return false;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
+  }
+  
+  public void setLoggedAccount(Accounts account) {
+        loggedUser = account;
+        isLogged = true;
   }
   
   public int updateTeamAccount(Teams aTeam){
