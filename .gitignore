@@ -12,3 +12,4 @@ tags
 ID
 .DS_Store*
 nbproject/*
+/PRJ666-Implementation/dist/
