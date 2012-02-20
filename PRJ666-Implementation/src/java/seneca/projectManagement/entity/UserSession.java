@@ -184,6 +184,10 @@ public class UserSession {
   public int getHasRegistered() {
       return isRegistered;
   }
+  
+  public int getAccountStatus() {
+      return loggedUser.getAccountstatus();
+  }
     
   public void logout() {
       isLogged = false;

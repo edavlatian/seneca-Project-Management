@@ -10,6 +10,9 @@
         if(userBean.getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+        } else if(userBean.getAccountStatus() != 1) {
+            session.setAttribute("Error", "Account has not been activated yet.");
+            response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
     else {
