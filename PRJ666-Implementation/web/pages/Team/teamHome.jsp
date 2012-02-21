@@ -9,6 +9,21 @@
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
                scope="session" />
   <jsp:setProperty name="userBean" property="*" />
+<%
+    if(userBean.isLogged() == true) {
+        if(userBean.getLoggedUser().getUserRole().equals("TL")) {
+          if(userBean.getTeam().getHasRegistered() != 1)
+            response.sendRedirect("publishTeamPage.jsp");
+        }
+        else if(userBean.getLoggedUser().getAccountStatus() != 1) {
+          session.setAttribute("Error", "Account has not been activated yet.");
+          response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+        }
+    }
+    else {
+        response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+    }
+%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -20,8 +35,7 @@
   </head>
   <body>
     <%
-      Teams team = userBean.getTeam();
-      String teamsName = team.getTeamName();
+      String teamsName = userBean.getTeam().getTeamName();
     %>
     <table> 
       <tr>
@@ -78,6 +92,7 @@
 			      <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
+            <li><a href="#">View Projects</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
