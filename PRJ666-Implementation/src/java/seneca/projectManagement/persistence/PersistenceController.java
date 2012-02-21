@@ -6,9 +6,7 @@ package seneca.projectManagement.persistence;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import seneca.projectManagement.entity.Accounts;
-import seneca.projectManagement.entity.Teammember;
-import seneca.projectManagement.entity.Teams;
+import seneca.projectManagement.entity.*;
 
 /**
  *
@@ -121,4 +119,65 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
+  public Company getCompany( Integer aUserId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Company.findByUserId").setParameter("userId", aUserId);
+    
+    return (Company)q.getSingleResult();
+  }
+  
+  public boolean addCompany( Company aCompany ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist( aCompany );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public boolean addProject( Projects aProject ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist( aProject );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public Projects getProject( Projects aProject ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByPrjName")
+            .setParameter("prjName", aProject.getPrjName());
+    
+    return (Projects)q.getSingleResult();
+  }
+  
+  public boolean addProjectFile( Projectfile aProjectFile ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist( aProjectFile );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public Projectfile getProjectFiles( Integer aProjectId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projectfile.findByProjectId")
+            .setParameter("projectId", aProjectId);
+    
+    return (Projectfile)q.getSingleResult();
+  }
 }

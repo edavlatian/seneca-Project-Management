@@ -4,7 +4,7 @@
  */
 package seneca.projectManagement.utils;
 
-import seneca.projectManagement.databaseClasses.Projects;
+import seneca.projectManagement.entity.Projects;
 import seneca.projectManagement.entity.UserSession;
 /**
  *
@@ -37,6 +37,7 @@ public class Validation {
     
     public static boolean isValidUsername(String username) {
         boolean value = true;
+        /*
         UserSession us = new UserSession();
         try {
             if(us.getAccounts(username) != null) {
@@ -48,11 +49,14 @@ public class Validation {
         catch (Exception e) {
             e.printStackTrace();
         }
+        
+        */
         return value;
     }
     
     public static boolean isValidProject(String prjName) {
         boolean value = true;
+        /*
         UserSession us = new UserSession();
         try {
             Projects proj = new Projects();
@@ -64,6 +68,7 @@ public class Validation {
         catch (Exception e) {
             e.printStackTrace();
         }
+        */
         return value;
     }
 }
