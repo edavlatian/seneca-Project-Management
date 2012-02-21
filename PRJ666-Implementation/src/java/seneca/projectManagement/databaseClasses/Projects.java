@@ -27,7 +27,8 @@ public class Projects {
   public Projects() {
   }
 
-  public Projects(String prjidentifier, String status, String description, String prjconstraints, String agreementdate) {
+  public Projects(String prjName, String prjidentifier, String status, String description, String prjconstraints, String agreementdate) {
+    this.prjname = prjName;
     this.prjidentifier = prjidentifier;
     this.status = status;
     this.description = description;
@@ -90,7 +91,7 @@ public class Projects {
     this.prjconstraints = prjconstraints;
   }
 
-  public Timestamp getAgreementdate() {
-    return agreementdate;
+  public String getAgreementdate() {
+    return new SimpleDateFormat("MM/dd/yyyy").format(agreementdate);
   }
 }

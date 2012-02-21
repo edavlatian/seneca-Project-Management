@@ -29,6 +29,11 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Register Company</title>
+        <style type="text/css">
+            input[type=text], textArea, input[type=password] {
+                width: 300px;
+            }
+        </style>
     </head>
     <body>
         <jsp:include page="/pages/headers/loginHeader.jsp" />
@@ -132,12 +137,8 @@
                 </div>
                 <div style="clear: both"></div>
             <div/>
-            <div style="width: 700px; background-color: lightskyblue; padding: 5px;">
-                <div style="float: left; width: 150px">&nbsp;</div>
-                <div style="float: left">
-                    <input type="submit" value="Continue">
-                </div>
-                <div style="clear: both"></div>
+            <div style="width: 700px; background-color: lightskyblue; padding: 5px; text-align: right">
+                <input type="submit" value="Continue">
             </div>
         </form>
     </body>
