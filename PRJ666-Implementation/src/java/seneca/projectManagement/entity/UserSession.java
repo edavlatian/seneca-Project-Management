@@ -6,6 +6,8 @@ package seneca.projectManagement.entity;
 
 import java.io.File;
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
@@ -321,6 +323,168 @@ public class UserSession {
   public void setLoggedAccount(Accounts account) {
         loggedUser = account;
         isLogged = true;
+  }
+  
+  public Company getCompany(Accounts account) throws SQLException {
+        try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            /*
+            select * from company
+            where userId = 20
+            */
+
+            stmt = conn.createStatement();
+            query = "select * from company "
+                    + "where userId=" + account.getUserid();
+            rs = stmt.executeQuery(query);
+
+            Company comp = null;
+            if(rs.next()) {
+                comp = new Company();
+                comp.setCompanyid(rs.getInt("companyId"));
+                comp.setCompanyname(rs.getString("companyName"));
+                comp.setCompanyphone(rs.getString("companyPhone"));
+                comp.setRepid(rs.getInt("userId"));
+            }
+
+            return comp;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
+  }
+  
+  public boolean addProject(Projects proj) throws SQLException {
+        try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            stmt = conn.createStatement();
+            query = "INSERT INTO projects (status, prjName, description, prjConstraints, companyId)" +
+                    "VALUES ('" + proj.getStatus() + "', '" + proj.getPrjname() + "', '" + proj.getDescription() + "', '" +
+                    proj.getPrjconstraints() + "', " + proj.getCompanyid() + ")";
+            stmt.executeUpdate(query);
+
+            return true;
+        }
+            catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Caught some Exception");
+            return false;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
+  }
+  
+  public Projects getProject(Projects proj) throws SQLException {
+        try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            /*
+            select * from projects
+            where prjName = "Gemini"
+            */
+
+            stmt = conn.createStatement();
+            query = "select * from projects "
+                    + "where prjName='" + proj.getPrjname() + "'";
+            rs = stmt.executeQuery(query);
+
+            Projects value = null;
+            if(rs.next()) {
+                value = new Projects();
+                value.setProjectid(rs.getInt("projectId"));
+                value.setStatus(rs.getString("status"));
+                value.setPrjname(rs.getString("prjName"));
+                value.setDescription(rs.getString("description"));
+                value.setPrjconstraints(rs.getString("prjConstraints"));
+                value.setAgreementDate(new SimpleDateFormat("MM/dd/yyyy").format(rs.getTimestamp("agreementDate")));
+                value.setCompanyid(rs.getInt("companyId"));
+                value.setTeamid(rs.getInt("teamId"));
+                value.setInstructorid(rs.getInt("instructorId"));
+            }
+
+            return value;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
+  }
+  
+  public boolean addProjectFile(Projectfile projFile) throws SQLException {
+        try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            stmt = conn.createStatement();
+            query = "INSERT INTO projectfile (fileName, fileDescription, theFile, projectId)" +
+                    "VALUES ('" + projFile.getFilename() + "', '" + projFile.getFiledescription() + "', '" +
+                    projFile.getThefile() + "', '" + projFile.getProjectid() + "')";
+            stmt.executeUpdate(query);
+
+            return true;
+        }
+            catch (Exception e){
+            e.printStackTrace();
+            System.out.println("Caught some Exception");
+            return false;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
+  }
+  
+  public Projectfile getProfileFile(Projects proj) throws SQLException {
+      try {
+            conn = DriverManager.getConnection(DBConnect.getDbUrl(),
+                    DBConnect.getDbUser(), DBConnect.getDbPass());
+
+            /*
+            select * from projectfile
+            where projectId = 7
+            */
+
+            stmt = conn.createStatement();
+            query = "select * from projectfile "
+                    + "where projectId='" + proj.getProjectid() + "'";
+            rs = stmt.executeQuery(query);
+
+            Projectfile value = null;
+            if(rs.next()) {
+                value = new Projectfile();
+                value.setFileid(rs.getInt("fileId"));
+                value.setFilename(rs.getString("fileName"));
+                value.setFiledescription(rs.getString("fileDescription"));
+                value.setThefile(rs.getString("theFile"));
+                value.setProjectid(rs.getInt("projectId"));
+            }
+
+            return value;
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return null;
+        }
+        finally {
+            if (conn != null)
+                conn.close();
+        }
   }
   
   public int updateTeamAccount(Teams aTeam){

@@ -4,6 +4,7 @@
  */
 package seneca.projectManagement.utils;
 
+import seneca.projectManagement.databaseClasses.Projects;
 import seneca.projectManagement.entity.UserSession;
 /**
  *
@@ -42,6 +43,22 @@ public class Validation {
                 value = false;
             } else {
                 value = username.matches("[\\p{Alnum}.]+");
+            }
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+    
+    public static boolean isValidProject(String prjName) {
+        boolean value = true;
+        UserSession us = new UserSession();
+        try {
+            Projects proj = new Projects();
+            proj.setPrjname(prjName);
+            if(us.getProject(proj) != null) {
+                value = false;
             }
         }
         catch (Exception e) {

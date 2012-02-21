@@ -174,7 +174,7 @@
             */
             if(errorFound == false) {
                 userBean.setLoggedAccount(account);
-                out.println("<h1>Company Account successfully registered!</h1>");
+                out.println("<h1>Company Account has been successfully registered!</h1>");
                 out.println("<a href=\"ProjectForm.jsp\">Click here to propose a project!</a>");
             }
         %>

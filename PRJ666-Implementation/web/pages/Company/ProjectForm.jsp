@@ -88,17 +88,6 @@
                     %>
                 </div>
                 <div style="clear: both"></div>
-                <div style="float: left; width: 150px">Project Agreement Date:</div>
-                <div style="float: left"><input type="text" name="id_pdate" value="<% out.print(proj.getAgreementdate()); %>"></div>
-                <div style="float: left; color: red">
-                    <% 
-                        if(session.getAttribute("pdate") != null) {
-                            out.println("* " + session.getAttribute("pdate").toString());
-                            session.removeAttribute("pdate");
-                        }
-                    %>
-                </div>
-                <div style="clear: both"></div>
             </div>
             <div style="width: 700px; background-color: lightskyblue; padding: 5px;">
                 Project Files and Links Information

@@ -91,7 +91,41 @@ public class Projects {
     this.prjconstraints = prjconstraints;
   }
 
-  public String getAgreementdate() {
-    return new SimpleDateFormat("MM/dd/yyyy").format(agreementdate);
+  public Timestamp getAgreementdate() {
+    return agreementdate;
   }
+  
+  public void setAgreementDate(String agreementdate) {
+    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+    try {
+      this.agreementdate = new Timestamp(df.parse(agreementdate).getTime());
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+  }
+
+    public int getCompanyid() {
+        return companyid;
+    }
+
+    public void setCompanyid(int companyid) {
+        this.companyid = companyid;
+    }
+
+    public int getInstructorid() {
+        return instructorid;
+    }
+
+    public void setInstructorid(int instructorid) {
+        this.instructorid = instructorid;
+    }
+
+    public int getTeamid() {
+        return teamid;
+    }
+
+    public void setTeamid(int teamid) {
+        this.teamid = teamid;
+    }
 }
