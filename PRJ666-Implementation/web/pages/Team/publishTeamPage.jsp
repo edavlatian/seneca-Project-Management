@@ -6,7 +6,7 @@
 
 <%@ page
   import="seneca.projectManagement.utils.CryptoUtil,
-  seneca.projectManagement.databaseClasses.Accounts,
+  seneca.projectManagement.entity.*,
   java.sql.SQLException"
   language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>

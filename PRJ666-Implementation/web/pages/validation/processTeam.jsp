@@ -4,12 +4,9 @@
     Author     : matthewschranz
 --%>
 
-<%@page import="java.io.Console"%>
-<%@page import="seneca.projectManagement.databaseClasses.Teams"%>
 <%@ page
   import="seneca.projectManagement.utils.CryptoUtil,
-          seneca.projectManagement.databaseClasses.Teams,
-          seneca.projectManagement.databaseClasses.Teammember"
+          seneca.projectManagement.entity.*"
   language="java" contentType="text/html; charset=ISO-8859-1"
   pageEncoding="ISO-8859-1"%>
   
@@ -43,61 +40,59 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
     emails += tmEmail[i] + ";";
   }
   
-  Teams team = userBean.getTeamAccount(userBean.getLoggedUser().getUserid());
+  Teams team = userBean.getTeam();
   
   
   if (team != null){
     
-      Teammember teamMember = userBean.getTeamLeader(team.getTeamid());
+      Teammember teamMember = userBean.getLeader(team.getTeamId());
       teamMember.setDescription(tlDesc);
-      teamMember.setFirstname(tlFName);
-      teamMember.setLastname(tlLName);
+      teamMember.setFirstName(tlFName);
+      teamMember.setLastName(tlLName);
       teamMember.setEmail(tlEmail);
       
       
-      if (userBean.updateTeamMember(teamMember) == 1) {
+      if (userBean.updateMember( teamMember )) {
         for (int i = 0, len = tmFName.length; i < len;){
           teamMember = new Teammember();
         
           teamMember.setDescription(tmDesc[i]);
           teamMember.setEmail(tmEmail[i]);
-          teamMember.setTeamid(team.getTeamid());
-          teamMember.setFirstname(tmFName[i]);
-          teamMember.setLastname(tmLName[i]);
-          teamMember.setTeamleader(0);
+          teamMember.setTeamId(team.getTeamId());
+          teamMember.setFirstName(tmFName[i]);
+          teamMember.setLastName(tmLName[i]);
+          teamMember.setTeamLeader(0);
           
-          if (userBean.addTeamMember(teamMember)){
+          if ( userBean.addMember( teamMember ) ){
             i++;
-            System.out.println("Added a team member");
           }
           else {
-            System.out.println("Failed adding member");
-            request.setAttribute("errors", "Error. Team Member could not be added.");
+            session.setAttribute("errors", "Error. Team Member could not be added.");
             response.sendRedirect("../Team/publishTeamPage.jsp");
           }
         }
       }
       else {
-        request.setAttribute("errors", "Error. Team Leader could not be updated.");
+        session.setAttribute("errors", "Error. Team Leader could not be updated.");
         response.sendRedirect("../Team/publishTeamPage.jsp");
       }
     
     team.setTeamDescription(teamDesc);
-    team.setTeamconstraints(teamCons);
-    team.setTeamname(teamName);
-    team.setTeamemail(emails);
-    team.setHasregistered(1);
+    team.setTeamConstraints(teamCons);
+    team.setTeamName(teamName);
+    team.setTeamEmail(emails);
+    team.setHasRegistered(1);
     
-    if (userBean.updateTeamAccount(team) == 1){
+    if ( userBean.updateTeam( team ) ){
       response.sendRedirect("../Team/teamHome.jsp");
     }
     else {
-      request.setAttribute("errors", "Error. Team Account could not be updated.");
+      session.setAttribute("errors", "Error. Team Account could not be updated.");
       response.sendRedirect("../Team/publishTeamPage.jsp");
     }
   }
   else {
-    request.setAttribute("errors", "Error. Team Account could not be found.");
+    session.setAttribute("errors", "Error. Team Account could not be found.");
     response.sendRedirect("../Team/publishTeamPage.jsp");
   }
 }

@@ -4,7 +4,7 @@
     Author     : matthewschranz
 --%>
 
-<%@page import="seneca.projectManagement.databaseClasses.Teams"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
                scope="session" />
@@ -20,8 +20,8 @@
   </head>
   <body>
     <%
-      Teams team = userBean.getTeamAccount(userBean.getLoggedUser().getUserid());
-      String teamsName = team.getTeamname();
+      Teams team = userBean.getTeam();
+      String teamsName = team.getTeamName();
     %>
     <table> 
       <tr>
@@ -83,7 +83,7 @@
             <ul>
               <li>
               <%
-                if(userBean.getIsLogged()) { %>
+                if(userBean.isLogged()) { %>
                 <a href="../logout.jsp">Logout</a></li>
               <%
                 } else {

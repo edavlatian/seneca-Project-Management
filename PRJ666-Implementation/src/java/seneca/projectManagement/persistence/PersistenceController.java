@@ -18,48 +18,56 @@ public class PersistenceController extends EntityControllerBase {
 
   private EntityManager em;
   
-  public void addAccount( Accounts aAccount ){
+  public boolean addAccount( Accounts aAccount ){
     em = getEntityManager();
     
     em.getTransaction().begin();
     em.persist( aAccount );
     em.getTransaction().commit();
     em.close();
-   
+  
+    return true;
   }
   
-  public void addTeam( Accounts aAccount ){
-    addAccount( aAccount );
+  public boolean addTeam( Accounts aAccount ){
+    boolean result = addAccount( aAccount );
     
-    Teams team = new Teams();
-    Accounts account = getAccount( aAccount.getUserIdentifier() );
-    team.setUserId( account.getUserId() );
-    team.setTeamEmail( account.getUserEmail() );
+    if( result ){
+      Teams team = new Teams();
+      Accounts account = getAccount( aAccount.getUserIdentifier() );
+      team.setUserId( account.getUserId() );
+      team.setTeamEmail( account.getUserEmail() );
     
-    em = getEntityManager();
-    em.getTransaction().begin();
-    em.persist( team );
-    em.getTransaction().commit();
-    em.close();
+      em = getEntityManager();
+      em.getTransaction().begin();
+      em.persist( team );
+      em.getTransaction().commit();
+      em.close();
     
-    team = getTeam( account.getUserId() );
+      team = getTeam( account.getUserId() );
     
-    Teammember member = new Teammember();
-    member.setEmail( account.getUserEmail() );
-    member.setFirstName( account.getUserFName() );
-    member.setLastName( account.getUserLName() );
-    member.setTeamId( team.getTeamId() );
-    member.setTeamLeader( 1 );
+      Teammember member = new Teammember();
+      member.setEmail( account.getUserEmail() );
+      member.setFirstName( account.getUserFName() );
+      member.setLastName( account.getUserLName() );
+      member.setTeamId( team.getTeamId() );
+      member.setTeamLeader( 1 );
     
-    addTeamMember( member );
+      addTeamMember( member );
+      
+      return true;
+    }
+    return false;
   }
   
-  public void addTeamMember( Teammember aMember ){
+  public boolean addTeamMember( Teammember aMember ){
     em = getEntityManager();
     em.getTransaction().begin();
     em.persist( aMember );
     em.getTransaction().commit();
     em.close();
+    
+    return true;
   }
   
   public Teams getTeam( Integer userId ){
@@ -78,6 +86,39 @@ public class PersistenceController extends EntityControllerBase {
             aUserIdentifier );
     
     return (Accounts)q.getSingleResult();
+  }
+  
+  public Teammember getLeader( int aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
+            .setParameter("teamId", aTeamId);
+    
+    return (Teammember)q.getSingleResult();
+  }
+  
+  public boolean updateMember( Teammember aMember ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aMember );
+    em.getTransaction().commit();
+
+    em.close();
+    
+    return true;
+  }
+  
+  public boolean updateTeam( Teams aTeam ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aTeam );
+    em.getTransaction().commit();
+
+    em.close();
+    
+    return true;
   }
   
 }

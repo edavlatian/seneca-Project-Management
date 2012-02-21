@@ -4,20 +4,16 @@
  */
 package seneca.projectManagement.entity;
 
-import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
-import seneca.projectManagement.databaseClasses.Accounts;
-import seneca.projectManagement.databaseClasses.Teammember;
-import seneca.projectManagement.databaseClasses.Teams;
 import seneca.projectManagement.persistence.DBConnect;
-import seneca.projectManagement.utils.Matching;
+import seneca.projectManagement.persistence.PersistenceController;
+import seneca.projectManagement.utils.CryptoUtil;
 
 /**
  *
@@ -42,16 +38,9 @@ public class UserSession {
   private String query;
   private ResultSet rs;
   private Driver t;
-  
-  // Holds the temporary login user for checking their credentials
-  private Accounts tempUser;
-  private boolean isLogged ;
-  private int isRegistered ;
+  private PersistenceController pc;
   
   public UserSession() {
-    tempUser = new Accounts();
-    isLogged = false;
-    isRegistered = 0;
     try {
       t = (Driver) Class.forName(DBConnect.getDriver()).newInstance();
     } catch (InstantiationException ex) {
@@ -62,26 +51,68 @@ public class UserSession {
     catch (ClassNotFoundException ex) {
       Logger.getLogger(UserSession.class.getName()).log(Level.SEVERE, null, ex);
     }
+    pc = new PersistenceController();
   }
   
   public Accounts getLoggedUser() {
     return loggedUser;
   }
-
-  public void setLoggedUser(Accounts loggedUser) {
-    this.loggedUser = loggedUser;
-  }
   
-  public boolean logIn(){
+  public boolean logIn( String aUserIdentifier, String aPassphrase ){
     /*
      * If a row in Accounts is found with a userIdentifier equal to aUsername
      * and the CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)) hashed
      * password is equal then set our account member variable to the pulled down
      * account.
      */
-    return checkUser();
+    try {
+      Accounts account = pc.getAccount( aUserIdentifier );
+      if(account != null) {
+        if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())
+            == true) {
+          loggedUser = account;
+          return true;    
+        }
+      }
+      else {
+        loggedUser = null;
+        return false;
+      }
+    }
+    catch (Exception e){
+      e.printStackTrace();
+    }
+    return false;
   }
   
+  public boolean isLogged() {
+    return loggedUser instanceof Accounts;
+  }
+  
+  public void logout() {
+    loggedUser = null;
+  }
+  
+  public Teams getTeam(){
+    return pc.getTeam( loggedUser.getUserId() );
+  }
+  
+  public Teammember getLeader( int aTeamId ){
+    return pc.getLeader( aTeamId );
+  }
+  
+  public boolean updateMember( Teammember aMember ){
+    return pc.updateMember( aMember );
+  }
+  
+  public boolean addMember( Teammember aMember ){
+    return pc.addTeamMember( aMember );
+  }
+  
+  public boolean updateTeam( Teams aTeam ){
+    return pc.updateTeam( aTeam );
+  }
+  /*
   public boolean addAccount (Accounts aUser) throws SQLException {
     
     try {
@@ -115,10 +146,10 @@ public class UserSession {
   public boolean updateAccount (Accounts aAccount) throws SQLException {
     return false;    
   }
-  
+  */
   // Used by Instructors, Administrators
   public boolean addTeam (Accounts aAccount, Teams aTeam) throws SQLException {
-    if (addAccount(aAccount)){
+    if (pc.addTeam( aAccount )){
       /*
        * Code to insert team to teams table. Ensure you get the 
        * auto generated account userId first so you can put it in
@@ -130,29 +161,12 @@ public class UserSession {
     return false;
   }
   
-  public ArrayList<Matching> matchTeamProjects (String semesterIdentifier) throws SQLException {
-    /*
-     * The expected string format will be like the following:
-     * 
-     * 122
-     * 
-     * That would stand for year 2012 Summer Semester.
-     * 
-     * Then you could do... 
-     * SELECT * FROM Teamprojectranking WHERE whenRanked = 'semesterIdentifier'
-     * 
-     * And convert the ResultSet into Matching Objects (Change the classname if you want)
-     * and then stored those in an ArrayList and return it.
-     */
-    
-    return null;
-  }
-  
   /*********************************************************************************
    * 
    * Kepner's Code
    * 
    *********************************************************************************/
+  /*
   public void setUsername(String value) {
       tempUser.setUseridentifier(value);
   }
@@ -188,31 +202,9 @@ public class UserSession {
   public void logout() {
       isLogged = false;
   }
+  */
   
-  private boolean checkUser() {
-      boolean value = false;
-      try {
-        Accounts account = getAccounts(tempUser.getUseridentifier());
-        if(account != null) {
-            if(tempUser.getPassword().equals(account.getPassword()) == true) {
-                loggedUser = account;
-                isLogged = true;
-                value = true;
-            }
-        }
-        else {
-            loggedUser = null;
-            tempUser = null;
-            value = false;
-        }
-      }
-      catch (SQLException e) {
-        System.out.println(e.getMessage());
-        value = false;
-      }
-      return value;
-  }
-  
+  /*
   private ArrayList<Accounts> getAccounts() throws SQLException {
       try {
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
@@ -253,12 +245,6 @@ public class UserSession {
       try {
       conn = DriverManager.getConnection(DBConnect.getDbUrl(),
               DBConnect.getDbUser(), DBConnect.getDbPass());
-      
-      /*
-      select * from accounts a 
-      join teams t on a.userid = t.userid
-      where useridentifier='PRJ566Sum2012_1'
-      */
       
       stmt = conn.createStatement();
       query = "select * from accounts a "
@@ -457,4 +443,5 @@ public class UserSession {
       }
     }
   }
+  */
 }

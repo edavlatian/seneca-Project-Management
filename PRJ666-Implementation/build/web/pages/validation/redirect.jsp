@@ -4,11 +4,10 @@
     Author     : KepneR
 --%>
 
-<%@page import="seneca.projectManagement.databaseClasses.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="seneca.projectManagement.entity.*"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,8 +17,8 @@
     <body>
         
         <%
-            if(userBean.logIn()) {
-                String roleFilter = userBean.getLoggedUser().getUserrole();
+            if(userBean.logIn( request.getParameter("username"), request.getParameter("password"))) {
+                String roleFilter = userBean.getLoggedUser().getUserRole();
                 if(roleFilter.equals("AD")) {
                     response.sendRedirect("../Admin/HomeAdmin.jsp");
                 }
@@ -33,12 +32,13 @@
                     response.sendRedirect("../Supervisor/HomeSupervisor.jsp");
                 }
                 else if(roleFilter.equals("TL")) {
-                    if(userBean.getHasRegistered() == 0) {
-                        response.sendRedirect("../Team/publishTeamPage.jsp");
-                    }
-                    else {
-                        response.sendRedirect("../Team/teamHome.jsp");
-                    }
+                  Teams team = userBean.getTeam();
+                  if(team.getHasRegistered() == 0) {
+                    response.sendRedirect("../Team/publishTeamPage.jsp");
+                  }
+                  else {
+                    response.sendRedirect("../Team/teamHome.jsp");
+                  }
                 }
                 else {
                     response.sendRedirect("../Home.jsp");

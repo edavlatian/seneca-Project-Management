@@ -7,17 +7,17 @@
                scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" import="seneca.projectManagement.entity.*"%>
 <!DOCTYPE html>
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>JSP Page</title>
+    <title>Login Page</title>
   </head>
   <body>
       <jsp:include page="headers/loginHeader.jsp" />
       <%
-        if(userBean.getIsLogged() == false) {
+        if(userBean.isLogged() == false) {
       %>
         <form method="POST" action="validation/redirect.jsp">
             Username: <input id="username" name="username" type="text" value="evan.weaver" /><br/>
@@ -35,7 +35,7 @@
             if(session.getAttribute("Error") != null) {
                 out.print("<font color=\"red\">" + session.getAttribute("Error").toString() + "</font><br/>");
             }
-            String roleFilter = userBean.getLoggedUser().getUserrole();
+            String roleFilter = userBean.getLoggedUser().getUserRole();
             
             if(roleFilter.equals("AD")) {
               response.sendRedirect("Admin/HomeAdmin.jsp");
@@ -50,7 +50,8 @@
               response.sendRedirect("Supervisor/HomeSupervisor.jsp");
             }
             else if(roleFilter.equals("TL")) {
-              if(userBean.getHasRegistered() == 0) {
+              Teams team = userBean.getTeam();
+              if(team.getHasRegistered() == 0) {
                 response.sendRedirect("Team/publishTeamPage.jsp");
               }
               else {
