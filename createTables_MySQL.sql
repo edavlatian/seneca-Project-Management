@@ -20,7 +20,7 @@ DROP TABLE accounts;
 
 
 CREATE TABLE accounts (
-  userId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  userId int AUTO_INCREMENT PRIMARY KEY,
   userIdentifier varchar(25) NOT NULL UNIQUE,
   userFName varchar(16) NOT NULL,
   userLName varchar(16) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE accounts (
 );
 
 CREATE TABLE teams (
-  teamId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  teamId int AUTO_INCREMENT PRIMARY KEY,
   teamEmail varchar(400) NOT NULL,
   teamStatus int DEFAULT 1,
   teamName varchar(20),
@@ -44,12 +44,12 @@ CREATE TABLE teams (
   teamLogo varchar(200),
   projectId int,
   hasRegistered int DEFAULT 0,
-  userId INT NOT NULL,
+  userId int NOT NULL,
   CONSTRAINT fk_TeamAccount FOREIGN KEY (userId) REFERENCES accounts (userId) 
 );
 
 CREATE TABLE company (
-  companyId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  companyId int AUTO_INCREMENT PRIMARY KEY,
   companyName varchar(25) NOT NULL,
   companyPhone varchar(12) NOT NULL,
   userId int NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE company (
 );
 
 CREATE TABLE projects (
-  projectId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  projectId int AUTO_INCREMENT PRIMARY KEY,
   status varchar(2) NOT NULL,
   prjName varchar(20) NOT NULL,
   description varchar(500) NOT NULL,
@@ -74,7 +74,7 @@ CREATE TABLE projects (
 ALTER TABLE teams ADD CONSTRAINT fk_ProjectId FOREIGN KEY (projectId) REFERENCES projects (projectId);
 
 CREATE TABLE milestone (
-  milestoneId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  milestoneId int AUTO_INCREMENT PRIMARY KEY,
   description varchar(125) NOT NULL,
   projectId INTEGER NOT NULL,
   milestoneStatus char(2) DEFAULT 'NS',
@@ -83,7 +83,7 @@ CREATE TABLE milestone (
 );
 
 CREATE TABLE comments (
-  commentId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  commentId int AUTO_INCREMENT PRIMARY KEY,
   commentStatus INT DEFAULT 0,
   commentDescription varchar(500) NOT NULL,
   projectId INT NOT NULL,
@@ -91,7 +91,7 @@ CREATE TABLE comments (
 );
 
 CREATE TABLE teammember (
-  memberId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  memberId int AUTO_INCREMENT PRIMARY KEY,
   firstName varchar(15) NOT NULL,
   lastName varchar(15) NOT NULL,
   email varchar(50) NOT NULL,
@@ -107,7 +107,7 @@ CREATE TABLE teammember (
 );
 
 CREATE TABLE teamprojectranking (
-  rankId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  rankId int AUTO_INCREMENT PRIMARY KEY,
   teamId INT NOT NULL,
   projectId INT NOT NULL,
   whoRanked varchar(1) NOT NULL,
@@ -118,7 +118,7 @@ CREATE TABLE teamprojectranking (
 );
 
 CREATE TABLE projectfile (
-  fileId int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  fileId int AUTO_INCREMENT PRIMARY KEY,
   fileName varchar(40) NOT NULL,
   fileDescription varchar(120) NOT NULL,
   theFile varchar(500) NOT NULL,

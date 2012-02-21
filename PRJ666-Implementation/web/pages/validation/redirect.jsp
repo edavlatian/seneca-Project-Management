@@ -21,32 +21,32 @@
             if(userBean.logIn()) {
                 String roleFilter = userBean.getLoggedUser().getUserrole();
                 if(roleFilter.equals("AD")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Admin/HomeAdmin.jsp");
+                    response.sendRedirect("../Admin/HomeAdmin.jsp");
                 }
                 else if(roleFilter.equals("CR")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Company/HomeCompany.jsp");
+                    response.sendRedirect("../Company/HomeCompany.jsp");
                 }
                 else if(roleFilter.equals("IN")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp");
+                    response.sendRedirect("../Instructor/HomeInstructor.jsp");
                 }
                 else if(roleFilter.equals("SU")) {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Supervisor/HomeSupervisor.jsp");
+                    response.sendRedirect("../Supervisor/HomeSupervisor.jsp");
                 }
                 else if(roleFilter.equals("TL")) {
                     if(userBean.getHasRegistered() == 0) {
-                        response.sendRedirect("/PRJ666-Implementation/pages/Team/publishTeamPage.jsp");
+                        response.sendRedirect("../Team/publishTeamPage.jsp");
                     }
                     else {
-                        response.sendRedirect("/PRJ666-Implementation/pages/Team/teamHome.jsp");
+                        response.sendRedirect("../Team/teamHome.jsp");
                     }
                 }
                 else {
-                    response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+                    response.sendRedirect("../Home.jsp");
                 }
             }
             else {
                 session.setAttribute("Error", "Invalid credentials");
-                response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+                response.sendRedirect("../login.jsp");
             }
         %>
         

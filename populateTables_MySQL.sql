@@ -53,6 +53,7 @@ INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole,
 INSERT INTO accounts (userFName, userLName, userEmail, userIdentifier, userRole, password) 
   VALUES ('Rachel', 'Nichols', 'rachel.nichols@learn.senecac.on.ca', 'PRJ566Sum2012_4', 'TL', 'gyoODTfAfN0gNJZ7gSjN5hfp/eo=');
   
+
 /* teams Table Commands */
 INSERT INTO teams (teamEmail, teamName, teamConstraints, userId, teamDescription)
   VALUES ('mjschranz@learn.senecac.on.ca;sara.underwood@learn.senecac.on.ca', 'BEAM Solutions', 'JAVA<br/>MySQL<br/>Glassfish', 1,
