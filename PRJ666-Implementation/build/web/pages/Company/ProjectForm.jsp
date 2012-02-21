@@ -54,7 +54,7 @@
             </div>
             <div style="width: 700px">
                 <div style="float: left; width: 150px">Project Name:</div>
-                <div style="float: left"><input type="text" name="id_pname" value="<% out.print(proj.getPrjname()); %>"></div>
+                <div style="float: left"><input type="text" name="id_pname" value="<% out.print(proj.getPrjName()); %>"></div>
                 <div style="float: left; color: red">
                     <% 
                         if(session.getAttribute("pname") != null) {
@@ -76,7 +76,7 @@
                 </div>
                 <div style="clear: both"></div>
                 <div style="float: left; width: 150px">Project Constraints:</div>
-                <div style="float: left"><textarea name="id_pcons" cols="40" rows="5"><% out.print(proj.getPrjconstraints()); %></textarea></div>
+                <div style="float: left"><textarea name="id_pcons" cols="40" rows="5"><% out.print(proj.getPrjConstraints()); %></textarea></div>
                 <div style="float: left; color: red">
                     <% 
                         if(session.getAttribute("pcons") != null) {
@@ -92,7 +92,7 @@
             </div>
             <div style="width: 700px">
                 <div style="float: left; width: 150px">File Name:</div>
-                <div style="float: left"><input type="text" name="id_flname" value="<% out.print(projFile.getFilename()); %>"></div>
+                <div style="float: left"><input type="text" name="id_flname" value="<% out.print(projFile.getFileName()); %>"></div>
                 <div style="float: left; color: red">
                     <% 
                         if(session.getAttribute("flname") != null) {
@@ -103,7 +103,7 @@
                 </div>
                 <div style="clear: both"></div>
                 <div style="float: left; width: 150px">File Description:</div>
-                <div style="float: left"><textarea name="id_fldesc" cols="40" rows="5"><% out.print(projFile.getFiledescription()); %></textarea></div>
+                <div style="float: left"><textarea name="id_fldesc" cols="40" rows="5"><% out.print(projFile.getFileDescription()); %></textarea></div>
                 <div style="float: left; color: red">
                     <% 
                         if(session.getAttribute("fldesc") != null) {
@@ -114,7 +114,7 @@
                 </div>
                 <div style="clear: both"></div>
                 <div style="float: left; width: 150px">File Link:</div>
-                <div style="float: left"><input type="text" name="id_fllink" value="<% out.print(projFile.getThefile()); %>"></div>
+                <div style="float: left"><input type="text" name="id_fllink" value="<% out.print(projFile.getTheFile()); %>"></div>
                 <div style="float: left; color: red">
                     <% 
                         if(session.getAttribute("fllink") != null) {
