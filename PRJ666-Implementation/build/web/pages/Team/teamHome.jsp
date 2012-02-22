@@ -34,9 +34,6 @@
     <title>PRJ566 - Team Home</title>
   </head>
   <body>
-    <%
-      String teamsName = userBean.getTeam().getTeamName();
-    %>
     <table> 
       <tr>
         <td colspan="2">
@@ -110,7 +107,7 @@
         </td>
       </tr>
       <tr>
-        <td>Here is your Team Home Page, Team <%=teamsName%> .</td>
+        <td>Here is your Team Home Page, Team <%=userBean.getTeam().getTeamName()%> .</td>
       </tr>
     </table>
   </body>

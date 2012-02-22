@@ -4,6 +4,7 @@
  */
 package seneca.projectManagement.entity;
 
+import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateful;
@@ -126,8 +127,16 @@ public class UserSession {
     return pc.addProjectFile( projFile );
   }
   
-  public Projectfile getProfileFiles(Integer aProjectId){
+  public ArrayList<Projectfile> getProfileFiles(Integer aProjectId){
     return pc.getProjectFiles( aProjectId );
+  }
+  
+  public Projectfile getAProjectFile( Integer aFileId ){
+    return pc.getAProjectFile( aFileId );
+  }
+  
+  public ArrayList<Projects> getCompanyProjects( Company aCompany ){
+    return pc.getCompanyProjects( aCompany.getCompanyId() );
   }
 }
  

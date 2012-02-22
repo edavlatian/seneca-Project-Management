@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <!DOCTYPE html>
 <html>
   <head>
@@ -66,13 +68,54 @@
 		      </div>
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg')">
-          <% /* TODO: Insert code here that checks for logged in user role, sets links
-          accordingly */%>
           <ul>
-			      <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Team Page</a></li>
-            <li><a href="#">Manage Project Milestones</a></li>
-		      </ul>
+          <% 
+            if(userBean.isLogged()) {
+              if(userBean.getLoggedUser().getUserRole().equals("CR")){
+          %>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="#">Create New Project</a></li>
+            <li><a href="#">Your Projects</a></li>
+            <li><a href="#">Upcoming Milestones</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
+          %>
+            <li><a href="#">Rank Projects</a></li>
+		        <li><a href="#">Manage Project Milestones</a></li>
+            <li><a href="#">View Projects</a></li>
+            <li><a href="#">Manage Team Page</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
+          %>
+            <li><a href="#">Create Team Accounts</a></li>
+            <li><a href="#">Deactivate Team Accounts</a></li>
+		        <li><a href="#">Match Teams/Projects</a></li>
+            <li><a href="#">Match Teams/Projects Manually</a></li>
+		        <li><a href="#">Pending Projects</a></li>
+            <li><a href="#">Approved Projects</a></li>
+            <li><a href="#">Proceed Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
+          %>
+            <li><a href="#">Change Project Status to Past</a></li>
+		        <li><a href="#">Current Semester Available Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
+		      %>
+            <li><a href="#">Pending Comments</a></li>
+		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Change Project Status to Past</a></li>
+            <li><a href="#">Manage Site Accounts</a></li>
+          <%
+              }
+            }
+          %>
+          </ul>
           <div style="float: right;">
             <ul>
               <li><a href="login.jsp">Login</a></li>

@@ -26,9 +26,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Comments implements Serializable {
   private static final long serialVersionUID = 1L;
   @Id
-  @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Basic(optional = false)
-  @NotNull
   @Column(name = "commentId")
   private Integer commentId;
   @Column(name = "commentStatus")
