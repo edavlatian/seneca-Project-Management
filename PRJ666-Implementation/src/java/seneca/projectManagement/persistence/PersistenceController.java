@@ -4,7 +4,7 @@
  */
 package seneca.projectManagement.persistence;
 
-import java.util.ArrayList;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import seneca.projectManagement.entity.*;
@@ -173,13 +173,13 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-  public ArrayList<Projectfile> getProjectFiles( Integer aProjectId ){
+  public List<Projectfile> getProjectFiles( Integer aProjectId ){
     em = getEntityManager();
     
     Query q = em.createNamedQuery("Projectfile.findByProjectId")
             .setParameter("projectId", aProjectId);
     
-    return (ArrayList<Projectfile>)q.getResultList();
+    return (List<Projectfile>)q.getResultList();
   }
   
   public Projectfile getAProjectFile( Integer aFileId ){
@@ -191,12 +191,12 @@ public class PersistenceController extends EntityControllerBase {
     return (Projectfile)q.getSingleResult();
   }
   
-  public ArrayList<Projects> getCompanyProjects( Integer aCompanyId ){
+  public List<Projects> getCompanyProjects( Integer aCompanyId ){
     em = getEntityManager();
     
     Query q = em.createNamedQuery( "Projects.findByCompanyId" )
             .setParameter( "companyId", aCompanyId );
     
-    return (ArrayList<Projects>)q.getResultList();
+    return (List<Projects>)q.getResultList();
   }
 }

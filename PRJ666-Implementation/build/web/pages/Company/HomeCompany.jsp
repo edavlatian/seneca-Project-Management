@@ -25,24 +25,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>PRJ566 - Company Home</title>
-    </head>
-    <body>
-        <jsp:include page="/pages/headers/loginHeader.jsp" />
-        <h1>Company Page</h1>
-        <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-        userBean.getLoggedUser().getUserLName()%></h2>
-        <a href="ViewCompanyProjects.jsp">View your companies projects</a>
-    </body>
-</html>
-<html>
   <head>
-    <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.16.custom.css" />
-    <script type="text/javascript" src="resources/js/twitter.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
+    <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
+    <script type="text/javascript" src="../resources/js/twitter.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Company Home</title>
   </head>
   <body>
@@ -51,17 +38,17 @@
         <td colspan="2">
           <table width="100%">
             <tr>
-              <td width="402" style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
             </tr>
           </table>
         </td>
       </tr>
       <tr valign="top">
         <td rowspan="5" align="left" width="200"> 
-          <img src="resources/images/seneca_logo.gif" title="Seneca logo"/>
+          <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
-          <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
+          <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
@@ -96,11 +83,11 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('resources/images/header_bg.jpg')">
+        <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
 			      <li><a href="#">Current Semester Teams</a></li>
 		        <li><a href="#">Create New Project</a></li>
-            <li><a href="#">Your Projects</a></li>
+            <li><a href="Company/ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           </ul>
@@ -115,8 +102,7 @@
         <td>
           <h1>Company Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-          userBean.getLoggedUser().getUserLName()%></h2>
-          <a href="ViewCompanyProjects.jsp">View your companies projects</a>  
+          userBean.getLoggedUser().getUserLName()%></h2>  
         </td>
       </tr>             
     </table>

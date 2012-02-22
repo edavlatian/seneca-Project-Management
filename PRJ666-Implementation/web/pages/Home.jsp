@@ -75,18 +75,23 @@
           %>
 			      <li><a href="#">Current Semester Teams</a></li>
 		        <li><a href="#">Create New Project</a></li>
-            <li><a href="#">Your Projects</a></li>
+            <li><a href="Company/ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("TL")){
+                if(userBean.getTeam().getHasRegistered() == 1){
           %>
             <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="#">View Projects</a></li>
             <li><a href="#">Manage Team Page</a></li>
           <%
+                }
+                else {
+                  response.sendRedirect("Team/publishTeamPage.jsp");  
+                }
               }
               else if(userBean.getLoggedUser().getUserRole().equals("IN")){
           %>
@@ -113,13 +118,18 @@
             <li><a href="#">Manage Site Accounts</a></li>
           <%
               }
-            }
           %>
           </ul>
           <div style="float: right;">
             <ul>
+              <li><a href="logout.jsp">Logout</a></li>
+          <%
+            }
+            else {
+          %>
               <li><a href="login.jsp">Login</a></li>
               <li><a href="register.jsp">Register</a></li>
+          <% } %>
             </ul>
           </div>
         </td>

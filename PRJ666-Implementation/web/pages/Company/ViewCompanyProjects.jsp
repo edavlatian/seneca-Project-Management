@@ -3,6 +3,7 @@
     Created on : Feb 15, 2012, 9:34:22 AM
     Author     : Edouard
 --%>
+<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.Company"%>
 <%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
@@ -38,13 +39,12 @@
             <th>Constraints</th>
         </tr>
         <%
-        ArrayList<Projects> projects = new ArrayList<Projects>();
         Company comp = userBean.getCompany();
-        projects = userBean.getCompanyProjects( comp );
+        List<Projects> projects = userBean.getCompanyProjects( comp );
         if(projects.size()>0){
             for(int i=0; i < projects.size(); i++){
                 Projects proj = new Projects();
-                proj = (Projects) projects.get(i);
+                proj = projects.get(i);
         %>
         <tr>
         <td><%= proj.getProjectId() %></td>

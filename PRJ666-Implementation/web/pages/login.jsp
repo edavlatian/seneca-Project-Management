@@ -20,8 +20,8 @@
         if(userBean.isLogged() == false) {
       %>
         <form method="POST" action="validation/redirect.jsp">
-            Username: <input id="username" name="username" type="text" value="evan.weaver" /><br/>
-            Password: <input id="password" name="password" type="password" value="12345" /><br/>
+            Username: <input id="username" name="username" type="text" value="" /><br/>
+            Password: <input id="password" name="password" type="password" value="" /><br/>
             <input type="submit" value="Login Now!" />
         </form>
         

@@ -25,6 +25,7 @@
       <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     </head>
     <body>
+      <jsp:include page="../headers/loginHeader.jsp" />
       <form method="post" action="../validation/processTeam.jsp" onsubmit="return validateTeamPublish()">
         <table id="teamInfo"> 
           <tr>
