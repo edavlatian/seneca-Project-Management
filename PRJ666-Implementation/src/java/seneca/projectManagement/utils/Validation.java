@@ -4,8 +4,8 @@
  */
 package seneca.projectManagement.utils;
 
-import seneca.projectManagement.entity.Projects;
-import seneca.projectManagement.entity.UserSession;
+import seneca.projectManagement.entity.*;
+import seneca.projectManagement.persistence.PersistenceController;
 /**
  *
  * @author KepneR
@@ -37,20 +37,17 @@ public class Validation {
     
     public static boolean isValidUsername(String username) {
         boolean value = true;
-        /*
-        UserSession us = new UserSession();
+        
         try {
-            if(us.getAccounts(username) != null) {
+            PersistenceController pc = new PersistenceController();
+            if(pc.getAccount(username) != null) {
                 value = false;
-            } else {
-                value = username.matches("[\\p{Alnum}.]+");
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
         
-        */
         return value;
     }
     

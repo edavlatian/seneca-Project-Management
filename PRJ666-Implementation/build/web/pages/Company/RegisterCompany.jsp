@@ -9,7 +9,16 @@
 <%@page import="seneca.projectManagement.entity.*" %>
 <%
     Company company = new Company();
+    company.setCompanyName("");
+    company.setCompanyPhone("");
     Accounts account = new Accounts();
+    account.setAccountStatus(1);
+    account.setPasswordHashed("");
+    account.setUserEmail("");
+    account.setUserFName("");
+    account.setUserIdentifier("");
+    account.setUserLName("");
+    account.setUserRole("");
     boolean errorFound = false;
     
     if(session.getAttribute("agreed") == null) {
@@ -69,10 +78,10 @@
         }
 
         String user = request.getParameter("id_user");
-        if(lname == null) {
+        if(user == null) {
             session.setAttribute("user", "Cannot be empty!");
             errorFound = true;
-        } else if(lname.isEmpty() == true) {
+        } else if(user.isEmpty() == true) {
             session.setAttribute("user", "Cannot be empty!");
             errorFound = true;
         } else {
@@ -109,13 +118,16 @@
             session.setAttribute("pass1", "Cannot be empty!");
             errorFound = true;
         } else if(pass1.length() < 5) {
-            session.setAttribute("pass1", "Password length must be at least 6 characters.");
+            session.setAttribute("pass1", "Password length must be at least 5 characters.");
             errorFound = true;
         } else if(pass2 == null) {
             session.setAttribute("pass2", "Cannot be empty!");
             errorFound = true;
         } else if(pass2.isEmpty() == true) {
             session.setAttribute("pass2", "Cannot be empty!");
+            errorFound = true;
+        } else if (pass1.equals(pass2) == false) {
+            session.setAttribute("pass1", "Passwords must be the same!");
             errorFound = true;
         } else {
             if(Validation.isValidPassSimple(pass1, pass2) == true) {
@@ -132,17 +144,20 @@
             response.sendRedirect("RegisterForm.jsp");
         } else {
             account.setUserRole("CR");
-            account.setAccountStatus(0);
+            account.setAccountStatus(1);
+            
             if(userBean.addAccount(account) == false) {
                 out.println("An unexpected error has occured while registering the account.");
                 errorFound = true;
             }
-            
-            int userID = userBean.getLoggedUser().getUserId();
-            company.setUserId(userID);
+            company.setUserId(userBean.getAccount(account.getUserIdentifier()).getUserId());
             if(userBean.addCompany(company) == false) {
                 out.println("An unexpected error has occured while registering the company.");
                 errorFound = true;
+            }
+            
+            if(errorFound == false) {
+                userBean.logIn(user, pass1);
             }
         }
     }
@@ -151,31 +166,164 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-        <jsp:include page="/pages/headers/loginHeader.jsp" />
+  <head>
+    <link rel="stylesheet" type="text/css" href="/PRJ666-Implementation/pages/resources/css/pageStuff.css" />
+    <link rel="stylesheet" type="text/css" href="/PRJ666-Implementation/pages/resources/css/jquery-ui-1.8.16.custom.css" />
+    <script type="text/javascript" src="/PRJ666-Implementation/pages/resources/js/twitter.js"></script>
+    <script type="text/javascript" src="/PRJ666-Implementation/pages/resources/js/jquery-ui.js"></script>
+    <title>PRJ566 - Home</title>
+    <style type="text/css">
+        input[type=text], textArea, input[type=password] {
+            width: 300px;
+        }
+    </style>
+  </head>
+  <body>
+    <table> 
+      <tr>
+        <td colspan="2">
+          <table width="100%">
+            <tr>
+              <td width="402" style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr valign="top">
+        <td rowspan="5" align="left" width="200"> 
+          <img src="/PRJ666-Implementation/pages/resources/images/seneca_logo.gif" title="Seneca logo"/>
+          <br/>
+          <img src="/PRJ666-Implementation/pages/resources/images/ICT_Logo.png" title="ICT Logo"/>
+          <br/>
+          <div style="margin:2px; width:200px;">
+            <script type="text/javascript"> 
+		          new TWTR.Widget( {
+  		          version: 2,
+  		          type: "profile",
+  		          rpp: 5,
+ 		            interval: 6000,
+  		          width: "auto",
+  		          height: 300,
+  		          theme: {
+    		          shell: {
+      		          background: "#d5e7e9",
+      		          color: "#000000"
+    		          },
+    		          tweets: {
+      		          background: "#fffaff",
+     		            color: "#000000",
+      		          links: "#0772eb"
+    		          }
+  		          },	
+  		          features: {
+    		          scrollbar: false,
+    		          loop: false,
+    		          live: false,
+    		          hashtags: true,
+    		          timestamp: true,
+    	    	      avatars: false,
+    		          behavior: "all"
+  		          }
+		          } ).render().setUser( "Seneca_College" ).start();
+		        </script>
+		      </div>
+        </td>
+        <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
+          <ul>
+          <% 
+            if(userBean.isLogged()) {
+              if(userBean.getLoggedUser().getUserRole().equals("CR")){
+          %>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="#">Create New Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="#">Upcoming Milestones</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
+                if(userBean.getTeam().getHasRegistered() == 1){
+          %>
+            <li><a href="#">Rank Projects</a></li>
+		        <li><a href="#">Manage Project Milestones</a></li>
+            <li><a href="#">View Projects</a></li>
+            <li><a href="#">Manage Team Page</a></li>
+          <%
+                }
+                else {
+                  response.sendRedirect("/PRJ666-Implementation/pages/Team/publishTeamPage.jsp");  
+                }
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
+          %>
+            <li><a href="#">Create Team Accounts</a></li>
+            <li><a href="#">Deactivate Team Accounts</a></li>
+		        <li><a href="#">Match Teams/Projects</a></li>
+            <li><a href="#">Match Teams/Projects Manually</a></li>
+		        <li><a href="#">Pending Projects</a></li>
+            <li><a href="#">Approved Projects</a></li>
+            <li><a href="#">Proceed Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
+          %>
+            <li><a href="#">Change Project Status to Past</a></li>
+		        <li><a href="#">Current Semester Available Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
+		      %>
+            <li><a href="#">Pending Comments</a></li>
+		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Change Project Status to Past</a></li>
+            <li><a href="#">Manage Site Accounts</a></li>
+          <%
+              }
+          %>
+          </ul>
+          <div style="float: right;">
+            <ul>
+              <li><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
+          <%
+            }
+            else {
+          %>
+              <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
+              <li><a href="/PRJ666-Implementation/pages/register.jsp">Register</a></li>
+              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
+          <% } %>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
         <%
             /*
-            out.println(account.getUserid() + "<br/>");
-            out.println(account.getUseridentifier() + "<br/>");
-            out.println(account.getUserfname() + "<br/>");
-            out.println(account.getUserlname() + "<br/>");
-            out.println(account.getUseremail() + "<br/>");
-            out.println(account.getUserrole() + "<br/>");
-            out.println(account.getPassword() + "<br/>");
+            out.print(account.getUserId() + "<br/>");
+            out.print(account.getUserIdentifier() + "<br/>");
+            out.print(account.getUserFName() + "<br/>");
+            out.print(account.getUserLName() + "<br/>");
+            out.print(account.getUserEmail() + "<br/>");
+            out.print(account.getUserRole() + "<br/>");
+            out.print(account.getPassword() + "<br/>");
+            out.print(account.getAccountStatus() + "<br/>");
             out.print("<br/>");
-            out.println(company.getCompanyname() + "<br/>");
-            out.println(company.getCompanyphone() + "<br/>");
-            out.println(company.getRepid() + "<br/>");
+            out.print(company.getCompanyId() + "<br/>");
+            out.print(company.getCompanyName() + "<br/>");
+            out.print(company.getCompanyPhone() + "<br/>");
+            out.print(company.getUserId() + "<br/>");
             */
+            
             if(errorFound == false) {
                 userBean.setLoggedUser(account);
                 out.println("<h1>Company Account has been successfully registered!</h1>");
                 out.println("<a href=\"ProjectForm.jsp\">Click here to propose a project!</a>");
             }
         %>
-    </body>
+        </td>
+      </tr>          
+    </table>
+  </body>
 </html>
