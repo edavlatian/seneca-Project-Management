@@ -9,7 +9,7 @@ li{
   float: left;
 }
 
-li a:link,a:visited
+li a:link, li a:visited
 {
   font-size: 80%;
   display:block;

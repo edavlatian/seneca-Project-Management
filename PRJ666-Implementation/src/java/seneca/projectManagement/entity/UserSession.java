@@ -128,6 +128,10 @@ public class UserSession {
     return pc.getProject( proj );
   }
   
+  public Projects getProject(String pname){
+    return pc.getProject( pname );
+  }
+  
   public Projects getProject(Integer id){
     return pc.getProject( id );
   }  

@@ -23,6 +23,7 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Projects.findByProjectId", query = "SELECT p FROM Projects p WHERE p.projectId = :projectId"),
   @NamedQuery(name = "Projects.findByStatus", query = "SELECT p FROM Projects p WHERE p.status = :status"),
   @NamedQuery(name = "Projects.findByPrjName", query = "SELECT p FROM Projects p WHERE p.prjName = :prjName"),
+  @NamedQuery(name = "Projects.findByPrjIdentifier", query = "SELECT p FROM Projects p WHERE p.prjName = :prjIdentifier"),
   @NamedQuery(name = "Projects.findByDescription", query = "SELECT p FROM Projects p WHERE p.description = :description"),
   @NamedQuery(name = "Projects.findByPrjConstraints", query = "SELECT p FROM Projects p WHERE p.prjConstraints = :prjConstraints"),
   @NamedQuery(name = "Projects.findByAgreementDate", query = "SELECT p FROM Projects p WHERE p.agreementDate = :agreementDate"),
@@ -44,6 +45,11 @@ public class Projects implements Serializable {
   @Size(min = 1, max = 20)
   @Column(name = "prjName")
   private String prjName;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 25)
+  @Column(name = "prjIdentifier")
+  private String prjIdentifier;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 500)
@@ -91,6 +97,14 @@ public class Projects implements Serializable {
 
   public void setPrjName(String prjName) {
     this.prjName = prjName;
+  }
+  
+  public String getPrjIdentifier() {
+    return prjIdentifier;
+  }
+
+  public void setPrjIdentifier(String prjIdentifier) {
+    this.prjIdentifier = prjIdentifier;
   }
 
   public String getDescription() {

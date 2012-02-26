@@ -53,19 +53,17 @@ public class Validation {
     
     public static boolean isValidProject(String prjName) {
         boolean value = true;
-        /*
-        UserSession us = new UserSession();
+        
         try {
-            Projects proj = new Projects();
-            proj.setPrjname(prjName);
-            if(us.getProject(proj) != null) {
+            PersistenceController pc = new PersistenceController();
+            if(pc.getProject(prjName) != null) {
                 value = false;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        
         return value;
     }
 }

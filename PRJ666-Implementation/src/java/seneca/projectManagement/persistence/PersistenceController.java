@@ -165,6 +165,16 @@ public class PersistenceController extends EntityControllerBase {
     return value.get(value.size() - 1);
   }
   
+  public Projects getProject( String pname ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByPrjName")
+            .setParameter("prjName", pname);
+    List<Projects> value = (List<Projects>) q.getResultList();
+    
+    return value.get(value.size() - 1);
+  }
+  
   public Projects getProject( Integer id ){
     em = getEntityManager();
     
