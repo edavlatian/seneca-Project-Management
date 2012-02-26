@@ -45,8 +45,6 @@ public class Projects implements Serializable {
   @Size(min = 1, max = 20)
   @Column(name = "prjName")
   private String prjName;
-  @Basic(optional = false)
-  @NotNull
   @Size(min = 1, max = 25)
   @Column(name = "prjIdentifier")
   private String prjIdentifier;
@@ -179,5 +177,4 @@ public class Projects implements Serializable {
   public String toString() {
     return "seneca.projectManagement.entity.Projects[ projectId=" + projectId + " ]";
   }
-  
 }

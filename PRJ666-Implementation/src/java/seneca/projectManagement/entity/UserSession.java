@@ -4,6 +4,8 @@
  */
 package seneca.projectManagement.entity;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.LocalBean;
@@ -11,7 +13,7 @@ import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import seneca.projectManagement.persistence.PersistenceController;
 import seneca.projectManagement.utils.CryptoUtil;
-
+import seneca.projectManagement.utils.Validation;
 /**
  *
  * @author matthewschranz
@@ -116,6 +118,10 @@ public class UserSession {
     return pc.getCompany( loggedUser.getUserId() );
   }
   
+  public Company getCompanyByID(Integer companyID) {
+      return pc.getCompanyByID(companyID);
+  }
+  
   public boolean addCompany( Company aCompany ){
     return pc.addCompany( aCompany );
   }
@@ -154,6 +160,28 @@ public class UserSession {
   
   public List<Projects> getAllProjects(String status) {
       return pc.getAllProjects(status);
+  }
+  
+  public List<Projects> getAllProjects(String status, Accounts a) {
+      List<Projects> value = new ArrayList<Projects>();
+      for(Projects p : pc.getAllProjects(status)) {
+          if(p.getInstructorId() == a.getUserId()) {
+              value.add(p);
+          }
+      }
+      return value;
+  }
+  
+  public List<Projects> getAllProjects(String status, String sem) {
+      List<Projects> value = new ArrayList<Projects>();
+      for(Projects p : pc.getAllProjects(status)) {
+          if(p.getPrjIdentifier() != null) {
+            if(p.getPrjIdentifier().equals(sem) == true) {
+                value.add(p);
+            }
+          }
+      }
+      return value;
   }
   
   public List<Projects> getCompanyProjects( Company aCompany ){

@@ -1,16 +1,16 @@
 <%-- 
-    Document   : HomeSupervisor
-    Created on : Feb 7, 2012, 3:34:03 PM
+    Document   : HomeAdmin.jsp
+    Created on : Feb 7, 2012, 3:32:57 PM
     Author     : KepneR
 --%>
 
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.*" %>
+<%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%
     if(userBean.isLogged() == true) {
-        if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
-            session.setAttribute("Error", "You don't have permission to access the supervisor page.");
+        if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
+            session.setAttribute("Error", "You don't have permission to access the administrator page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
@@ -24,14 +24,14 @@
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <title>PRJ566 - Supervisor Home</title>
+    <title>PRJ566 - Administrator Home</title>
   </head>
   <body>
     <table> 
@@ -68,7 +68,7 @@
     		          tweets: {
       		          background: "#fffaff",
      		            color: "#000000",
-                            links: "#0772eb"
+      		          links: "#0772eb"
     		          }
   		          },	
   		          features: {
@@ -86,8 +86,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-                <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-                <li><a href="#">Current Semester Available Projects</a></li>
+			      <li><a href="#">Pending Comments</a></li>
+		        <li><a href="#">Available Projects</a></li>
+            <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
+            <li><a href="#">Manage Site Accounts</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -98,7 +100,7 @@
       </tr>
       <tr>
         <td>
-            <h1>Archive Selected Project(s)</h1>
+          <h1>Archive Selected Project(s)</h1>
             <div style="clear: both"></div>
             <div>
             <%
@@ -130,7 +132,7 @@
             %>
             </div>
         </td>
-      </tr>
+      </tr>             
     </table>
   </body>
 </html>

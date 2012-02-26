@@ -1,21 +1,21 @@
 <%-- 
-    Document   : HomeSupervisor
-    Created on : Feb 7, 2012, 3:34:03 PM
+    Document   : HomeAdmin.jsp
+    Created on : Feb 7, 2012, 3:32:57 PM
     Author     : KepneR
 --%>
 
 <%@page import="seneca.projectManagement.utils.ProjectSorting"%>
 <%@page import="java.util.Collections"%>
-<%@page import="seneca.projectManagement.utils.Validation"%>
-<%@page import="java.util.Calendar"%>
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.*" %>
+<%@page import="seneca.projectManagement.entity.*"%>
+<%@page import="seneca.projectManagement.utils.Validation"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     session.setAttribute("First", 1);
     if(userBean.isLogged() == true) {
-        if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
-            session.setAttribute("Error", "You don't have permission to access the supervisor page.");
+        if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
+            session.setAttribute("Error", "You don't have permission to access the administrator page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
@@ -25,14 +25,14 @@
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+<!DOCTYPE html>  
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <title>PRJ566 - Supervisor Home</title>
+    <title>PRJ566 - Administrator Home</title>
   </head>
   <body>
     <table> 
@@ -69,7 +69,7 @@
     		          tweets: {
       		          background: "#fffaff",
      		            color: "#000000",
-                            links: "#0772eb"
+      		          links: "#0772eb"
     		          }
   		          },	
   		          features: {
@@ -87,8 +87,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-                <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-                <li><a href="#">Current Semester Available Projects</a></li>
+			      <li><a href="#">Pending Comments</a></li>
+		        <li><a href="#">Available Projects</a></li>
+            <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
+            <li><a href="#">Manage Site Accounts</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -99,12 +101,13 @@
       </tr>
       <tr>
         <td>
-            <h1>List of Projects this Semester (<%= Validation.getSemesterToday() %>)</h1>
+          <h1>List of Proceeded Projects</h1>
             <form method="POST" action="ProjectSetPast.jsp">
             <%
                 Projects p = null;
                 Company c = null;
-                List<Projects> projects = userBean.getAllProjects("PR", Validation.getSemesterToday());
+                //List<Projects> projects = userBean.getAllProjects("PR", Validation.getSemesterToday());
+                List<Projects> projects = userBean.getAllProjects("PR");
                 if(projects.size() > 0) {
                     Collections.sort(projects, new ProjectSorting());
                     Integer beg = 0;

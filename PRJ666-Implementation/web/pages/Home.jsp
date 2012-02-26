@@ -4,6 +4,7 @@
     Author     : KepneR
 --%>
 
+<%@page import="seneca.projectManagement.utils.Validation"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
@@ -227,7 +228,8 @@
             E<br/>
             R<br/>
             E<br/>
-            <a href="#">Test Link</a>
+            <a href="#">Test Link</a></br>
+            <% out.print(Validation.getSemesterToday()); %>
           </p>
           <hr/>
         </td>

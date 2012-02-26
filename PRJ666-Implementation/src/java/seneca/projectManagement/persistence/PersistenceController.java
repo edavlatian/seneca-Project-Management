@@ -73,9 +73,8 @@ public class PersistenceController extends EntityControllerBase {
     em = getEntityManager();
     
     Query q = em.createNamedQuery( "Teams.findByUserId" ).setParameter( "userId", userId );
-    List<Teams> value = (List<Teams>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Teams) q.getSingleResult();
   }
   
   public Accounts getAccount( String aUserIdentifier ){
@@ -83,9 +82,8 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
             aUserIdentifier );
-    List<Accounts> value = (List<Accounts>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Accounts) q.getSingleResult();
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -93,9 +91,8 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
             .setParameter("teamId", aTeamId);
-    List<Teammember> value = (List<Teammember>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Teammember) q.getSingleResult();
   }
   
   public boolean updateMember( Teammember aMember ){
@@ -126,9 +123,13 @@ public class PersistenceController extends EntityControllerBase {
     em = getEntityManager();
     
     Query q = em.createNamedQuery("Company.findByUserId").setParameter("userId", aUserId);
-    List<Company> value = (List<Company>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Company) q.getSingleResult();
+  }
+  
+  public Company getCompanyByID(Integer companyID) {
+      em = getEntityManager();
+      return em.find(Company.class, companyID);
   }
   
   public boolean addCompany( Company aCompany ){
@@ -160,9 +161,14 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByPrjName")
             .setParameter("prjName", aProject.getPrjName());
-    List<Projects> value = (List<Projects>) q.getResultList();
+    Projects value = null;
+    try {
+        value = (Projects) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     
-    return value.get(value.size() - 1);
+    return value;
   }
   
   public Projects getProject( String pname ){
@@ -170,9 +176,14 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByPrjName")
             .setParameter("prjName", pname);
-    List<Projects> value = (List<Projects>) q.getResultList();
+    Projects value = null;
+    try {
+        value = (Projects) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     
-    return value.get(value.size() - 1);
+    return value;
   }
   
   public Projects getProject( Integer id ){
@@ -180,9 +191,8 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByProjectId")
             .setParameter("projectId", id);
-    List<Projects> value = (List<Projects>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Projects) q.getSingleResult();
   }
   
   public boolean addProjectFile( Projectfile aProjectFile ){
@@ -211,9 +221,8 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Projectfile.findByFileId")
             .setParameter( "fileId", aFileId );
-    List<Projectfile> value = (List<Projectfile>) q.getResultList();
     
-    return value.get(value.size() - 1);
+    return (Projectfile) q.getSingleResult();
   }
   
   public List<Projects> getAllProjects() {
