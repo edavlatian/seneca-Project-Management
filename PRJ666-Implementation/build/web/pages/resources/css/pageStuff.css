@@ -25,3 +25,11 @@ li a:link,a:visited
 .errors {
   color: red; 
 }
+
+tr.projects{
+  text-align: center;
+}
+
+h3.title{
+  text-decoration: underline;
+}

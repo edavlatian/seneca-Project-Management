@@ -89,7 +89,7 @@
 			      <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="#">View Projects</a></li>
+            <li><a href="viewProjects.jsp">View Projects</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>

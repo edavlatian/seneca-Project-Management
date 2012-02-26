@@ -123,7 +123,17 @@ public class PersistenceController extends EntityControllerBase {
   public Company getCompany( Integer aUserId ){
     em = getEntityManager();
     
-    Query q = em.createNamedQuery("Company.findByUserId").setParameter("userId", aUserId);
+    Query q = em.createNamedQuery("Company.findByUserId")
+            .setParameter("userId", aUserId);
+    
+    return (Company)q.getSingleResult();
+  }
+  
+  public Company getProjectCompany( Integer aCompanyId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Company.findByCompanyId" )
+            .setParameter( "companyId",  aCompanyId);
     
     return (Company)q.getSingleResult();
   }
@@ -196,6 +206,15 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Projects.findByCompanyId" )
             .setParameter( "companyId", aCompanyId );
+    
+    return (List<Projects>)q.getResultList();
+  }
+  
+  public List<Projects> getAvailableProjects( String aStatus ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findByStatus")
+            .setParameter( "status", aStatus );
     
     return (List<Projects>)q.getResultList();
   }

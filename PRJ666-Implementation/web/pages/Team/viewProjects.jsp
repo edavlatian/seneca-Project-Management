@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
@@ -31,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <title>PRJ566 - Team Home</title>
+    <title>PRJ566 - Team View Available Projects</title>
   </head>
   <body>
     <table> 
@@ -99,8 +100,28 @@
         </td>
       </tr>
       <tr class="projects">
-        <td></td>
+        <td><h3 class="title">Available Projects</h3></td>
       </tr>
+      <%
+        List<Projects> projects = userBean.getAvailableProjects( "AV" );
+        Company comp;
+        
+        if( !projects.isEmpty() ) {
+          for( int i = 0, len = projects.size(); i < len; i++){
+            Projects proj = projects.get( i );
+            comp = userBean.getProjectCompany( proj.getCompanyId() );
+            out.println( "<tr><td>" );
+            out.println( "Company: " + comp.getCompanyName() + "<br/>" );
+            out.println( "About Us: TODO: Debate adding additional column to Company Table <br/>" );
+            out.println( "<a href='projectDetails.jsp'>" + proj.getPrjName() + "</a><br/>" );
+            out.println( "Status: " + proj.getStatus() + "<br/>" );
+            out.println( "</td></tr>" );
+          }
+        }
+        else{
+          out.print( "<tr class='projects'><td>There were no available projects.</td></tr>" );
+        }
+      %>
     </table>
   </body>
 </html>

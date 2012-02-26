@@ -116,6 +116,10 @@ public class UserSession {
     return pc.getCompany( loggedUser.getUserId() );
   }
   
+  public Company getProjectCompany( Integer aCompanyId ){
+    return pc.getProjectCompany( aCompanyId );
+  }
+  
   public boolean addCompany( Company aCompany ){
     return pc.addCompany( aCompany );
   }
@@ -142,6 +146,10 @@ public class UserSession {
   
   public List<Projects> getCompanyProjects( Company aCompany ){
     return pc.getCompanyProjects( aCompany.getCompanyId() );
+  }
+  
+  public List<Projects> getAvailableProjects( String aStatus ){
+    return pc.getAvailableProjects( aStatus );
   }
 }
  
