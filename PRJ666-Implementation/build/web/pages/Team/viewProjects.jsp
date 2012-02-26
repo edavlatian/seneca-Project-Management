@@ -113,7 +113,7 @@
             out.println( "<tr><td>" );
             out.println( "Company: " + comp.getCompanyName() + "<br/>" );
             out.println( "About Us: TODO: Debate adding additional column to Company Table <br/>" );
-            out.println( "<a href='projectDetails.jsp'>" + proj.getPrjName() + "</a><br/>" );
+            out.println( "Project: <a href='projectDetails.jsp'>" + proj.getPrjName() + "</a><br/>" );
             out.println( "Status: " + proj.getStatus() + "<br/>" );
             out.println( "</td></tr>" );
           }
