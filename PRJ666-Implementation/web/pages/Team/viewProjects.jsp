@@ -1,24 +1,29 @@
 <%-- 
-    Document   : HomeSupervisor
-    Created on : Feb 7, 2012, 3:34:03 PM
-    Author     : KepneR
+    Document   : viewProjects
+    Created on : Feb 26, 2012, 10:05:52 AM
+    Author     : matthewschranz
 --%>
 
-<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
-<jsp:setProperty name="userBean" property="*" />
+<%@page import="seneca.projectManagement.entity.*"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+  <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
+               scope="session" />
+  <jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true) {
-        if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
-            session.setAttribute("Error", "You don't have permission to access the supervisor page.");
-            response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+        if(userBean.getLoggedUser().getUserRole().equals("TL")) {
+          if(userBean.getTeam().getHasRegistered() != 1)
+            response.sendRedirect("publishTeamPage.jsp");
+        }
+        else if(userBean.getLoggedUser().getAccountStatus() != 1) {
+          session.setAttribute("Error", "Account has not been activated yet.");
+          response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
 %>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -26,7 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <title>PRJ566 - Supervisor Home</title>
+    <title>PRJ566 - Team Home</title>
   </head>
   <body>
     <table> 
@@ -81,9 +86,11 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Change Project Status to Past</a></li>
-		        <li><a href="#">Current Semester Available Projects</a></li>
-          </ul>
+			      <li><a href="#">Rank Projects</a></li>
+		        <li><a href="#">Manage Team Page</a></li>
+            <li><a href="#">Manage Project Milestones</a></li>
+            <li><a href="#">View Projects</a></li>
+		      </ul>
           <div style="float: right;">
             <ul>
               <li><a href="../logout.jsp">Logout</a></li>
@@ -91,13 +98,9 @@
           </div>
         </td>
       </tr>
-      <tr>
-        <td>
-          <h1>Supervisor Page</h1>
-          <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-          userBean.getLoggedUser().getUserLName()%></h2>  
-        </td>
-      </tr>             
+      <tr class="projects">
+        <td></td>
+      </tr>
     </table>
   </body>
 </html>

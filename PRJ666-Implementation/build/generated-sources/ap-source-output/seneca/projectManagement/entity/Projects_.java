@@ -5,12 +5,13 @@ import javax.annotation.Generated;
 import javax.persistence.metamodel.SingularAttribute;
 import javax.persistence.metamodel.StaticMetamodel;
 
-@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-02-23T14:35:25")
+@Generated(value="EclipseLink-2.3.0.v20110604-r9504", date="2012-02-26T12:16:37")
 @StaticMetamodel(Projects.class)
 public class Projects_ { 
 
     public static volatile SingularAttribute<Projects, String> prjConstraints;
     public static volatile SingularAttribute<Projects, Integer> instructorId;
+    public static volatile SingularAttribute<Projects, String> prjIdentifier;
     public static volatile SingularAttribute<Projects, Date> agreementDate;
     public static volatile SingularAttribute<Projects, String> status;
     public static volatile SingularAttribute<Projects, String> prjName;
