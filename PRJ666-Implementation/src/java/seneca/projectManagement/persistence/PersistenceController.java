@@ -73,9 +73,9 @@ public class PersistenceController extends EntityControllerBase {
     em = getEntityManager();
     
     Query q = em.createNamedQuery( "Teams.findByUserId" ).setParameter( "userId", userId );
+    List<Teams> value = (List<Teams>) q.getResultList();
     
-    
-    return (Teams)q.getSingleResult();
+    return value.get(value.size() - 1);
   }
   
   public Accounts getAccount( String aUserIdentifier ){
@@ -83,8 +83,9 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
             aUserIdentifier );
+    List<Accounts> value = (List<Accounts>) q.getResultList();
     
-    return (Accounts)q.getSingleResult();
+    return value.get(value.size() - 1);
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -92,8 +93,9 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
             .setParameter("teamId", aTeamId);
+    List<Teammember> value = (List<Teammember>) q.getResultList();
     
-    return (Teammember)q.getSingleResult();
+    return value.get(value.size() - 1);
   }
   
   public boolean updateMember( Teammember aMember ){
@@ -124,8 +126,9 @@ public class PersistenceController extends EntityControllerBase {
     em = getEntityManager();
     
     Query q = em.createNamedQuery("Company.findByUserId").setParameter("userId", aUserId);
+    List<Company> value = (List<Company>) q.getResultList();
     
-    return (Company)q.getSingleResult();
+    return value.get(value.size() - 1);
   }
   
   public boolean addCompany( Company aCompany ){
@@ -157,8 +160,19 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByPrjName")
             .setParameter("prjName", aProject.getPrjName());
+    List<Projects> value = (List<Projects>) q.getResultList();
     
-    return (Projects)q.getSingleResult();
+    return value.get(value.size() - 1);
+  }
+  
+  public Projects getProject( Integer id ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByProjectId")
+            .setParameter("projectId", id);
+    List<Projects> value = (List<Projects>) q.getResultList();
+    
+    return value.get(value.size() - 1);
   }
   
   public boolean addProjectFile( Projectfile aProjectFile ){
@@ -187,8 +201,25 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Projectfile.findByFileId")
             .setParameter( "fileId", aFileId );
+    List<Projectfile> value = (List<Projectfile>) q.getResultList();
     
-    return (Projectfile)q.getSingleResult();
+    return value.get(value.size() - 1);
+  }
+  
+  public List<Projects> getAllProjects() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findAll" );
+    
+    return (List<Projects>) q.getResultList();
+  }
+  
+  public List<Projects> getAllProjects(String status) {
+      em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findByStatus" ).setParameter("status", status);
+    
+    return (List<Projects>) q.getResultList();
   }
   
   public List<Projects> getCompanyProjects( Integer aCompanyId ){
@@ -198,5 +229,26 @@ public class PersistenceController extends EntityControllerBase {
             .setParameter( "companyId", aCompanyId );
     
     return (List<Projects>)q.getResultList();
+  }
+  
+  public List<Projects> getInstructorProjects( Integer aInstructorId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findByInstructorId" )
+            .setParameter( "instructorId", aInstructorId );
+    
+    return (List<Projects>)q.getResultList();
+  }
+  
+  public boolean updateProject(Projects p) {
+    em = getEntityManager();
+
+    em.getTransaction().begin();
+    em.merge( p );
+    em.getTransaction().commit();
+
+    em.close();
+
+    return true;
   }
 }

@@ -24,6 +24,9 @@
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+        } else if(session.getAttribute("agreed") == null) {
+            session.setAttribute("AgreementError", "You have not agreed to the agreement form.");
+            response.sendRedirect("ProjectAgreementForm.jsp");
         } else {
             String pname = request.getParameter("id_pname");
             if (pname == null) {
@@ -104,7 +107,7 @@
                 Company c = userBean.getCompany();
                 proj.setStatus("PE");
                 proj.setCompanyId(c.getCompanyId());
-                
+
                 if(userBean.addProject(proj) == false) {
                     out.println("An unexpected error has occured while registering the Project.");
                     errorFound = true;
@@ -121,7 +124,7 @@
     }
     else {
         errorFound = true;
-        response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+        response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
     }
 %>
 
@@ -193,8 +196,8 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="ProjectForm.jsp">Create New Project</a></li>
+            <li><a href="#">Current Semester Teams</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>

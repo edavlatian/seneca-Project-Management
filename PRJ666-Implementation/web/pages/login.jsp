@@ -143,7 +143,7 @@
                 <form method="POST" action="validation/redirect.jsp">
                         <div style="float: left; width: 80px; text-align: right">Username:</div>
                         <div style="float: left; width: 150px">
-                            <input id="username" name="username" type="text" value="kepner.caliso" style="width: 145px"/>
+                            <input id="username" name="username" type="text" value="emile.ohan" style="width: 145px"/>
                         </div>
                         <div style="clear: both"></div>
                         <div style="float: left; width: 80px; text-align: right">Password:</div>

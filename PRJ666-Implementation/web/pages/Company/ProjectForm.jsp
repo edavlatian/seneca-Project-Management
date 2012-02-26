@@ -4,11 +4,11 @@
     Author     : KepneR
 --%>
 
+<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.Date"%>
 <%@page import="java.util.Calendar"%>
-<jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%@page import="seneca.projectManagement.entity.*" %>
 <%@page import="seneca.projectManagement.utils.*" %>
 <%
@@ -16,10 +16,12 @@
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+        } else if(session.getAttribute("agreed") == null) {
+            session.setAttribute("AgreementError", "You have not agreed to the agreement form.");
+            response.sendRedirect("ProjectAgreementForm.jsp");
         }
-    }
-    else {
-        response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+    } else {
+        response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
     }
     
     Projects proj = new Projects();
@@ -107,8 +109,8 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="ProjectForm.jsp">Create New Project</a></li>
+            <li><a href="#">Current Semester Teams</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>

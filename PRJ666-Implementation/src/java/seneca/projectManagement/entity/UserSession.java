@@ -128,6 +128,10 @@ public class UserSession {
     return pc.getProject( proj );
   }
   
+  public Projects getProject(Integer id){
+    return pc.getProject( id );
+  }  
+  
   public boolean addProjectFile(Projectfile projFile){
     return pc.addProjectFile( projFile );
   }
@@ -140,8 +144,24 @@ public class UserSession {
     return pc.getAProjectFile( aFileId );
   }
   
+  public List<Projects> getAllProjects(){
+    return pc.getAllProjects();
+  }
+  
+  public List<Projects> getAllProjects(String status) {
+      return pc.getAllProjects(status);
+  }
+  
   public List<Projects> getCompanyProjects( Company aCompany ){
     return pc.getCompanyProjects( aCompany.getCompanyId() );
+  }
+  
+  public List<Projects> getInstructorProjects( Accounts aAccount ){
+    return pc.getCompanyProjects( aAccount.getUserId() );
+  }
+  
+  public boolean updateProject(Projects p) {
+      return pc.updateProject(p);
   }
 }
  

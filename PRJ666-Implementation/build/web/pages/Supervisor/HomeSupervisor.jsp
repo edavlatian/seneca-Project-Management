@@ -5,7 +5,6 @@
 --%>
 
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
-<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true) {
         if(userBean.getLoggedUser().getUserRole().equals("SU") == false) {
@@ -81,8 +80,8 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Change Project Status to Past</a></li>
-		        <li><a href="#">Current Semester Available Projects</a></li>
+            <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
+            <li><a href="#">Current Semester Available Projects</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -94,8 +93,13 @@
       <tr>
         <td>
           <h1>Supervisor Page</h1>
-          <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-          userBean.getLoggedUser().getUserLName()%></h2>  
+          <h2>Hello, 
+              <%
+                if(userBean.getLoggedUser() != null) {
+                    out.print(userBean.getLoggedUser().getUserFName() + " " + userBean.getLoggedUser().getUserLName());
+                }
+              %>
+          </h2>  
         </td>
       </tr>             
     </table>

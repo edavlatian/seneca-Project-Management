@@ -275,7 +275,7 @@
               else if(userBean.getLoggedUser().getUserRole().equals("AD")){
 		      %>
             <li><a href="#">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Available Projects</a></li>
             <li><a href="#">Change Project Status to Past</a></li>
             <li><a href="#">Manage Site Accounts</a></li>
           <%
