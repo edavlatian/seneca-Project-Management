@@ -9,8 +9,17 @@
 <%
   Email emailer = new Email();
   
-  emailer.sendEmail( "schranz.m@gmail.com", "mjschranz@learn.senecac.on.ca",
-          "Test Email", "This email is a test from the BEAM Solutions PRJ666 project.");
+  emailer.sendEmail( "matthew.schranz@senecacollege.ca", "schranz.m@gmail.com",
+          "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
+          + " using an outside email as the recipient.");
+  
+  emailer.sendEmail( "matthew.schranz@senecacollege.ca", "mjschranz@learn.senecac.on.ca",
+          "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
+          + "using an @learn.senecac.on.ca as the recipient.");
+  
+  emailer.sendEmail( "emile.ohan@senecacollege.ca", "matthew.schranz@senecacollege.ca",
+          "Test Email", "This email is a test from the BEAM Solutions PRJ666 project"
+          + "using an @senecacollege.ca as the recipient.");
 %>
 <html>
   <head>
@@ -18,6 +27,8 @@
     <title>JSP Page</title>
   </head>
   <body>
-    <h1>You sent an email to mjschranz@learn.senecac.on.ca, from matthew.schranz@senecacollege.ca.</h1>
+    <h3>You sent an email to mjschranz@learn.senecac.on.ca from matthew.schranz@senecacollege.ca.</h3>
+    <h3>You sent an email to schranz.m@gmail.com from matthew.schranz@senecacollege.ca.</h3>
+    <h3>You sent an email to matthew.schranz@senecacollege.ca from emile.ohan@senecacollege.ca.</h3>
   </body>
 </html>
