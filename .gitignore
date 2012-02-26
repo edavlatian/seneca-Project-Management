@@ -11,8 +11,5 @@ TAGS
 tags
 ID
 .DS_Store*
-nbproject/*
 /PRJ666-Implementation/dist/
-/WebApplication1/nbproject/private/
-/WebApplication1/build/
-/WebApplication1/dist/
+/PRJ666-Implementation/build/
