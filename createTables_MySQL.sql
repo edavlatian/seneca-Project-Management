@@ -59,7 +59,8 @@ CREATE TABLE company (
 CREATE TABLE projects (
   projectId int AUTO_INCREMENT PRIMARY KEY,
   status varchar(2) NOT NULL,
-  prjName varchar(20) NOT NULL,
+  prjName varchar(20) NOT NULL UNIQUE,
+  prjIdentifier varchar(25),
   description varchar(500) NOT NULL,
   prjConstraints varchar(250) NOT NULL,
   agreementDate TIMESTAMP DEFAULT NOW(),

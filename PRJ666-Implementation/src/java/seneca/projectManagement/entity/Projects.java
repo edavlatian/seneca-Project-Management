@@ -44,6 +44,9 @@ public class Projects implements Serializable {
   @Size(min = 1, max = 20)
   @Column(name = "prjName")
   private String prjName;
+  @Size(min = 1, max = 25)
+  @Column(name = "prjIdentifier")
+  private String prjIdentifier;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 500)
@@ -67,6 +70,14 @@ public class Projects implements Serializable {
   private Integer instructorId;
 
   public Projects() {
+  }
+  
+  public String getPrjIdentifier() {
+    return prjIdentifier;
+  }
+
+  public void setPrjIdentifier(String prjIdentifier) {
+    this.prjIdentifier = prjIdentifier;
   }
 
   public Integer getProjectId() {
