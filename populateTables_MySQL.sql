@@ -129,7 +129,13 @@ INSERT INTO projects (status, prjName, description, prjConstraints, companyId, i
   VALUES ('PA', 'WOOOOOOOOOOO', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 5, 5);
 
 INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
-  VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6);  
+  VALUES ('PE', 'SUPER HELLO WORLD', 'We are going to be doing super awesome stuff. Our project is going to be the next Wordpress!', 'Drupal<br/>MySQL', 6); 
+  
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('AV', 'Reddit', 'Were Reddit. We are the internet. We are assuming control. We are assuming control.', 'Java<br/>MySQL<br/>Apache', 6);
+
+INSERT INTO projects (status, prjName, description, prjConstraints, companyId)
+  VALUES ('AV', 'Fruit Loops', "Were bringing back Fruit Loops. Why? Because Fruit Loops are super awesome and kids these days don't know what they are missing.", 'Java<br/>MySQL<br/>Apache', 6);
 
 /* comments Table Commands */
 INSERT INTO comments (projectId, commentDescription, commentStatus)
