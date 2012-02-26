@@ -5,8 +5,6 @@
 --%>
 
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
-<jsp:setProperty name="userBean" property="*" />
-
 <%@page contentType="text/html" pageEncoding="UTF-8" import="seneca.projectManagement.entity.*"%>
 <!DOCTYPE html>
 <html>

@@ -29,11 +29,12 @@ import seneca.projectManagement.utils.CryptoUtil;
 @StatefulTimeout(unit = TimeUnit.MINUTES, value = 60)
 public class UserSession {
 
-  private Accounts loggedUser;
-  private PersistenceController pc;
+  private Accounts loggedUser = null;
+  private PersistenceController pc = null;
   
   public UserSession() {
     pc = new PersistenceController();
+    loggedUser = null;
   }
   
   public Accounts getLoggedUser() {
@@ -55,9 +56,9 @@ public class UserSession {
       Accounts account = pc.getAccount( aUserIdentifier );
       if(account != null) {
         if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())
-            == true) {
+            == true && account.getAccountStatus() == 1) {
           loggedUser = account;
-          return true;    
+          return true;
         }
       }
       else {
@@ -81,6 +82,10 @@ public class UserSession {
   
   public boolean addAccount( Accounts aAccount ){
     return pc.addAccount( aAccount );
+  }
+  
+  public Accounts getAccount(String userIdentifier) {
+      return pc.getAccount(userIdentifier);
   }
   
   public Teams getTeam(){

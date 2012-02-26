@@ -3,17 +3,21 @@
     Created on : Feb 20, 2012, 7:43:04 PM
     Author     : KepneR
 --%>
-<%@page import="java.text.SimpleDateFormat"%>
-<%@page import="java.text.DateFormat"%>
-<%@page import="java.util.Date"%>
+
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <%@page import="seneca.projectManagement.entity.*" %>
 <%@page import="seneca.projectManagement.utils.*" %>
 <%
-    Date date = new Date();
-    DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
     Projects proj = new Projects();
+    proj.setPrjName("");
+    proj.setDescription("");
+    proj.setPrjConstraints("");
+    
     Projectfile projFile = new Projectfile();
+    projFile.setFileName("");
+    projFile.setFileDescription("");
+    projFile.setTheFile("");
+    
     boolean errorFound = false;
     
     if(userBean.isLogged() == true) {
@@ -100,6 +104,7 @@
                 Company c = userBean.getCompany();
                 proj.setStatus("PE");
                 proj.setCompanyId(c.getCompanyId());
+                
                 if(userBean.addProject(proj) == false) {
                     out.println("An unexpected error has occured while registering the Project.");
                     errorFound = true;
@@ -123,44 +128,122 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registering Project Proposal</title>
-    </head>
-    <body>
-        <jsp:include page="/pages/headers/loginHeader.jsp" />
+  <head>
+    <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
+    <script type="text/javascript" src="../resources/js/twitter.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
+    <title>PRJ566 - Company Home</title>
+    <style type="text/css">
+        input[type=text], textArea {
+            width: 300px;
+        }
+    </style>
+  </head>
+  <body>
+    <table> 
+      <tr>
+        <td colspan="2">
+          <table width="100%">
+            <tr>
+              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr valign="top">
+        <td rowspan="5" align="left" width="200"> 
+          <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
+          <br/>
+          <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
+          <br/>
+          <div style="margin:2px; width:200px;">
+            <script type="text/javascript"> 
+		          new TWTR.Widget( {
+  		          version: 2,
+  		          type: "profile",
+  		          rpp: 5,
+ 		            interval: 6000,
+  		          width: "auto",
+  		          height: 300,
+  		          theme: {
+    		          shell: {
+      		          background: "#d5e7e9",
+      		          color: "#000000"
+    		          },
+    		          tweets: {
+      		          background: "#fffaff",
+     		            color: "#000000",
+      		          links: "#0772eb"
+    		          }
+  		          },	
+  		          features: {
+    		          scrollbar: false,
+    		          loop: false,
+    		          live: false,
+    		          hashtags: true,
+    		          timestamp: true,
+    	    	      avatars: false,
+    		          behavior: "all"
+  		          }
+		          } ).render().setUser( "Seneca_College" ).start();
+		        </script>
+		      </div>
+        </td>
+        <td style="background-image: url('../resources/images/header_bg.jpg')">
+          <ul>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="ProjectForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="#">Upcoming Milestones</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          </ul>
+          <div style="float: right;">
+            <ul>
+              <li><a href="../logout.jsp">Logout</a></li>
+            </ul>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>
         <%
             if(errorFound == false) {
                 /*
-                out.print(userBean.getLoggedUser().getUseridentifier() + "<br/>");
-                out.print(userBean.getLoggedUser().getAccountstatus() + "<br/>");
-                out.print(userBean.getLoggedUser().getUserid() + "<br/>");
+                out.print(userBean.getLoggedUser().getUserId() + "<br/>");
+                out.print(userBean.getLoggedUser().getUserIdentifier() + "<br/>");
+                out.print(userBean.getLoggedUser().getAccountStatus() + "<br/>");
                 out.print("<hr/>");
-                Company c = userBean.getCompany(userBean.getLoggedUser());
+                Company c = userBean.getCompany();
                 if(c != null) {
-                    out.print(c.getCompanyid() + "<br/>");
-                    out.print(c.getCompanyname() + "<br/>");
-                    out.print(c.getCompanyphone() + "<br/>");
+                    out.print(c.getCompanyId() + "<br/>");
+                    out.print(c.getCompanyName() + "<br/>");
+                    out.print(c.getCompanyPhone() + "<br/>");
+                    out.print(c.getUserId() + "<br/>");
                 }
                 out.print("<hr/>");
-                out.print(proj.getProjectid() + "<br/>");
+                out.print(proj.getProjectId() + "<br/>");
                 out.print(proj.getStatus() + "<br/>");
-                out.print(proj.getPrjname() + "<br/>");
+                out.print(proj.getPrjName() + "<br/>");
                 out.print(proj.getDescription() + "<br/>");
-                out.print(proj.getPrjconstraints() + "<br/>");
-                out.print(proj.getAgreementdate() + "<br/>");
-                out.print(proj.getCompanyid() + "<br/>");
-                out.print(proj.getTeamid() + "<br/>");
-                out.print(proj.getInstructorid() + "<br/>");
+                out.print(proj.getPrjConstraints() + "<br/>");
+                out.print(proj.getAgreementDate() + "<br/>");
+                out.print(proj.getCompanyId() + "<br/>");
+                out.print(proj.getTeamId() + "<br/>");
+                out.print(proj.getInstructorId() + "<br/>");
                 out.print("<hr/>");
-                out.print(projFile.getFileid() + "<br/>");
-                out.print(projFile.getFilename() + "<br/>");
-                out.print(projFile.getFiledescription() + "<br/>");
-                out.print(projFile.getThefile() + "<br/>");
-                out.print(projFile.getProjectid() + "<br/>");
+                out.print(projFile.getFileId() + "<br/>");
+                out.print(projFile.getFileName() + "<br/>");
+                out.print(projFile.getFileDescription() + "<br/>");
+                out.print(projFile.getTheFile() + "<br/>");
+                out.print(projFile.getProjectId() + "<br/>");
                 */
                 out.println("<h1>Project Proposal has been successfully registered!</h1>");
             }
         %>
-    </body>
+        </td>
+      </tr>             
+    </table>
+  </body>
 </html>

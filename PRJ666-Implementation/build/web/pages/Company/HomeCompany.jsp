@@ -12,10 +12,6 @@
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
-        else if(userBean.getLoggedUser().getAccountStatus() != 1) {
-          session.setAttribute("Error", "Account has not been activated yet.");
-          response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
-        }
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
@@ -86,8 +82,8 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
 			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="#">Create New Project</a></li>
-            <li><a href="Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+		        <li><a href="ProjectForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           </ul>
