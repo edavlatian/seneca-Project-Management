@@ -110,7 +110,7 @@
         if( !projects.isEmpty() ) {
           for( int i = 0, len = projects.size(); i < len; i++){
             Projects proj = projects.get( i );
-            comp = userBean.getProjectCompany( proj.getCompanyId() );
+            comp = userBean.getCompanyByID( proj.getCompanyId() );
             out.println( "<tr><td>" );
             out.println( "Company Name: " + comp.getCompanyName() + "<br/>" );
             out.println( "Company Telephone: " + comp.getCompanyPhone() + "<br/><br/>" );

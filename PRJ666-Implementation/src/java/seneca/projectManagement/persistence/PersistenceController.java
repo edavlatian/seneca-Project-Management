@@ -128,15 +128,6 @@ public class PersistenceController extends EntityControllerBase {
     return (Company)q.getSingleResult();
   }
   
-  public Company getProjectCompany( Integer aCompanyId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Company.findByCompanyId" )
-            .setParameter( "companyId",  aCompanyId);
-    
-    return (Company) q.getSingleResult();
-  }
-  
   public Company getCompanyByID(Integer aCompanyID) {
       em = getEntityManager();
       return em.find(Company.class, aCompanyID);
