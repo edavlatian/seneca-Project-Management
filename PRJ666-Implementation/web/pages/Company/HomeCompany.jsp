@@ -81,8 +81,8 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="ProjectForm.jsp">Create New Project</a></li>
+            <li><a href="#">Current Semester Teams</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
@@ -97,8 +97,13 @@
       <tr>
         <td>
           <h1>Company Page</h1>
-          <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
-          userBean.getLoggedUser().getUserLName()%></h2>  
+          <h2>Hello, 
+              <%
+                if(userBean.getLoggedUser() != null) {
+                    out.print(userBean.getLoggedUser().getUserFName() + " " + userBean.getLoggedUser().getUserLName());
+                }
+              %>
+          </h2>
         </td>
       </tr>             
     </table>

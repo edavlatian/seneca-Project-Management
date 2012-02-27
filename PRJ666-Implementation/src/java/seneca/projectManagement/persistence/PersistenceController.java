@@ -74,8 +74,7 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery( "Teams.findByUserId" ).setParameter( "userId", userId );
     
-    
-    return (Teams)q.getSingleResult();
+    return (Teams) q.getSingleResult();
   }
   
   public Accounts getAccount( String aUserIdentifier ){
@@ -84,7 +83,7 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
             aUserIdentifier );
     
-    return (Accounts)q.getSingleResult();
+    return (Accounts) q.getSingleResult();
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -93,7 +92,7 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
             .setParameter("teamId", aTeamId);
     
-    return (Teammember)q.getSingleResult();
+    return (Teammember) q.getSingleResult();
   }
   
   public boolean updateMember( Teammember aMember ){
@@ -135,7 +134,12 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createNamedQuery( "Company.findByCompanyId" )
             .setParameter( "companyId",  aCompanyId);
     
-    return (Company)q.getSingleResult();
+    return (Company) q.getSingleResult();
+  }
+  
+  public Company getCompanyByID(Integer aCompanyID) {
+      em = getEntityManager();
+      return em.find(Company.class, aCompanyID);
   }
   
   public boolean addCompany( Company aCompany ){
@@ -167,8 +171,38 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByPrjName")
             .setParameter("prjName", aProject.getPrjName());
+    Projects value = null;
+    try {
+        value = (Projects) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
     
-    return (Projects)q.getSingleResult();
+    return value;
+  }
+  
+  public Projects getProject( String pname ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByPrjName")
+            .setParameter("prjName", pname);
+    Projects value = null;
+    try {
+        value = (Projects) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    return value;
+  }
+  
+  public Projects getProject( Integer id ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByProjectId")
+            .setParameter("projectId", id);
+    
+    return (Projects) q.getSingleResult();
   }
   
   public boolean addProjectFile( Projectfile aProjectFile ){
@@ -198,7 +232,23 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createNamedQuery( "Projectfile.findByFileId")
             .setParameter( "fileId", aFileId );
     
-    return (Projectfile)q.getSingleResult();
+    return (Projectfile) q.getSingleResult();
+  }
+  
+  public List<Projects> getAllProjects() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findAll" );
+    
+    return (List<Projects>) q.getResultList();
+  }
+  
+  public List<Projects> getAllProjects(String status) {
+      em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findByStatus" ).setParameter("status", status);
+    
+    return (List<Projects>) q.getResultList();
   }
   
   public List<Projects> getCompanyProjects( Integer aCompanyId ){
@@ -218,4 +268,26 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<Projects>)q.getResultList();
   }
+
+  public List<Projects> getInstructorProjects( Integer aInstructorId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Projects.findByInstructorId" )
+            .setParameter( "instructorId", aInstructorId );
+    
+    return (List<Projects>)q.getResultList();
+  }
+  
+  public boolean updateProject(Projects p) {
+    em = getEntityManager();
+
+    em.getTransaction().begin();
+    em.merge( p );
+    em.getTransaction().commit();
+
+    em.close();
+
+    return true;
+  }
+
 }

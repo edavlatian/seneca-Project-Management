@@ -236,7 +236,7 @@
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
           %>
 			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="#">Create New Project</a></li>
+		        <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
@@ -275,7 +275,7 @@
               else if(userBean.getLoggedUser().getUserRole().equals("AD")){
 		      %>
             <li><a href="#">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Available Projects</a></li>
             <li><a href="#">Change Project Status to Past</a></li>
             <li><a href="#">Manage Site Accounts</a></li>
           <%
@@ -319,7 +319,7 @@
             if(errorFound == false) {
                 userBean.setLoggedUser(account);
                 out.println("<h1>Company Account has been successfully registered!</h1>");
-                out.println("<a href=\"ProjectForm.jsp\">Click here to propose a project!</a>");
+                out.println("<a href=\"ProjectAgreementForm.jsp\">Click here to propose a project!</a>");
             }
         %>
         </td>
