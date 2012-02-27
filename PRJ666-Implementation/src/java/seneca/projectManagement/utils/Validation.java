@@ -4,6 +4,8 @@
  */
 package seneca.projectManagement.utils;
 
+import java.util.Calendar;
+import java.util.Date;
 import seneca.projectManagement.entity.*;
 import seneca.projectManagement.persistence.PersistenceController;
 /**
@@ -53,19 +55,44 @@ public class Validation {
     
     public static boolean isValidProject(String prjName) {
         boolean value = true;
-        /*
-        UserSession us = new UserSession();
+        
         try {
-            Projects proj = new Projects();
-            proj.setPrjname(prjName);
-            if(us.getProject(proj) != null) {
+            PersistenceController pc = new PersistenceController();
+            if(pc.getProject(prjName) != null) {
                 value = false;
             }
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        */
+        
+        return value;
+    }
+    
+    public static String getSemesterToday() {
+        Calendar cal = Calendar.getInstance();
+        String value = null;
+        switch(cal.get(Calendar.MONTH)) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+                value = "PRJ666WIN" + cal.get(Calendar.YEAR);
+                break;
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+                value = "PRJ666SUM" + cal.get(Calendar.YEAR);
+                break;
+            case 8:
+            case 9:
+            case 10:
+            case 11:
+            default:
+                value = "PRJ666FALL" + cal.get(Calendar.YEAR);
+        }
+        
         return value;
     }
 }

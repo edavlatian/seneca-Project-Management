@@ -142,12 +142,12 @@
                 <form method="POST" action="validation/redirect.jsp">
                         <div style="float: left; width: 80px; text-align: right">Username:</div>
                         <div style="float: left; width: 150px">
-                            <input id="username" name="username" type="text" value="kepner.caliso" style="width: 145px"/>
+                            <input id="username" name="username" type="text" value="" style="width: 145px"/>
                         </div>
                         <div style="clear: both"></div>
                         <div style="float: left; width: 80px; text-align: right">Password:</div>
                         <div style="float: left; width: 150px">
-                            <input id="password" name="password" type="password" value="12345" style="width: 145px" />
+                            <input id="password" name="password" type="password" value="" style="width: 145px" />
                         </div>
                         <div style="clear: both"></div>
                         <div style="width: 230px; text-align: right"><input type="submit" value="Login Now!" /></div>
