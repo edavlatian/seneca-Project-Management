@@ -33,3 +33,17 @@ tr.projects{
 h3.title{
   text-decoration: underline;
 }
+
+#labels{
+  text-align: right;
+  display: inline-block;
+  width: 45%;
+  border: 3px solid #000;
+}
+
+#inputFields{
+  display: inline-block;
+  text-align: left;
+  width: 45%;
+  border: 3px solid #000;
+}
