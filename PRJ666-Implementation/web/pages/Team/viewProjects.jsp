@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
+    <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
     <title>PRJ566 - Team View Available Projects</title>
   </head>
   <body>
@@ -90,7 +91,7 @@
 			      <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="#">View Projects</a></li>
+            <li><a href="viewProjects.jsp">View Projects</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
@@ -111,10 +112,15 @@
             Projects proj = projects.get( i );
             comp = userBean.getProjectCompany( proj.getCompanyId() );
             out.println( "<tr><td>" );
-            out.println( "Company: " + comp.getCompanyName() + "<br/>" );
-            out.println( "About Us: TODO: Debate adding additional column to Company Table <br/>" );
-            out.println( "Project: <a href='projectDetails.jsp'>" + proj.getPrjName() + "</a><br/>" );
-            out.println( "Status: " + proj.getStatus() + "<br/>" );
+            out.println( "Company Name: " + comp.getCompanyName() + "<br/>" );
+            out.println( "Company Telephone: " + comp.getCompanyPhone() + "<br/><br/>" );
+            out.println( "About Us: TODO: Debate adding additional column to Company Table <br/><br/>" );
+            out.println( "Project Name: " + proj.getPrjName() + "&#09;<button onclick='displayDetails( this )'>"
+                    + "Show Details</button><br/>" );
+            out.println( "Status: " + proj.getStatus() + "<br/><br/>" );
+            out.println( "<div style='display: none'>Project Description: " + proj.getDescription() 
+                    + "</br>");
+            out.println( "Project Constraints:<br/>" + proj.getPrjConstraints() + "</div>");
             out.println( "</td></tr>" );
           }
         }

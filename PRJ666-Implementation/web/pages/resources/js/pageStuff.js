@@ -159,3 +159,18 @@ function validateFileSize( fileControl ) {
 
   areErrors = false;
 };
+
+function displayDetails( aButton ){
+  var parentElement = aButton.parentNode,
+      details = parentElement.childNodes[ 15 ];
+      
+  if( aButton.innerHTML === "Show Details" ){
+    aButton.innerHTML = "Hide Details";
+    details.style.display = "";
+  }
+  else {
+    aButton.innerHTML = "Show Details";
+    details.style.display = "none";
+  }
+  
+};
