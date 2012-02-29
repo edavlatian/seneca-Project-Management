@@ -1,10 +1,9 @@
 <%-- 
-    Document   : viewProjects
-    Created on : Feb 26, 2012, 10:05:52 AM
+    Document   : editTeamPage
+    Created on : Feb 28, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
 
-<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
@@ -32,8 +31,7 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
-    <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
-    <title>PRJ566 - Team View Available Projects</title>
+    <title>PRJ566 - Edit Team Page</title>
   </head>
   <body>
     <table> 
@@ -100,34 +98,9 @@
           </div>
         </td>
       </tr>
-      <tr class="projects">
-        <td><h3 class="title">Available Projects</h3></td>
+      <tr>
+        <td>Here is your Team Home Page, Team <%=userBean.getTeam().getTeamName()%> .</td>
       </tr>
-      <%
-        List<Projects> projects = userBean.getAvailableProjects( "AV" );
-        Company comp;
-        
-        if( !projects.isEmpty() ) {
-          for( int i = 0, len = projects.size(); i < len; i++){
-            Projects proj = projects.get( i );
-            comp = userBean.getCompanyByID( proj.getCompanyId() );
-            out.println( "<tr><td>" );
-            out.println( "Company Name: " + comp.getCompanyName() + "<br/>" );
-            out.println( "Company Telephone: " + comp.getCompanyPhone() + "<br/><br/>" );
-            out.println( "About Us: TODO: Debate adding additional column to Company Table <br/><br/>" );
-            out.println( "Project Name: " + proj.getPrjName() + "&#09;<button onclick='displayDetails( this )'>"
-                    + "Show Details</button><br/>" );
-            out.println( "Status: " + proj.getStatus() + "<br/><br/>" );
-            out.println( "<div style='display: none'>Project Description: " + proj.getDescription() 
-                    + "</br>");
-            out.println( "Project Constraints:<br/>" + proj.getPrjConstraints() + "</div>");
-            out.println( "</td></tr>" );
-          }
-        }
-        else{
-          out.print( "<tr class='projects'><td>There were no available projects.</td></tr>" );
-        }
-      %>
     </table>
   </body>
 </html>

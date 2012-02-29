@@ -87,21 +87,13 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
 			      <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Team Page</a></li>
+		        <li><a href="editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="viewProjects.jsp">View Projects</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
-              <li>
-              <%
-                if(userBean.isLogged()) { %>
-                <a href="../logout.jsp">Logout</a></li>
-              <%
-                } else {
-              %>
-                <a href="../login.jsp">Login</a></li>
-              <%  } %>
+              <li><a href="../logout.jsp">Logout</a></li>
             </ul>
           </div>
         </td>

@@ -89,7 +89,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
 			      <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Team Page</a></li>
+		        <li><a href="editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="viewProjects.jsp">View Projects</a></li>
 		      </ul>
