@@ -97,8 +97,8 @@
           %>
             <li><a href="#">Create Team Accounts</a></li>
             <li><a href="#">Deactivate Team Accounts</a></li>
-		        <li><a href="#">Match Teams/Projects</a></li>
-            <li><a href="#">Match Teams/Projects Manually</a></li>
+		        <li style="width:10%;"><a href="#">Match Teams<br/>Projects</a></li>
+            <li style="width:10%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
 		        <li><a href="#">Pending Projects</a></li>
             <li><a href="#">Approved Projects</a></li>
             <li><a href="#">Proceed Projects</a></li>

@@ -82,7 +82,7 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
+        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="teamHome.jsp">Team Home</a></li>
 			      <li><a href="#">Rank Projects</a></li>

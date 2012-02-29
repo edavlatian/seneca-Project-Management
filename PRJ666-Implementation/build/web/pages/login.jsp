@@ -64,7 +64,7 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('resources/images/header_bg.jpg')">
+        <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="Home.jsp">Home Page</a></li>
           </ul>
@@ -77,7 +77,6 @@
               <%
                 } else {
               %>
-              <li><a href="login.jsp">Login</a></li>
               <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
              <% } %>
             </ul>

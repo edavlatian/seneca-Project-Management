@@ -77,21 +77,18 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
+        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-			      <li><a href="#">Create Team Accounts</a></li>
-            <li><a href="#">Deactivate Team Accounts</a></li>
-		        <li><a href="#">Match Teams/Projects</a></li>
-            <li><a href="#">Match Teams/Projects Manually</a></li>
-		        <li><a href="#">Pending Projects</a></li>
-            <li><a href="#">Approved Projects</a></li>
-            <li><a href="#">Proceed Projects</a></li>
+            <li style="width: 7%;"><a href="../Home.jsp">Home<br/>Page</a></li>
+			      <li style="width:11%;"><a href="#">Create<br/>Team<br/>Accounts</a></li>
+            <li style="width:11%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
+		        <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
+            <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
+		        <li style="width:11%;"><a href="#">Pending Projects</a></li>
+            <li style="width:11%;"><a href="#">Approved Projects</a></li>
+            <li style="width:11%;"><a href="#">Proceed Projects</a></li>
+            <li><a href="../logout.jsp">Logout</a></li>
           </ul>
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
         </td>
       </tr>
       <tr>
