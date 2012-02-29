@@ -133,9 +133,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Company Home</title>
     <style type="text/css">
         input[type=text], textArea {

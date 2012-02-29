@@ -50,11 +50,6 @@
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Company Home</title>
-    <style type="text/css">
-        input[type=text], textArea {
-            width: 300px;
-        }
-    </style>
   </head>
   <body>
     <table> 

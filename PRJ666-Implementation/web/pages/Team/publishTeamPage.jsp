@@ -30,9 +30,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
     <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
     <title>PRJ566 - Publish Team Page</title>
   </head>
@@ -89,6 +87,7 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul style="display: none;">
+            <li><a href="teamHome.jsp">Team Home</a></li>
 			      <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
@@ -167,15 +166,22 @@
               <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Members</b></td>
             </tr>
           </table>
-          <input type="button" value="Add Team Member" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
-                 onclick="addMember();"/>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <input type="submit" value="Publish Team Page" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
-                 name="publishTeam" />
+          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;">
+            Publish Team Page
+          </button> 
           <br/>
           <div id="errors" style="color: red;">${param.errors}</div>
           <input type="hidden" name="publishTeamPage" value="true"/>
           </form>
+          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
+                  onclick="addMember()">
+            Add Team Member
+          </button>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
+                  onclick="removeMember()">
+            Remove Team Member
+          </button> 
         </td>
       </tr>
     </table>

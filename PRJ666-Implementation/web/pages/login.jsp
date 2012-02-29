@@ -10,9 +10,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="resources/js/twitter.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Home</title>
   </head>
   <body>
@@ -68,67 +66,20 @@
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg')">
           <ul>
-          <% 
-            if(userBean.isLogged()) {
-              if(userBean.getLoggedUser().getUserRole().equals("CR")){
-          %>
-			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="#">Create New Project</a></li>
-            <li><a href="Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
-            <li><a href="#">Edit Company Info</a></li>
-          <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
-                if(userBean.getTeam().getHasRegistered() == 1){
-          %>
-            <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="#">View Projects</a></li>
-            <li><a href="#">Manage Team Page</a></li>
-          <%
-                }
-                else {
-                  response.sendRedirect("Team/publishTeamPage.jsp");  
-                }
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
-          %>
-            <li><a href="#">Create Team Accounts</a></li>
-            <li><a href="#">Deactivate Team Accounts</a></li>
-		        <li><a href="#">Match Teams/Projects</a></li>
-            <li><a href="#">Match Teams/Projects Manually</a></li>
-		        <li><a href="#">Pending Projects</a></li>
-            <li><a href="#">Approved Projects</a></li>
-            <li><a href="#">Proceed Projects</a></li>
-          <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
-          %>
-            <li><a href="#">Change Project Status to Past</a></li>
-		        <li><a href="#">Current Semester Available Projects</a></li>
-          <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
-		      %>
-            <li><a href="#">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
-            <li><a href="#">Change Project Status to Past</a></li>
-            <li><a href="#">Manage Site Accounts</a></li>
-          <%
-              }
-          %>
+            <li><a href="Home.jsp">Home Page</a></li>
           </ul>
           <div style="float: right;">
             <ul>
+              <%
+                if(userBean.isLogged()){
+              %>
               <li><a href="logout.jsp">Logout</a></li>
-          <%
-            }
-            else {
-          %>
+              <%
+                } else {
+              %>
               <li><a href="login.jsp">Login</a></li>
               <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
-          <% } %>
+             <% } %>
             </ul>
           </div>
         </td>
@@ -137,7 +88,7 @@
         <td>
             <div style="width: 240px; background-color: #D5E7E9; padding: 5px; margin-top: 5px">
             <%
-                if(userBean.isLogged() == false) {
+                if(!userBean.isLogged()) {
             %>
                 <form method="POST" action="validation/redirect.jsp">
                         <div style="float: left; width: 80px; text-align: right">Username:</div>

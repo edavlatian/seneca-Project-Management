@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
   <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession"
@@ -17,22 +18,26 @@
         }
         else if(userBean.getLoggedUser().getAccountStatus() != 1) {
           session.setAttribute("Error", "Account has not been activated yet.");
-          response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
+          response.sendRedirect("../login.jsp");
         }
     }
     else {
-        response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+        response.sendRedirect("../Home.jsp");
     }
 %>
 <!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="../resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <script type="text/javascript" src="../resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Edit Team Page</title>
   </head>
+  <%
+    Integer teamId = userBean.getTeam().getTeamId();
+    List<Teammember> teamMembers = userBean.getAllTeamMembers( teamId );
+    Teammember leader = userBean.getLeader( teamId );
+    Teams team = userBean.getTeam();
+  %>
   <body>
     <table> 
       <tr>
@@ -86,6 +91,7 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
+            <li><a href="teamHome.jsp">Team Home</a></li>
 			      <li><a href="#">Rank Projects</a></li>
 		        <li><a href="editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="#">Manage Project Milestones</a></li>
@@ -99,7 +105,74 @@
         </td>
       </tr>
       <tr>
-        <td>Here is your Team Home Page, Team <%=userBean.getTeam().getTeamName()%> .</td>
+        <td>
+          <h1>Team Edit Page Form</h1>
+          <form method="POST" action="">
+            <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
+              Team Information 
+            </div>
+            <div style="width: 700px; padding: 5px">
+              <div style="float: left; width: 150px">Team Name:</div>
+              <div style="float: left"><input type="text" name="tName" value="<%= team.getTeamName() %>" /></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Team Description:</div>
+              <div style="float: left">
+                <textarea name="tDesc" cols="40" rows="10"><%= team.getTeamDescription() %></textarea>
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Team Constraints:</div>
+              <div style="float: left">
+                <textarea name="tCons" cols="40" rows="5"><%= team.getTeamConstraints() %></textarea>
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Team Logo:</div>
+              <div style="float: left"><input type="text" name="tLogo" value="Debate Changing Logos to same as Files" /></div>
+              <div style="clear: both"></div>
+            </div>
+            <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
+              Team Members
+            </div>
+            <div style="width: 700px; padding: 5px">
+              <%
+                Teammember member;
+                for ( int i = 0, len = teamMembers.size(); i < len; i++ ){
+                  member = teamMembers.get( i );
+              %>
+              <div style="width: 75%; text-align: left; padding: 5px;">
+                Member <%= ++i %>: <br/><hr/>
+              </div>
+              <div style="float: left; width: 150px">First Name:</div>
+              <div style="float: left">
+                <input type="text" name="tmFName" value="<%= member.getFirstName() %>" /> 
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Last Name:</div>
+              <div style="float: left">
+                <input type="text" name="tmLName" value="<%= member.getLastName() %>" /> 
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Email:</div>
+              <div style="float: left">
+                <input type="text" name="tmEmail" value="<%= member.getEmail() %>" /> 
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Member Image:</div>
+              <div style="float: left">
+                <input type="text" name="tmImage" value="<%= member.getMemberImage() %>" /> 
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Member Description:</div>
+              <div style="float: left">
+                <textarea name="tmDesc" cols="40" rows="5"><%= member.getDescription() %></textarea> 
+              </div>
+              <div style="clear: both"></div>
+            <% } %>
+            </div>
+            <div style="width: 700px; background-color: #D5E7E9; padding: 5px; text-align: right">
+              <input type="submit" value="Save Team Information">
+            </div>
+          </form>
+        </td>
       </tr>
     </table>
   </body>

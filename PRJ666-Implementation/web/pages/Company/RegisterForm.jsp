@@ -37,9 +37,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="/PRJ666-Implementation/pages/resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="/PRJ666-Implementation/pages/resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="/PRJ666-Implementation/pages/resources/js/twitter.js"></script>
-    <script type="text/javascript" src="/PRJ666-Implementation/pages/resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Home</title>
     <style type="text/css">
         input[type=text], textArea, input[type=password] {

@@ -12,9 +12,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
-    <link rel="stylesheet" type="text/css" href="resources/css/jquery-ui-1.8.16.custom.css" />
     <script type="text/javascript" src="resources/js/twitter.js"></script>
-    <script type="text/javascript" src="resources/js/jquery-ui.js"></script>
     <title>PRJ566 - Home</title>
   </head>
   <body>
@@ -84,6 +82,7 @@
               else if(userBean.getLoggedUser().getUserRole().equals("TL")){
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
+            <li><a href="Team/teamHome.jsp">Team Home</a></li>
             <li><a href="#">Rank Projects</a></li>
 		        <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="Team/viewProjects.jsp">View Projects</a></li>

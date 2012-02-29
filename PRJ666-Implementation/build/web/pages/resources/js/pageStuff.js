@@ -31,6 +31,13 @@ function addMember() {
     "</tr>";
 };
 
+function removeMember() {
+  memberCount--;
+  var table = document.getElementById( "teamInfo" );
+
+  table.removeChild( table.lastChild );
+};
+
 function validateTeamPublish() {
   var errorMessage = document.getElementById("errors");
   

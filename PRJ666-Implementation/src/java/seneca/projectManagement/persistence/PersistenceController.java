@@ -95,6 +95,15 @@ public class PersistenceController extends EntityControllerBase {
     return (Teammember) q.getSingleResult();
   }
   
+  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT t FROM Teammember t where t.teamId = :teamId AND t.teamLeader = 0" )
+            .setParameter( "teamId", aTeamId );
+    
+    return (List<Teammember>)q.getResultList();
+  }
+  
   public boolean updateMember( Teammember aMember ){
     em = getEntityManager();
     
