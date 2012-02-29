@@ -172,6 +172,7 @@
               <input type="submit" value="Save Team Information">
             </div>
           </form>
+          *NOTE* Unfinished.
         </td>
       </tr>
     </table>
