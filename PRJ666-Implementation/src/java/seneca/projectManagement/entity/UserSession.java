@@ -144,7 +144,11 @@ public class UserSession {
   
   public Projects getProject(Integer id){
     return pc.getProject( id );
-  }  
+  }
+  
+  public Projects getTeamProject( Integer aTeamId ){
+    return pc.getTeamProject( aTeamId );
+  }
   
   public boolean addProjectFile(Projectfile projFile){
     return pc.addProjectFile( projFile );
@@ -201,7 +205,50 @@ public class UserSession {
   }
   
   public boolean updateProject(Projects p) {
-      return pc.updateProject(p);
+    return pc.updateProject(p);
+  }
+  
+  public List<Milestone> getProjectMilestones( Integer aProjectId ){
+    return pc.getProjectMilestones( aProjectId ); 
+  }
+  
+  public boolean newMilestone( Milestone aMilestone ){
+    return pc.newMilestone( aMilestone );
+  }
+  
+  public Milestone getMilestone( Integer aMilestoneId ){
+    return pc.getMilestone( aMilestoneId );
+  }
+  
+  public boolean updateMilestone( Milestone aMilestone ){
+    return pc.updateMilestone( aMilestone );
+  }
+  
+  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
+    return pc.getTeamProjectRankings( aTeamId );
+  }
+  
+  public int countSemesterTeams( String aPeriod ){
+    return pc.countSemesterTeams( aPeriod ).intValue();
+  }
+  
+  //Edouard
+  public List<Teams> getAvailableTeams(int aStatus){
+      return pc.getAvailableTeams(aStatus);
+  }
+  public Teams getProjectTeam(int aId){
+      return pc.getProjectTeam(aId);
+  }
+  /*
+  public List<Milestone> getUpcomingMilestones(){
+      return pc.getUpcomingMilestones();
+  }
+  */
+  public boolean updateProjectFile(Projectfile aProjectfile){
+      return pc.updateProjectFile(aProjectfile);
+  }
+  public boolean newComment(Comments aComment){
+      return pc.newComment(aComment);
   }
 }
  

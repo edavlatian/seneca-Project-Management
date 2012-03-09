@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1"/>
-    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/1">
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/src/java/seneca/projectManagement/utils/Validation.java</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/Company/HomeCompany.jsp</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/Company/RegisterForm.jsp</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/login.jsp</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/validation/redirect.jsp</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/src/java/seneca/projectManagement/entity/UserSession.java</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/logout.jsp</file>
-        <file>file:/C:/Users/KepneR/PRJ666-02-21-2012/seneca-Project-Management/PRJ666-Implementation/web/pages/Home.jsp</file>
-    </open-files>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
+        <file>
+            <url>web/pages/Team/createMilestone.jsp</url>
+            <line>119</line>
+        </file>
+        <file>
+            <url>web/pages/Team/manageMilestones.jsp</url>
+            <line>118</line>
+        </file>
+    </editor-bookmarks>
 </project-private>

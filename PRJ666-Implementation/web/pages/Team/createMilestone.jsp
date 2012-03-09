@@ -1,6 +1,6 @@
 <%-- 
-    Document   : viewProjects
-    Created on : Feb 26, 2012, 10:05:52 AM
+    Document   : manageMilestones
+    Created on : Mar 3, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
 
@@ -29,11 +29,27 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
+    <link rel="stylesheet" type="text/css" href="../resources/css/ui-lightness/jquery-ui-1.8.18.custom.css"/>
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
-    <title>PRJ566 - Team View Available Projects</title>
+    <script type="text/javascript" src="../resources/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../resources/js/jquery-ui-1.8.18.custom.min.js"></script>
+    <script>
+      $(function() {
+		    $( "#datepicker" ).datepicker();
+	    }); 
+    </script>
+    <title>PRJ566 - Create Milestone</title>
   </head>
   <body>
+    <%
+      if(session.getAttribute("createSuccess") != null){
+        request.removeAttribute("milestoneDescription");
+        request.removeAttribute("milestoneName");
+        request.removeAttribute("milestoneDate");
+        request.removeAttribute("milestoneStatus");
+      }
+    %>
     <table> 
       <tr>
         <td colspan="2">
@@ -46,7 +62,7 @@
         </td>
       </tr>
       <tr valign="top">
-        <td rowspan="1000" align="left" width="200"> 
+        <td rowspan="5" align="left" width="200"> 
           <img src="../resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
@@ -84,7 +100,7 @@
 		        </script>
 		      </div>
         </td>
-        <td style="background-image: url('../resources/images/header_bg.jpg')">
+        <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
 			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
@@ -101,40 +117,56 @@
         </td>
       </tr>
       <tr>
-        <td><h3 class="title">Available Projects</h3></td>
-      </tr>
-      <tr>
         <td>
-        <%
-          List<Projects> projects = userBean.getAvailableProjects( "AV" );
-          Company comp;
-        
-          if( !projects.isEmpty() ) {
-            for( int i = 0, len = projects.size(); i < len; i++){
-              Projects proj = projects.get( i );
-              comp = userBean.getCompanyByID( proj.getCompanyId() );
-        %>
-              <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-                <h3><%= proj.getPrjName() %></h3>
+          <%
+            if(session.getAttribute("createSuccess") != null){
+          %>
+              <div style="float: left; color: green;">
+                <%= session.getAttribute("createSuccess").toString() %>
               </div>
-              <div style="width: 700px; padding: 5px;">
-                Company Name: <%= comp.getCompanyName() %> <br/>
-                Company Description: <p class="description"><%= comp.getCompanyDescription() %></p> <br/>
-                Business Areas: <p class="description"><%= comp.getBusinessAreas() %></p> <br/>
-                <button onclick='displayDetails( this )'>Show Details</button>
-                <div style='display: none'>
-                  Project Description: <p class="description"><%= proj.getDescription() %></p> <br/>
-                  Project Constraints: <p class="description"><%= proj.getPrjConstraints() %></p>
-                </div>
-              </div>
-        <%
+              <br/>
+          <%
+              session.removeAttribute("createSuccess");
             }
-          }
-          else{ %>
-            <p class="projects">There were no available projects.</p>
-        <%
-          }
-        %>
+          %>
+          <form action="../validation/processTeam.jsp" method="post">
+            <div style="width: 500px; background-color: #D5E7E9; padding: 5px;">
+              Create Milestone 
+            </div>
+            <div style="width: 700px; padding: 5px">
+              <div style="float: left; width: 150px">Milestone Name: </div>
+              <div style="float: left"><input type="text" name="milestoneName" value="${param.milestoneName}" size="40"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Milestone Description: </div>
+              <div style="float: left"><input type="text" name="milestoneDescription" value="${param.milestoneDescription}" size="40"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Milestone Status: </div>
+              <div style="float: left"> 
+                <select name="milestoneStatus">
+                  <option value="NS" selected="selected">Not Started</option>
+                  <option value="IP">In Progress</option>
+                </select>
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Due Date: </div>
+              <div style="float: left"><input type="text" id="datepicker" name="milestoneDate" value="${param.milestoneDate}"/></div>
+              <div style="clear: both"></div>
+          <%
+            if(session.getAttribute("createErrors") != null) {
+          %>
+              <div style="float: left; color: red;">
+                <%= session.getAttribute("createErrors").toString() %>
+              </div>
+              <div style="clear: both"></div>
+              <br/>
+          <%
+              session.removeAttribute("createErrors");
+            }
+          %>
+            <button name="create">Create Milestone</button>
+            <input type="hidden" name="createMilestone" value="true" />
+          </form>  
+          </table>
         </td>
       </tr>
     </table>

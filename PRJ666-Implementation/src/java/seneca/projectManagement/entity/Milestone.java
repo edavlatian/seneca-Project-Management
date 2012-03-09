@@ -21,6 +21,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
   @NamedQuery(name = "Milestone.findAll", query = "SELECT m FROM Milestone m"),
   @NamedQuery(name = "Milestone.findByMilestoneId", query = "SELECT m FROM Milestone m WHERE m.milestoneId = :milestoneId"),
+  @NamedQuery(name = "Milestone.findByMilestoneName", query = "SELECT m FROM Milestone m WHERE m.milestoneName = :milestoneName"),
   @NamedQuery(name = "Milestone.findByDescription", query = "SELECT m FROM Milestone m WHERE m.description = :description"),
   @NamedQuery(name = "Milestone.findByProjectId", query = "SELECT m FROM Milestone m WHERE m.projectId = :projectId"),
   @NamedQuery(name = "Milestone.findByMilestoneStatus", query = "SELECT m FROM Milestone m WHERE m.milestoneStatus = :milestoneStatus"),
@@ -30,6 +31,11 @@ public class Milestone implements Serializable {
   @Id
   @Column(name = "milestoneId")
   private Integer milestoneId;
+  @Basic(optional = false)
+  @NotNull
+  @Size(min = 1, max = 70)
+  @Column(name = "milestoneName")
+  private String milestoneName;
   @Basic(optional = false)
   @NotNull
   @Size(min = 1, max = 125)
@@ -44,7 +50,7 @@ public class Milestone implements Serializable {
   private String milestoneStatus = "NS";
   @Column(name = "dueDate")
   @Temporal(TemporalType.TIMESTAMP)
-  private Date dueDate = new Date();
+  private Date dueDate;
 
   public Milestone() {
   }
@@ -55,6 +61,14 @@ public class Milestone implements Serializable {
 
   public void setMilestoneId(Integer milestoneId) {
     this.milestoneId = milestoneId;
+  }
+
+  public String getMilestoneName() {
+    return milestoneName;
+  }
+
+  public void setMilestoneName(String milestoneName) {
+    this.milestoneName = milestoneName;
   }
 
   public String getDescription() {

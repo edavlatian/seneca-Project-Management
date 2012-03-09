@@ -28,7 +28,7 @@
         </td>
       </tr>
       <tr valign="top">
-        <td rowspan="5" align="left" width="200"> 
+        <td rowspan="100" align="left" width="200"> 
           <img src="resources/images/seneca_logo.gif" title="Seneca logo"/>
           <br/>
           <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
@@ -82,11 +82,12 @@
               else if(userBean.getLoggedUser().getUserRole().equals("TL")){
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
-            <li><a href="Team/teamHome.jsp">Team Home</a></li>
-            <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="Team/viewProjects.jsp">View Projects</a></li>
-            <li><a href="Team/editTeamPage.jsp">Manage Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
+			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/editMilestone.jsp">Edit Project Milestones</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
           <%
                 }
                 else {
@@ -106,7 +107,7 @@
               }
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
           %>
-            <li><a href="#">Change Project Status to Past</a></li>
+            <li><a href="Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
 		        <li><a href="#">Current Semester Available Projects</a></li>
           <%
               }
@@ -134,6 +135,16 @@
           </div>
         </td>
       </tr>
+      <%
+        if(session.getAttribute("Error") != null){
+      %>
+          <tr><td style="color: red;">
+            <%= session.getAttribute("Error").toString() %>
+          </td></tr>
+      <%
+          session.removeAttribute("Error");
+        }
+      %>
       <tr>
         <td>
           <b><u>News Title 1</u></b>

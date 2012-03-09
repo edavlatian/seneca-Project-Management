@@ -35,6 +35,9 @@
             } else if(pname.isEmpty() == true) {
                 session.setAttribute("pname", "Cannot be empty!");
                 errorFound = true;
+            } else if(pname.length() > 20) {
+                session.setAttribute("pname", "Cannot be longer than 20 characters!");
+                errorFound = true;
             } else {
                 if(Validation.isValidProject(pname) == true) {
                     proj.setPrjName(pname);
@@ -51,6 +54,9 @@
             } else if(pdesc.isEmpty() == true) {
                 session.setAttribute("pdesc", "Cannot be empty!");
                 errorFound = true;
+            } else if(pdesc.length() > 500) {
+                session.setAttribute("pdesc", "Cannot be longer than 500 characters!");
+                errorFound = true;
             } else {
                 proj.setDescription(pdesc);
             }
@@ -62,39 +68,46 @@
             } else if(pcons.isEmpty() == true) {
                 session.setAttribute("pcons", "Cannot be empty!");
                 errorFound = true;
+            } else if(pcons.length() > 250) {
+                session.setAttribute("pcons", "Cannot be longer than 250 characters!");
+                errorFound = true;
             } else {
                 proj.setPrjConstraints(pcons);
             }
 
             String flname = request.getParameter("id_flname");
             if(flname == null) {
-                session.setAttribute("flname", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("flname", "Cannot be empty!");
+                //errorFound = true;
+                flname = "";
             } else if(flname.isEmpty() == true) {
-                session.setAttribute("flname", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("flname", "Cannot be empty!");
+                //errorFound = true;
+                flname = "";
             } else {
                 projFile.setFileName(flname);
             }
 
             String fldesc = request.getParameter("id_fldesc");
             if(fldesc == null) {
-                session.setAttribute("fldesc", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("fldesc", "Cannot be empty!");
+                //errorFound = true;
             } else if(fldesc.isEmpty() == true) {
-                session.setAttribute("fldesc", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("fldesc", "Cannot be empty!");
+                //errorFound = true;
+                fldesc = "";
             } else {
                 projFile.setFileDescription(fldesc);
             }
 
             String fllink = request.getParameter("id_fllink");
             if(fllink == null) {
-                session.setAttribute("fllink", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("fllink", "Cannot be empty!");
+                //errorFound = true;
             } else if(fllink.isEmpty() == true) {
-                session.setAttribute("fllink", "Cannot be empty!");
-                errorFound = true;
+                //session.setAttribute("fllink", "Cannot be empty!");
+                //errorFound = true;
+                fllink = "";
             } else {
                 projFile.setTheFile(fllink);
             }
@@ -107,17 +120,19 @@
                 Company c = userBean.getCompany();
                 proj.setStatus("PE");
                 proj.setCompanyId(c.getCompanyId());
-
+                
                 if(userBean.addProject(proj) == false) {
                     out.println("An unexpected error has occured while registering the Project.");
                     errorFound = true;
                 }
 
-                int prjId = userBean.getProject(proj).getProjectId();
-                projFile.setProjectId(prjId);
-                if(userBean.addProjectFile(projFile) == false) {
-                    out.println("An unexpected error has occured while registering the Project File.");
-                    errorFound = true;
+                if(projFile.getFileName().equals("") == false) {
+                    int prjId = userBean.getProject(proj).getProjectId();
+                    projFile.setProjectId(prjId);
+                    if(userBean.addProjectFile(projFile) == false) {
+                        out.println("An unexpected error has occured while registering the Project File.");
+                        errorFound = true;
+                    }
                 }
             }
         }
@@ -241,6 +256,8 @@
                 out.print(projFile.getProjectId() + "<br/>");
                 */
                 out.println("<h1>Project Proposal has been successfully registered!</h1>");
+                //session.removeAttribute("Project");
+                //session.removeAttribute("ProjectFile");
             }
         %>
         </td>

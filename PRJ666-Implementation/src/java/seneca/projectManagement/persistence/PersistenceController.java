@@ -217,6 +217,15 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
+  public Projects getTeamProject( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Projects.findByTeamId")
+            .setParameter( "teamId", aTeamId );
+    
+    return (Projects) q.getSingleResult();
+  }
+  
   public List<Projectfile> getProjectFiles( Integer aProjectId ){
     em = getEntityManager();
     
@@ -263,7 +272,7 @@ public class PersistenceController extends EntityControllerBase {
   public List<Projects> getAvailableProjects( String aStatus ){
     em = getEntityManager();
     
-    Query q = em.createNamedQuery( "Projects.findByStatus")
+    Query q = em.createNamedQuery( "SELECT p FROM projects p WHERE p.status = :status ORDER BY p.projectId ASC")
             .setParameter( "status", aStatus );
     
     return (List<Projects>)q.getResultList();
@@ -289,5 +298,118 @@ public class PersistenceController extends EntityControllerBase {
 
     return true;
   }
+  
+  public List<Milestone> getProjectMilestones( Integer aProjectId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Milestone.findByProjectId" )
+            .setParameter( "projectId", aProjectId );
+    
+    return (List<Milestone>)q.getResultList();
+  }
 
+  public boolean newMilestone( Milestone aMilestone ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist( aMilestone );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public Milestone getMilestone( Integer aMilestoneId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Milestone.findByMilestoneId" )
+            .setParameter( "milestoneId", aMilestoneId );
+    
+    return (Milestone)q.getSingleResult();
+  }
+  
+  public boolean updateMilestone( Milestone aMilestone ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aMilestone );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "SELECT m from Teamprojectranking m WHERE m.teamId = :teamId ORDER BY m.projectId ASC")
+            .setParameter( "teamId", aTeamId );
+    
+    return (List<Teamprojectranking>) q.getResultList();
+  }
+  
+  public Number countSemesterTeams( String aPeriod ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT COUNT(a.userIdentifier) FROM Accounts a WHERE a.userIdentifier LIKE :period ")
+            .setParameter( "period", "%" + aPeriod + "%" );
+    
+    return (Number)q.getSingleResult();
+  }
+  
+  //Edouard
+  public List<Teams> getAvailableTeams(int aStatus){
+      em = getEntityManager();
+      
+      Query q = em.createNamedQuery("Teams.findByTeamStatus")
+              .setParameter( "teamStatus", aStatus );
+      
+      return (List<Teams>)q.getResultList();
+  } 
+  
+  public Teams getProjectTeam(int aId){
+      em = getEntityManager();
+      try{
+        Query q = em.createNamedQuery("Teams.findByProjectId");
+        q.setParameter( "projectId", aId );
+        return (Teams)q.getSingleResult();
+      }catch(Exception e ){
+          return null;
+      }
+  }
+  
+  public boolean updateProjectFile( Projectfile aProjectfile){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aProjectfile );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public boolean newComment( Comments aComment){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aComment );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  /*
+  public List<Milestone> getUpcomingMilestones(){
+      em = getEntityManager();
+
+      Query q = em.createQuery( "SELECT m FROM Milestone m WHERE m.dueDate >= '2012-03-05' AND m.dueDate <= '2012-04-05' ");
+
+      return (List<Milestone>)q.getResultList();
+  }*/
+  
 }

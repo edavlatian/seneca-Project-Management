@@ -1,6 +1,6 @@
 <%-- 
-    Document   : teamHome
-    Created on : Feb 1, 2012, 10:05:52 AM
+    Document   : rankProjects
+    Created on : Mar 4, 2012, 10:05:52 AM
     Author     : matthewschranz
 --%>
 
@@ -20,6 +20,10 @@
           session.setAttribute("Error", "Account has not been activated yet.");
           response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
+        else if(userBean.getTeam().getProjectId() >= 0){
+          session.setAttribute("Error", "You already are matched to a project");
+          response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
+        }
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
@@ -30,7 +34,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Team Home</title>
+    <title>PRJ566 - Rank Projects</title>
   </head>
   <body>
     <table> 
@@ -85,7 +89,7 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Team Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team Home</a></li>
 			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
@@ -101,71 +105,95 @@
       </tr>
       <tr>
         <td>
-          <div style="color: green;">
           <%
-            if(session.getAttribute("editSuccess") != null) {
-              out.println(session.getAttribute("editSuccess").toString());
-              session.removeAttribute("editSuccess");              
+            if(session.getAttribute("rankSuccess") != null){
+          %>
+              <div style="float: left; color: green;">
+                <%= session.getAttribute("rankSuccess").toString() %>
+              </div>
+              <br/>
+          <%
+              session.removeAttribute("rankSuccess");
             }
+            else if(session.getAttribute("rankFail") != null) {
           %>
-          </div>
-          <br/>
-          <%
-            Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getAllTeamMembers(team.getTeamId());
-            Teammember leader = userBean.getLeader(team.getTeamId());
-          %>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3><%= team.getTeamName() %></h3>
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
-                 style="max-width: 230px; max-height: 180px;"/>
-            <div>
-              <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
-              <br/><br/>
-              Description: <br/>
-              <%= team.getTeamDescription() %>
-              <br/><br/>
-              Constraints: <br/>
-              <%= team.getTeamConstraints() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Leader</h3> 
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
+              <div style="float: left; color: red;">
+                <%= session.getAttribute("rankFail").toString() %>
+              </div>
               <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Members</h3> 
-          </div>
           <%
-            for(int i = 0, len = members.size(); i < len; i++){
-              leader = members.get(i);
+              session.removeAttribute("rankFail");  
+            } 
           %>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
-              <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
+          <div style="width: 900px; background-color: #D5E7E9; padding: 5px;">
+            <h3>Rank Available Projects</h3>
           </div>
-          <% } %>
+          <form method="post" action="../validation/processTeam.jsp">
+            <table style="width: 90%;" cellpadding="5">
+              <tr>
+                <th style="width: 20%">Project Name</th>
+                <th style="width: 45%">Project Description</th>
+                <th style="width: 30%">Project Constraints</th>
+                <th style="width: 5%">Your Rank</th>
+              </tr>
+          <%
+              List<Projects> projects = userBean.getAllProjects("AV");
+              Teams t = userBean.getTeam();
+              Projects p;
+              
+              if(!projects.isEmpty()){
+                if(!t.getHasRanked()){
+                  for(int i = 0, len = projects.size(); i < len; i++){
+                    p = projects.get(i);
+          %>
+                    <tr>
+                      <td><%= p.getPrjName() %></td>
+                      <td><%= p.getDescription() %></td>
+                      <td><%= p.getPrjConstraints() %></td>
+                      <td>
+                        <input type="text" name="pRank" value="" style="width: 40px;" /><br/>
+                        <input type="hidden" name="pId" value="<%= p.getProjectId() %>" />
+                      </td>
+                    </tr>
+           <%
+                  }
+                }
+                else{
+                  List<Teamprojectranking> rankings = userBean.getTeamProjectRankings(t.getTeamId());
+                  Teamprojectranking tm;
+                  for(int i = 0, len = projects.size(); i < len; i++){
+                    p = projects.get(i);
+                    tm = rankings.get(i);
+           %>
+                    <tr>
+                      <td><%= p.getPrjName() %></td>
+                      <td><%= p.getDescription() %></td>
+                      <td><%= p.getPrjConstraints() %></td>
+                      <td>
+                        <input type="text" name="pRank" value="<%= tm.getRanking() %>" style="width: 40px;" /><br/>
+                        <input type="hidden" name="pId" value="<%= p.getProjectId() %>" />
+                      </td>
+                    </tr>
+           <%
+                  }
+                }
+              }
+           %>
+            </table>
+            <%
+              if(session.getAttribute("rankFailed") != null){
+            %>
+                <div style="color: red;">
+                  <%= session.getAttribute("rankFailed").toString() %>
+                </div>
+                <br/>
+            <%
+                session.removeAttribute("rankFailed");
+              }
+            %>
+            <input type="hidden" name="teamRanking" value="true"/>
+            <button>Save Rankings</button>
+          </form>
         </td>
       </tr>
     </table>

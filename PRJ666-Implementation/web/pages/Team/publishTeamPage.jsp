@@ -86,13 +86,6 @@
 		      </div>
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
-          <ul style="display: none;">
-            <li><a href="teamHome.jsp">Team Home</a></li>
-			      <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Team Page</a></li>
-            <li><a href="#">Manage Project Milestones</a></li>
-            <li><a href="viewProjects.jsp">View Projects</a></li>
-		      </ul>
           <div style="float: right;">
             <ul>
               <li><a href="../logout.jsp">Logout</a></li>
@@ -166,22 +159,14 @@
               <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Members</b></td>
             </tr>
           </table>
-          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;">
-            Publish Team Page
-          </button> 
+          <button>Publish Team Page</button> 
           <br/>
           <div id="errors" style="color: red;">${param.errors}</div>
           <input type="hidden" name="publishTeamPage" value="true"/>
           </form>
-          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
-                  onclick="addMember()">
-            Add Team Member
-          </button>
+          <button onclick="addMember()">Add Team Member</button>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat; font-weight: bold;"
-                  onclick="removeMember()">
-            Remove Team Member
-          </button> 
+          <button onclick="removeMember()">Remove Team Member</button> 
         </td>
       </tr>
     </table>

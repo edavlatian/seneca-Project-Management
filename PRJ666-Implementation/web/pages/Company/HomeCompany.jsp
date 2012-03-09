@@ -79,11 +79,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="#">Current Semester Teams</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
-            <li><a href="#">Edit Company Info</a></li>
+            <li><a href="UpcomingMilestones.jsp">Upcoming Milestones</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>

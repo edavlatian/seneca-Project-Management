@@ -1,12 +1,12 @@
 <%-- 
-    Document   : ViewCompanyProjects
-    Created on : Feb 15, 2012, 9:34:22 AM
+    Document   : ViewAvailableTeams
+    Created on : Feb 29, 2012, 4:00:23 PM
     Author     : Edouard
 --%>
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.Company"%>
-<%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
+<%@page import="seneca.projectManagement.entity.Teams"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
@@ -25,10 +25,10 @@
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Company Projects</title>
+        <title>Available Teams</title>
     </head>
     <body>
-      <table> 
+    <table> 
       <tr>
         <td colspan="2">
           <table width="100%">
@@ -95,40 +95,34 @@
         </td>
       </tr>
       <tr>
-        <td> 
-            <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
+        <td>        
+        <h1>Currently Available Teams</h1>
         <table>
-        <tr>
-            <th>Status</th>
-            <th>Project Name</th>
-            <th>Description</th>
-            <!-- <th>Constraints</th> -->
-        </tr>
-        <%
-        Company comp = userBean.getCompany();
-        List<Projects> projects = userBean.getCompanyProjects( comp );
-        if(projects.size()>0){
-            for(int i=0; i < projects.size(); i++){
-                Projects proj = new Projects();
-                proj = projects.get(i);
-        %>
-        <tr>
-                <td><%= proj.getStatus() %></td>
-                <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
-                <td><%= proj.getDescription() %></td>
-                <!--<td><%//=proj.getPrjConstraints() %></td>-->
-        </tr>
-        <%
-            }
-        }else{
-            %>
-            <tr><td colspan="3">Sorry, there does not appear to be any projects associated with this company.</td></tr>
-        <%
-        }
-        %>
+            <tr>
+                <th>Team Name</th>
+                <th>Description</th>
+            </tr>
+                <% 
+                List<Teams> teamlist = userBean.getAvailableTeams(1);
+                if(teamlist.size() > 0){
+                    for(int i = 0; i<teamlist.size();i++){
+                        Teams temp = new Teams();
+                        temp = teamlist.get(i);
+                        %>
+            <tr>
+               <td><a href="../Team/TeamPage.jsp?id=<%=temp.getTeamId()%>"><%=temp.getTeamName()%></a></td>
+               <td><%=temp.getTeamDescription()%></td>
+            </tr>
+                        <%
+                    }//for
+                }
+                else{
+                    %><tr><td colspan="2">Sorry, there are currently no available teams.</td></tr><%
+                }
+                %>         
         </table>
-       </td>
+        </td>
       </tr>             
-    </table>  
+    </table>
     </body>
 </html>

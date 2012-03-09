@@ -103,6 +103,7 @@
                 Projects p = null;
                 Company c = null;
                 List<Projects> projects = userBean.getAllProjects("PR", Validation.getSemesterToday());
+                //List<Projects> projects = userBean.getAllProjects("PR");
                 if(projects.size() > 0) {
                     Collections.sort(projects, new ProjectSorting());
                     Integer beg = 0;

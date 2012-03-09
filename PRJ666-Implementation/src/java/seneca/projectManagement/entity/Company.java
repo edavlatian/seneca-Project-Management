@@ -22,6 +22,8 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Company.findByCompanyId", query = "SELECT c FROM Company c WHERE c.companyId = :companyId"),
   @NamedQuery(name = "Company.findByCompanyName", query = "SELECT c FROM Company c WHERE c.companyName = :companyName"),
   @NamedQuery(name = "Company.findByCompanyPhone", query = "SELECT c FROM Company c WHERE c.companyPhone = :companyPhone"),
+  @NamedQuery(name = "Company.findByBusinessAreas", query = "SELECT c FROM Company c WHERE c.businessAreas = :businessAreas"),
+  @NamedQuery(name = "Company.findByCompanyDescription", query = "SELECT c FROM Company c WHERE c.companyDescription = :companyDescription"),
   @NamedQuery(name = "Company.findByUserId", query = "SELECT c FROM Company c WHERE c.userId = :userId")})
 public class Company implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -38,6 +40,12 @@ public class Company implements Serializable {
   @Size(min = 1, max = 12)
   @Column(name = "companyPhone")
   private String companyPhone;
+  @Size(max = 200)
+  @Column(name = "businessAreas")
+  private String businessAreas;
+  @Size(max = 600)
+  @Column(name = "companyDescription")
+  private String companyDescription;
   @Basic(optional = false)
   @NotNull
   @Column(name = "userId")
@@ -68,6 +76,22 @@ public class Company implements Serializable {
 
   public void setCompanyPhone(String companyPhone) {
     this.companyPhone = companyPhone;
+  }
+
+  public String getBusinessAreas() {
+    return businessAreas;
+  }
+
+  public void setBusinessAreas(String businessAreas) {
+    this.businessAreas = businessAreas;
+  }
+
+  public String getCompanyDescription() {
+    return companyDescription;
+  }
+
+  public void setCompanyDescription(String companyDescription) {
+    this.companyDescription = companyDescription;
   }
 
   public int getUserId() {

@@ -1,12 +1,14 @@
 <%-- 
-    Document   : ViewCompanyProjects
-    Created on : Feb 15, 2012, 9:34:22 AM
+    Document   : UpcomingMilestones
+    Created on : Mar 5, 2012, 10:03:49 PM
     Author     : Edouard
 --%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="seneca.projectManagement.entity.Projects"%>
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.Company"%>
-<%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
+<%@page import="seneca.projectManagement.entity.Milestone"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
@@ -18,17 +20,16 @@
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
 %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Company Projects</title>
+        <title>Available Teams</title>
     </head>
     <body>
-      <table> 
+    <table> 
       <tr>
         <td colspan="2">
           <table width="100%">
@@ -95,40 +96,48 @@
         </td>
       </tr>
       <tr>
-        <td> 
-            <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
-        <table>
-        <tr>
-            <th>Status</th>
-            <th>Project Name</th>
-            <th>Description</th>
-            <!-- <th>Constraints</th> -->
-        </tr>
-        <%
-        Company comp = userBean.getCompany();
-        List<Projects> projects = userBean.getCompanyProjects( comp );
-        if(projects.size()>0){
-            for(int i=0; i < projects.size(); i++){
-                Projects proj = new Projects();
-                proj = projects.get(i);
-        %>
-        <tr>
-                <td><%= proj.getStatus() %></td>
-                <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
-                <td><%= proj.getDescription() %></td>
-                <!--<td><%//=proj.getPrjConstraints() %></td>-->
-        </tr>
-        <%
+        <td>        
+            <h1>Milestones for the next 30 days:</h1>
+            <%
+            
+            List<Projects> projects = userBean.getCompanyProjects(userBean.getCompany()); //Gets a list of company projects
+            if(projects.size() > 0){ //Check if there are any projects.
+                %>
+              <table id="upcoming_milestone_table">
+                <%
+                for(int i = 0; i < projects.size(); i++ ){ //For every project
+                    if(projects.get(i).getStatus().equals("PR") || projects.get(i).getStatus().equals("MA")){ // Check if the project is proceeded or matched
+                  %>
+                  <tr><td colspan="4"><a href="ViewProjectDetails.jsp?id=<%=projects.get(i).getProjectId()%>"><%=projects.get(i).getPrjName()%></a></td></tr>
+                  <%
+                        List<Milestone> prjMilestones = userBean.getProjectMilestones(projects.get(i).getProjectId()); //Get a list of milestones
+                        if(prjMilestones.size()>0){ //Check if there are milestones
+                            for( int y = 0; y < prjMilestones.size();y++){ //For every milestone
+                                
+                  %>
+                  <tr>
+                      <td>&nbsp;</td>
+                      <td><%=prjMilestones.get(y).getMilestoneName()%></td>
+                      <td><%=prjMilestones.get(y).getDescription()%></td>
+                      <td><%=prjMilestones.get(y).getMilestoneStatus()%></td>
+                      <td><%=new SimpleDateFormat("yyyy/MM/dd").format(prjMilestones.get(y).getDueDate())%></td></tr>          
+                  <%
+                            }
+                        }else{
+                            %>
+                  <tr><td colspan="4">This project does not have any milestones</td></tr>
+                            <%
+                        }
+                    }
+                }
+                %>
+              </table>
+                <%
             }
-        }else{
+           
             %>
-            <tr><td colspan="3">Sorry, there does not appear to be any projects associated with this company.</td></tr>
-        <%
-        }
-        %>
-        </table>
-       </td>
+        </td>
       </tr>             
-    </table>  
+    </table>
     </body>
 </html>

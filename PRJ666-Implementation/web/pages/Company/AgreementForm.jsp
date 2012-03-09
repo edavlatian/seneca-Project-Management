@@ -135,7 +135,6 @@
             else {
           %>
               <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
-              <li><a href="/PRJ666-Implementation/pages/register.jsp">Register</a></li>
               <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
           <% } %>
             </ul>

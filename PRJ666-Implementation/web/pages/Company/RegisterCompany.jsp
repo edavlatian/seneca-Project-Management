@@ -11,6 +11,8 @@
     Company company = new Company();
     company.setCompanyName("");
     company.setCompanyPhone("");
+    company.setCompanyDescription("");
+    company.setBusinessAreas("");
     Accounts account = new Accounts();
     account.setAccountStatus(1);
     account.setPasswordHashed("");
@@ -37,6 +39,34 @@
             errorFound = true;
         } else {
             company.setCompanyName(cname);
+        }
+        
+        String careas = request.getParameter("id_careas");
+        if(careas == null) {
+            session.setAttribute("careas", "Cannot be empty!");
+            errorFound = true;
+        } else if(careas.isEmpty() == true) {
+            session.setAttribute("careas", "Cannot be empty!");
+            errorFound = true;
+        } else if(careas.length() > 200) {
+            session.setAttribute("careas", "Cannot be longer than 200 characters!");
+            errorFound = true;
+        } else {
+            company.setBusinessAreas(careas);
+        }
+        
+        String cdesc = request.getParameter("id_cdesc");
+        if(cdesc == null) {
+            session.setAttribute("cdesc", "Cannot be empty!");
+            errorFound = true;
+        } else if(cdesc.isEmpty() == true) {
+            session.setAttribute("cdesc", "Cannot be empty!");
+            errorFound = true;
+        } else if(cdesc.length() > 600) {
+            session.setAttribute("cdesc", "Cannot be longer than 600 characters!");
+            errorFound = true;
+        } else {
+            company.setCompanyDescription(cdesc);
         }
 
         String cphone = request.getParameter("id_cphone");
@@ -315,9 +345,11 @@
             */
             
             if(errorFound == false) {
-                userBean.setLoggedUser(account);
+                //userBean.setLoggedUser(account);
                 out.println("<h1>Company Account has been successfully registered!</h1>");
                 out.println("<a href=\"ProjectAgreementForm.jsp\">Click here to propose a project!</a>");
+                session.removeAttribute("Company");
+                session.removeAttribute("Account");
             }
         %>
         </td>

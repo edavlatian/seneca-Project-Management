@@ -11,6 +11,8 @@
     Company company = new Company();
     company.setCompanyName("");
     company.setCompanyPhone("");
+    company.setCompanyDescription("");
+    company.setBusinessAreas("");
     Accounts account = new Accounts();
     account.setAccountStatus(1);
     account.setPasswordHashed("");
@@ -179,6 +181,28 @@
                             if(session.getAttribute("cname") != null) {
                                 out.println("* " + session.getAttribute("cname").toString());
                                 session.removeAttribute("cname");
+                            }
+                        %>
+                    </div>
+                    <div style="clear: both"></div>
+                    <div style="float: left; width: 150px">Business Areas:</div>
+                    <div style="float: left"><textarea name="id_careas" cols="40" rows="5"><% out.println(company.getBusinessAreas()); %></textarea></div>
+                    <div style="float: left; color: red">
+                        <% 
+                            if(session.getAttribute("careas") != null) {
+                                out.println("* " + session.getAttribute("careas").toString());
+                                session.removeAttribute("careas");
+                            }
+                        %>
+                    </div>
+                    <div style="clear: both"></div>
+                    <div style="float: left; width: 150px">Company Description:</div>
+                    <div style="float: left"><textarea name="id_cdesc" cols="40" rows="10"><% out.println(company.getCompanyDescription()); %></textarea></div>
+                    <div style="float: left; color: red">
+                        <% 
+                            if(session.getAttribute("cdesc") != null) {
+                                out.println("* " + session.getAttribute("cdesc").toString());
+                                session.removeAttribute("cdesc");
                             }
                         %>
                     </div>

@@ -1,34 +1,44 @@
 <%-- 
-    Document   : ViewCompanyProjects
-    Created on : Feb 15, 2012, 9:34:22 AM
+    Document   : AddProjectFile
+    Created on : Feb 29, 2012, 5:42:53 PM
     Author     : Edouard
 --%>
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.Company"%>
-<%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
+<%@page import="seneca.projectManagement.entity.Projects"%>
+<%@page import="seneca.projectManagement.entity.Projectfile"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
-        }
+        }            
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-%>
-
+    
+    String id = request.getParameter("id");
+    Projects proj =  new Projects();
+    Projectfile projFile = new Projectfile();
+    if( id!=null && !id.equals("")){
+        proj = userBean.getProject(Integer.parseInt(id));
+        if( proj != null && proj.getProjectId() > 0){
+            projFile.setProjectId(Integer.parseInt(id));
+        }else{ id=""; }                         
+    }else{ id=""; }
+ %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Company Projects</title>
+        <title>Add Project File to <%=proj.getPrjName()%></title>
     </head>
     <body>
-      <table> 
+    <table> 
       <tr>
         <td colspan="2">
           <table width="100%">
@@ -95,40 +105,36 @@
         </td>
       </tr>
       <tr>
-        <td> 
-            <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
-        <table>
-        <tr>
-            <th>Status</th>
-            <th>Project Name</th>
-            <th>Description</th>
-            <!-- <th>Constraints</th> -->
-        </tr>
-        <%
-        Company comp = userBean.getCompany();
-        List<Projects> projects = userBean.getCompanyProjects( comp );
-        if(projects.size()>0){
-            for(int i=0; i < projects.size(); i++){
-                Projects proj = new Projects();
-                proj = projects.get(i);
-        %>
-        <tr>
-                <td><%= proj.getStatus() %></td>
-                <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
-                <td><%= proj.getDescription() %></td>
-                <!--<td><%//=proj.getPrjConstraints() %></td>-->
-        </tr>
-        <%
-            }
-        }else{
-            %>
-            <tr><td colspan="3">Sorry, there does not appear to be any projects associated with this company.</td></tr>
-        <%
-        }
-        %>
-        </table>
+        <td>
+            <!-- TODO : Check to see if id is empty. -->
+        <h1>Enter file information below:</h1>
+        <p><strong>Please note:</strong><br/> Files are not hosted on our servers and must be hosted at your leisure 
+            somewhere appropriate.<br/> If files contain sensitive information considering encrypting them.</p>
+        <form method="post" action="../validation/processFile.jsp">
+            <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
+            <input type="hidden" name="AddProjectFile" value="true" />
+            <table>
+                <tr>
+                    <td>File Name:</br><em style="color: gray; font-size: 12px;">Database Connection Info</em></td>
+                    <td><input style="vertical-align: top;" type="text" size="40" name="projectfileName" /></td>
+                </tr>
+                <tr>
+                    <td>Description:</br><em style="color: gray; font-size: 12px;">Contains database connection <br/>information for our prj system.</em></td>
+                    <td><textarea rows="3" cols="40" name="projectfileDescription" style="vertical-align: top;" /></textarea></td>
+                </tr>
+                <tr>
+                    <td>File Location:</br><em style="color: gray; font-size: 12px;">The full url of the file.<br/>http://web.com/files/conn.doc</em></td>
+                    <td style="vertical-align: top;"><input type="text" size="40" name="projectfileTheFile" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Add File" />
+                    </td>
+                </tr>
+            </table>
+        </form>
        </td>
       </tr>             
-    </table>  
+    </table>        
     </body>
 </html>
