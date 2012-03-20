@@ -1,6 +1,6 @@
 <%-- 
-    Document   : ViewProjectDetails
-    Created on : Feb 29, 2012, 4:39:22 PM
+    Document   : EditProjectInfo
+    Created on : Mar 20, 2012, 4:41:05 PM
     Author     : Edouard
 --%>
 <%@page import="java.util.List"%>
@@ -18,15 +18,11 @@
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-    
     String id = request.getParameter("id");
     Projects proj =  new Projects();
-    Teams team = new Teams();
-    List<Projectfile> projFiles;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj != null && proj.getProjectId() > 0){
-            team = userBean.getProjectTeam(Integer.parseInt(id));
             if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
                 id="x";
             }
@@ -36,16 +32,15 @@
     }else{
         id="";
     }
-    
+        
 %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Project Details</title>
+        <title>Edit Project Details</title>
     </head>
     <body>
     <table> 
@@ -126,103 +121,79 @@
         </td>
       </tr>
       <tr>
-        <td>       
-        <% if(id.equals("x")){
+        <td>
+        <%if(id.equals("x")){
             %><h1>You do not have permission to access this page.</h1><%
-         }else if(!id.equals("")){
-           projFiles = userBean.getProfileFiles(proj.getProjectId());  
-   %>
-            <strong style="color:red;">
-                <%
-                    if(request.getParameter("commentsubmit")!=null){
-                        if(request.getParameter("commentsubmit").equals("yes")){
-                            %>A comment was submitted for approval.<%
-                        }
-                    }
-                    if(request.getParameter("fileadded")!=null){
-                        if(request.getParameter("fileadded").equals("yes")){
-                            %>File was successfully added.<%
-                        }
-                    }
-                    if(request.getParameter("fileupdated")!=null){
-                        if(request.getParameter("fileupdated").equals("yes")){
-                            %>File was successfully updated.<%
-                        }
-                    }    
-                    if(request.getParameter("fileremoved")!=null){
-                        if(request.getParameter("fileremoved").equals("yes")){
-                            %>File was successfully removed.<%
-                        }
-                    }
-                    if(request.getParameter("updatedproject")!=null){
-                        if(request.getParameter("updatedproject").equals("yes")){
-                            %>Project was successfully updated.<%
-                        }
-                    }                              
-                %>                               
-            </strong>    
-        <h1><%=proj.getPrjName()%></h1>
-        <h2>Status: <%=proj.getStatus()%></h2>
-        <%
-        if(proj.getStatus().equals("PE")){
-            %>
-            <p><strong style="color:red;">This project has not yet been approved.<br/>You are able to edit the project details before it is approved</strong></p>
-            <a href="EditProjectInfo.jsp?id=<%=proj.getProjectId()%>">Click here to edit</a>
-            <%
-        }
-        %>
-        <p>Description: <%=proj.getDescription()%></p>
-        <p><strong>Constraints:</strong> <%=proj.getPrjConstraints()%></p>
-        <%if(!projFiles.isEmpty()){
-            %>
-            <table id="filelist_table">
-                <tr><th colspan="2">Project File List</tr>
+         }else if(!id.equals("")){%>
+         <h1>Make changes below:</h1>
+         <form method="post" action="../validation/processOther.jsp">
+            <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
+            <input type="hidden" name="UpdateProject" value="true" />            
+            <table>
                 <tr>
-                    <th>Description</th>
-                    <th>The File</th>
-                    <th>Edit</th>
-                    <th>Remove</th>
+                    <td>Project Name:</br><em style="color: gray; font-size: 12px;">Hours of Service</em></td>
+                    <td><input style="vertical-align: top;" type="text" size="40" name="projectName" value="<%=proj.getPrjName()%>"/></td>
+                    <td>
+                        <strong style="color:red;">
+                            <%
+                                if(request.getParameter("pname")!=null){
+                                    if(request.getParameter("pname").equals("1")){
+                                        %>Project name field cant be empty!<%
+                                    }else if (request.getParameter("pname").equals("2")){
+                                        %>Project name cant exceed 25 characters in length!<%
+                                    }
+                                }
+                            %>                               
+                        </strong>
+                    </td>                 
                 </tr>
-                <%
-                for(int i=0; i < projFiles.size(); i++){
-                    Projectfile temp = new Projectfile();
-                    temp = (Projectfile)projFiles.get(i);
-                    %>
-                    <tr>
-                        <td><%=temp.getFileDescription()%></td>
-                        <td><a href="<%=temp.getTheFile()%>"><%=temp.getFileName()%></a></td>
-                        <td><a href="ManageProjectFile.jsp?id=<%=temp.getFileId()%>">EDIT</a></td>
-                        <td><a href="RemoveProjectFile.jsp?id=<%=temp.getFileId()%>">DELETE</a></td>
-                    </tr>
-                    <%
-                }
-                %>
+                <tr style="vertical-align: top;">
+                    <td>Description:</br><em style="color: gray; font-size: 12px;">This project will track<br/>the hours of service. Etc..</em></td>
+                    <td><textarea rows="10" cols="40" name="projectDescription" style="vertical-align: top;" /><%=proj.getDescription()%></textarea></td>
+                    <td>
+                        <strong style="color:red;">
+                            <%
+                                if(request.getParameter("pdesc")!=null){
+                                    if(request.getParameter("pdesc").equals("1")){
+                                        %>Description field cant be empty!<%
+                                    }else if (request.getParameter("pdesc").equals("2")){
+                                        %>Description cant exceed 500 characters in length!<%
+                                    }
+                                }
+                            %>
+                        </strong>
+                    </td>                
+                </tr>
+                <tr style="vertical-align: top;">
+                    <td>Constraints:</br><em style="color: gray; font-size: 12px;">List of technologies:<br/>MySQL<br />Java</em></td>
+                    <td><textarea rows="5" cols="40" name="projectConstraints" style="vertical-align: top;" /><%=proj.getPrjConstraints()%></textarea></td>
+                    <td>
+                        <strong style="color:red;">
+                            <%
+                                if(request.getParameter("pcons")!=null){
+                                    if(request.getParameter("pcons").equals("1")){
+                                        %>Constraints field cant be empty!<%
+                                    }else if (request.getParameter("pcons").equals("2")){
+                                        %>Constraints cant exceed 250 characters in length!<%
+                                    }
+                                }
+                            %>
+                        </strong>
+                    </td>                
+                </tr>
                 <tr>
-                    <td><a href="AddProjectFile.jsp?id=<%=id%>">Add Project File</td>
-                </tr>
+                    <td colspan="3">
+                        <input type="submit" value="Save Changes" />
+                    </td>
+                </tr>                
             </table>
-               <%    
-        }else{
-            %><p> There are no files associated with this project</p>
-             <% if(!proj.getStatus().equals("PA")){%>
-            <a href="AddProjectFile.jsp?id=<%=id%>">Add Project File</a></p>
-            <%}            
-        }
-        %>
-        <% if(team!=null && team.getTeamId()!=0){%>
-        <p>Assigned Team: <a href="#"><%=team.getTeamName()%></a></p>
-        <%}else{%>
-        <p><strong>Currently no team assigned</strong></p>
-        <%}
-          if(proj.getStatus().equals("PA")){
-        %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
-          }
-        }else{
-        %><h1>This project does not appear to be valid or does not exist.</h1><%
-        }
-        %>
+         </form>
+        <%
+         }else{
+            %><h1>This project does not appear to be valid or does not exist.</h1><%
+         }%>    
        </td>
       </tr>             
     </table>
     </body>
-</html>
+</html>            

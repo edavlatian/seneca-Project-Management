@@ -22,7 +22,6 @@
     }
     String id = request.getParameter("id");
     Projects proj = new Projects();
-    Comments comment;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj!= null && proj.getProjectId() > 0){
@@ -30,10 +29,9 @@
                 if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
                     id="z"; //Comments already exist.
                 }else{
-                    comment = new Comments();
-                    comment.setProjectId(proj.getProjectId());
-                    comment.setCommentStatus(0);
-                    comment.setCommentDescription(""); 
+                    if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
+                        id="";
+                    }
                 }
             }else{
                 id="x"; //Project is not yet in PA status.
@@ -53,7 +51,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Company Home</title>
+    <title>Add Comment</title>
   </head>
   <body>
     <table> 
@@ -121,10 +119,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
-            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Information</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -165,7 +163,7 @@
                 </strong>
                 <p><%=userBean.checkProjectComments(proj.getProjectId())%></p>
                 <form action="../validation/processOther.jsp" method="post">
-                    <textarea name="commentDescription" rows="8" cols="50"></textarea>
+                    <textarea name="commentDescription" rows="10" cols="50"></textarea>
                     <strong style="color:red;">
                         <%
                             if(request.getParameter("cdesc")!=null){
