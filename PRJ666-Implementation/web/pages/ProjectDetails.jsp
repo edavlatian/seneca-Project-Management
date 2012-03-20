@@ -95,8 +95,7 @@
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="Home.jsp">Home Page</a></li>
-            <li><a href="archived.jsp">Archived Projects</a></li>
+            <li><a href="Home.jsp">Home</a></li>
           <% 
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
@@ -111,7 +110,7 @@
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Team<br/>Project</a></li>
           <%
@@ -125,7 +124,7 @@
             <li><a href="Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
             <li><a href="Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
             <li><a href="Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
           <%
@@ -133,13 +132,13 @@
               else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
           %>
             <li><a href="Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
-		        <li><a href="#">Current Semester Available Projects</a></li>
+            <li><a href="#">Current Semester Available Projects</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("AD")){
 		      %>
             <li><a href="#">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
+            <li><a href="#">Available Projects</a></li>
             <li><a href="#">Change Project Status to Past</a></li>
             <li><a href="#">Manage Site Accounts</a></li>
           <%
@@ -154,7 +153,8 @@
             else {
           %>
               <li><a href="login.jsp">Login</a></li>
-              <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+              <li><a href="archived.jsp">Archived Projects</a></li>
+              <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
           <% } %>
             </ul>
           </div>

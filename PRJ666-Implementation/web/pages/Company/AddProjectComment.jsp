@@ -4,7 +4,10 @@
     Author     : Edouard
 --%>
 
-<%@page import="seneca.projectManagement.entity.*"%>
+<%@page import="seneca.projectManagement.entity.Company"%>
+<%@page import="seneca.projectManagement.entity.Accounts"%>
+<%@page import="seneca.projectManagement.entity.Comments"%>
+<%@page import="seneca.projectManagement.entity.Projects"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
@@ -22,31 +25,22 @@
     Comments comment;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
-
         if( proj!= null && proj.getProjectId() > 0){
-            
             if(proj.getStatus().equals("PA")){
-                
-                
                 if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
-                    
                     id="z"; //Comments already exist.
-                    
                 }else{
                     comment = new Comments();
                     comment.setProjectId(proj.getProjectId());
                     comment.setCommentStatus(0);
                     comment.setCommentDescription(""); 
                 }
-                
             }else{
                 id="x"; //Project is not yet in PA status.
             }
-            
         }else{
             id="q"; // Project does not exist.
         }
-        
     }else{
         id=""; // The id is either null or empty.
     }

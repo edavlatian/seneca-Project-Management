@@ -15,9 +15,9 @@ li a:link, li a:visited
   display:block;
   font-weight:bold;
   color:#FFFFFF;
-  width:95px;
+  width:90px;
   text-align:center;
-  padding:4px;
+  padding:1px;
   text-decoration:none;
   text-transform:uppercase;
 }

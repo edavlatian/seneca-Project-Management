@@ -99,7 +99,11 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home<br/>Page</a></li>
+<<<<<<< HEAD
+            <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
+=======
 		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
+>>>>>>> 0e006c4517caccc778eb9b91bcb02a878deedc0b
             <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>
 		      </ul>

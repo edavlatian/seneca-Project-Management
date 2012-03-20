@@ -141,6 +141,35 @@ public class PersistenceController extends EntityControllerBase {
     return (List<Teammember>)q.getResultList();
   }
   
+  public List<Teammember> getActiveTeamMembers(){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Teams.findByTeamStatus").setParameter("teamStatus", 1);
+    
+    List<Teams> tms = (List<Teams>)q.getResultList();
+    Teams t = null;
+    
+    List<Teammember> tmbrs = null, temp = null;
+    Teammember m = null;
+    
+    q = em.createNamedQuery("Teammember.findByTeamId").setParameter("teamId", tms.get(0).getTeamId());
+    tmbrs = (List<Teammember>)q.getResultList();
+    
+    for(int i = 1, len = tms.size(); i < len; i++){
+      t = tms.get(i);
+      q = em.createNamedQuery("Teammember.findByTeamId").setParameter("teamId", t.getTeamId());
+      
+      temp = (List<Teammember>)q.getResultList();
+      
+      for(int k = 0, len2 = temp.size(); k < len2; k++){
+        tmbrs.add(temp.get(k));
+      }
+      
+    }
+    
+    return tmbrs;
+  }
+  
   public boolean updateMember( Teammember aMember ){
     em = getEntityManager();
     
@@ -466,6 +495,18 @@ public class PersistenceController extends EntityControllerBase {
 
         return ret;
   }
+  
+  public boolean removeMember( Teammember aMember ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.remove(em.merge(aMember));
+    em.getTransaction().commit();
+    em.close();
+    
+    return true;
+  }
+
 //Edouard
   public boolean updateCompany(Company aCompany){
     boolean ret = false;

@@ -129,7 +129,7 @@
                         }
                     }
                 %>                               
-            </strong>         
+            </strong>
         <form method="post" action="../validation/processFile.jsp">
             <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
             <input type="hidden" name="AddProjectFile" value="true" />
@@ -183,7 +183,7 @@
                                 }
                             %>                                
                         </strong>
-                    </td>                    
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="2">

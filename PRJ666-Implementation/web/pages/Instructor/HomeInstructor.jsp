@@ -92,11 +92,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-            <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-            <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
@@ -108,7 +109,7 @@
           userBean.getLoggedUser().getUserLName()%></h2>  
           <p><a href="ViewClients.jsp">Clients</a></p>
           <p><a href="ViewProjects.jsp">Projects</a></p>
-          <p><a href="ViewTeams.jsp">Teams</a></p>          
+          <p><a href="ViewTeams.jsp">Teams</a></p>       
         </td>
       </tr>             
     </table>

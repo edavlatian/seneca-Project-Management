@@ -102,6 +102,7 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
+            <li><a href="HomeSupervisor.jsp">Supervisor Home</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
             <li><a href="AvailableProjects.jsp">Current Semester Available Projects</a></li>
           </ul>

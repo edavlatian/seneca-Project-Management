@@ -102,11 +102,12 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="HomeInstructor.jsp">Instructor<br/>Home</a></li>
-            <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-		        <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
-            <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
-            <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
@@ -114,7 +115,7 @@
       <tr>
         <td>
           <h3 class="title">Current Active Semester Teams</h3>
-          <form name="form1" method="POST" action="matchTeam.jsp">
+          <form name="form1" method="POST" action="../Instructor/matchTeam.jsp">
             <%
                 Teams t = null;
                 List<Teams> tms = userBean.getUnMatchedTeams(1);

@@ -107,8 +107,9 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-			      <li><a href="PendingComments.jsp">Pending Comments</a></li>
-		        <li><a href="AvailableProjects.jsp">Available Projects</a></li>
+            <li><a href="HomeAdmin.jsp">Administrator Home</a></li>
+            <li><a href="PendingComments.jsp">Pending Comments</a></li>
+            <li><a href="AvailableProjects.jsp">Available Projects</a></li>
             <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
             <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
           </ul>

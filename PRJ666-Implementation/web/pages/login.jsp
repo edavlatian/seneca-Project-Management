@@ -20,7 +20,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -65,9 +67,6 @@
 		      </div>
         </td>
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
-          <ul>
-            <li><a href="Home.jsp">Home Page</a></li>
-          </ul>
           <div style="float: right;">
             <ul>
               <%
@@ -78,7 +77,7 @@
                 } else {
               %>
                 <li><a href="archived.jsp">Archived Projects</a></li>
-                <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
+                <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
              <% } %>
             </ul>
           </div>

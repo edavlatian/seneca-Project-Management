@@ -100,57 +100,12 @@
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="#">Edit Company Info</a></li>
           <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
-                if(userBean.getTeam().getHasRegistered() == 1){
+          }
+          }
           %>
-            <li><a href="#">Rank Projects</a></li>
-            <li><a href="#">View Projects</a></li>
-            <li><a href="#">Manage Team Page</a></li>
-          <%
-                }
-                else {
-                  response.sendRedirect("/PRJ666-Implementation/pages/Team/publishTeamPage.jsp");  
-                }
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
-          %>
-            <li><a href="#">Create Team Accounts</a></li>
-            <li><a href="#">Deactivate Team Accounts</a></li>
-		        <li><a href="#">Match Teams/Projects</a></li>
-            <li><a href="#">Match Teams/Projects Manually</a></li>
-		        <li><a href="#">Pending Projects</a></li>
-            <li><a href="#">Approved Projects</a></li>
-            <li><a href="#">Proceed Projects</a></li>
-          <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
-          %>
-            <li><a href="#">Change Project Status to Past</a></li>
-		        <li><a href="#">Current Semester Available Projects</a></li>
-          <%
-              }
-              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
-		      %>
-            <li><a href="#">Pending Comments</a></li>
-		        <li><a href="#">Available Projects</a></li>
-            <li><a href="#">Change Project Status to Past</a></li>
-            <li><a href="#">Manage Site Accounts</a></li>
-          <%
-              }
-          %>
-          </ul>
+          </ul>    
           <div style="float: right;">
-            <ul>
-              <li><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
-          <%
-            }
-            else {
-          %>
-              <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
-              <li><a href="../archived.jsp">Archived Projects</a></li>
-              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
-          <% } %>
+            <ul><li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
             </ul>
           </div>
         </td>

@@ -3,7 +3,6 @@
     Created on : Feb 29, 2012, 4:39:22 PM
     Author     : Edouard
 --%>
-
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="seneca.projectManagement.entity.*"%>
@@ -126,8 +125,7 @@
       <tr>
         <td>       
         <% if(id!=""){
-           projFiles = userBean.getProfileFiles(proj.getProjectId());
-           
+           projFiles = userBean.getProfileFiles(proj.getProjectId());  
    %>
             <strong style="color:red;">
                 <%

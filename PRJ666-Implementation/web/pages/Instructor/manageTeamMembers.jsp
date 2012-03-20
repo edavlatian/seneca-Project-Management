@@ -1,20 +1,16 @@
 <%-- 
-    Document   : ManageAccounts
-    Created on : Mar 5, 2012, 8:32:59 PM
-    Author     : KepneR
+    Document   : manageTeamMembers
+    Created on : Mar 18, 2012, 8:04:02 PM
+    Author     : matthewschranz
 --%>
-
-<%@page import="java.util.Collections"%>
-<%@page import="seneca.projectManagement.utils.AccountSorting"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <%@page import="java.util.List"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    session.setAttribute("First", 1);
     if(userBean.isLogged() == true && userBean != null) {
-        if(userBean.getLoggedUser().getUserRole().equals("AD") == false) {
-            session.setAttribute("Error", "You don't have permission to access the administrator page.");
+        if(userBean.getLoggedUser().getUserRole().equals("IN") == false) {
+            session.setAttribute("Error", "You don't have permission to access the instructor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         }
     }
@@ -24,12 +20,12 @@
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>  
+<!DOCTYPE html>
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Administrator</title>
+    <title>Instructor - Manage Team Members</title>
   </head>
   <body>
     <table> 
@@ -37,7 +33,7 @@
         <td colspan="2">
           <table width="100%">
             <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;"></td>
               <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
                 <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
               </td>
@@ -56,7 +52,7 @@
             if(userBean.isLogged() == true) {
               Accounts temp_a = userBean.getLoggedUser();
               out.println("<hr width='95%' align='left'/>");
-              out.print("Hello Administrator, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              out.print("Hello Instructor, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
               out.println("<hr width='95%' align='left'/>");
             }
           }
@@ -96,54 +92,46 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="HomeAdmin.jsp">Administrator Home</a></li>
-            <li><a href="PendingComments.jsp">Pending Comments</a></li>
-            <li><a href="AvailableProjects.jsp">Available Projects</a></li>
-            <li><a href="ProjectUpdate.jsp">Change Project Status to Past</a></li>
-            <li><a href="ManageAccounts.jsp">Manage Site Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/InstructorHome.jsp">Instructor<br/>Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="../logout.jsp">Logout</a></li>
           </ul>
-          <div style="float: right;">
-            <ul>
-              <li><a href="../logout.jsp">Logout</a></li>
-            </ul>
-          </div>
         </td>
       </tr>
       <tr>
         <td>
-          <h1>Account Management</h1>
-          <form method="POST" action="UpdateAccounts.jsp">
+          <h1>Manage Team Members</h1>
+          <form action="../Instructor/updateMembers.jsp" method="post">
           <%
             Integer beg = 0;
-            Integer items = 10;
+            Integer items = 8;
             Integer color = 0;
-            Accounts a = null;
-            List<Accounts> accts = userBean.getAllAccounts();
-            if(accts.size() > 0) {
-                Collections.sort(accts, new AccountSorting());
+            List<Teammember> members = userBean.getActiveTeamMembers();
+            Teammember m = null;
+            Teams t = null;
+            if(members.size() > 0) {
                 try {
                     items = new Integer(request.getParameter("items"));
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
+                catch (Exception e) {}
                 try {
                     beg = new Integer(request.getParameter("beg")) * items;
                 }
-                catch (Exception e) {
-                    e.printStackTrace();
-                }
-                out.println("<div style='width: 930px;'>");
+                catch (Exception e) {}
+                out.println("<div style='width: 730px;'>");
                 out.println("<div style='float: left; padding: 2px; width: 30px; text-align: center'>&nbsp;</div>");
-                out.println("<div style='float: left; padding: 2px; width: 250px'>Username</div>");
-                out.println("<div style='float: left; padding: 2px; width: 150px'>First Name</div>");
-                out.println("<div style='float: left; padding: 2px; width: 150px'>Last Name</div>");
-                out.println("<div style='float: left; padding: 2px; width: 100px'>Email</div>");
-                out.println("<div style='float: left; padding: 2px; width: 100px'>Role</div>");
-                out.println("<div style='float: left; padding: 2px; width: 60px'>Status</div>");
+                out.println("<div style='float: left; padding: 2px; width: 250px'>Name</div>");
+                out.println("<div style='float: left; padding: 2px; width: 250px'>Team</div>");
+                out.println("<div style='float: left; padding: 2px; width: 150px'>Email</div>");
                 out.println("<div style='clear: both'></div>");
-                for(int i = beg; i < beg + items && i < accts.size(); i++) {
-                    a = accts.get(i);
+                for(int i = beg; i < beg + items && i < members.size(); i++) {
+                    m = members.get(i);
+                    System.out.println(m.getTeamId());
+                    t = userBean.getTeamById(m.getTeamId());
                     out.print("<div style='font-weight: bold; padding: 5px; color: white; background-color: ");
                     if(color == 0) {
                         out.print("#6F93C9");
@@ -154,37 +142,36 @@
                     }
                     out.println("'>");
                         out.println("<div style='float: left; padding: 1px; width: 30px; text-align: center'>");
-                            out.println("<input type='radio' name='accounts' value=" + a.getUserIdentifier() + " />");
+                            out.println("<input type='radio' name='mId' value=" + m.getMemberId() + " />");
                         out.println("</div>");
-                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + a.getUserIdentifier() + "</div>");
-                        out.println("<div style='float: left; padding: 1px; width: 150px'>" + a.getUserFName() + "</div>");
-                        out.println("<div style='float: left; padding: 1px; width: 150px'>" + a.getUserLName() + "</div>");
-                        out.println("<div style='float: left; padding: 2px; width: 100px'><a href='mailto:" + a.getUserEmail() + "'>Email</a></div>");
-                        out.println("<div style='float: left; padding: 2px; width: 100px'>" + a.getUserRole() + "</div>");
-                        String s = a.getAccountStatus() == 1 ? "Active" : "Inactive";
-                        out.println("<div style='float: left; padding: 2px; width: 60px'>" + s + "</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + m.getFirstName() + " " + m.getLastName() + "</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 250px'>" + t.getTeamName() + "</div>");
+                        out.println("<div style='float: left; padding: 1px; width: 150px'><a href='mailto:" + m.getEmail() + "'>Email</a></div>");
                         out.println("<div style='clear: both'></div>");
                     out.println("</div>");
                 }
-                out.println("<div style='float: left'><input type='submit' value='Create New Account' name='create' /></div>");
-                out.println("<div style='float: left'><input type='submit' value='Edit Selected Account' name='edit' /></div>");
-                out.println("<div style='float: left'><input type='submit' value='Remove Selected Account' name='remove' /></div>");
+                out.println("<div style='float: left'><input type='submit' value='Add New Member' name='createMember' /></div>");
+                out.println("<div style='float: left'><input type='submit' value='Remove Team Member' name='deleteMember' /></div>");
                 out.println("<div style='float: right'>");
-                int pages = (int) Math.ceil( (double) accts.size() / items);
+                int pages = (int) Math.ceil( (double) members.size() / items);
                 out.println(" Page(s): ");
                 for(int i = 0; i < pages; i++) {
-                    out.println("<a href='ManageAccounts.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                    out.println("<a href='manageTeamMembers.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
                 }
-                out.println("<a href='ManageAccounts.jsp?items=" + accts.size() + "'>View All</a>");
+                out.println("<a href='manageTeamMembers.jsp?items=" + members.size() + "'>View All</a>");
                 out.println("</div>");
                 out.println("<div style='clear: both'></div>");
                 if(session.getAttribute("Error") != null) {
-                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                    session.removeAttribute("Error");
+                  out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                  session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("memberSuccess") != null){
+                  out.println("<span style='color: green'>" + session.getAttribute("memberSuccess") + "</span>");
+                  session.removeAttribute("memberSuccess");                 
                 }
                 out.println("</div>");
             } else {
-                out.println("No accounts to display!");
+                out.println("There are no active team members right now! =/");
             }
           %>
           </form>
