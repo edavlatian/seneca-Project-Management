@@ -77,7 +77,8 @@
               <%
                 } else {
               %>
-              <li><a href="Company/AgreementForm.jsp">Company Registration</a></li>
+                <li><a href="archived.jsp">Archived Projects</a></li>
+                <li><a href="Company/AgreementForm.jsp">Register<br/>Company</a></li>
              <% } %>
             </ul>
           </div>

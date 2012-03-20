@@ -15,7 +15,7 @@ li a:link, li a:visited
   display:block;
   font-weight:bold;
   color:#FFFFFF;
-  width:120px;
+  width:95px;
   text-align:center;
   padding:4px;
   text-decoration:none;
@@ -45,5 +45,13 @@ input[type=text], textArea {
 button {
   background-image: url('../images/header_bg.jpg'); 
   background-repeat: repeat; 
+  font-weight: bold;
+}
+
+body a:link, a:visited{
+  text-decoration: none;
+}
+
+.teamHeaders{
   font-weight: bold;
 }

@@ -11,7 +11,7 @@
                scope="session" />
   <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("TL")) {
           if(userBean.getTeam().getHasRegistered() != 1)
             response.sendRedirect("publishTeamPage.jsp");
@@ -39,7 +39,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -50,6 +52,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Teams temp_t = userBean.getTeam();
+              out.print("Hello, Team " + temp_t.getTeamName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -85,12 +98,9 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Home.jsp">Team Home</a></li>
-			      <li><a href="/PRJ666-Implementation/pages/Team/rankProjects.jsp">Rank Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Team/editTeamPage.jsp">Manage Team Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/createMilestone.jsp">Create Project Milestone</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/editMilestone.jsp">Edit Project Milestones</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View Projects</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>
 		      </ul>
           <div style="float: right;">
             <ul>
@@ -101,71 +111,32 @@
       </tr>
       <tr>
         <td>
-          <div style="color: green;">
-          <%
-            if(session.getAttribute("editSuccess") != null) {
-              out.println(session.getAttribute("editSuccess").toString());
-              session.removeAttribute("editSuccess");              
-            }
-          %>
-          </div>
-          <br/>
           <%
             Teams team = userBean.getTeam();
-            List<Teammember> members = userBean.getAllTeamMembers(team.getTeamId());
-            Teammember leader = userBean.getLeader(team.getTeamId());
+            List<Teammember> members = userBean.getAllMembers(team.getTeamId());
+            Teammember m = null;
           %>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3><%= team.getTeamName() %></h3>
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= team.getTeamLogo() %>" alt="<%= team.getTeamName() %>" 
-                 style="max-width: 230px; max-height: 180px;"/>
-            <div>
-              <a href="mailto:<%= team.getTeamEmail() %>" >Email The Team</a>
-              <br/><br/>
-              Description: <br/>
-              <%= team.getTeamDescription() %>
-              <br/><br/>
-              Constraints: <br/>
-              <%= team.getTeamConstraints() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Leader</h3> 
-          </div>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
-              <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <div style="width: 700px; background-color: #D5E7E9; padding: 5px;">
-            <h3>Team Members</h3> 
+          <div style="text-align: center;">
+            <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
           </div>
           <%
             for(int i = 0, len = members.size(); i < len; i++){
-              leader = members.get(i);
-          %>
-          <div style="width: 700px; padding: 5px;">
-            <img src="<%= leader.getMemberImage() %>" alt="<%= leader.getFirstName() + " " + leader.getLastName() %>"
-                 style="max-width: 450px; max-height: 300px;"/>
-            <div>
-              Name: <%= leader.getFirstName() + " " + leader.getLastName() %>
+              m = members.get(i);
+              %>
+              <div style="text-align: center;">
+                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"><img src="<%= m.getMemberImage() %>" alt="Member Image" 
+                                                                        style="max-height: 200px; max-width: 150px;"/></a>
+                <br/>
+                <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
+                <br/>
+                <a href="mailto:<%= m.getEmail() %>">Email</a>
+                <br/>
+                <%= m.getFirstName() + " " + m.getLastName() %>
+              </div>
               <br/>
-              Email: <%= leader.getEmail() %>
-              <br/> <br/>
-              Description: <br/>
-              <%= leader.getDescription() %>
-            </div>
-          </div>
-          <% } %>
+              <%
+            }
+          %>
         </td>
       </tr>
     </table>

@@ -4,10 +4,11 @@
     Author     : KepneR
 --%>
 
+<%@page import="seneca.projectManagement.entity.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("IN") == false) {
             session.setAttribute("Error", "You don't have permission to access the instructor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
@@ -24,7 +25,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Instructor Home</title>
+    <title>Instructor</title>
   </head>
   <body>
     <table> 
@@ -33,7 +34,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;"></td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -44,6 +47,16 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              out.print("Hello Instructor, " + temp_a.getUserFName() + " " + temp_a.getUserLName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -79,14 +92,11 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li style="width: 7%;"><a href="../Home.jsp">Home<br/>Page</a></li>
-			      <li style="width:11%;"><a href="#">Create<br/>Team<br/>Accounts</a></li>
-            <li style="width:11%;"><a href="#">Deactivate<br/>Team<br/>Accounts</a></li>
-		        <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects</a></li>
-            <li style="width:11%;"><a href="#">Match<br/>Teams<br/>Projects<br/>Manually</a></li>
-		        <li style="width:11%;"><a href="#">Pending Projects</a></li>
-            <li style="width:11%;"><a href="#">Approved Projects</a></li>
-            <li style="width:11%;"><a href="#">Proceed Projects</a></li>
+            <li><a href="CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+            <li><a href="PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
@@ -96,6 +106,9 @@
           <h1>Instructor Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
           userBean.getLoggedUser().getUserLName()%></h2>  
+          <p><a href="ViewClients.jsp">Clients</a></p>
+          <p><a href="ViewProjects.jsp">Projects</a></p>
+          <p><a href="ViewTeams.jsp">Teams</a></p>          
         </td>
       </tr>             
     </table>

@@ -20,7 +20,7 @@
     
     boolean errorFound = false;
     
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
@@ -163,7 +163,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -174,6 +176,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -209,11 +222,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="#">Current Semester Teams</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
-            <li><a href="#">Edit Company Info</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>

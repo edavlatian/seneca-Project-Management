@@ -54,7 +54,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -65,6 +67,17 @@
           <br/>
           <img src="/PRJ666-Implementation/pages/resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -107,7 +120,6 @@
 			      <li><a href="#">Current Semester Teams</a></li>
 		        <li><a href="#">Create New Project</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Upcoming Milestones</a></li>
             <li><a href="#">Edit Company Info</a></li>
           <%
               }
@@ -115,7 +127,6 @@
                 if(userBean.getTeam().getHasRegistered() == 1){
           %>
             <li><a href="#">Rank Projects</a></li>
-		        <li><a href="#">Manage Project Milestones</a></li>
             <li><a href="#">View Projects</a></li>
             <li><a href="#">Manage Team Page</a></li>
           <%
@@ -159,7 +170,7 @@
             else {
           %>
               <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
-              <li><a href="/PRJ666-Implementation/pages/register.jsp">Register</a></li>
+              <li><a href="../archived.jsp">Archived Projects</a></li>
               <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
           <% } %>
             </ul>

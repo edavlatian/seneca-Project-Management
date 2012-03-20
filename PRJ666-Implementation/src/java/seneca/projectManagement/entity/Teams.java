@@ -28,7 +28,6 @@ import javax.xml.bind.annotation.XmlRootElement;
   @NamedQuery(name = "Teams.findByTeamLogo", query = "SELECT t FROM Teams t WHERE t.teamLogo = :teamLogo"),
   @NamedQuery(name = "Teams.findByProjectId", query = "SELECT t FROM Teams t WHERE t.projectId = :projectId"),
   @NamedQuery(name = "Teams.findByHasRegistered", query = "SELECT t FROM Teams t WHERE t.hasRegistered = :hasRegistered"),
-  @NamedQuery(name = "Teams.findByHasRanked", query = "SELECT t FROM Teams t WHERE t.hasRanked = :hasRanked"),
   @NamedQuery(name = "Teams.findByUserId", query = "SELECT t FROM Teams t WHERE t.userId = :userId")})
 public class Teams implements Serializable {
   private static final long serialVersionUID = 1L;
@@ -41,7 +40,7 @@ public class Teams implements Serializable {
   @Column(name = "teamEmail")
   private String teamEmail;
   @Column(name = "teamStatus")
-  private Integer teamStatus;
+  private Integer teamStatus = 1;
   @Size(max = 20)
   @Column(name = "teamName")
   private String teamName;
@@ -58,8 +57,6 @@ public class Teams implements Serializable {
   private Integer projectId;
   @Column(name = "hasRegistered")
   private Integer hasRegistered = 0;
-  @Column(name = "hasRanked")
-  private Boolean hasRanked = false;
   @Basic(optional = false)
   @NotNull
   @Column(name = "userId")
@@ -148,14 +145,6 @@ public class Teams implements Serializable {
 
   public void setHasRegistered(Integer hasRegistered) {
     this.hasRegistered = hasRegistered;
-  }
-
-  public Boolean getHasRanked() {
-    return hasRanked;
-  }
-
-  public void setHasRanked(Boolean hasRanked) {
-    this.hasRanked = hasRanked;
   }
 
   public int getUserId() {

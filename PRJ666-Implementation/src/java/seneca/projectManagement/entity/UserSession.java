@@ -87,11 +87,23 @@ public class UserSession {
   }
   
   public Accounts getAccount(String userIdentifier) {
-      return pc.getAccount(userIdentifier);
+    return pc.getAccount(userIdentifier);
   }
+  
+  public Accounts getAccount(Integer id) {
+    return pc.getAccount(id);
+  } 
   
   public Teams getTeam(){
     return pc.getTeam( loggedUser.getUserId() );
+  }
+  
+  public Teams getTeam(Integer id) {
+    return pc.getTeam(id);
+  } 
+  
+  public Teams getTeamById( Integer aTeamId ){
+    return pc.getTeamById(aTeamId);
   }
   
   public Teammember getLeader( int aTeamId ){
@@ -106,8 +118,16 @@ public class UserSession {
     return pc.addTeamMember( aMember );
   }
   
-  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
-    return pc.getAllTeamMembers( aTeamId );
+  public List<Teammember> getTeamMembers( Integer aTeamId ){
+    return pc.getTeamMembers( aTeamId );
+  }
+  
+  public List<Teammember> getAllMembers( Integer aTeamId ){
+    return pc.getAllMembers( aTeamId );
+  }
+  
+  public Teammember getMember( Integer aMemberId ){
+    return pc.getMember(aMemberId);
   }
   
   public boolean updateTeam( Teams aTeam ){
@@ -196,10 +216,6 @@ public class UserSession {
     return pc.getCompanyProjects( aCompany.getCompanyId() );
   }
   
-  public List<Projects> getAvailableProjects( String aStatus ){
-    return pc.getAvailableProjects( aStatus );
-  }
-  
   public List<Projects> getInstructorProjects( Accounts aAccount ){
     return pc.getCompanyProjects( aAccount.getUserId() );
   }
@@ -208,47 +224,84 @@ public class UserSession {
     return pc.updateProject(p);
   }
   
-  public List<Milestone> getProjectMilestones( Integer aProjectId ){
-    return pc.getProjectMilestones( aProjectId ); 
+  public Comments getComments(Integer id) {
+      return pc.getComments(id);
   }
   
-  public boolean newMilestone( Milestone aMilestone ){
-    return pc.newMilestone( aMilestone );
+  public List<Comments> getAllComments() {
+      return pc.getAllComments();
   }
   
-  public Milestone getMilestone( Integer aMilestoneId ){
-    return pc.getMilestone( aMilestoneId );
+  public List<Comments> getAllComments(Integer projID) {
+      List<Comments> comments = new ArrayList<Comments>();
+      for(Comments c : pc.getAllComments(projID)) {
+          if(c.getCommentStatus() == 0) {
+              comments.add(c);
+          }
+      }
+      return comments;
   }
   
-  public boolean updateMilestone( Milestone aMilestone ){
-    return pc.updateMilestone( aMilestone );
+  public List<Comments> getAllActiveComments(Integer projID) {
+    List<Comments> comments = new ArrayList<Comments>();
+    for(Comments c : pc.getAllComments(projID)) {
+      if(c.getCommentStatus() == 1) {
+        comments.add(c);
+      }
+    }
+    return comments;
+  } 
+  
+  public boolean updateComments(Comments aComments) {
+      return pc.updateComments(aComments);
   }
   
-  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
-    return pc.getTeamProjectRankings( aTeamId );
+  public List<Accounts> getAllAccounts() {
+      return pc.getAllAccounts();
   }
   
-  public int countSemesterTeams( String aPeriod ){
-    return pc.countSemesterTeams( aPeriod ).intValue();
+  public boolean removeAccounts(Accounts a) {
+    return pc.removeAccounts(a);
+  }  
+
+  public boolean updateAccounts(Accounts a) {
+    return pc.updateAccounts(a);
+  } 
+  
+  public List<Teams> getUnMatchedTeams( Integer aStatus ){
+      return pc.getUnMatchedTeams(aStatus);
   }
   
-  //Edouard
-  public List<Teams> getAvailableTeams(int aStatus){
-      return pc.getAvailableTeams(aStatus);
-  }
   public Teams getProjectTeam(int aId){
       return pc.getProjectTeam(aId);
   }
-  /*
-  public List<Milestone> getUpcomingMilestones(){
-      return pc.getUpcomingMilestones();
-  }
-  */
+
   public boolean updateProjectFile(Projectfile aProjectfile){
       return pc.updateProjectFile(aProjectfile);
   }
+  
   public boolean newComment(Comments aComment){
       return pc.newComment(aComment);
   }
+  
+  //Edouard
+  public boolean updateCompany(Company aCompany){
+      return pc.updateCompany(aCompany);
+  }
+  //Edouard
+  public boolean removeProjectFile(Projectfile file){
+      return pc.removeProjectFile(file);
+  }
+  //Edouard
+  public Number checkProjectComments(int id){
+      return pc.checkProjectComments(id);
+  }
+  //Edouard
+  public List<Company> getAllCompanies(){
+      return pc.getAllCompanies();
+  }
+  //Edouard
+  public List<Teams> getAllTeams(){
+      return pc.getAllTeams();
+  }
 }
- 

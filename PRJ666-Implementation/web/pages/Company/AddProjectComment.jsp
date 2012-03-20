@@ -4,12 +4,11 @@
     Author     : Edouard
 --%>
 
-<%@page import="seneca.projectManagement.entity.Comments"%>
-<%@page import="seneca.projectManagement.entity.Projects"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
@@ -23,15 +22,34 @@
     Comments comment;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
+
         if( proj!= null && proj.getProjectId() > 0){
+            
             if(proj.getStatus().equals("PA")){
-                comment = new Comments();
-                comment.setProjectId(proj.getProjectId());
-                comment.setCommentStatus(0);
-                comment.setCommentDescription("");
-            }else{id="x";}
-        }else{id="";}
-    }else{id="";}
+                
+                
+                if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
+                    
+                    id="z"; //Comments already exist.
+                    
+                }else{
+                    comment = new Comments();
+                    comment.setProjectId(proj.getProjectId());
+                    comment.setCommentStatus(0);
+                    comment.setCommentDescription(""); 
+                }
+                
+            }else{
+                id="x"; //Project is not yet in PA status.
+            }
+            
+        }else{
+            id="q"; // Project does not exist.
+        }
+        
+    }else{
+        id=""; // The id is either null or empty.
+    }
     
 %>
 
@@ -50,7 +68,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -61,6 +81,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -97,10 +128,8 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="UpcomingMilestones.jsp">Upcoming Milestones</a></li>
             <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
@@ -111,17 +140,49 @@
         </td>
       </tr>
       <tr>
-        <td>
-            <%
+        <td><%
             if(id.equals("x")){
-                %><h1>This project is not yet available for commentary.</h1><%
+                %>
+                <h1>This project is not yet available for commentary.</h1>
+                <%
+            }else if(id.equals("q")){
+                %>
+                <h1>The project used to get to this page is not valid.</h1>
+                <%
+            }else if(id.equals("z")){
+                 %>
+                 <h1>A comment has already been submitted for this project.</h1>
+                 <%
             }else if(id.equals("")){
-                %><h1>This comment is not associated with a valid project.</h1><%
+                %>
+                <h1>Cant add a comment to this project.</h1>
+                <%                
             }else{
                 %>
                 <h2>Please enter a comment bellow for:<br /> <%=proj.getPrjName()%></h2>
+                <strong style="color:red;">
+                    <%
+                        if(request.getParameter("commentfail")!=null){
+                            if(request.getParameter("commentfail").equals("1")){
+                                %>There was an error when submitting the comment.<%
+                            }
+                        }
+                    %>                               
+                </strong>
+                <p><%=userBean.checkProjectComments(proj.getProjectId())%></p>
                 <form action="../validation/processOther.jsp" method="post">
                     <textarea name="commentDescription" rows="8" cols="50"></textarea>
+                    <strong style="color:red;">
+                        <%
+                            if(request.getParameter("cdesc")!=null){
+                                if(request.getParameter("cdesc").equals("1")){
+                                    %>Comment Field cant be empty!!<%
+                                }else if (request.getParameter("cdesc").equals("2")){
+                                    %>Comment cant exceed 500 characters in length!<%
+                                }
+                            }
+                        %>                               
+                    </strong>
                     <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
                     <input type="hidden" name="AddComment" value="true" /><br />
                     <input type="submit" value="Submit for Approval" />

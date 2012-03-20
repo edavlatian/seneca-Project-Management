@@ -1,31 +1,40 @@
 <%-- 
-    Document   : ViewAvailableTeams
-    Created on : Feb 29, 2012, 4:00:23 PM
-    Author     : Edouard
+    Document   : RemoveProjectFile
+    Created on : Mar 19, 2012, 12:23:42 PM
+    Author     : win7user
 --%>
+
 <%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.Teams"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
-        }
+        }            
     }
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+    
+    String id = request.getParameter("id");
+    Projectfile projFile = new Projectfile();
+    if( id!=null && !id.equals("")){
+        projFile = userBean.getAProjectFile(Integer.parseInt(id));
+        if( projFile != null && projFile.getProjectId() > 0){
+            //Something Goes here
+        }else{ id=""; }                         
+    }else{ id=""; }
+ %>
+ <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Available Teams</title>
+        <title>Manage Project File: <%=projFile.getFileName()%></title>
     </head>
     <body>
     <table> 
@@ -34,7 +43,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -45,6 +56,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -81,10 +103,8 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
             <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="UpcomingMilestones.jsp">Upcoming Milestones</a></li>
             <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
@@ -96,33 +116,26 @@
       </tr>
       <tr>
         <td>        
-        <h1>Currently Available Teams</h1>
-        <table>
-            <tr>
-                <th>Team Name</th>
-                <th>Description</th>
-            </tr>
-                <% 
-                List<Teams> teamlist = userBean.getAvailableTeams(1);
-                if(teamlist.size() > 0){
-                    for(int i = 0; i<teamlist.size();i++){
-                        Teams temp = new Teams();
-                        temp = teamlist.get(i);
-                        %>
-            <tr>
-               <td><a href="../Team/TeamPage.jsp?id=<%=temp.getTeamId()%>"><%=temp.getTeamName()%></a></td>
-               <td><%=temp.getTeamDescription()%></td>
-            </tr>
-                        <%
-                    }//for
-                }
-                else{
-                    %><tr><td colspan="2">Sorry, there are currently no available teams.</td></tr><%
-                }
-                %>         
-        </table>
+            <h1>Delete Project File?</h1>
+            <p>If you are sure you want to delete the file below, please click the delete button. <br />Otherwise you may navigate elsewhere.</p>
+            <strong>File: <a href="<%=projFile.getTheFile() %>"><%=projFile.getFileName() %></a></strong><br />
+            <strong>Description: </strong><em><%=projFile.getFileDescription() %></em> <br /><br />
+            <strong style="color:red;">
+                <%
+                    if(request.getParameter("filefailed")!=null){
+                        if(request.getParameter("filefailed").equals("1")){
+                            %>There was an error when removing the file.<%
+                        }
+                    }
+                %>                               
+            </strong> 
+            <form method="post" action="../validation/processFile.jsp">
+                <input type="hidden" name="fileId" value="<%=projFile.getFileId()%>" />
+                <input type="hidden" name="RemoveProjectFile" value="true" />            
+                <input type="submit" value="Delete" />
+            </form>
         </td>
-      </tr>             
-    </table>
+      </tr>
+    </table>        
     </body>
 </html>

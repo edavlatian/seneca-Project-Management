@@ -20,12 +20,16 @@ public class PersistenceController extends EntityControllerBase {
   public boolean addAccount( Accounts aAccount ){
     em = getEntityManager();
     
-    em.getTransaction().begin();
-    em.persist( aAccount );
-    em.getTransaction().commit();
-    em.close();
-  
-    return true;
+    try{
+      em.getTransaction().begin();
+      em.persist( aAccount );
+      em.getTransaction().commit();
+      em.close();
+      return true;
+    } catch (Exception e) {
+      e.printStackTrace();
+      return false;
+    }
   }
   
   public boolean addTeam( Accounts aAccount ){
@@ -77,28 +81,61 @@ public class PersistenceController extends EntityControllerBase {
     return (Teams) q.getSingleResult();
   }
   
-  public Accounts getAccount( String aUserIdentifier ){
+  public Teams getTeamById( Integer aTeamId ){
     em = getEntityManager();
     
-    Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
-            aUserIdentifier );
-    
-    return (Accounts) q.getSingleResult();
+    em.getTransaction().begin();
+    return em.find(Teams.class, aTeamId);
   }
+  
+  public Accounts getAccount( String aUserIdentifier ){
+    Accounts value = null;
+    try {
+        em = getEntityManager();
+        Query q = em.createNamedQuery( "Accounts.findByUserIdentifier" ).setParameter( "userIdentifier", 
+                aUserIdentifier );
+        value = (Accounts) q.getSingleResult();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    
+    return value;
+  }
+  
+  public Accounts getAccount(Integer id) {
+    em = getEntityManager();   
+    em.getTransaction().begin();
+    
+    return em.find(Accounts.class, id);
+  } 
   
   public Teammember getLeader( int aTeamId ){
-    em = getEntityManager();
+    try{
+      em = getEntityManager();
     
-    Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
-            .setParameter("teamId", aTeamId);
+      Query q = em.createQuery("SELECT t FROM Teammember t WHERE t.teamId = :teamId AND t.teamLeader = 1")
+              .setParameter("teamId", aTeamId);
     
-    return (Teammember) q.getSingleResult();
+      return (Teammember) q.getSingleResult();
+    }
+    catch (Exception e){
+      return null;
+    }
   }
   
-  public List<Teammember> getAllTeamMembers( Integer aTeamId ){
+  public List<Teammember> getTeamMembers( Integer aTeamId ){
     em = getEntityManager();
     
     Query q = em.createQuery( "SELECT t FROM Teammember t where t.teamId = :teamId AND t.teamLeader = 0" )
+            .setParameter( "teamId", aTeamId );
+    
+    return (List<Teammember>)q.getResultList();
+  }
+  
+  public List<Teammember> getAllMembers( Integer aTeamId ){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT t FROM Teammember t where t.teamId = :teamId" )
             .setParameter( "teamId", aTeamId );
     
     return (List<Teammember>)q.getResultList();
@@ -114,6 +151,13 @@ public class PersistenceController extends EntityControllerBase {
     em.close();
     
     return true;
+  }
+  
+  public Teammember getMember( Integer aMemberId ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    return em.find(Teammember.class, aMemberId);
   }
   
   public boolean updateTeam( Teams aTeam ){
@@ -222,8 +266,11 @@ public class PersistenceController extends EntityControllerBase {
     
     Query q = em.createNamedQuery("Projects.findByTeamId")
             .setParameter( "teamId", aTeamId );
-    
-    return (Projects) q.getSingleResult();
+    try {
+      return (Projects) q.getSingleResult();
+    } catch (Exception e) {
+      return null; 
+    }
   }
   
   public List<Projectfile> getProjectFiles( Integer aProjectId ){
@@ -268,15 +315,6 @@ public class PersistenceController extends EntityControllerBase {
     
     return (List<Projects>)q.getResultList();
   }
-  
-  public List<Projects> getAvailableProjects( String aStatus ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "SELECT p FROM projects p WHERE p.status = :status ORDER BY p.projectId ASC")
-            .setParameter( "status", aStatus );
-    
-    return (List<Projects>)q.getResultList();
-  }
 
   public List<Projects> getInstructorProjects( Integer aInstructorId ){
     em = getEntityManager();
@@ -299,57 +337,6 @@ public class PersistenceController extends EntityControllerBase {
     return true;
   }
   
-  public List<Milestone> getProjectMilestones( Integer aProjectId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Milestone.findByProjectId" )
-            .setParameter( "projectId", aProjectId );
-    
-    return (List<Milestone>)q.getResultList();
-  }
-
-  public boolean newMilestone( Milestone aMilestone ){
-    em = getEntityManager();
-    
-    em.getTransaction().begin();
-    em.persist( aMilestone );
-    em.getTransaction().commit();
-    
-    em.close();
-    
-    return true;
-  }
-  
-  public Milestone getMilestone( Integer aMilestoneId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "Milestone.findByMilestoneId" )
-            .setParameter( "milestoneId", aMilestoneId );
-    
-    return (Milestone)q.getSingleResult();
-  }
-  
-  public boolean updateMilestone( Milestone aMilestone ){
-    em = getEntityManager();
-    
-    em.getTransaction().begin();
-    em.merge( aMilestone );
-    em.getTransaction().commit();
-    
-    em.close();
-    
-    return true;
-  }
-  
-  public List<Teamprojectranking> getTeamProjectRankings( Integer aTeamId ){
-    em = getEntityManager();
-    
-    Query q = em.createNamedQuery( "SELECT m from Teamprojectranking m WHERE m.teamId = :teamId ORDER BY m.projectId ASC")
-            .setParameter( "teamId", aTeamId );
-    
-    return (List<Teamprojectranking>) q.getResultList();
-  }
-  
   public Number countSemesterTeams( String aPeriod ){
     em = getEntityManager();
     
@@ -358,13 +345,58 @@ public class PersistenceController extends EntityControllerBase {
     
     return (Number)q.getSingleResult();
   }
+
+  public Comments getComments(Integer id) {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery("Comments.findByCommentId")
+            .setParameter("commentId", id);
+    
+    return (Comments) q.getSingleResult();
+  }
+  
+  public List<Comments> getAllComments() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Comments.findAll" );
+    
+    return (List<Comments>) q.getResultList();
+  }
+  
+  public List<Comments> getAllComments(Integer projID) {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Comments.findByProjectId" ).setParameter("projectId", projID);
+    
+    return (List<Comments>) q.getResultList();
+  }
+  
+  public boolean updateComments( Comments aComments ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.merge( aComments );
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
+  
+  public List<Accounts> getAllAccounts() {
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Accounts.findAll" );
+    
+    return (List<Accounts>) q.getResultList();
+  }
   
   //Edouard
-  public List<Teams> getAvailableTeams(int aStatus){
+  public List<Teams> getUnMatchedTeams( Integer aStatus ){
       em = getEntityManager();
       
-      Query q = em.createNamedQuery("Teams.findByTeamStatus")
-              .setParameter( "teamStatus", aStatus );
+      Query q = em.createQuery("SELECT t FROM Teams t WHERE t.projectId IS NULL AND t.teamStatus = :status")
+              .setParameter( "status", aStatus );
       
       return (List<Teams>)q.getResultList();
   } 
@@ -403,13 +435,89 @@ public class PersistenceController extends EntityControllerBase {
     
     return true;
   }
-  /*
-  public List<Milestone> getUpcomingMilestones(){
-      em = getEntityManager();
-
-      Query q = em.createQuery( "SELECT m FROM Milestone m WHERE m.dueDate >= '2012-03-05' AND m.dueDate <= '2012-04-05' ");
-
-      return (List<Milestone>)q.getResultList();
-  }*/
   
+  public boolean removeAccounts(Accounts a) {
+      boolean ret = false;
+      em = getEntityManager();
+      try {
+          em.getTransaction().begin();
+          em.remove(em.merge(a));
+          em.getTransaction().commit();
+          ret = true;
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      em.close();
+      return ret;
+  }
+  
+  public boolean updateAccounts(Accounts a) {
+        boolean ret = false;
+        em = getEntityManager();
+        try {
+            em.getTransaction().begin();
+            em.merge( a );
+            em.getTransaction().commit();
+            em.close();
+            ret = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ret;
+  }
+//Edouard
+  public boolean updateCompany(Company aCompany){
+    boolean ret = false;
+    em = getEntityManager();
+    try{
+        em.getTransaction().begin();
+        em.merge( aCompany );
+        em.getTransaction().commit();
+        em.close();
+        ret = true;
+    } catch (Exception e){
+        e.printStackTrace();
+    }
+    return ret;
+  }
+//Edouard
+  public boolean removeProjectFile(Projectfile file) {
+      boolean ret = false;
+      em = getEntityManager();
+      try {
+          em.getTransaction().begin();
+          em.remove(em.merge(file));
+          em.getTransaction().commit();
+          ret = true;
+      } catch (Exception e) {
+          e.printStackTrace();
+      }
+      em.close();
+      return ret;
+  }
+  //Edouard
+  public Number checkProjectComments(int id){
+      em = getEntityManager();
+      Query q = em.createQuery( "SELECT COUNT(a.projectId) FROM Comments a WHERE a.projectId=:id ")
+            .setParameter( "id", id );
+
+      return (Number)q.getSingleResult();
+  }
+  //Edouard
+  public List<Company> getAllCompanies(){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Company.findAll" );
+    
+    return (List<Company>) q.getResultList();
+  }
+  //Edouard
+  public List<Teams> getAllTeams(){
+    em = getEntityManager();
+    
+    Query q = em.createNamedQuery( "Teams.findAll" );
+    
+    return (List<Teams>) q.getResultList();
+  }  
 }

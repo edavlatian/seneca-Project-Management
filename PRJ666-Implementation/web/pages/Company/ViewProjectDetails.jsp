@@ -3,16 +3,14 @@
     Created on : Feb 29, 2012, 4:39:22 PM
     Author     : Edouard
 --%>
+
 <%@page import="java.util.List"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="seneca.projectManagement.entity.Teams"%>
-<%@page import="seneca.projectManagement.entity.Projects"%>
-<%@page import="seneca.projectManagement.entity.Milestone"%>
-<%@page import="seneca.projectManagement.entity.Projectfile"%>
+<%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
 <%
-    if(userBean.isLogged() == true) {
+    if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
             session.setAttribute("Error", "You don't have permission to access the company page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
@@ -25,7 +23,6 @@
     String id = request.getParameter("id");
     Projects proj =  new Projects();
     Teams team = new Teams();
-    List<Milestone> projMilestones;
     List<Projectfile> projFiles;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
@@ -55,7 +52,9 @@
           <table width="100%">
             <tr>
               <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></td>
+              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
+                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
+              </td>
             </tr>
           </table>
         </td>
@@ -66,6 +65,17 @@
           <br/>
           <img src="../resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
+          <%
+          if(userBean != null) {
+            if(userBean.isLogged() == true) {
+              Accounts temp_a = userBean.getLoggedUser();
+              out.println("<hr width='95%' align='left'/>");
+              Company temp_c = userBean.getCompany();
+              out.print("Hello, Company " + temp_c.getCompanyName());
+              out.println("<hr width='95%' align='left'/>");
+            }
+          }
+          %>
           <div style="margin:2px; width:200px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
@@ -102,10 +112,8 @@
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
             <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ViewAvailableTeams.jsp">Current Semester Teams</a></li>
             <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="UpcomingMilestones.jsp">Upcoming Milestones</a></li>
             <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
@@ -118,9 +126,33 @@
       <tr>
         <td>       
         <% if(id!=""){
-           projMilestones = userBean.getProjectMilestones(proj.getProjectId());
            projFiles = userBean.getProfileFiles(proj.getProjectId());
+           
    %>
+            <strong style="color:red;">
+                <%
+                    if(request.getParameter("commentsubmit")!=null){
+                        if(request.getParameter("commentsubmit").equals("yes")){
+                            %>A comment was submitted for approval.<%
+                        }
+                    }
+                    if(request.getParameter("fileadded")!=null){
+                        if(request.getParameter("fileadded").equals("yes")){
+                            %>File was successfully added.<%
+                        }
+                    }
+                    if(request.getParameter("fileupdated")!=null){
+                        if(request.getParameter("fileupdated").equals("yes")){
+                            %>File was successfully updated.<%
+                        }
+                    }    
+                    if(request.getParameter("fileremoved")!=null){
+                        if(request.getParameter("fileremoved").equals("yes")){
+                            %>File was successfully removed.<%
+                        }
+                    }                   
+                %>                               
+            </strong>    
         <h1><%=proj.getPrjName()%></h1>
         <h2>Status: <%=proj.getStatus()%></h2>
         <p>Description: <%=proj.getDescription()%></p>
@@ -133,6 +165,7 @@
                     <th>Description</th>
                     <th>The File</th>
                     <th>Edit</th>
+                    <th>Remove</th>
                 </tr>
                 <%
                 for(int i=0; i < projFiles.size(); i++){
@@ -143,6 +176,7 @@
                         <td><%=temp.getFileDescription()%></td>
                         <td><a href="<%=temp.getTheFile()%>"><%=temp.getFileName()%></a></td>
                         <td><a href="ManageProjectFile.jsp?id=<%=temp.getFileId()%>">EDIT</a></td>
+                        <td><a href="RemoveProjectFile.jsp?id=<%=temp.getFileId()%>">DELETE</a></td>
                     </tr>
                     <%
                 }
@@ -153,45 +187,20 @@
             </table>
                <%    
         }else{
-            %><p> There are no files associated with this project</p><%
+            %><p> There are no files associated with this project</p>
+             <% if(!proj.getStatus().equals("PA")){%>
+            <a href="AddProjectFile.jsp?id=<%=id%>">Add Project File</a></p>
+            <%}            
         }
         %>
         <% if(team!=null && team.getTeamId()!=0){%>
-        <p>Assigned Team: <a href="../Team/TeamPage.jsp?id=<%=team.getTeamId()%>"><%=team.getTeamName()%></a></p>
+        <p>Assigned Team: <a href="#"><%=team.getTeamName()%></a></p>
         <%}else{%>
         <p><strong>Currently no team assigned</strong></p>
         <%}
-        if(!projMilestones.isEmpty()){
-            %>
-            <table id="milestone_table">
-              <tr>
-                <th colspan="3">Milestones</th>
-              </tr>
-              <tr>
-                  <th>Status</th>
-                  <th>Description</th>
-                  <th>Due Date</th>
-              </tr>
-              <%
-              for(int i = 0; i < projMilestones.size(); i++){
-               Milestone temp = new Milestone();
-               temp = projMilestones.get(i);
-               String s = new SimpleDateFormat("yyyy/MM/dd").format(temp.getDueDate());
-                %><tr>
-                    <td><%=temp.getMilestoneStatus()%></td>
-                    <td><%=temp.getDescription()%></td>
-                    <td><%=s%></td>
-                  </tr><%
-            }
-            %>
-            </table>
-            <%
-        }else{
-            %><p>Currently there are no milestones associated with this project</p><%
-        }
-            if(proj.getStatus().equals("PA")){
-            %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
-            }
+          if(proj.getStatus().equals("PA")){
+        %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
+          }
         }else{
         %><h1>This project does not appear to be valid or does not exist.</h1><%
         }
