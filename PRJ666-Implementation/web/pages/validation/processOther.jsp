@@ -4,6 +4,7 @@
     Author     : matthewschranz
 --%>
 <%@page import="seneca.projectManagement.entity.*"%>
+<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.utils.Email"%>
 
 <%@ page
@@ -91,6 +92,21 @@
         }else{
             response.sendRedirect("../Company/EditProjectInfo.jsp?id="+proj.getProjectId()+errors);
         }                                                 
+    }else if("true".equals(request.getParameter("RemoveProject"))){
+        Projects proj = userBean.getProject(Integer.parseInt(request.getParameter("projectId")));
+        List <Projectfile> projFiles = userBean.getProfileFiles(proj.getProjectId());  
+        if(userBean.removeProject(proj) == false){
+            response.sendRedirect("../Company/RemoveProject.jsp?id="+proj.getProjectId()+"&removefail=1");
+        }else{
+            if(projFiles.size() > 0){
+                for(int i = 0; i < projFiles.size();i++){
+                    userBean.removeProjectFile(projFiles.get(i));
+                }
+            }
+            response.sendRedirect("../Company/ViewCompanyProjects.jsp?id="+proj.getProjectId()+"&projectdeleted=yes" );       
+        }
+
     }
+    %>    
 
 %>

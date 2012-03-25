@@ -167,7 +167,8 @@
         if(proj.getStatus().equals("PE")){
             %>
             <p><strong style="color:red;">This project has not yet been approved.<br/>You are able to edit the project details before it is approved</strong></p>
-            <a href="EditProjectInfo.jsp?id=<%=proj.getProjectId()%>">Click here to edit</a>
+            <a href="EditProjectInfo.jsp?id=<%=proj.getProjectId()%>">Click here to edit</a><br/>
+            <a href="RemoveProject.jsp?id=<%=proj.getProjectId()%>">Click here to delete</a>            
             <%
         }
         %>

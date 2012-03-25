@@ -312,4 +312,8 @@ public class UserSession {
   public List<Teams> getAllTeams(){
       return pc.getAllTeams();
   }
+  //Edouard
+  public boolean removeProject(Projects aProject){
+      return pc.removeProject(aProject);
+  }  
 }

@@ -2,12 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/1">
         <file>
-            <url>web/pages/Team/manageMilestones.jsp</url>
-            <line>129</line>
-        </file>
-        <file>
             <url>web/pages/Team/createMilestone.jsp</url>
             <line>119</line>
+        </file>
+        <file>
+            <url>web/pages/Team/manageMilestones.jsp</url>
+            <line>129</line>
         </file>
     </editor-bookmarks>
 </project-private>

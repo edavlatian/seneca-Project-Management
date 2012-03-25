@@ -3,8 +3,6 @@
     Created on : Mar 20, 2012, 4:41:05 PM
     Author     : Edouard
 --%>
-<%@page import="java.util.List"%>
-<%@page import="java.text.SimpleDateFormat"%>
 <%@page import="seneca.projectManagement.entity.*"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
