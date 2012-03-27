@@ -4,6 +4,9 @@
     Author     : matthewschranz
 --%>
 
+<%@page import="seneca.projectManagement.entity.Company"%>
+<%@page import="java.util.List"%>
+<%@page import="seneca.projectManagement.entity.Projects"%>
 <%@page import="seneca.projectManagement.entity.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
@@ -25,20 +28,20 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Instructor</title>
+    <title>Instructor - Update Projects</title>
+    <script language="JavaScript">
+      function setProject(x) {
+        document.form1.Project.value = x;
+        document.form1.submit();
+      }
+    </script>
   </head>
   <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;"></td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -98,13 +101,73 @@
 		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/postNews.jsp">Post<br/>News</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
       </tr>
       <tr>
         <td>
-          <h1>This is a Place Holder. More to Come.</h1>  
+          <h3 class="title">Update Project Status</h3>
+          <form name="form1" method="POST" action="../Instructor/changeProjectStatus.jsp">
+            <%
+              Projects p = null;
+              Company c = null;
+              List<Projects> projects = userBean.getApprovedMatchedProjects();
+              if(projects.size() > 0) {
+                Integer beg = 0;
+                Integer items = 5;
+                try {
+                  items = new Integer(request.getParameter("items"));
+                }
+                catch (Exception e) {}
+                try {
+                  beg = new Integer(request.getParameter("beg")) * items;
+                }
+                catch (Exception e) {}
+                for(int i = beg; i < beg + items && i < projects.size(); i++) {
+                  p = projects.get(i);
+                  c = userBean.getCompanyByID(p.getCompanyId());
+                  String status = p.getStatus().equals("AP") ? "Set Project to Available" : "Proceed Project to PRJ666";
+                  out.print("<div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>");
+                  out.println("<div style='float: left'>");
+                  out.println(c.getCompanyName());
+                  out.print("</div>");
+                  out.println("<div style='float: right'>");
+                  out.println("<input type='button' value='" + status + "' onclick='setProject(" + p.getProjectId() + ")'/>");
+                  out.print("</div>");
+                  out.print("<div style='clear: both'></div>");
+                  out.print("</div>");
+                  out.println("<div style='background-color: skyblue; padding: 10px'>");
+                  out.println("<b>Project Name:</b><br/>" + p.getPrjName() + "");
+                  out.println("</div>");
+                }
+            %>
+            <div style="border-style: solid; border-color: #6F93C9"> </div>
+            <%
+                out.println("<div style='float: left'><input type='hidden' name='Project' /></div>");
+                out.println("<div style='float: right'>");
+                int pages = (int) Math.ceil( (double) projects.size() / items);
+                out.println(" Page(s): ");
+                for(int i = 0; i < pages; i++) {
+                  out.println("<a href='updateProjects.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
+                }
+                out.println("<a href='updateProjects.jsp?items=" + projects.size() + "'>View All</a>");
+                out.println("</div>");
+                out.print("<div style='clear: both'></div>");
+                if(session.getAttribute("updateFail") != null) {
+                  out.println("<span style='color: red'>" + session.getAttribute("updateFail") + "</span>");
+                  session.removeAttribute("updateFail");
+                }
+                else if(session.getAttribute("updateSuccess") != null){
+                  out.println("<span style='color: green'>" + session.getAttribute("updateSuccess") + "</span>");
+                  session.removeAttribute("updateSuccess");
+                }
+              } else {
+                out.println("<h1>No project that are Approved or Matched.</h1>");
+              }
+            %>
+            </form>
         </td>
       </tr>             
     </table>

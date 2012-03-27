@@ -11,20 +11,14 @@
   <head>
     <link rel="stylesheet" type="text/css" href="resources/css/pageStuff.css" />
     <script type="text/javascript" src="resources/js/twitter.js"></script>
-    <title>PRJ566 - Home</title>
+    <title>PRJ566 - Login</title>
   </head>
   <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -69,16 +63,71 @@
         <td style="background-image: url('resources/images/header_bg.jpg'); height: 1px;">
           <div style="float: right;">
             <ul>
-              <%
-                if(userBean.isLogged()){
-              %>
-              <li><a href="logout.jsp">Logout</a></li>
-              <%
-                } else {
-              %>
-                <li><a href="archived.jsp">Archived Projects</a></li>
-                <li><a href="Company/AgreementForm.jsp">Company<br/>Registration</a></li>
-             <% } %>
+          <% 
+            if(userBean.isLogged()) {
+              if(userBean.getLoggedUser().getUserRole().equals("CR")){
+          %>
+			      <li><a href="#">Current Semester Teams</a></li>
+		        <li><a href="#">Create New Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="#">Edit Company Info</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("TL")){
+                if(userBean.getTeam().getHasRegistered() == 1){
+          %>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Team<br/>Project</a></li>
+          <%
+                }
+                else {
+                  response.sendRedirect("Team/publishTeamPage.jsp");  
+                }
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("IN")){
+          %>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/postNews.jsp">Post<br/>News</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("SU")){   
+          %>
+            <li><a href="/PRJ666-Implementation/pages/Supervisor/ProjectUpdate.jsp">Change Project Status to Past</a></li>
+		        <li><a href="/PRJ666-Implementation/pages/Supervisor/AvailableProjects.jsp">Current Semester Available Projects</a></li>
+          <%
+              }
+              else if(userBean.getLoggedUser().getUserRole().equals("AD")){
+		      %>
+            <li><a href="/PRJ666-Implementation/pages/Admin/HomeAdmin.jsp">Admin Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Admin/PendingComments.jsp">Pending Comments</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Admin/AvailableProjects.jsp">Available Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Admin/ProjectUpdate.jsp">Change Project Status to Past</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Admin/ManageAccounts.jsp">Manage Site Accounts</a></li>
+          <%
+              }
+          %>
+          </ul>
+          <div style="float: right;">
+            <ul>
+              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+              <li><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+              <li><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
+          <%
+            }
+            else {
+          %>
+              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+              <li><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
+          <% } %>
             </ul>
           </div>
         </td>

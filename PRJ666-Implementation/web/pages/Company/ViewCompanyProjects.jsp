@@ -31,15 +31,9 @@
     <body>
       <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -94,9 +88,10 @@
         </td>      
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Information</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -107,15 +102,6 @@
       </tr>
       <tr>
         <td> 
-            <strong style="color:red;">
-                <%
-                    if(request.getParameter("projectdeleted")!=null){
-                        if(request.getParameter("projectdeleted").equals("yes")){
-                            %>The pending project was deleted.<%
-                        }
-                    }            
-                %> 
-            </strong>    
             <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
         <table>
         <tr>

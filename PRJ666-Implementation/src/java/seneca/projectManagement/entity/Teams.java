@@ -44,13 +44,16 @@ public class Teams implements Serializable {
   @Size(max = 20)
   @Column(name = "teamName")
   private String teamName;
-  @Size(max = 120)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "teamConstraints")
   private String teamConstraints;
-  @Size(max = 400)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "teamDescription")
   private String teamDescription;
-  @Size(max = 200)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "teamLogo")
   private String teamLogo;
   @Column(name = "projectId")

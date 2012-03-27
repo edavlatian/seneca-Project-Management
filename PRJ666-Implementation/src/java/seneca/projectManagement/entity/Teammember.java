@@ -48,10 +48,12 @@ public class Teammember implements Serializable {
   @Size(min = 1, max = 50)
   @Column(name = "email")
   private String email;
-  @Size(max = 200)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "memberImage")
   private String memberImage;
-  @Size(max = 250)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "description")
   private String description;
   @Column(name = "teamLeader")

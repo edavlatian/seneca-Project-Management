@@ -1,13 +1,11 @@
 <%-- 
-    Document   : matching
-    Created on : Mar 13, 2012, 8:44:31 PM
+    Document   : changeProjectStatus
+    Created on : Mar 22, 2012, 10:02:24 PM
     Author     : matthewschranz
 --%>
 
-<%@page import="seneca.projectManagement.entity.Teammember"%>
 <%@page import="java.util.Calendar"%>
-<%@page import="seneca.projectManagement.entity.Teams"%>
-<%@page import="java.util.List"%>
+<%@page import="seneca.projectManagement.entity.Projects"%>
 <%@page import="seneca.projectManagement.entity.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
 <jsp:setProperty name="userBean" property="*" />
@@ -29,13 +27,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Instructor - Matching</title>
-    <script>
-      function setTeam(x) {
-        document.form1.Team.value = x;
-        document.form1.submit();
-      }
-    </script>
+    <title>Instructor - Update Project</title>
   </head>
   <body>
     <table> 
@@ -98,6 +90,7 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
 		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
@@ -109,68 +102,71 @@
       </tr>
       <tr>
         <td>
-          <h3 class="title">Current Active Semester Teams</h3>
-          <form name="form1" method="POST" action="../Instructor/matchTeam.jsp">
+          <%
+            String pId = request.getParameter("Project") != null ? request.getParameter("Project") : session.getAttribute("Project").toString();
+            Projects p = userBean.getProject(new Integer(pId));
+            System.out.println("got project");
+            if(p.getStatus().equals("AP")){
+              p.setStatus("AV");
+              
+              if(userBean.updateProject(p)){
+                session.setAttribute("updateSuccess", "Successfully updated the status of project " + p.getPrjName() + ".");
+                response.sendRedirect("updateProjects.jsp");
+              }
+              else {
+                session.setAttribute("updateFail", "Updated failed. Please try changing it manually.");
+                response.sendRedirect("updateProjects.jsp");
+              }
+            }
+            else if(p.getStatus().equals("MA")){
+              System.out.println(pId);
+          %>
+          <form action="../validation/processInstructor.jsp" method="post">
+            <h3 class="title">Set Year and Semester for Implementation Date</h3>
+            <div style="padding: 5px">
+              <div style="float: left; width: 150px">Semester Period: </div>
+              <div style="float: left">
+                <select name="semesterPeriod">
+                  <option value="0" selected>Select a Period</option>
+                  <option value="FALL">Fall</option>
+                  <option value="SUM">Summer</option>
+                  <option value="WIN">Winter</option>
+                </select>
+              </div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Year: </div>
+              <div style="float: left">
+                <select name="year">
+                  <option value="0">Select a Year</option>
+                  <%
+                    Calendar cal = Calendar.getInstance();
+                    int year = 0;
+                 
+                    for(int i = 0; i < 5; i++){
+                      year = cal.get(Calendar.YEAR) + i;
+                      out.println("<option value='" + year + "'>" + year + "</option>");
+                    }
+                  %>
+                </select>
+              </div>
+            </div>
             <%
-                Teams t = null;
-                List<Teams> tms = userBean.getUnMatchedTeams(1);
-                Teammember leader = null;
-                if(tms.size() > 0) {
-                    Integer beg = 0;
-                    Integer items = 8;
-                    try {
-                        items = new Integer(request.getParameter("items"));
-                    }
-                    catch (Exception e) {}
-                    try {
-                        beg = new Integer(request.getParameter("beg")) * items;
-                    }
-                    catch (Exception e) {}
-                    for(int i = beg; i < beg + items && i < tms.size() ; i++) {
-                        t = tms.get(i);
-                        leader = userBean.getLeader(t.getTeamId());
-                        out.print("<div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>");
-                          out.println("<div style='float: left'>");
-                            out.println(t.getTeamName());
-                          out.print("</div>");
-                          out.println("<div style='float: right'>");
-                            out.println("<input type='button' value='Match This Team' onclick='setTeam(" + t.getTeamId() + ")' />");
-                          out.print("</div>");
-                          out.print("<div style='clear: both'></div>");
-                        out.print("</div>");
-                        out.println("<div style='background-color: skyblue; padding: 10px'>");
-                          out.println("<div style='float: left; width: 150px'><b>Team Leader:</b></div>");
-                          out.println("<div style='float: left; width: 750px'>" + leader.getFirstName() +
-                                  " " + leader.getLastName() + "</div>");
-                          out.print("<div style='clear: both'></div>");
-                        out.println("</div>");
-                    }
+              if(session.getAttribute("proceedFail") != null) {
+                out.println("<br/><div style='color: red'>" + session.getAttribute("proceedFail") + "</div>");
+                session.removeAttribute("proceedFail");
+              }
             %>
-            <div style="border-style: solid; border-color: #6F93C9"> </div>
-            <%
-                    out.println("<div style='float: left'><input type='hidden' name='Team' /></div>");
-                    out.println("<div style='float: right'>");
-                    int pages = (int) Math.ceil( (double) tms.size() / items);
-                    out.println(" Page(s): ");
-                    for(int i = 0; i < pages; i++) {
-                        out.println("<a href='matching.jsp?beg=" + i + "&items=" + items + "'>"+ (i + 1) + "</a> | ");
-                    }
-                    out.println("<a href='matching.jsp?items=" + tms.size() + "'>View All</a>");
-                    out.println("</div>");
-                    out.print("<div style='clear: both'></div>");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
-                    else if(session.getAttribute("matchSuccess") != null){
-                      out.println("<span style='color: green'>" + session.getAttribute("matchSuccess") + "</span>");
-                      session.removeAttribute("matchSuccess");                 
-                    }
-                } else {
-                    out.println("<h1>No projects to display.</h1>");
-                }
-            %>
-            </form>
+            <br/>
+            <input type="hidden" name="pId" value="<%= pId %>" />
+            <input type="submit" name="proceedProject" value="Proceed the Project" />
+          <%
+            }
+            else {
+              out.println("Error. You obviously navigated to the page without going to Update Projects first. Click"
+                      + "<a href='../Instructor/updateProjects.jsp'>this link</a> to go there.");  
+            }
+          %>
+          </form>
         </td>
       </tr>             
     </table>

@@ -5,7 +5,6 @@
 package seneca.projectManagement.entity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import javax.ejb.LocalBean;
@@ -13,19 +12,7 @@ import javax.ejb.Stateful;
 import javax.ejb.StatefulTimeout;
 import seneca.projectManagement.persistence.PersistenceController;
 import seneca.projectManagement.utils.CryptoUtil;
-import seneca.projectManagement.utils.Validation;
-/**
- *
- * @author matthewschranz
- */
 
-/*
- * NOTE:
- * 
- * Add methods as you need them. Insert/Delete/Update/Select whatever
- * the query type is.
- * 
- */
 @Stateful
 @LocalBean
 @StatefulTimeout(unit = TimeUnit.MINUTES, value = 60)
@@ -312,8 +299,16 @@ public class UserSession {
   public List<Teams> getAllTeams(){
       return pc.getAllTeams();
   }
-  //Edouard
-  public boolean removeProject(Projects aProject){
-      return pc.removeProject(aProject);
-  }  
+  
+  public List<Projects> getApprovedMatchedProjects(){
+    return pc.getApprovedMatchedProjects();
+  }
+  
+  public List<News> getRecentNews(){
+    return pc.getRecentNews();
+  }
+  
+  public boolean addNewsPost( News aPost ){
+    return pc.addNewsPost( aPost );
+  }
 }

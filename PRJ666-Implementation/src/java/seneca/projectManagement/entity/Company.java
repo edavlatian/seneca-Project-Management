@@ -40,10 +40,12 @@ public class Company implements Serializable {
   @Size(min = 1, max = 12)
   @Column(name = "companyPhone")
   private String companyPhone;
-  @Size(max = 200)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "businessAreas")
   private String businessAreas;
-  @Size(max = 600)
+  @Lob
+  @Size(max = 65535)
   @Column(name = "companyDescription")
   private String companyDescription;
   @Basic(optional = false)

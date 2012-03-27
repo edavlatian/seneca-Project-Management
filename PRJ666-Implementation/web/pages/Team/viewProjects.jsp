@@ -30,7 +30,6 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <script type="text/javascript" src="../resources/js/pageStuff.js"></script>
     <script language="JavaScript">
       function setProject(x) {
         document.form1.Project.value = x;
@@ -42,15 +41,9 @@
   <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">

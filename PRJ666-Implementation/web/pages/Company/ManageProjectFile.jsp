@@ -24,10 +24,7 @@
     if( id!=null && !id.equals("")){
         projFile = userBean.getAProjectFile(Integer.parseInt(id));
         if( projFile != null && projFile.getProjectId() > 0){
-            Projects proj = userBean.getProject(projFile.getProjectId());
-            if(userBean.getCompany().getCompanyId()!=proj.getCompanyId()){
-                id="x";
-            }
+            //Something Goes here
         }else{ id=""; }                         
     }else{ id=""; }
  %>
@@ -37,20 +34,14 @@
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Manage Project File</title>
+        <title>Manage Project File: <%=projFile.getFileName()%></title>
     </head>
     <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -105,10 +96,10 @@
         </td>      
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Information</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -118,10 +109,7 @@
         </td>
       </tr>
       <tr>
-        <td>
-        <%if(id.equals("x")){
-            %><h1>You do not have permission to access this page.</h1><%
-         }else if(!id.equals("")){%>            
+        <td>        
         <h1>Make Changes Below:</h1>
         <p><strong>Please note:</strong><br/> Files are not hosted on our servers and must be hosted at your leisure 
             somewhere appropriate.<br/> If files contain sensitive information considering encrypting them.</p>
@@ -138,7 +126,7 @@
             <input type="hidden" name="fileId" value="<%=projFile.getFileId()%>" />
             <input type="hidden" name="UpdateProjectFile" value="true" />            
             <table>
-                <tr style="vertical-align: top;">
+                <tr>
                     <td>File Name:</br><em style="color: gray; font-size: 12px;">Database Connection Info</em></td>
                     <td><input style="vertical-align: top;" type="text" size="40" name="projectfileName" value="<%=projFile.getFileName()%>"/></td>
                     <td>
@@ -155,7 +143,7 @@
                         </strong>
                     </td>                 
                 </tr>
-                <tr style="vertical-align: top;">
+                <tr>
                     <td>Description:</br><em style="color: gray; font-size: 12px;">Contains database connection <br/>information for our prj system.</em></td>
                     <td><textarea rows="3" cols="40" name="projectfileDescription" style="vertical-align: top;" /><%= projFile.getFileDescription()%></textarea></td>
                     <td>
@@ -172,7 +160,7 @@
                         </strong>
                     </td>                
                 </tr>
-                <tr style="vertical-align: top;">
+                <tr>
                     <td>File Location:</br><em style="color: gray; font-size: 12px;">The full URL of the file.<br/>http://web.com/files/conn.doc</em></td>
                     <td style="vertical-align: top;"><input type="text" size="40" name="projectfileTheFile" value="<%=projFile.getTheFile()%>"/></td>
                     <td>
@@ -196,10 +184,6 @@
                 </tr>
             </table>
         </form>
-        <%
-         }else{
-            %><h1>This file does not appear to be valid or does not exist.</h1><%
-         }%>        
        </td>
       </tr>             
     </table>        

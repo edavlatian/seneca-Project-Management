@@ -37,15 +37,9 @@
   <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -114,8 +108,7 @@
       </tr>
       <tr>
         <td>
-          *NOTE*: Please make sure you have all information needed before you Publish the Team Page.<br/>
-          *NOTE*: Make sure you hit the Add Team Member button as needed before completing the form.
+          *NOTE*: Please make sure you have all information needed before you Publish the Team Page.
         </td>
       </tr>
       <tr>
@@ -123,63 +116,200 @@
             font-weight: bold;">
           Team General Information</td>
       </tr>
+      <%
+        if(session.getAttribute("countFail") != null){
+          out.println("<tr><td style='color: red;'>");
+          out.println(session.getAttribute("countFail").toString());
+          out.println("</td></tr>");
+          session.removeAttribute("countFail");
+        }
+      %>
       <tr>
         <td>
-          <form method="post" action="../validation/processTeam.jsp" onsubmit="return validateTeamPublish()">
-          <table id="teamInfo" >  
+          <form method="post" action="../validation/processTeam.jsp">
+          <table style="width: 100%;" >
             <tr>
               <td>Enter Team Name:</td>
-              <td><input type="text" size="20" name="teamName" onchange="validateTeamName( this )" value="${param.teamName}" /></td>
+              <td><input type="text" size="20" name="tName" value="<%= request.getParameter("tName") != null ? request.getParameter("tName") : ""  %>" /></td>
             </tr>
             <tr>
-              <td>Upload Team Logo:</td>
-              <td><input type="file" name="teamLogo" onchange="validateFileSize( this )" accept="image/*"/></td>
+              <td>Team Logo Location:</td>
+              <td><input type="text" name="tLogo" value="<%= request.getParameter("tLogo") != null ? request.getParameter("tLogo") : ""  %>"/></td>
             </tr>
             <tr>
-              <td>Team Description:</td>
-              <td><textarea rows="3" cols="40" name="teamDescription" onchange="validateTeamDescription( this )" value="${param.teamDescription}"></textarea></td>
+              <td valign="top">Team Description:</td>
+              <td><textarea rows="10" cols="50" name="tDesc"><%= request.getParameter("tDesc") != null ? request.getParameter("tDesc") : ""  %></textarea></td>
             </tr>
             <tr>
-              <td>Enter Team Constraints:<br/><small> (e.g. availability for next term, technology limitations,<br /> programming language preferences, type of project)</small></td>
-              <td><textarea rows="3" cols="40" name="teamConstraints" onchange="validateTeamConstraints( this )"
-                            value="${param.teamConstraints}"></textarea></td>
+              <td valign="top">Enter Team Constraints:<br/><small> (e.g. availability for next term, technology limitations,<br /> programming language preferences, type of project)</small></td>
+              <td><textarea rows="10" cols="50" name="tCons"><%= request.getParameter("tCons") != null ? request.getParameter("tCons") : ""  %></textarea></td>
             </tr>
+            <%
+              if(session.getAttribute("teamInfoFail") != null){
+                out.println("<tr><td colspan=2 style='color: red;'>");
+                out.println(session.getAttribute("teamInfoFail").toString());
+                out.println("</td></tr>");
+                session.removeAttribute("teamInfoFail");
+              }
+            %>
             <tr>
               <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Leader</b></td>
             </tr>
             <tr>
               <td>Team Leader First Name:</td>
-              <td><input type="text" size="30" name="tlFName" onchange="validateName( this )" value="${param.tlFName}"/></td>
+              <td><input type="text" size="30" name="tlFName" value="<%= request.getParameter("tlFName") != null ? request.getParameter("tlFName") : ""  %>"/></td>
             </tr>
             <tr>
               <td>Team Leader Last Name:</td>
-              <td><input type="text" size="30" name="tlLName" onchange="validateName( this )" value="${param.tlLName}"/></td>
+              <td><input type="text" size="30" name="tlLName" value="<%= request.getParameter("tlLName") != null ? request.getParameter("tlLName") : ""  %>"/></td>
             </tr>
             <tr>
-              <td>Upload Your Image:</td>
-              <td><input type="file" name="tlImage" onchange="validateFileSize( this )" accept="image/*"/></td>
-            </tr>
-            <tr>
-              <td>Leader Description:</td>
-              <td><textarea rows="3" cols="40" name="tlDesc" onchange="validateMemberDescription( this )"
-                            value="${param.tlDesc}"></textarea></td>
+              <td>Enter Image Location:</td>
+              <td><input type="text" name="tlImage" value="<%= request.getParameter("tlImage") != null ? request.getParameter("tlImage") : ""  %>"/></td>
             </tr>
             <tr>
               <td>E-mail Address:</td>
-              <td><input type='text' size='40' name="tlEmail" onchange="validateEmail( this )" value="${param.tlEmail}"/></td>
+              <td><input type='text' size='40' name="tlEmail" value="${param.tlEmail}<%= request.getParameter("tlEmail") != null ? request.getParameter("tlEmail") : ""  %>"/></td>
             </tr>
             <tr>
-              <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Members</b></td>
+              <td valign="top">Leader Description:</td>
+              <td><textarea rows="10" cols="50" name="tlDesc" ><%= request.getParameter("tlDesc") != null ? request.getParameter("tlDesc") : ""  %></textarea></td>
             </tr>
+            <%
+              if(session.getAttribute("leaderInfoFail") != null){
+                out.println("<tr><td colspan=2 style='color: red;'>");
+                out.println(session.getAttribute("leaderInfoFail").toString());
+                out.println("</td></tr>");
+                session.removeAttribute("leaderInfoFail");
+              }
+            %>
+            <tr>
+              <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Member 1</b></td>
+            </tr>
+            <tr>
+              <td>First Name:</td>
+              <td><input type="text" size="30" name="tmFName" 
+                       value="<%= request.getParameterValues("tmFName") != null ? request.getParameterValues("tmFName")[0] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Last Name:</td>
+              <td><input type="text" size="30" name="tmLName" 
+                         value="<%= request.getParameterValues("tmLName") != null ? request.getParameterValues("tmLName")[0] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Enter Image Location:</td>
+              <td><input type="text" name="tmImage" 
+                         value="<%= request.getParameterValues("tmImage") != null ? request.getParameterValues("tmImage")[0] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>E-mail Address:</td>
+              <td><input type='text' size='40' name="tmEmail" 
+                         value="<%= request.getParameterValues("tmEmail") != null ? request.getParameterValues("tmEmail")[0] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">Description:</td>
+              <td>
+                <textarea rows="10" cols="50" name="tmDesc"><%= request.getParameterValues("tmDesc") != null ? request.getParameterValues("tmDesc")[0] : ""  %></textarea>
+              </td>
+            </tr>
+            <%
+              if(session.getAttribute("memberInfoFail0") != null){
+                out.println("<tr><td colspan=2 style='color: red;'>");
+                out.println(session.getAttribute("memberInfoFail0").toString());
+                out.println("</td></tr>");
+                session.removeAttribute("memberInfoFail0");
+              }
+            %>
+            <tr>
+              <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Member 2</b></td>
+            </tr>
+            <tr>
+              <td>First Name:</td>
+              <td><input type="text" size="30" name="tmFName" 
+                       value="<%= request.getParameterValues("tmFName") != null ? request.getParameterValues("tmFName")[1] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Last Name:</td>
+              <td><input type="text" size="30" name="tmLName" 
+                         value="<%= request.getParameterValues("tmLName") != null ? request.getParameterValues("tmLName")[1] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Enter Image Location:</td>
+              <td><input type="text" name="tmImage" 
+                         value="<%= request.getParameterValues("tmImage") != null ? request.getParameterValues("tmImage")[1] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>E-mail Address:</td>
+              <td><input type='text' size='40' name="tmEmail" 
+                         value="<%= request.getParameterValues("tmEmail") != null ? request.getParameterValues("tmEmail")[1] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">Description:</td>
+              <td>
+                <textarea rows="10" cols="50" name="tmDesc"><%= request.getParameterValues("tmDesc") != null ? request.getParameterValues("tmDesc")[1] : ""  %></textarea>
+              </td>
+            </tr>
+            <%
+              if(session.getAttribute("memberInfoFail1") != null){
+                out.println("<tr><td colspan=2 style='color: red;'>");
+                out.println(session.getAttribute("memberInfoFail1").toString());
+                out.println("</td></tr>");
+                session.removeAttribute("memberInfoFail1");
+              }
+            %>
+            <tr>
+              <td colspan="2" align="center" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;"><b>Team Member 3</b></td>
+            </tr>
+            <tr>
+              <td>First Name:</td>
+              <td><input type="text" size="30" name="tmFName" 
+                       value="<%= request.getParameterValues("tmFName") != null ? request.getParameterValues("tmFName")[2] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Last Name:</td>
+              <td><input type="text" size="30" name="tmLName" 
+                         value="<%= request.getParameterValues("tmLName") != null ? request.getParameterValues("tmLName")[2] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>Enter Image Location:</td>
+              <td><input type="text" name="tmImage" 
+                         value="<%= request.getParameterValues("tmImage") != null ? request.getParameterValues("tmImage")[2] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td>E-mail Address:</td>
+              <td><input type='text' size='40' name="tmEmail" 
+                         value="<%= request.getParameterValues("tmEmail") != null ? request.getParameterValues("tmEmail")[2] : ""  %>"/>
+              </td>
+            </tr>
+            <tr>
+              <td valign="top">Description:</td>
+              <td>
+                <textarea rows="10" cols="50" name="tmDesc"><%= request.getParameterValues("tmDesc") != null ? request.getParameterValues("tmDesc")[2] : ""  %></textarea>
+              </td>
+            </tr>
+            <%
+              if(session.getAttribute("memberInfoFail2") != null){
+                out.println("<tr><td colspan=2 style='color: red;'>");
+                out.println(session.getAttribute("memberInfoFail2").toString());
+                out.println("</td></tr>");
+                session.removeAttribute("memberInfoFail2");
+              }
+            %>
           </table>
-          <button>Publish Team Page</button> 
-          <br/>
-          <div id="errors" style="color: red;">${param.errors}</div>
+          <button>Publish Team Page</button>
           <input type="hidden" name="publishTeamPage" value="true"/>
-          </form>
-          <button onclick="addMember()">Add Team Member</button>
-          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-          <button onclick="removeMember()">Remove Team Member</button> 
+          </form> 
         </td>
       </tr>
     </table>

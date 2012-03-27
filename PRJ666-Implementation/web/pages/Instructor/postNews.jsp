@@ -1,12 +1,12 @@
 <%-- 
-    Document   : ProjectSetApproved
-    Created on : Mar 12, 2012, 1:11:36 PM
-    Author     : KepneR
+    Document   : postNews
+    Created on : Mar 25, 2012, 11:42:03 AM
+    Author     : matthewschranz
 --%>
 
-<%@page import="java.util.List"%>
-<%@page import="seneca.projectManagement.entity.*" %>
+<%@page import="seneca.projectManagement.entity.Accounts"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("IN") == false) {
@@ -17,10 +17,6 @@
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-    
-    if(session.getAttribute("Second") == null) {
-        response.sendRedirect("PendingProjects.jsp");
-    }
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -30,17 +26,6 @@
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
     <title>Instructor</title>
-    <script language="JavaScript">
-        function collapse(x, y) {
-            if(x.value == "Collapse") {
-                document.getElementById(y).style.display = "none";
-                x.value = "Expand";
-            } else {
-                document.getElementById(y).style.display = "block";
-                x.value = "Collapse";
-            }
-        }
-    </script>
   </head>
   <body>
     <table> 
@@ -108,27 +93,41 @@
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Instructor/postNews.jsp">Post<br/>News</a></li>
             <li><a href="../logout.jsp">Logout</a></li>
           </ul>
         </td>
       </tr>
       <tr>
         <td>
-            <%
-                Projects p = (Projects) session.getAttribute("project");
-                session.removeAttribute("project");
-                
-                p.setInstructorId(userBean.getLoggedUser().getUserId());
-                p.setStatus("AP");
-                if(userBean.updateProject(p) == false) {
-                    out.print("An unexpected error has occured while updating the project!");
-                } else {
-                    out.print("<h1>Project " + p.getPrjName() + " has been approved!</h1>");
+          <h3 class="title">Add News Post</h3>
+          <form method="POST" action="../validation/processInstructor.jsp"> 
+            <div style="padding: 5px">
+              <span style="font-weight: bold; text-decoration: italic;">*NOTE* You must type &#60br&#47;&#62; to represent a new line currently.</span>
+              <br/>
+              <div style="float: left; width: 150px">Post Title: </div>
+              <div style="float: left"><input type="text" name="pTitle" size="40" value="${param.pTitle}"/></div>
+              <div style="clear: both"></div>
+              <div style="float: left; width: 150px">Post Text: </div>
+              <div style="float: left">
+                <textarea rows="15" cols="150" name="pText">${param.pText}</textarea>
+              </div>
+              <div style="clear: both"></div>
+              <%
+                if(session.getAttribute("newsPostFail") != null){
+                  out.println("<div style='float: left; color: red;'>");
+                  out.println(session.getAttribute("newsPostFail").toString());
+                  out.println("</div><div style='clear: both'></div>");
+                  session.removeAttribute("newsPostFail");
                 }
-            %>
+              %>
+            </div>
+            <div style="background-color: #D5E7E9; padding: 5px; text-align: right">
+              <input type="submit" name="publishNewsPost" value="Publish Post">
+            </div>
+          </form>
         </td>
       </tr>             
     </table>
   </body>
 </html>
+

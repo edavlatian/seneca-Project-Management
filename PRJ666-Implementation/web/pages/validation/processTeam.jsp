@@ -36,10 +36,85 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
          tlEmail = request.getParameter("tlEmail");
   
   // Team Fields
-  String teamDesc = request.getParameter("teamDescription"),
-         teamCons = request.getParameter("teamConstraints"),
-         teamName = request.getParameter("teamName");
-
+  String tDesc = request.getParameter("tDesc"),
+         tCons = request.getParameter("tCons"),
+         tName = request.getParameter("tName"),
+         tLogo = request.getParameter("tLogo");
+  
+  // Team Validation
+  if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
+    session.setAttribute("teamInfoFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(tLogo.isEmpty()){
+    session.setAttribute("teamInfoFail" , "Error. Image can not be empty.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(tDesc.isEmpty() || tDesc.length() > 400){
+    session.setAttribute("teamInfoFail", "Error. Description can't be empty or greater than 400 characters.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(tCons.isEmpty() || tCons.length() > 120){
+    session.setAttribute("teamInfoFail", "Error. Constraints can't be empty or greater than 120 characters.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  
+  // Leader Validation
+  if(!tlFName.matches("[A-Za-z\\s]{3,15}")){
+    session.setAttribute("leaderInfoFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(!tlLName.matches("[A-Za-z\\s]{3,15}")){
+    session.setAttribute("leaderInfoFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(!tlEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
+    session.setAttribute("leaderInfoFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  else if(tlDesc.isEmpty() || tlDesc.length() > 250){
+    session.setAttribute("leaderInfoFail", "Error. Description can't be empty or greater than 250 characters.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  
+  // Check if at least one member's info is filled
+  if(tmFName.length > 1){
+    session.setAttribute("countFail", "Error. Must have at least one member.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+  }
+  
+  // Member First Name Validation
+  for(int i = 0, len = tmFName.length; i < len; i++){
+    if(!tmFName[i].matches("[A-Za-z\\s]{3,15}")){
+      session.setAttribute("memberInfoFail" + i, "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response); 
+    }
+  }
+  
+  // Member Last Name Validation
+  for(int i = 0, len = tmLName.length; i < len; i++){
+    if(!tmLName[i].matches("[A-Za-z\\s]{3,15}")){
+      session.setAttribute("memberInfoFail" + i, "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    }
+  }
+  
+  // Member Description Validation
+  for(int i = 0, len = tmDesc.length; i < len; i++){
+    if(tmDesc[i].isEmpty() || tmDesc[i].length() > 250){
+      session.setAttribute("memberInfoFail" + i, "Error. Description can't be empty or greater than 250 characters.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    }     
+  }
+  
+  // Member Email Validation
+  for(int i = 0, len = tmEmail.length; i < len; i++){
+    if(!tmEmail[i].matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
+      session.setAttribute("memberInfoFail" + i, "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    }
+  }
+  
   String emails = "";
   emails = tlEmail + ";";
   
@@ -74,19 +149,19 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
             i++;
           }
           else {
-            session.setAttribute("errors", "Error. Team Member could not be added.");
-            response.sendRedirect("../Team/publishTeamPage.jsp");
+            session.setAttribute("countFail", "Error. Team Member could not be added.");
+            request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
           }
         }
       }
       else {
-        session.setAttribute("errors", "Error. Team Leader could not be updated.");
-        response.sendRedirect("../Team/publishTeamPage.jsp");
+        session.setAttribute("countFail", "Error. Team Leader could not be updated.");
+        request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
       }
     
-    team.setTeamDescription(teamDesc);
-    team.setTeamConstraints(teamCons);
-    team.setTeamName(teamName);
+    team.setTeamDescription(tDesc);
+    team.setTeamConstraints(tCons);
+    team.setTeamName(tName);
     team.setTeamEmail(emails);
     team.setHasRegistered(1);
     
@@ -94,13 +169,13 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
       response.sendRedirect("../Team/teamHome.jsp");
     }
     else {
-      session.setAttribute("errors", "Error. Team Account could not be updated.");
-      response.sendRedirect("../Team/publishTeamPage.jsp");
+      session.setAttribute("countFail", "Error. Team Account could not be updated.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
     }
   }
   else {
-    session.setAttribute("errors", "Error. Team Account could not be found.");
-    response.sendRedirect("../Team/publishTeamPage.jsp");
+    session.setAttribute("countFail", "Error. Team Account could not be found.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
 }
 else if (request.getParameter("editTeamInfo") != null){
@@ -201,7 +276,6 @@ else if (request.getParameter("editMemberInfo") != null) {
     response.sendRedirect("../Team/updateTeam.jsp");  
   }
   else if(userBean.updateMember(m)) {
-    System.out.println("DERP");
     List<Teammember> members = userBean.getAllMembers(t.getTeamId());
       
     for(int i = 0; i < members.size(); i++){

@@ -32,7 +32,8 @@ public class Comments implements Serializable {
   private Integer commentStatus = 0;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 500)
+  @Lob
+  @Size(min = 1, max = 65535)
   @Column(name = "commentDescription")
   private String commentDescription;
   @Basic(optional = false)

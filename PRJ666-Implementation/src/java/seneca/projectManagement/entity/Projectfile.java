@@ -36,12 +36,14 @@ public class Projectfile implements Serializable {
   private String fileName;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 120)
+  @Lob
+  @Size(min = 1, max = 65535)
   @Column(name = "fileDescription")
   private String fileDescription;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 500)
+  @Lob
+  @Size(min = 1, max = 65535)
   @Column(name = "theFile")
   private String theFile;
   @Basic(optional = false)

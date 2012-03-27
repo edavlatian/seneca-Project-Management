@@ -50,12 +50,14 @@ public class Projects implements Serializable {
   private String prjIdentifier;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 500)
+  @Lob
+  @Size(min = 1, max = 65535)
   @Column(name = "description")
   private String description;
   @Basic(optional = false)
   @NotNull
-  @Size(min = 1, max = 250)
+  @Lob
+  @Size(min = 1, max = 65535)
   @Column(name = "prjConstraints")
   private String prjConstraints;
   @Column(name = "agreementDate")

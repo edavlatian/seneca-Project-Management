@@ -22,6 +22,7 @@
     }
     String id = request.getParameter("id");
     Projects proj = new Projects();
+    Comments comment;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj!= null && proj.getProjectId() > 0){
@@ -29,9 +30,10 @@
                 if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
                     id="z"; //Comments already exist.
                 }else{
-                    if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
-                        id="";
-                    }
+                    comment = new Comments();
+                    comment.setProjectId(proj.getProjectId());
+                    comment.setCommentStatus(0);
+                    comment.setCommentDescription(""); 
                 }
             }else{
                 id="x"; //Project is not yet in PA status.
@@ -51,20 +53,14 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>Add Comment</title>
+    <title>PRJ566 - Company Home</title>
   </head>
   <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -119,10 +115,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Information</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -163,7 +159,7 @@
                 </strong>
                 <p><%=userBean.checkProjectComments(proj.getProjectId())%></p>
                 <form action="../validation/processOther.jsp" method="post">
-                    <textarea name="commentDescription" rows="10" cols="50"></textarea>
+                    <textarea name="commentDescription" rows="8" cols="50"></textarea>
                     <strong style="color:red;">
                         <%
                             if(request.getParameter("cdesc")!=null){

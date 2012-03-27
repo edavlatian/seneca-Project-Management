@@ -1,3 +1,7 @@
+body {
+  margin: 0 auto;
+}
+
 ul
 {
   list-style-type:none;
@@ -11,11 +15,10 @@ li{
 
 li a:link, li a:visited
 {
-  font-size: 80%;
+  font-size: 75%;
   display:block;
-  font-weight:bold;
   color:#FFFFFF;
-  width:90px;
+  width:75px;
   text-align:center;
   padding:1px;
   text-decoration:none;

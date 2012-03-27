@@ -31,15 +31,9 @@
 <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -94,9 +88,9 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -107,7 +101,7 @@
       </tr>
       <tr>
         <td>
-            <h1>Make changes below:</h1>
+            <h1>Please feel free to make any changes below:</h1>
             <%Company company;
               company = userBean.getCompany();
              
@@ -130,7 +124,7 @@
                 <input type="hidden" name="companyId" value="<%=company.getCompanyId()%>" />
                 <input type="hidden" name="UpdateCompanyInfo" value="true" />            
                 <table>
-                    <tr style="vertical-align: top;">
+                    <tr>
                         <td>Company Name:</br><em style="color: gray; font-size: 12px;">Company Name</em></td>
                         <td><input style="vertical-align: top;" type="text" size="40" name="companyName" value="<%=company.getCompanyName() %>"/></td>
                         <td>
@@ -147,9 +141,9 @@
                            </strong>
                         </td>
                     </tr>
-                    <tr style="vertical-align: top;">
+                    <tr>
                         <td>Company Description:</br><em style="color: gray; font-size: 12px;">Small history or description <br/>about this company</em></td>
-                        <td><textarea rows="10" cols="40" name="companyDescription" style="vertical-align: top;" /><%= company.getCompanyDescription()%></textarea></td>
+                        <td><textarea rows="3" cols="40" name="companyDescription" style="vertical-align: top;" /><%= company.getCompanyDescription()%></textarea></td>
                         <td>
                             <strong style="color:red;">
                                 <%
@@ -164,7 +158,7 @@
                             </strong>
                         </td>
                     </tr>
-                    <tr style="vertical-align: top;">
+                    <tr>
                         <td>Business Areas:</br><em style="color: gray; font-size: 12px;">List or description of <br/>of the areas of business <br />this Company is involved in.</em></td>
                         <td><textarea rows="3" cols="40" name="businessAreas" style="vertical-align: top;" /><%= company.getBusinessAreas()%></textarea></td>
                         <td>
@@ -181,7 +175,7 @@
                             </strong>
                         </td>
                     </tr>                    
-                    <tr style="vertical-align: top;">
+                    <tr>
                         <td>Company Phone:</br><em style="color: gray; font-size: 12px;">Contact number <br/>123-555-1234</em></td>
                         <td style="vertical-align: top;"><input type="text" size="40" name="companyPhone" value="<%=company.getCompanyPhone()%>"/></td>
                         <td>

@@ -27,16 +27,13 @@
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj != null && proj.getProjectId() > 0){
             team = userBean.getProjectTeam(Integer.parseInt(id));
-            if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
-                id="x";
-            }
         }else{
             id="";
         }
     }else{
         id="";
     }
-    
+   
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -45,20 +42,14 @@
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Project Details</title>
+        <title>Project #<%=id%></title>
     </head>
     <body>
     <table> 
       <tr>
-        <td colspan="2">
-          <table width="100%">
-            <tr>
-              <td width="402" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
-              <td style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;" width="800">
-                <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
-              </td>
-            </tr>
-          </table>
+        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
+          <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
       </tr>
       <tr valign="top">
@@ -113,10 +104,10 @@
         </td>      
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create<br/>New<br/>Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your<br/>Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit<br/>Company<br/>Information</a></li>
+            <li><a href="HomeCompany.jsp">Company Home</a></li>
+            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>
@@ -127,9 +118,7 @@
       </tr>
       <tr>
         <td>       
-        <% if(id.equals("x")){
-            %><h1>You do not have permission to access this page.</h1><%
-         }else if(!id.equals("")){
+        <% if(id!=""){
            projFiles = userBean.getProfileFiles(proj.getProjectId());  
    %>
             <strong style="color:red;">
@@ -153,25 +142,11 @@
                         if(request.getParameter("fileremoved").equals("yes")){
                             %>File was successfully removed.<%
                         }
-                    }
-                    if(request.getParameter("updatedproject")!=null){
-                        if(request.getParameter("updatedproject").equals("yes")){
-                            %>Project was successfully updated.<%
-                        }
-                    }                              
+                    }                   
                 %>                               
             </strong>    
         <h1><%=proj.getPrjName()%></h1>
         <h2>Status: <%=proj.getStatus()%></h2>
-        <%
-        if(proj.getStatus().equals("PE")){
-            %>
-            <p><strong style="color:red;">This project has not yet been approved.<br/>You are able to edit the project details before it is approved</strong></p>
-            <a href="EditProjectInfo.jsp?id=<%=proj.getProjectId()%>">Click here to edit</a><br/>
-            <a href="RemoveProject.jsp?id=<%=proj.getProjectId()%>">Click here to delete</a>            
-            <%
-        }
-        %>
         <p>Description: <%=proj.getDescription()%></p>
         <p><strong>Constraints:</strong> <%=proj.getPrjConstraints()%></p>
         <%if(!projFiles.isEmpty()){

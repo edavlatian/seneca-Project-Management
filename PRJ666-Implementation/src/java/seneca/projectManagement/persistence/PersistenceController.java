@@ -560,20 +560,34 @@ public class PersistenceController extends EntityControllerBase {
     Query q = em.createNamedQuery( "Teams.findAll" );
     
     return (List<Teams>) q.getResultList();
-  }  
-//Edouard
-  public boolean removeProject(Projects aProject) {
-      boolean ret = false;
-      em = getEntityManager();
-      try {
-          em.getTransaction().begin();
-          em.remove(em.merge(aProject));
-          em.getTransaction().commit();
-          ret = true;
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      em.close();
-      return ret;
-  }  
+  }
+  
+  public List<Projects> getApprovedMatchedProjects(){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "Select p FROM Projects p WHERE p.status = 'MA' OR p.status = 'AP'");
+    
+    return q.getResultList() != null ? (List<Projects>)q.getResultList() : null;
+  }
+  
+  public List<News> getRecentNews(){
+    em = getEntityManager();
+    
+    Query q = em.createQuery( "SELECT n FROM News n ORDER BY n.postDate DESC" );
+    q.setMaxResults(5);
+    
+    return (List<News>)q.getResultList();
+  }
+  
+  public boolean addNewsPost( News aPost ){
+    em = getEntityManager();
+    
+    em.getTransaction().begin();
+    em.persist(aPost);
+    em.getTransaction().commit();
+    
+    em.close();
+    
+    return true;
+  }
 }
