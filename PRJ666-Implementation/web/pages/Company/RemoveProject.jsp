@@ -1,13 +1,11 @@
 <%-- 
-    Document   : ViewCompanyProjects
-    Created on : Feb 15, 2012, 9:34:22 AM
+    Document   : RemoveProject
+    Created on : Mar 25, 2012, 8:36:04 AM
     Author     : Edouard
 --%>
-    
-<%@page import="java.util.List"%>
 <%@page import="seneca.projectManagement.entity.*"%>
-<%@ page import="java.util.ArrayList, seneca.projectManagement.entity.Projects"%>
 <jsp:useBean id="userBean" class="seneca.projectManagement.entity.UserSession" scope="session" />
+<jsp:setProperty name="userBean" property="*" />
 <%
     if(userBean.isLogged() == true && userBean != null) {
         if(userBean.getLoggedUser().getUserRole().equals("CR") == false) {
@@ -18,18 +16,35 @@
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
+    String id = request.getParameter("id");
+    Projects proj =  new Projects();
+    if( id!=null && !id.equals("")){
+        proj = userBean.getProject(Integer.parseInt(id));
+        if( proj != null && proj.getProjectId() > 0){
+            if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
+                id="x";
+            }else{
+                if(!proj.getStatus().equals("PE")){
+                    id="q";
+                }
+            }
+        }else{
+            id="";
+        }
+    }else{
+        id="";
+    }    
 %>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Company Projects</title>
+        <title>Remove Pending Project</title>
     </head>
     <body>
-      <table> 
+    <table> 
       <tr>
         <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
@@ -101,48 +116,34 @@
         </td>
       </tr>
       <tr>
-        <td> 
+        <td>
+        <%if(id.equals("x")){
+            %><h1>You do not have permission to access this page.</h1><%
+         }else if(id.equals("q")){
+            %><h1>You do not have permission to delete this project.</h1><%
+        }else if(!id.equals("")){%>
+         <h1>Delete project?</h1>
             <strong style="color:red;">
                 <%
-                    if(request.getParameter("projectdeleted")!=null){
-                        if(request.getParameter("projectdeleted").equals("yes")){
-                            %>The pending project was deleted.<%
+                    if(request.getParameter("removefail")!=null){
+                        if(request.getParameter("removefail").equals("1")){
+                            %>There was an error removing this project.<%
                         }
-                    }            
-                %> 
-            </strong>             
-            <h1><%=userBean.getCompany().getCompanyName()%> Project List</h1>
-        <table>
-        <tr>
-            <th>Status</th>
-            <th>Project Name</th>
-            <th>Description</th>
-            <!-- <th>Constraints</th> -->
-        </tr>
+                    }
+                %>                               
+            </strong>            
+         <form method="post" action="../validation/processOther.jsp">
+            <input type="hidden" name="projectId" value="<%=proj.getProjectId()%>" />
+            <input type="hidden" name="RemoveProject" value="true" />            
+            <p>If you want to delete <strong><%=proj.getPrjName()%></strong> click the delete button below.</p>
+            <input type="submit" value="Delete" />
+         </form>
         <%
-        Company comp = userBean.getCompany();
-        List<Projects> projects = userBean.getCompanyProjects( comp );
-        if(projects.size()>0){
-            for(int i=0; i < projects.size(); i++){
-                Projects proj = new Projects();
-                proj = projects.get(i);
-        %>
-        <tr>
-                <td><%= proj.getStatus() %></td>
-                <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
-                <td><%= proj.getDescription() %></td>
-        </tr>
-        <%
-            }
-        }else{
-            %>
-            <tr><td colspan="3">Sorry, there does not appear to be any projects associated with this company.</td></tr>
-        <%
-        }
-        %>
-        </table>
+         }else{
+            %><h1>This project does not appear to be valid or does not exist.</h1><%
+         }%>    
        </td>
       </tr>             
-    </table>  
+    </table>
     </body>
-</html>
+</html> 

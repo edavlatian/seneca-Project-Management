@@ -311,4 +311,8 @@ public class UserSession {
   public boolean addNewsPost( News aPost ){
     return pc.addNewsPost( aPost );
   }
+  //Edouard
+  public boolean removeProject(Projects aProject){
+      return pc.removeProject(aProject);
+  }    
 }

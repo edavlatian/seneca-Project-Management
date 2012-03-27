@@ -24,7 +24,10 @@
     if( id!=null && !id.equals("")){
         projFile = userBean.getAProjectFile(Integer.parseInt(id));
         if( projFile != null && projFile.getProjectId() > 0){
-            //Something Goes here
+            Projects proj = userBean.getProject(projFile.getProjectId());
+            if(userBean.getCompany().getCompanyId()!=proj.getCompanyId()){
+                id="x";
+            }
         }else{ id=""; }                         
     }else{ id=""; }
  %>
@@ -34,7 +37,7 @@
     <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-        <title>Manage Project File: <%=projFile.getFileName()%></title>
+        <title>Remove Project File</title>
     </head>
     <body>
     <table> 
@@ -109,7 +112,10 @@
         </td>
       </tr>
       <tr>
-        <td>        
+        <td> 
+        <%if(id.equals("x")){
+            %><h1>You do not have permission to access this page.</h1><%
+         }else if(!id.equals("")){%>                   
             <h1>Delete Project File?</h1>
             <p>If you are sure you want to delete the file below, please click the delete button. <br />Otherwise you may navigate elsewhere.</p>
             <strong>File: <a href="<%=projFile.getTheFile() %>"><%=projFile.getFileName() %></a></strong><br />
@@ -128,6 +134,10 @@
                 <input type="hidden" name="RemoveProjectFile" value="true" />            
                 <input type="submit" value="Delete" />
             </form>
+        <%
+         }else{
+            %><h1>This file does not appear to be valid or does not exist.</h1><%
+         }%>                 
         </td>
       </tr>
     </table>        

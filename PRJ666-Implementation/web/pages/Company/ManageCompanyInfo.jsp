@@ -124,7 +124,7 @@
                 <input type="hidden" name="companyId" value="<%=company.getCompanyId()%>" />
                 <input type="hidden" name="UpdateCompanyInfo" value="true" />            
                 <table>
-                    <tr>
+                    <tr style="vertical-align: top;">
                         <td>Company Name:</br><em style="color: gray; font-size: 12px;">Company Name</em></td>
                         <td><input style="vertical-align: top;" type="text" size="40" name="companyName" value="<%=company.getCompanyName() %>"/></td>
                         <td>
@@ -141,7 +141,7 @@
                            </strong>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="vertical-align: top;">
                         <td>Company Description:</br><em style="color: gray; font-size: 12px;">Small history or description <br/>about this company</em></td>
                         <td><textarea rows="3" cols="40" name="companyDescription" style="vertical-align: top;" /><%= company.getCompanyDescription()%></textarea></td>
                         <td>
@@ -158,7 +158,7 @@
                             </strong>
                         </td>
                     </tr>
-                    <tr>
+                    <tr style="vertical-align: top;">
                         <td>Business Areas:</br><em style="color: gray; font-size: 12px;">List or description of <br/>of the areas of business <br />this Company is involved in.</em></td>
                         <td><textarea rows="3" cols="40" name="businessAreas" style="vertical-align: top;" /><%= company.getBusinessAreas()%></textarea></td>
                         <td>
@@ -175,7 +175,7 @@
                             </strong>
                         </td>
                     </tr>                    
-                    <tr>
+                    <tr style="vertical-align: top;">
                         <td>Company Phone:</br><em style="color: gray; font-size: 12px;">Contact number <br/>123-555-1234</em></td>
                         <td style="vertical-align: top;"><input type="text" size="40" name="companyPhone" value="<%=company.getCompanyPhone()%>"/></td>
                         <td>
@@ -193,7 +193,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2">
+                        <td colspan="3">
                             <input type="submit" value="Save Changes" />
                         </td>
                     </tr>

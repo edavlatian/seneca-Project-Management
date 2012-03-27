@@ -22,7 +22,6 @@
     }
     String id = request.getParameter("id");
     Projects proj = new Projects();
-    Comments comment;
     if( id!=null && !id.equals("")){
         proj = userBean.getProject(Integer.parseInt(id));
         if( proj!= null && proj.getProjectId() > 0){
@@ -30,10 +29,9 @@
                 if( userBean.checkProjectComments(proj.getProjectId()).intValue() > 0 ){
                     id="z"; //Comments already exist.
                 }else{
-                    comment = new Comments();
-                    comment.setProjectId(proj.getProjectId());
-                    comment.setCommentStatus(0);
-                    comment.setCommentDescription(""); 
+                    if(userBean.getCompany().getCompanyId()!= proj.getCompanyId() ){
+                        id="";
+                    }
                 }
             }else{
                 id="x"; //Project is not yet in PA status.
@@ -159,7 +157,7 @@
                 </strong>
                 <p><%=userBean.checkProjectComments(proj.getProjectId())%></p>
                 <form action="../validation/processOther.jsp" method="post">
-                    <textarea name="commentDescription" rows="8" cols="50"></textarea>
+                    <textarea name="commentDescription" rows="10" cols="50"></textarea>
                     <strong style="color:red;">
                         <%
                             if(request.getParameter("cdesc")!=null){
