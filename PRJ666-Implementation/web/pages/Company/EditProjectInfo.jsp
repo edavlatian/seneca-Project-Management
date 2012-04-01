@@ -149,7 +149,7 @@
                                     if(request.getParameter("pdesc").equals("1")){
                                         %>Description field cant be empty!<%
                                     }else if (request.getParameter("pdesc").equals("2")){
-                                        %>Description cant exceed 500 characters in length!<%
+                                        %>Description cant exceed 65000 characters in length!<%
                                     }
                                 }
                             %>
@@ -166,7 +166,7 @@
                                     if(request.getParameter("pcons").equals("1")){
                                         %>Constraints field cant be empty!<%
                                     }else if (request.getParameter("pcons").equals("2")){
-                                        %>Constraints cant exceed 250 characters in length!<%
+                                        %>Constraints cant exceed 65000 characters in length!<%
                                     }
                                 }
                             %>

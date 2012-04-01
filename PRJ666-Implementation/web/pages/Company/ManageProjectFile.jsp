@@ -159,7 +159,7 @@
                                     if(request.getParameter("fdesc").equals("1")){
                                         %>Description field cant be empty!<%
                                     }else if (request.getParameter("fdesc").equals("2")){
-                                        %>Description cant exceed 120 characters in length!<%
+                                        %>Description cant exceed 65000 characters in length!<%
                                     }
                                 }
                             %>
@@ -176,7 +176,7 @@
                                     if(request.getParameter("ffile").equals("1")){
                                         %>File Location field cant be empty!<%
                                     }else if (request.getParameter("ffile").equals("2")){
-                                        %>File Location field cant exceed 500 characters in length!<%
+                                        %>File Location field cant exceed 65000 characters in length!<%
                                     }
                                 }
                             %>                                

@@ -29,7 +29,7 @@
         if(mDesc == null || mDesc.isEmpty()){
             errorFound = true;
             errors+="&cdesc=1";
-        }else if(mDesc.length() > 500){
+        }else if(mDesc.length() > 65000){
             errorFound = true;
             errors+="&cdesc=2";
         }else{
@@ -66,7 +66,7 @@
         if(mDescription == null || mDescription.isEmpty()){
             errorFound = true;
             errors += "&pdesc=1";
-        }else if(mDescription.length() > 500){
+        }else if(mDescription.length() > 65000){
             errorFound = true;
             errors += "&pdesc=2";
         }else{
@@ -76,7 +76,7 @@
         if(mConstraints == null || mConstraints.isEmpty()){
             errorFound = true;
             errors += "&pcons=1";
-        }else if(mConstraints.length() > 500){
+        }else if(mConstraints.length() > 65000){
             errorFound = true;
             errors += "&pcons=2";
         }else{
