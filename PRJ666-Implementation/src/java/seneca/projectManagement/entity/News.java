@@ -54,10 +54,6 @@ public class News implements Serializable {
     return postId;
   }
 
-  public void setPostId(Integer postId) {
-    this.postId = postId;
-  }
-
   public Date getPostDate() {
     return postDate;
   }

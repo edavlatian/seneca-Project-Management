@@ -91,10 +91,10 @@
         </td>
         <td style="background-image: url('../resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="HomeCompany.jsp">Company Home</a></li>
-            <li><a href="ProjectAgreementForm.jsp">Create New Project</a></li>
-            <li><a href="ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="ManageCompanyInfo.jsp">Edit Company Info</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
           </ul>
           <div style="float: right;">
             <ul>

@@ -60,10 +60,6 @@ public class Company implements Serializable {
     return companyId;
   }
 
-  public void setCompanyId(Integer companyId) {
-    this.companyId = companyId;
-  }
-
   public String getCompanyName() {
     return companyName;
   }

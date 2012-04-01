@@ -58,10 +58,6 @@ public class Projectfile implements Serializable {
     return fileId;
   }
 
-  public void setFileId(Integer fileId) {
-    this.fileId = fileId;
-  }
-
   public String getFileName() {
     return fileName;
   }

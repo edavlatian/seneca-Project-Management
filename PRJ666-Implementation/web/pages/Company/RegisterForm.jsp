@@ -106,12 +106,12 @@
 		      </div>
         </td>
         <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
-            <ul>
-              <li><a href="/PRJ666-Implementation/pages/Home.jsp">Home</a></li>
-              <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
-              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived Projects</a></li>
-              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Company Registration</a></li>
-            </ul>
+          <ul>
+            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
+          </ul>
         </td>
       </tr>
       <tr>

@@ -46,15 +46,15 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
     session.setAttribute("teamInfoFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
-  else if(tLogo.isEmpty()){
+  else if(tLogo.isEmpty() || tLogo.length() > 65000){
     session.setAttribute("teamInfoFail" , "Error. Image can not be empty.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
-  else if(tDesc.isEmpty() || tDesc.length() > 400){
+  else if(tDesc.isEmpty() || tDesc.length() > 65000){
     session.setAttribute("teamInfoFail", "Error. Description can't be empty or greater than 400 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
-  else if(tCons.isEmpty() || tCons.length() > 120){
+  else if(tCons.isEmpty() || tCons.length() > 65000){
     session.setAttribute("teamInfoFail", "Error. Constraints can't be empty or greater than 120 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
@@ -72,7 +72,7 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
     session.setAttribute("leaderInfoFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
-  else if(tlDesc.isEmpty() || tlDesc.length() > 250){
+  else if(tlDesc.isEmpty() || tlDesc.length() > 65000){
     session.setAttribute("leaderInfoFail", "Error. Description can't be empty or greater than 250 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
   }
@@ -195,17 +195,17 @@ else if (request.getParameter("editTeamInfo") != null){
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(tLogo.isEmpty()){
+  else if(tLogo.isEmpty() || tLogo.length() > 65000){
     session.setAttribute("editTeamFail" , "Error. Image can not be empty.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(tDesc.isEmpty() || tDesc.length() > 400){
+  else if(tDesc.isEmpty() || tDesc.length() > 65000){
     session.setAttribute("editTeamFail", "Error. Description can't be empty or greater than 400 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(tCons.isEmpty() || tCons.length() > 120){
+  else if(tCons.isEmpty() || tCons.length() > 65000){
     session.setAttribute("editTeamFail", "Error. Constraints can't be empty or greater than 120 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");

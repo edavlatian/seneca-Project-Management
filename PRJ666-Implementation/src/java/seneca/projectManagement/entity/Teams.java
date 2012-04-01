@@ -82,10 +82,6 @@ public class Teams implements Serializable {
     return teamId;
   }
 
-  public void setTeamId(Integer teamId) {
-    this.teamId = teamId;
-  }
-
   public String getTeamEmail() {
     return teamEmail;
   }

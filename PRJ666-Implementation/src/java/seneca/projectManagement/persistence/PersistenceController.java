@@ -590,19 +590,20 @@ public class PersistenceController extends EntityControllerBase {
     
     return true;
   }
-//Edouard
+
+  //Edouard
   public boolean removeProject(Projects aProject) {
-      boolean ret = false;
-      em = getEntityManager();
-      try {
-          em.getTransaction().begin();
-          em.remove(em.merge(aProject));
-          em.getTransaction().commit();
-          ret = true;
-      } catch (Exception e) {
-          e.printStackTrace();
-      }
-      em.close();
-      return ret;
-  }    
+    boolean ret = false;
+    em = getEntityManager();
+    try {
+      em.getTransaction().begin();
+      em.remove(em.merge(aProject));
+      em.getTransaction().commit();
+      ret = true;
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+    em.close();
+    return ret;
+  }
 }

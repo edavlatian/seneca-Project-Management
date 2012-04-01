@@ -79,10 +79,6 @@ public class Projects implements Serializable {
     return projectId;
   }
 
-  public void setProjectId(Integer projectId) {
-    this.projectId = projectId;
-  }
-
   public String getStatus() {
     return status;
   }

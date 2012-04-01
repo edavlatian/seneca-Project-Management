@@ -48,10 +48,6 @@ public class Comments implements Serializable {
     return commentId;
   }
 
-  public void setCommentId(Integer commentId) {
-    this.commentId = commentId;
-  }
-
   public Integer getCommentStatus() {
     return commentStatus;
   }

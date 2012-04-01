@@ -58,14 +58,14 @@ Document   : Home
             }	
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -97,10 +97,10 @@ Document   : Home
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
           %>
-			      <li><a href="#">Current Semester Teams</a></li>
-		        <li><a href="#">Create New Project</a></li>
+			      <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="#">Edit Company Info</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
           <%
               }
               else if(userBean.getLoggedUser().getUserRole().equals("TL")){

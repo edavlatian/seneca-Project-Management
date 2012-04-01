@@ -73,10 +73,6 @@ public class Accounts implements Serializable {
     return userId;
   }
 
-  public void setUserId(Integer userId) {
-    this.userId = userId;
-  }
-
   public String getUserIdentifier() {
     return userIdentifier;
   }
