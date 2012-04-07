@@ -16,8 +16,16 @@
         
         <%
             if(userBean.logIn( request.getParameter("username"), request.getParameter("password"))) {
-                String roleFilter = userBean.getLoggedUser().getUserRole();
-                if(roleFilter.equals("AD")) {
+                Accounts a = userBean.getLoggedUser();
+                String roleFilter = a.getUserRole();
+                
+                if(a.getAccountStatus() == 0){
+                    System.out.println("in error");
+                    session.setAttribute("Error", "Account is no longer active. Please contact an administrator.");
+                    userBean.setLoggedUser(null);
+                    response.sendRedirect("../login.jsp");
+                }
+                else if(roleFilter.equals("AD")) {
                     response.sendRedirect("../Admin/HomeAdmin.jsp");
                 }
                 else if(roleFilter.equals("CR")) {

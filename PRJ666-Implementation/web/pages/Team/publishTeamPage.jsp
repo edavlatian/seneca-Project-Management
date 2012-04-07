@@ -59,14 +59,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -169,7 +169,7 @@
             </tr>
             <tr>
               <td>E-mail Address:</td>
-              <td><input type='text' size='40' name="tlEmail" value="${param.tlEmail}<%= request.getParameter("tlEmail") != null ? request.getParameter("tlEmail") : ""  %>"/></td>
+              <td><input type='text' size='40' name="tlEmail" value="<%= request.getParameter("tlEmail") != null ? request.getParameter("tlEmail") : ""  %>"/></td>
             </tr>
             <tr>
               <td valign="top">Leader Description:</td>

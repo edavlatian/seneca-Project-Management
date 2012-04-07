@@ -54,14 +54,14 @@
           <br/>
           <img src="resources/images/ICT_Logo.png" title="ICT Logo"/>
           <br/>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -104,7 +104,7 @@
           %>
             <li><a href="/PRJ666-Implementation/pages/Team/teamHome.jsp">Team<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team<br/>Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Available<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Team<br/>Project</a></li>
           <%
                 }

@@ -35,9 +35,6 @@
             } else if(pname.isEmpty() == true) {
                 session.setAttribute("pname", "Cannot be empty!");
                 errorFound = true;
-            } else if(pname.length() > 20) {
-                session.setAttribute("pname", "Cannot be longer than 20 characters!");
-                errorFound = true;
             } else {
                 if(Validation.isValidProject(pname) == true) {
                     proj.setPrjName(pname);
@@ -54,9 +51,6 @@
             } else if(pdesc.isEmpty() == true) {
                 session.setAttribute("pdesc", "Cannot be empty!");
                 errorFound = true;
-            } else if(pdesc.length() > 500) {
-                session.setAttribute("pdesc", "Cannot be longer than 500 characters!");
-                errorFound = true;
             } else {
                 proj.setDescription(pdesc);
             }
@@ -67,9 +61,6 @@
                 errorFound = true;
             } else if(pcons.isEmpty() == true) {
                 session.setAttribute("pcons", "Cannot be empty!");
-                errorFound = true;
-            } else if(pcons.length() > 250) {
-                session.setAttribute("pcons", "Cannot be longer than 250 characters!");
                 errorFound = true;
             } else {
                 proj.setPrjConstraints(pcons);
@@ -181,14 +172,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
