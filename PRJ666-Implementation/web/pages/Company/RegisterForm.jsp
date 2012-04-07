@@ -72,14 +72,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -107,10 +107,10 @@
         </td>
         <td style="background-image: url('/PRJ666-Implementation/pages/resources/images/header_bg.jpg')">
           <ul>
-            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
+            <li><a href="/PRJ666-Implementation/pages/login.jsp">Login</a></li>
+            <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
+            <li><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
           </ul>
         </td>
       </tr>

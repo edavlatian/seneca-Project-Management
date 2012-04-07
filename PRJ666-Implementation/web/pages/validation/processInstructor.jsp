@@ -82,18 +82,18 @@ else if(request.getParameter("createTeamMember") != null){
          mLName = request.getParameter("mLName"),
          mEmail = request.getParameter("mEmail");
   
-  if(tId.endsWith("0")){
+  if(tId.equals("0")){
     session.setAttribute("createMemberFail", "Error. Must select a team to place the new member with.");
     session.setAttribute("createMember", "blahblah");
     request.getRequestDispatcher("../Instructor/updateMembers.jsp").forward(request, response);
   }
-  else if(!mFName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("createMemberFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+  else if(!mFName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("createMemberFail", "Error. First Name must be only alphanumeric and between 1 and 15 characters in length.");
     session.setAttribute("createMember", "blahblah");
     request.getRequestDispatcher("../Instructor/updateMembers.jsp").forward(request, response);
   }
-  else if(!mLName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("createMemberFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+  else if(!mLName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("createMemberFail", "Error. Last Name must be only alphanumeric and between 1 and 15 characters in length.");
     session.setAttribute("createMember", "blahblah");
     request.getRequestDispatcher("../Instructor/updateMembers.jsp").forward(request, response);
   }

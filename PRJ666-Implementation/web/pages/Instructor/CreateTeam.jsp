@@ -62,14 +62,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -99,7 +99,7 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/matching.jsp">Match<br/>Teams<br/>Projects</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
@@ -119,47 +119,44 @@
             <div style="padding: 5px">
                 <div style="float: left; width: 150px">User Name:</div>
                 <div style="float: left">
-                    <input type="text" name="id_user" value="<%= a.getUserIdentifier() %>" />
-                    <% 
-                        if(session.getAttribute("user") != null) {
-                            out.println("<span style='color: red'>* " + session.getAttribute("user").toString() + "</span>");
-                            session.removeAttribute("user");
-                        }
-                    %>
+                    <input type="text" name="id_user" value="<%= request.getParameter("id_user") == null ? Validation.getPRJ566SemesterUsername() : request.getParameter("id_user") %>" readonly/>
                 </div>
-                <div style="clear: both; height: 20px"></div>
+                <div style="clear: both;"></div>
                 <div style="float: left; width: 150px">First Name:</div>
                 <div style="float: left">
-                    <input type="text" name="id_fname" value="<%= a.getUserFName() %>" />
+                    <input type="text" name="id_fname" value="${param.id_fname}" />
+                </div>
                     <% 
                         if(session.getAttribute("fname") != null) {
-                            out.println("<span style='color: red'>* " + session.getAttribute("fname").toString() + "</span>");
+                            out.println("<div style='color: red; float: left; max-width: 395px; padding-left: 5px;'>* " 
+                                    + session.getAttribute("fname").toString() + "</div>");
                             session.removeAttribute("fname");
                         }
                     %>
-                </div>
                 <div style="clear: both"></div>
                 <div style="float: left; width: 150px">Last Name:</div>
                 <div style="float: left">
-                    <input type="text" name="id_lname" value="<%= a.getUserLName() %>" />
+                    <input type="text" name="id_lname" value="${param.id_lname}" />
+                </div>
                     <% 
                         if(session.getAttribute("lname") != null) {
-                            out.println("<span style='color: red'>* " + session.getAttribute("lname").toString() + "</span>");
+                            out.println("<div style='color: red; float: left; max-width: 395px; padding-left: 5px;'>* " 
+                                    + session.getAttribute("lname").toString() + "</div>");
                             session.removeAttribute("lname");
                         }
                     %>
-                </div>
-                <div style="clear: both"></div>
+                <div style="clear: both;"></div>
                 <div style="float: left; width: 150px">Email:</div>
                 <div style="float: left">
-                    <input type="text" name="id_email" id="id_email" value="<%= a.getUserEmail() %>" />
+                    <input type="text" name="id_email" id="id_email" value="${param.id_email}" />
+                </div>
                     <% 
                         if(session.getAttribute("email") != null) {
-                            out.println("<span style='color: red'>* " + session.getAttribute("email").toString() + "</span>");
+                            out.println("<div style='color: red; float: left; max-width: 395px; padding-left: 5px;'>* " 
+                                    + session.getAttribute("email").toString() + "</div>");
                             session.removeAttribute("email");
                         }
                     %>
-                </div>
                 <div style="clear: both"></div>
                 <div style="float: left; width: 150px">Role:</div>
                 <div style="float: left">

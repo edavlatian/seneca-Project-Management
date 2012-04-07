@@ -78,14 +78,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -164,7 +164,7 @@
                                 if(request.getParameter("cdesc").equals("1")){
                                     %>Comment Field cant be empty!!<%
                                 }else if (request.getParameter("cdesc").equals("2")){
-                                    %>Comment cant exceed 65000 characters in length!<%
+                                    %>Comment cant exceed 500 characters in length!<%
                                 }
                             }
                         %>                               

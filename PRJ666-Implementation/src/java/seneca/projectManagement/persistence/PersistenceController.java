@@ -40,6 +40,7 @@ public class PersistenceController extends EntityControllerBase {
       Accounts account = getAccount( aAccount.getUserIdentifier() );
       team.setUserId( account.getUserId() );
       team.setTeamEmail( account.getUserEmail() );
+      team.setTeamName("Unregistered Team. User Id: " + account.getUserId());
     
       em = getEntityManager();
       em.getTransaction().begin();
@@ -163,10 +164,36 @@ public class PersistenceController extends EntityControllerBase {
       
       for(int k = 0, len2 = temp.size(); k < len2; k++){
         tmbrs.add(temp.get(k));
-      }
-      
+      } 
     }
     
+    return tmbrs;
+  }
+  
+  public List<Teammember> getActiveRegisteredTeamMembers(){
+    em = getEntityManager();
+    
+    Query q = em.createQuery("SELECT t FROM Teams t WHERE t.teamStatus = 1 AND t.hasRegistered = 1");
+    
+    List<Teams> tms = (List<Teams>)q.getResultList();
+    Teams t = null;
+    
+    List<Teammember> tmbrs = null, temp = null;
+    Teammember m = null;
+    
+    q = em.createNamedQuery("Teammember.findByTeamId").setParameter("teamId", tms.get(0).getTeamId());
+    tmbrs = (List<Teammember>)q.getResultList();
+    
+    for(int i = 1, len = tms.size(); i < len; i++){
+      t = tms.get(i);
+      q = em.createNamedQuery("Teammember.findByTeamId").setParameter("teamId", t.getTeamId());
+      
+      temp = (List<Teammember>)q.getResultList();
+      
+      for(int k = 0, len2 = temp.size(); k < len2; k++){
+        tmbrs.add(temp.get(k));
+      } 
+    }
     return tmbrs;
   }
   
@@ -421,11 +448,10 @@ public class PersistenceController extends EntityControllerBase {
   }
   
   //Edouard
-  public List<Teams> getUnMatchedTeams( Integer aStatus ){
+  public List<Teams> getUnMatchedTeams( ){
       em = getEntityManager();
       
-      Query q = em.createQuery("SELECT t FROM Teams t WHERE t.projectId IS NULL AND t.teamStatus = :status")
-              .setParameter( "status", aStatus );
+      Query q = em.createQuery("SELECT t FROM Teams t WHERE t.projectId IS NULL AND t.teamStatus = 1 AND t.hasRegistered = 1");
       
       return (List<Teams>)q.getResultList();
   } 

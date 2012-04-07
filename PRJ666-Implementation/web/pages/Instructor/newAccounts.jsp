@@ -23,28 +23,16 @@
             session.setAttribute("Error", "You don't have permission to access the instructor page.");
             response.sendRedirect("/PRJ666-Implementation/pages/login.jsp");
         } else {
-            String user = request.getParameter("id_user");
-            if(user == null) {
-                session.setAttribute("user", "Cannot be empty!");
-                errorFound = true;
-            } else if(user.isEmpty() == true) {
-                session.setAttribute("user", "Cannot be empty!");
-                errorFound = true;
-            } else {
-                if(Validation.isValidUsername(user) == true) {
-                    a.setUserIdentifier(user);
-                } else {
-                    session.setAttribute("user", "Invalid username!");
-                    errorFound = true;
-                }
-            }
-            
             String fname = request.getParameter("id_fname");
             if(fname == null) {
                 session.setAttribute("fname", "Cannot be empty!");
                 errorFound = true;
             } else if(fname.isEmpty() == true) {
                 session.setAttribute("fname", "Cannot be empty!");
+                errorFound = true;
+            } else if(!fname.matches("[A-Za-z\\s-]{1,16}")) {
+                session.setAttribute("fname", "Cannot be greater than 16 characters in length. Must contain only "
+                        + "alphabetic characters dashes and spaces.");
                 errorFound = true;
             } else {
                 a.setUserFName(fname);
@@ -56,6 +44,10 @@
                 errorFound = true;
             } else if(lname.isEmpty() == true) {
                 session.setAttribute("lname", "Cannot be empty!");
+                errorFound = true;
+            } else if(!lname.matches("[A-Za-z\\s-]{1,16}")) {
+                session.setAttribute("lname", "Cannot be greater than 16 characters in length. Must contain only "
+                        + "alphabetic characters dashes and spaces.");
                 errorFound = true;
             } else {
                 a.setUserLName(lname);
@@ -69,20 +61,21 @@
                 session.setAttribute("email", "Cannot be empty!");
                 errorFound = true;
             } else {
-                if(Validation.isValidEmail(email) == true) {
+                if(email.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")) {
                     a.setUserEmail(email);
                 } else {
-                    session.setAttribute("email", "Invalid email address!");
+                    session.setAttribute("email", "Invalid email address! Must end in @learn.senecac.on.ca or @senecacollege.ca");
                     errorFound = true;
                 }
             }
             
             a.setUserRole(request.getParameter("id_role"));
             a.setAccountStatus(new Integer(request.getParameter("id_status")));
+            a.setUserIdentifier(request.getParameter("id_user"));
             
             if(errorFound == true) {
                 session.setAttribute("Account", a);
-                response.sendRedirect("CreateTeam.jsp");
+                request.getRequestDispatcher("CreateTeam.jsp").forward(request, response);
             }
         }
     }
@@ -123,14 +116,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {

@@ -57,14 +57,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -93,7 +93,7 @@
         <td style="background-image: url('../resources/images/header_bg.jpg'); height: 1px;">
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Team/manageTeamPage.jsp">Manage<br/>Team Page</a></li>
-            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Team/viewProjects.jsp">View<br/>Available<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Team/teamProject.jsp">View<br/>Your<br/>Project</a></li>
           </ul>
           <div style="float: right;">
@@ -109,6 +109,7 @@
             Teams team = userBean.getTeam();
             List<Teammember> members = userBean.getAllMembers(team.getTeamId());
             Teammember m = null;
+            int count = 0;
           %>
           <div style="text-align: center;">
             <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
@@ -117,18 +118,22 @@
             for(int i = 0, len = members.size(); i < len; i++){
               m = members.get(i);
               %>
-              <div style="text-align: center;">
-                <a href="memberPage.jsp?id=<%= m.getMemberId() %>"><img src="<%= m.getMemberImage() %>" alt="Member Image" 
-                                                                        style="max-height: 200px; max-width: 150px;"/></a>
-                <br/>
+              <div style="text-align: center; float: left; margin-left: 5px; width: 270px; height: 400px;">
+                <div style="width: 260px; height: 350px;">
+                  <a href="memberPage.jsp?id=<%= m.getMemberId() %>">
+                      <img src="<%= m.getMemberImage() %>" alt="Member Image" 
+                        style="max-height: 350px; max-width: 260px;"/></a>
+                </div>
                 <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>
                 <br/>
                 <a href="mailto:<%= m.getEmail() %>">Email</a>
                 <br/>
                 <%= m.getFirstName() + " " + m.getLastName() %>
               </div>
-              <br/>
               <%
+              if(count == 3)
+                out.println("<br/>");
+              count++;
             }
           %>
         </td>

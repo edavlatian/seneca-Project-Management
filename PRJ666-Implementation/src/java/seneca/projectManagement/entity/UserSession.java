@@ -44,8 +44,7 @@ public class UserSession {
     try {
       Accounts account = pc.getAccount( aUserIdentifier );
       if(account != null) {
-        if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())
-            == true && account.getAccountStatus() == 1) {
+        if(CryptoUtil.encodeBase64(CryptoUtil.digestSHA(aPassphrase)).equals(account.getPassword())) {
           loggedUser = account;
           return true;
         }
@@ -259,8 +258,8 @@ public class UserSession {
     return pc.updateAccounts(a);
   } 
   
-  public List<Teams> getUnMatchedTeams( Integer aStatus ){
-      return pc.getUnMatchedTeams(aStatus);
+  public List<Teams> getUnMatchedTeams(){
+      return pc.getUnMatchedTeams();
   }
   
   public Teams getProjectTeam(int aId){
@@ -315,5 +314,9 @@ public class UserSession {
   //Edouard
   public boolean removeProject(Projects aProject){
     return pc.removeProject(aProject);
+  }
+  
+  public List<Teammember> getActiveRegisteredTeamMembers(){
+    return pc.getActiveRegisteredTeamMembers();
   }
 }

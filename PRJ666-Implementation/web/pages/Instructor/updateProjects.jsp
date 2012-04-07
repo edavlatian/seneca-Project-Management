@@ -60,14 +60,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -155,16 +155,17 @@
                 out.println("<a href='updateProjects.jsp?items=" + projects.size() + "'>View All</a>");
                 out.println("</div>");
                 out.print("<div style='clear: both'></div>");
-                if(session.getAttribute("updateFail") != null) {
-                  out.println("<span style='color: red'>" + session.getAttribute("updateFail") + "</span>");
-                  session.removeAttribute("updateFail");
-                }
-                else if(session.getAttribute("updateSuccess") != null){
-                  out.println("<span style='color: green'>" + session.getAttribute("updateSuccess") + "</span>");
-                  session.removeAttribute("updateSuccess");
-                }
               } else {
-                out.println("<h1>No project that are Approved or Matched.</h1>");
+                out.println("<h3>No projects that are Approved or Matched.</h3>");
+              }
+              
+              if(session.getAttribute("updateFail") != null) {
+                out.println("<span style='color: red'>" + session.getAttribute("updateFail") + "</span>");
+                session.removeAttribute("updateFail");
+              }
+              else if(session.getAttribute("updateSuccess") != null){
+                out.println("<span style='color: green'>" + session.getAttribute("updateSuccess") + "</span>");
+                session.removeAttribute("updateSuccess");
               }
             %>
             </form>

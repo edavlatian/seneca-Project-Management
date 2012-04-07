@@ -61,14 +61,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -98,7 +98,7 @@
           <ul>
             <li><a href="/PRJ666-Implementation/pages/Instructor/HomeInstructor.jsp">Instructor<br/>Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/CreateTeam.jsp">Create<br/>Team<br/>Accounts</a></li>
-		        <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Instructor/PendingProjects.jsp">Pending<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/ApprovedProjects.jsp">Approved<br/>Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/updateProjects.jsp">Change<br/>Project<br/>Status</a></li>
             <li><a href="/PRJ666-Implementation/pages/Instructor/manageTeamMembers.jsp">Manage<br/>Team<br/>Members</a></li>
@@ -113,7 +113,7 @@
           <form name="form1" method="POST" action="../Instructor/matchTeam.jsp">
             <%
                 Teams t = null;
-                List<Teams> tms = userBean.getUnMatchedTeams(1);
+                List<Teams> tms = userBean.getUnMatchedTeams();
                 Teammember leader = null;
                 if(tms.size() > 0) {
                     Integer beg = 0;
@@ -128,7 +128,10 @@
                     catch (Exception e) {}
                     for(int i = beg; i < beg + items && i < tms.size() ; i++) {
                         t = tms.get(i);
-                        leader = userBean.getLeader(t.getTeamId());
+                        if(userBean.getLeader(t.getTeamId()) != null){
+                          leader = userBean.getLeader(t.getTeamId());
+                        }
+                        
                         out.print("<div style='font-weight: bold; color: white; background-color: #6F93C9; padding: 5px;'>");
                           out.println("<div style='float: left'>");
                             out.println(t.getTeamName());
@@ -140,8 +143,13 @@
                         out.print("</div>");
                         out.println("<div style='background-color: skyblue; padding: 10px'>");
                           out.println("<div style='float: left; width: 150px'><b>Team Leader:</b></div>");
-                          out.println("<div style='float: left; width: 750px'>" + leader.getFirstName() +
-                                  " " + leader.getLastName() + "</div>");
+                          if(leader != null){
+                            out.println("<div style='float: left; width: 750px'>" + leader.getFirstName() +
+                                    " " + leader.getLastName() + "</div>");
+                          }
+                          else{
+                            out.println("<div style='float: left; width: 750px'>No Leader Assigned. Contact Team Members.</div>");    
+                          }
                           out.print("<div style='clear: both'></div>");
                         out.println("</div>");
                     }

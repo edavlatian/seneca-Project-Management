@@ -53,14 +53,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -152,7 +152,7 @@
                                         if(request.getParameter("cdesc").equals("1")){
                                             %>Description field cant be empty!<%
                                         }else if (request.getParameter("cdesc").equals("2")){
-                                            %>Description cant exceed 65000 characters in length!<%
+                                            %>Description cant exceed 500 characters in length!<%
                                         }
                                     }
                                 %>
@@ -169,7 +169,7 @@
                                         if(request.getParameter("cbusa").equals("1")){
                                             %>Business Areas field cant be empty!<%
                                         }else if (request.getParameter("cbusa").equals("2")){
-                                            %>Business Areas cant exceed 65000 characters in length!<%
+                                            %>Business Areas cant exceed 200 characters in length!<%
                                         }
                                     }
                                 %>                                

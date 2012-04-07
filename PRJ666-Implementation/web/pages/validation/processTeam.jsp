@@ -27,13 +27,15 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
   String[] tmFName = request.getParameterValues("tmFName"),
            tmLName = request.getParameterValues("tmLName"),
            tmDesc = request.getParameterValues("tmDesc"),
-           tmEmail = request.getParameterValues("tmEmail");
+           tmEmail = request.getParameterValues("tmEmail"),
+           tmImage = request.getParameterValues("tmImage");
   
   // Team Leader 
   String tlFName = request.getParameter("tlFName"),
          tlLName = request.getParameter("tlLName"),
          tlDesc = request.getParameter("tlDesc"),
-         tlEmail = request.getParameter("tlEmail");
+         tlEmail = request.getParameter("tlEmail"),
+         tlImage = request.getParameter("tlImage");
   
   // Team Fields
   String tDesc = request.getParameter("tDesc"),
@@ -41,84 +43,118 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
          tName = request.getParameter("tName"),
          tLogo = request.getParameter("tLogo");
   
+  int count = 0;
+  
+  for(int i = 0; i < 3; i++){
+    if(!tmFName[i].isEmpty() || !tmLName[i].isEmpty() || !tmDesc[i].isEmpty() || !tmEmail[i].isEmpty() || !tmImage[i].isEmpty())
+      count++;  
+  }
+  
   // Team Validation
   if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
     session.setAttribute("teamInfoFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   else if(tLogo.isEmpty() || tLogo.length() > 65000){
     session.setAttribute("teamInfoFail" , "Error. Image can not be empty.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   else if(tDesc.isEmpty() || tDesc.length() > 65000){
-    session.setAttribute("teamInfoFail", "Error. Description can't be empty or greater than 400 characters.");
+    session.setAttribute("teamInfoFail", "Error. Description can't be empty or greater than 65000 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   else if(tCons.isEmpty() || tCons.length() > 65000){
-    session.setAttribute("teamInfoFail", "Error. Constraints can't be empty or greater than 120 characters.");
+    session.setAttribute("teamInfoFail", "Error. Constraints can't be empty or greater than 65000 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   
   // Leader Validation
-  if(!tlFName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("leaderInfoFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+  if(!tlFName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("leaderInfoFail", "Error. First Name must be only alphanumeric and between 1 and 15 characters in length.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
-  else if(!tlLName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("leaderInfoFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+  else if(!tlLName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("leaderInfoFail", "Error. Last Name must be only alphanumeric and between 1 and 15 characters in length.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   else if(!tlEmail.matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
     session.setAttribute("leaderInfoFail", "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   else if(tlDesc.isEmpty() || tlDesc.length() > 65000){
-    session.setAttribute("leaderInfoFail", "Error. Description can't be empty or greater than 250 characters.");
+    session.setAttribute("leaderInfoFail", "Error. Description can't be empty or greater than 65000 characters.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
+  }
+  else if(tlImage.length() > 65000){
+    session.setAttribute("leaderInfoFail", "Error. Leader Image can't be empty.");
+    request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   
   // Check if at least one member's info is filled
-  if(tmFName.length > 1){
+  if(count < 1){
     session.setAttribute("countFail", "Error. Must have at least one member.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
   
   // Member First Name Validation
-  for(int i = 0, len = tmFName.length; i < len; i++){
-    if(!tmFName[i].matches("[A-Za-z\\s]{3,15}")){
-      session.setAttribute("memberInfoFail" + i, "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
-      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response); 
+  for(int i = 0; i < count; i++){
+    if(!tmFName[i].matches("[A-Za-z\\s]{1,15}")){
+      session.setAttribute("memberInfoFail" + i, "Error. First Name must be only alphanumeric and between 1 and 15 characters in length.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
     }
   }
   
   // Member Last Name Validation
-  for(int i = 0, len = tmLName.length; i < len; i++){
-    if(!tmLName[i].matches("[A-Za-z\\s]{3,15}")){
-      session.setAttribute("memberInfoFail" + i, "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+  for(int i = 0; i < count; i++){
+    if(!tmLName[i].matches("[A-Za-z\\s]{1,15}")){
+      session.setAttribute("memberInfoFail" + i, "Error. Last Name must be only alphanumeric and between 1 and 15 characters in length.");
       request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
     }
   }
   
   // Member Description Validation
-  for(int i = 0, len = tmDesc.length; i < len; i++){
-    if(tmDesc[i].isEmpty() || tmDesc[i].length() > 250){
-      session.setAttribute("memberInfoFail" + i, "Error. Description can't be empty or greater than 250 characters.");
+  for(int i = 0; i < count; i++){
+    if(tmDesc[i].isEmpty() || tmDesc[i].length() > 65000){
+      session.setAttribute("memberInfoFail" + i, "Error. Description can't be empty or greater than 65000 characters.");
       request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
     }     
   }
   
   // Member Email Validation
-  for(int i = 0, len = tmEmail.length; i < len; i++){
+  for(int i = 0; i < count; i++){
     if(!tmEmail[i].matches("[\\w\\+\\-\\._]+(@learn.senecac.on.ca|@senecacollege.ca)")){
       session.setAttribute("memberInfoFail" + i, "Error. Email must end in @learn.senecac.on.ca or @senecacollege.ca .");
       request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
+    }
+  }
+  
+  // Member Image Validation
+  for(int i = 0; i < count; i++){
+    if(tmImage[i].length() > 65000){
+      session.setAttribute("memberInfoFail" + i, "Error. Image can't be empty.");
+      request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
     }
   }
   
   String emails = "";
   emails = tlEmail + ";";
   
-  for(int i = 0, len = tmEmail.length; i < len; i++){
+  for(int i = 0; i < count; i++){
     emails += tmEmail[i] + ";";
   }
   
@@ -126,16 +162,18 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
   
   
   if (team != null){
-    
       Teammember teamMember = userBean.getLeader(team.getTeamId());
       teamMember.setDescription(tlDesc);
       teamMember.setFirstName(tlFName);
       teamMember.setLastName(tlLName);
       teamMember.setEmail(tlEmail);
+      teamMember.setMemberImage(tlImage);
+      teamMember.setTeamLeader(1);
+      teamMember.setTeamId(team.getTeamId());
       
       
       if (userBean.updateMember( teamMember )) {
-        for (int i = 0, len = tmFName.length; i < len;){
+        for (int i = 0; i < count;){
           teamMember = new Teammember();
         
           teamMember.setDescription(tmDesc[i]);
@@ -144,6 +182,7 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
           teamMember.setFirstName(tmFName[i]);
           teamMember.setLastName(tmLName[i]);
           teamMember.setTeamLeader(0);
+          teamMember.setMemberImage(tmImage[i]);
           
           if ( userBean.addMember( teamMember ) ){
             i++;
@@ -151,12 +190,14 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
           else {
             session.setAttribute("countFail", "Error. Team Member could not be added.");
             request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+            return;
           }
         }
       }
       else {
         session.setAttribute("countFail", "Error. Team Leader could not be updated.");
         request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+        return;
       }
     
     team.setTeamDescription(tDesc);
@@ -171,11 +212,13 @@ if ("true".equals(request.getParameter("publishTeamPage"))){
     else {
       session.setAttribute("countFail", "Error. Team Account could not be updated.");
       request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+      return;
     }
   }
   else {
     session.setAttribute("countFail", "Error. Team Account could not be found.");
     request.getRequestDispatcher("../Team/publishTeamPage.jsp").forward(request, response);
+    return;
   }
 }
 else if (request.getParameter("editTeamInfo") != null){
@@ -191,22 +234,22 @@ else if (request.getParameter("editTeamInfo") != null){
   t.setTeamDescription(tDesc);
   
   if(!tName.matches("[A-Za-z0-9\\s]{1,20}")){
-    session.setAttribute("editTeamFail", "Error. First Name must be only alphanumeric and between 1 and 20 characters in length.");
+    session.setAttribute("editTeamFail", "Error. Team Name must be only alphanumeric and between 1 and 20 characters in length.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tLogo.isEmpty() || tLogo.length() > 65000){
-    session.setAttribute("editTeamFail" , "Error. Image can not be empty.");
+    session.setAttribute("editTeamFail" , "Error. Team Logo can not be empty.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tDesc.isEmpty() || tDesc.length() > 65000){
-    session.setAttribute("editTeamFail", "Error. Description can't be empty or greater than 400 characters.");
+    session.setAttribute("editTeamFail", "Error. Team Description can't be empty or greater than 65000 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
   else if(tCons.isEmpty() || tCons.length() > 65000){
-    session.setAttribute("editTeamFail", "Error. Constraints can't be empty or greater than 120 characters.");
+    session.setAttribute("editTeamFail", "Error. Team Constraints can't be empty or greater than 65000 characters.");
     session.setAttribute("editTeam", "blahblah");
     response.sendRedirect("../Team/updateTeam.jsp");
   }
@@ -243,16 +286,14 @@ else if (request.getParameter("editMemberInfo") != null) {
   m.setTeamId(t.getTeamId());
   m.setTeamLeader(Integer.parseInt(mLeader));
   
-  System.out.println(mLeader);
-  
-  if(!mFName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 3 and 15 characters in length.");
+  if(!mFName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("editMemberFail", "Error. First Name must be only alphanumeric and between 1 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
     session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(!mLName.matches("[A-Za-z\\s]{3,15}")){
-    session.setAttribute("editMemberFail", "Error. Last Name must be only alphanumeric and between 3 and 15 characters in length.");
+  else if(!mLName.matches("[A-Za-z\\s]{1,15}")){
+    session.setAttribute("editMemberFail", "Error. Last Name must be only alphanumeric and between 1 and 15 characters in length.");
     session.setAttribute("editMember", "blahblah");
     session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
@@ -263,8 +304,8 @@ else if (request.getParameter("editMemberInfo") != null) {
     session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(mDesc.isEmpty() || mDesc.length() > 250){
-    session.setAttribute("editMemberFail", "Error. Description can't be empty or greater than 250 characters.");
+  else if(mDesc.isEmpty() || mDesc.length() > 65000){
+    session.setAttribute("editMemberFail", "Error. Description can't be empty or greater than 65000 characters.");
     session.setAttribute("editMember", "blahblah");
     session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");

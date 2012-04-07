@@ -38,7 +38,7 @@
         if(mDescription == null || mDescription.isEmpty() ){
             errorFound = true;
             errors += "&fdesc=1";
-        }else if(mDescription.length() > 65000){
+        }else if(mDescription.length() > 120){
             errorFound = true;
             errors += "&fdesc=2";
         }else{
@@ -48,7 +48,7 @@
         if(mTheFile == null || mTheFile.isEmpty()){
             errorFound = true;
             errors += "&ffile=1";
-        }else if(mTheFile.length() > 65000){
+        }else if(mTheFile.length() > 500){
             errorFound = true;
             errors += "&ffile=2";
         }else{
@@ -86,7 +86,7 @@
         if(mDescription == null || mDescription.isEmpty() ){
             errorFound = true;
             errors += "&fdesc=1";
-        }else if(mDescription.length() > 65000){
+        }else if(mDescription.length() > 120){
             errorFound = true;
             errors += "&fdesc=2";
         }else{
@@ -96,7 +96,7 @@
         if(mTheFile == null || mTheFile.isEmpty()){
             errorFound = true;
             errors += "&ffile=1";
-        }else if(mTheFile.length() > 65000){
+        }else if(mTheFile.length() > 500){
             errorFound = true;
             errors += "&ffile=2";
         }else{
@@ -110,7 +110,7 @@
                 response.sendRedirect("../Company/ViewProjectDetails.jsp?id="+projFile.getProjectId()+"&fileupdated=yes" );       
             }
         }else{
-            response.sendRedirect("../Company/ManageProjectFile.jsp?id="+projFile.getFileId()+errors);
+            response.sendRedirect("../Company/ManageProjectFile.jsp?id="+projFile.getProjectId()+errors);
         } 
     }else if("true".equals(request.getParameter("RemoveProjectFile"))){
         Projectfile projFile = userBean.getAProjectFile(Integer.parseInt(request.getParameter("fileId")));

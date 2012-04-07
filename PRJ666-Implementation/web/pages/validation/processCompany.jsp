@@ -32,7 +32,7 @@
         if(mCompanyDescription == null || mCompanyDescription.isEmpty()){
             errorFound = true;
             errors += "&cdesc=1";
-        }else if(mCompanyDescription.length() > 65000){
+        }else if(mCompanyDescription.length() > 600){
             errorFound = true;      
             errors += "&cdesc=2";
         }else{
@@ -42,7 +42,7 @@
         if(mBusinessAreas == null || mBusinessAreas.isEmpty()){
             errorFound = true;
             errors += "&cbusa=1";
-        }else if(mBusinessAreas.length() > 65000){
+        }else if(mBusinessAreas.length() > 200){
             errorFound = true;
             errors += "&cbusa=2";
         }else{

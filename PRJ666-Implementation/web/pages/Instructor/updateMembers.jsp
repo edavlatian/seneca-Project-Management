@@ -54,14 +54,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -131,11 +131,22 @@
                               <option value="0" selected>Select a Team</option>
                               <%
                                 Teams t = null;
-                                List<Teams> tms = userBean.getUnMatchedTeams(1);
+                                List<Teams> tms = userBean.getUnMatchedTeams();
                                 for(int i = 0, len = tms.size(); i < len; i++){
                                   t = tms.get(i);
+                                  String selected = "";
+                                  
+                                  if(request.getParameter("mTeam") != null){
+                                    int id = t.getTeamId();
+                                    
+                                    if(Integer.toString(id).equals(request.getParameter("mTeam")))
+                                      selected = "selected";
+                                  }
+                                    
                               %>
-                              <option value="<%= t.getTeamId() %>"><%= t.getTeamName() %></option>
+                              <option value="<%= t.getTeamId() %>"
+                                      <%= selected %>>
+                                  <%= t.getTeamName() %></option>
                               <%
                                 }
                               %>

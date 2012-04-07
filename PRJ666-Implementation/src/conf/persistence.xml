@@ -2,13 +2,13 @@
 <persistence version="2.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
   <persistence-unit name="PRJ666-ImplementationPU" transaction-type="JTA">
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
-    <jta-data-source>jdbc/ejb605_113a26</jta-data-source>
+    <jta-data-source>jdbc/prj666_121a06</jta-data-source>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
-      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://zenit.senecac.on.ca:3306/ejb605_113a26"/>
-      <property name="javax.persistence.jdbc.password" value="deHM6632"/>
+      <property name="javax.persistence.jdbc.url" value="jdbc:mysql://zenit.senecac.on.ca:3306/prj666_121a06"/>
+      <property name="javax.persistence.jdbc.password" value="bfGY3445"/>
       <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
-      <property name="javax.persistence.jdbc.user" value="ejb605_113a26"/>
+      <property name="javax.persistence.jdbc.user" value="prj666_121a06"/>
     </properties>
   </persistence-unit>
 </persistence>

@@ -50,14 +50,14 @@
             }
           }
           %>
-          <div style="margin:2px; width:200px;">
+          <div style="margin:2px; width:350px;">
             <script type="text/javascript"> 
 		          new TWTR.Widget( {
   		          version: 2,
   		          type: "profile",
   		          rpp: 5,
  		            interval: 6000,
-  		          width: "auto",
+  		          width: 350,
   		          height: 300,
   		          theme: {
     		          shell: {
@@ -89,17 +89,26 @@
             if(userBean.isLogged()) {
               if(userBean.getLoggedUser().getUserRole().equals("CR")){
           %>
-			      <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
+            <li><a href="/PRJ666-Implementation/pages/Company/HomeCompany.jsp">Company Home</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ProjectAgreementForm.jsp">Create New Project</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ViewCompanyProjects.jsp">Your Projects</a></li>
             <li><a href="/PRJ666-Implementation/pages/Company/ManageCompanyInfo.jsp">Edit Company Info</a></li>
           <%
-          }
-          }
+              }
+            }
           %>
           </ul>    
           <div style="float: right;">
-            <ul><li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
+            <ul>
+              <li><a href="/PRJ666-Implementation/pages/archived.jsp">Archived<br/>Projects</a></li>
+              <li><a href="/PRJ666-Implementation/pages/Company/AgreementForm.jsp">Register<br/>Company</a></li>
+              <li><a href="/PRJ666-Implementation/pages/About.jsp">About</a></li>
+              <%
+                if(userBean.isLogged())
+                  out.println("<li><a href='/PRJ666-Implementation/pages/logout.jsp'>Logout</a></li>");
+                else
+                  out.println("<li><a href='/PRJ666-Implementation/pages/login.jsp'>Login</a></li>");
+              %>
             </ul>
           </div>
         </td>
