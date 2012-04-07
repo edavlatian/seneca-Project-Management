@@ -140,9 +140,9 @@
                             <%
                                 if(request.getParameter("fname")!=null){
                                     if(request.getParameter("fname").equals("1")){
-                                        %>File name field cant be empty!<%
+                                        %>File name field can't be empty!<%
                                     }else if (request.getParameter("fname").equals("2")){
-                                        %>File name cant exceed 40 characters in length!<%
+                                        %>File name can't exceed 40 characters in length!<%
                                     }
                                 }
                             %>                               
@@ -157,9 +157,9 @@
                             <%
                                 if(request.getParameter("fdesc")!=null){
                                     if(request.getParameter("fdesc").equals("1")){
-                                        %>Description field cant be empty!<%
+                                        %>Description field can't be empty!<%
                                     }else if (request.getParameter("fdesc").equals("2")){
-                                        %>Description cant exceed 120 characters in length!<%
+                                        %>Description can't exceed 65000 characters in length!<%
                                     }
                                 }
                             %>
@@ -174,9 +174,9 @@
                             <%
                                 if(request.getParameter("ffile")!=null){
                                     if(request.getParameter("ffile").equals("1")){
-                                        %>File Location field cant be empty!<%
+                                        %>File Location field can't be empty!<%
                                     }else if (request.getParameter("ffile").equals("2")){
-                                        %>File Location field cant exceed 500 characters in length!<%
+                                        %>File Location field can't exceed 65000 characters in length!<%
                                     }
                                 }
                             %>                                

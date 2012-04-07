@@ -133,9 +133,9 @@
                                 <%
                                     if(request.getParameter("cname")!=null){
                                         if(request.getParameter("cname").equals("1")){
-                                            %>Company name field cant be empty!<%
+                                            %>Company name field can't be empty!<%
                                         }else if (request.getParameter("cname").equals("2")){
-                                            %>Company name cant exceed 25 characters in length!<%
+                                            %>Company name can't exceed 25 characters in length!<%
                                         }
                                     }
                                 %>                               
@@ -150,9 +150,9 @@
                                 <%
                                     if(request.getParameter("cdesc")!=null){
                                         if(request.getParameter("cdesc").equals("1")){
-                                            %>Description field cant be empty!<%
+                                            %>Description can't be empty!<%
                                         }else if (request.getParameter("cdesc").equals("2")){
-                                            %>Description cant exceed 500 characters in length!<%
+                                            %>Description can't exceed 65000 characters in length!<%
                                         }
                                     }
                                 %>
@@ -167,9 +167,9 @@
                                 <%
                                     if(request.getParameter("cbusa")!=null){
                                         if(request.getParameter("cbusa").equals("1")){
-                                            %>Business Areas field cant be empty!<%
+                                            %>Business Areas can't be empty!<%
                                         }else if (request.getParameter("cbusa").equals("2")){
-                                            %>Business Areas cant exceed 200 characters in length!<%
+                                            %>Business Areas can't exceed 65000 characters in length!<%
                                         }
                                     }
                                 %>                                
@@ -184,9 +184,9 @@
                                 <%
                                     if(request.getParameter("cphon")!=null){
                                         if(request.getParameter("cphon").equals("1")){
-                                            %>Phone field cant be empty!<%
+                                            %>Phone field can't be empty!<%
                                         }else if (request.getParameter("cphon").equals("2")){
-                                            %>Phone cant exceed 12 characters in length!<%
+                                            %>Phone can't exceed 12 characters in length!<%
                                         }
                                     }
                                 %>                                
