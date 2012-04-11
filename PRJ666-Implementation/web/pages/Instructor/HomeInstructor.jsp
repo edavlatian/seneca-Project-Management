@@ -30,7 +30,7 @@
   <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
@@ -102,9 +102,9 @@
           <h1>Instructor Page</h1>
           <h2>Hello, <%=userBean.getLoggedUser().getUserFName() + " " +
           userBean.getLoggedUser().getUserLName()%></h2>  
-          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewClients.jsp">Clients</a></p>
-          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewProjects.jsp">Projects</a></p>
-          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewTeams.jsp">Teams</a></p>       
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewClients.jsp">View All Clients</a></p>
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewProjects.jsp">View All Projects</a></p>
+          <p><a href="/PRJ666-Implementation/pages/Instructor/ViewTeams.jsp">View All Teams</a></p>       
         </td>
       </tr>             
     </table>

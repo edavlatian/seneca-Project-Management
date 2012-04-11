@@ -51,7 +51,7 @@
   <head>
     <link rel="stylesheet" type="text/css" href="../resources/css/pageStuff.css" />
     <script type="text/javascript" src="../resources/js/twitter.js"></script>
-    <title>PRJ566 - Company Home</title>
+    <title>PRJ566 - Company Create Comment</title>
   </head>
   <body>
     <table> 

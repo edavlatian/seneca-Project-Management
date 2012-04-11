@@ -40,7 +40,7 @@ public class PersistenceController extends EntityControllerBase {
       Accounts account = getAccount( aAccount.getUserIdentifier() );
       team.setUserId( account.getUserId() );
       team.setTeamEmail( account.getUserEmail() );
-      team.setTeamName("Unregistered Team. User Id: " + account.getUserId());
+      team.setTeamName("User Id: " + account.getUserId());
     
       em = getEntityManager();
       em.getTransaction().begin();

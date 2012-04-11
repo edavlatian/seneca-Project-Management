@@ -112,6 +112,10 @@
             int count = 0;
           %>
           <div style="text-align: center;">
+            <img src="<%= team.getTeamLogo() == null || team.getTeamLogo().isEmpty() ? "/PRJ666-Implementation/pages/resources/images/logoDefault.jpg" : team.getTeamLogo() %>"
+                 alt="Team Logo" style="max-width: 400px; max-height: 200px;"/>
+          </div>
+          <div style="text-align: center; margin-bottom: 10px;">
             <a href="mailto:<%= team.getTeamEmail() %>">Email All Members</a>
           </div>
           <%
@@ -121,7 +125,8 @@
               <div style="text-align: center; float: left; margin-left: 5px; width: 270px; height: 400px;">
                 <div style="width: 260px; height: 350px;">
                   <a href="memberPage.jsp?id=<%= m.getMemberId() %>">
-                      <img src="<%= m.getMemberImage() %>" alt="Member Image" 
+                      <img src="<%= m.getMemberImage() == null || m.getMemberImage().isEmpty() ? "/PRJ666-Implementation/pages/resources/images/memberDefault.jpg" : m.getMemberImage() %>" 
+                           alt="Member Image" 
                         style="max-height: 350px; max-width: 260px;"/></a>
                 </div>
                 <%= m.getTeamLeader() == 1 ? "Leader" : "Member" %>

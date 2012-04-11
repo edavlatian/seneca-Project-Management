@@ -177,19 +177,26 @@
                   
                   if(mId != null){
                     mbr = userBean.getMember(new Integer(request.getParameter("mId")));
+                    List<Teammember> tmbrs = userBean.getAllMembers(mbr.getTeamId());
+                    Teams t = userBean.getTeamById(mbr.getTeamId());
                     
-                    if(userBean.removeMember(mbr)){
+                    if(tmbrs.size() == 1 && t.getProjectId() != null){
+                      session.setAttribute("memberError", "Can not remove the team member. Last team member of the group and the group has"
+                              + " been matched to a project.");
+                      response.sendRedirect("../Instructor/manageTeamMembers.jsp");  
+                    }
+                    else if(userBean.removeMember(mbr)){
                       session.removeAttribute("deleteMember");
                       session.setAttribute("memberSuccess", "Successfully deleted " + mbr.getFirstName() + " " + mbr.getLastName() + ".");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");
                     }
                     else {
-                      session.setAttribute("Error", "Member removal failed. Please try manually removing them.");
+                      session.setAttribute("memberError", "Member removal failed. Please try manually removing them.");
                       response.sendRedirect("../Instructor/manageTeamMembers.jsp");
                     }
                   } 
                   else {
-                    session.setAttribute("Error", "Error. Must select a member to perform a delete.");
+                    session.setAttribute("memberError", "Error. Must select a member to perform a delete.");
                     response.sendRedirect("../Instructor/manageTeamMembers.jsp");
                   }
                 
@@ -200,4 +207,3 @@
     </table>
   </body>
 </html>
-

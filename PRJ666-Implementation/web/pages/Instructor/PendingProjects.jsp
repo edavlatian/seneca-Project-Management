@@ -39,7 +39,7 @@
   <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
@@ -161,12 +161,16 @@
                     out.println("<a href='PendingProjects.jsp?items=" + projects.size() + "'>View All</a>");
                     out.println("</div>");
                     out.print("<div style='clear: both'></div>");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
                 } else {
                     out.println("<h1>No projects to display.</h1>");
+                }
+                if(session.getAttribute("Error") != null) {
+                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                    session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("approveSuccess") != null){
+                    out.println("<span style='color: green'>" + session.getAttribute("approveSuccess") + "</span>");
+                    session.removeAttribute("approveSuccess");                  
                 }
             %>
             </form>

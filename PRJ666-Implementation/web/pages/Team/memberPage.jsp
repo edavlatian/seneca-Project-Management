@@ -111,15 +111,16 @@
             Teammember m = userBean.getMember(mId);
           %>
           <div style="float: left;">
-            <img src="<%= m.getMemberImage() %>" style="max-height: 300px; max-width: 230px"/>
+            <img src="<%= m.getMemberImage() == null || m.getMemberImage().isEmpty() ? "/PRJ666-Implementation/pages/resources/images/memberDefault.jpg" : m.getMemberImage() %>" 
+                 style="max-height: 300px; max-width: 230px"/>
           </div>
-          <div style="float: left;">
+          <div style="float: left; margin-left: 15px;">
             <span class="teamHeaders">Name:&nbsp;</span><%= m.getFirstName() + " " + m.getLastName() %>
             <br/>
             <a href="mailto:<%= m.getEmail() %>">Email Me</a>
             <br/><br/>
             <span class="teamHeaders">Description:&nbsp;</span>
-            <p style="max-width: 300px;"><%= m.getDescription() %></p>
+            <p style="max-width: 500px;"><%= m.getDescription() %></p>
           </div>
         </td>
       </tr>

@@ -166,16 +166,16 @@
                     out.println("<a href='matching.jsp?items=" + tms.size() + "'>View All</a>");
                     out.println("</div>");
                     out.print("<div style='clear: both'></div>");
-                    if(session.getAttribute("Error") != null) {
-                        out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                        session.removeAttribute("Error");
-                    }
-                    else if(session.getAttribute("matchSuccess") != null){
-                      out.println("<span style='color: green'>" + session.getAttribute("matchSuccess") + "</span>");
-                      session.removeAttribute("matchSuccess");                 
-                    }
                 } else {
                     out.println("<h1>No projects to display.</h1>");
+                }
+                if(session.getAttribute("Error") != null) {
+                    out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
+                    session.removeAttribute("Error");
+                }
+                else if(session.getAttribute("matchSuccess") != null){
+                    out.println("<span style='color: green'>" + session.getAttribute("matchSuccess") + "</span>");
+                    session.removeAttribute("matchSuccess");                 
                 }
             %>
             </form>

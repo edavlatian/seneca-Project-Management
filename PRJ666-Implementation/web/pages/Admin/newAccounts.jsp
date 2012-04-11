@@ -175,7 +175,7 @@
           </ul>
           <div style="float: right;">
             <ul>
-              <li><a href="PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
+              <li><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
             </ul>
           </div>
         </td>

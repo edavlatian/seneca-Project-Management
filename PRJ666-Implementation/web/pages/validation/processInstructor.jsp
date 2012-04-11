@@ -185,7 +185,7 @@ else if(request.getParameter("publishNewsPost") != null){
       request.getRequestDispatcher("../Instructor/postNews.jsp").forward(request, response);
     }
     else {
-      response.sendRedirect("../Instructor/HomeInstructor.jsp");
+      response.sendRedirect("../Home.jsp");
     }
   }
 }

@@ -125,6 +125,21 @@
             List<Projectfile> pf = userBean.getProfileFiles(p.getProjectId());
             Company c = userBean.getCompanyByID(p.getCompanyId());
             
+            String status = p.getStatus();
+            
+            if(status.equals("PE"))
+                status = "Pending";
+            else if(status.equals("AP"))
+                status = "Approved";
+            else if(status.equals("AV"))
+                status = "Available";
+            else if(status.equals("MA"))
+                status = "Matched";
+            else if(status.equals("PR"))
+                status = "Proceeded";
+            else if(status.equals("PA"))
+                status = "Past";
+            
             session.setAttribute("project", p);
           %>
           <h1><%= p.getPrjName() %> Project Details</h1>
@@ -148,6 +163,9 @@
                     <div style="clear: both"></div>
                   <div style="float: left; width: 150px"><b>Constraints:</b></div>
                     <div style="float: left; width: 730px"><%= p.getPrjConstraints() %></div>
+                    <div style="clear: both"></div>
+                  <div style="float: left; width: 150px"><b>Status:</b></div>
+                    <div style="float: left; width: 730px"><%= status %></div>
                     <div style="clear: both"></div>
                   <div style="float: left; width: 150px"><b>Semester:</b></div>
                     <div style="float: left; width: 730px"><%= p.getPrjIdentifier() == null ? "N/A" : p.getPrjIdentifier() %></div>

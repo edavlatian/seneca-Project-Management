@@ -173,7 +173,7 @@ Document   : Home
         }
       %>
       <tr>
-        <td style='padding-left: 5px'>
+        <td style='margin-left: 5px'>
           <%
             List<News> allNews = userBean.getRecentNews();
             News n = null;
@@ -185,7 +185,7 @@ Document   : Home
                 a = userBean.getAccount(n.getInstructorId());
                 out.println("<h3 class='title'>" + n.getPostTitle() + "</h3>By: " + a.getUserFName() + " " + a.getUserLName() +
                         "<br/>Date: " + new SimpleDateFormat("MM/dd/yyyy").format(n.getPostDate()));
-                out.println("<p style='padding: 5px;'>" + n.getPostText() + "</p><hr/>");
+                out.println("<p>" + n.getPostText() + "</p><hr/>");
               }
             }
             else

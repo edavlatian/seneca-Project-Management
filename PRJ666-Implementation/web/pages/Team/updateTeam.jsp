@@ -159,6 +159,7 @@
                     out.println("<h1>Edit Member</h1>");
                         String s = request.getParameter("mId") != null ? request.getParameter("mId") : session.getAttribute("mId").toString();
                         m = userBean.getMember(Integer.parseInt(s));
+                        session.setAttribute("member", m);
                         %>
                         <form method="POST" action="../validation/processTeam.jsp">
                         <div style="width: 900px">

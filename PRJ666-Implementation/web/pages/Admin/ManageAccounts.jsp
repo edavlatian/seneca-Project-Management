@@ -34,7 +34,7 @@
   <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
@@ -98,7 +98,7 @@
           </ul>
           <div style="float: right;">
             <ul>
-              <li><a href="PRJ666-Implementation/logout.jsp">Logout</a></li>
+              <li><a href="/PRJ666-Implementation/pages/logout.jsp">Logout</a></li>
             </ul>
           </div>
         </td>
@@ -162,7 +162,7 @@
                 }
                 out.println("<div style='float: left'><input type='submit' value='Create New Account' name='create' /></div>");
                 out.println("<div style='float: left'><input type='submit' value='Edit Selected Account' name='edit' /></div>");
-                out.println("<div style='float: left'><input type='submit' value='Remove Selected Account' name='remove' /></div>");
+                //out.println("<div style='float: left'><input type='submit' value='Remove Selected Account' name='remove' /></div>");
                 out.println("<div style='float: right'>");
                 int pages = (int) Math.ceil( (double) accts.size() / items);
                 out.println(" Page(s): ");

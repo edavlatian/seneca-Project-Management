@@ -276,7 +276,9 @@ else if (request.getParameter("editMemberInfo") != null) {
          mLeader = request.getParameter("mLeader");
   
   Teams t = userBean.getTeam();
-  Teammember m = new Teammember(), leader = userBean.getLeader(t.getTeamId());
+  Teammember m = new Teammember(), leader = userBean.getLeader(t.getTeamId()),
+             sM;
+  sM = (Teammember) session.getAttribute("member");
   m.setDescription(mDesc);
   m.setEmail(mEmail);
   m.setFirstName(mFName);
@@ -310,7 +312,7 @@ else if (request.getParameter("editMemberInfo") != null) {
     session.setAttribute("mId", mId);
     response.sendRedirect("../Team/updateTeam.jsp");
   }
-  else if(leader != null && Integer.parseInt(mLeader) == 1){
+  else if(leader != null && Integer.parseInt(mLeader) == 1 && sM.getTeamLeader() != 1){
     session.setAttribute("editMemberFail", "Error. Can't set multiple members as leader. Please change the leader to a normal member first.");
     session.setAttribute("editMember", "blahblah");
     session.setAttribute("mId", mId);
@@ -328,7 +330,8 @@ else if (request.getParameter("editMemberInfo") != null) {
     userBean.updateTeam(t);
     session.removeAttribute("editMember");
     session.removeAttribute("editMemberFail");
-    session.setAttribute("teamSuccess", "Successfully edited the info for " + m.getFirstName() + " " + m.getLastName() +".");
+    session.removeAttribute("member");
+    session.setAttribute("teamSuccess", "Successfully edited the info for " + mFName + " " + mLName +".");
     response.sendRedirect("../Team/manageTeamPage.jsp");
   }
   else{

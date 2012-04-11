@@ -45,7 +45,7 @@
   <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
@@ -124,7 +124,7 @@
                 if(userBean.updateProject(p) == false) {
                     out.print("An unexpected error has occured while updating the project!");
                 } else {
-                    out.print("<h1>Project " + p.getPrjName() + " has been approved!</h1>");
+                    session.setAttribute("approveSuccess", "Project " + p.getPrjName() + " has been approved!");
                 }
             %>
         </td>

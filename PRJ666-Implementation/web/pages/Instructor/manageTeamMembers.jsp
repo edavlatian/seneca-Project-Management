@@ -156,17 +156,17 @@
                 out.println("<a href='manageTeamMembers.jsp?items=" + members.size() + "'>View All</a>");
                 out.println("</div>");
                 out.println("<div style='clear: both'></div>");
-                if(session.getAttribute("Error") != null) {
-                  out.println("<span style='color: red'>" + session.getAttribute("Error") + "</span>");
-                  session.removeAttribute("Error");
-                }
-                else if(session.getAttribute("memberSuccess") != null){
-                  out.println("<span style='color: green'>" + session.getAttribute("memberSuccess") + "</span>");
-                  session.removeAttribute("memberSuccess");                 
-                }
                 out.println("</div>");
             } else {
                 out.println("There are no active team members right now! =/");
+            }
+            if(session.getAttribute("memberError") != null) {
+              out.println("<span style='color: red'>" + session.getAttribute("memberError") + "</span>");
+              session.removeAttribute("memberError");
+            }
+            else if(session.getAttribute("memberSuccess") != null){
+              out.println("<span style='color: green'>" + session.getAttribute("memberSuccess") + "</span>");
+              session.removeAttribute("memberSuccess");                 
             }
           %>
           </form>

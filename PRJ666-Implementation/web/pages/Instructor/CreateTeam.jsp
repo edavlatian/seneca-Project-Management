@@ -17,17 +17,6 @@
     else {
         response.sendRedirect("/PRJ666-Implementation/pages/Home.jsp");
     }
-    
-    Accounts a = new Accounts();
-    a.setUserIdentifier(Validation.getPRJ566SemesterUsername());
-    a.setUserFName("");
-    a.setUserLName("");
-    a.setUserEmail("");
-    a.setUserRole("");
-    a.setAccountStatus(1);
-    if(session.getAttribute("Account") != null) {
-        a = (Accounts) session.getAttribute("Account");
-    }
 %>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -117,9 +106,18 @@
                 Account Information
             </div>
             <div style="padding: 5px">
-                <div style="float: left; width: 150px">User Name:</div>
+                <div style="float: left; width: 150px">Section:</div>
                 <div style="float: left">
-                    <input type="text" name="id_user" value="<%= request.getParameter("id_user") == null ? Validation.getPRJ566SemesterUsername() : request.getParameter("id_user") %>" readonly/>
+                    <select name="id_section">
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                    </select>
                 </div>
                 <div style="clear: both;"></div>
                 <div style="float: left; width: 150px">First Name:</div>
@@ -157,21 +155,6 @@
                             session.removeAttribute("email");
                         }
                     %>
-                <div style="clear: both"></div>
-                <div style="float: left; width: 150px">Role:</div>
-                <div style="float: left">
-                    <select name="id_role">
-                        <option value="TL" <%= a.getUserRole().equals("TL") ? "selected" : "" %>>Team Leader</option>
-                    </select>
-                </div>
-                <div style="clear: both"></div>
-                <div style="float: left; width: 150px">Status:</div>
-                <div style="float: left">
-                    <select name="id_status">
-                        <option value="1" <%= a.getAccountStatus() == 1 ? "selected" : "" %>>Active</option>
-                        <option value="0" <%= a.getAccountStatus() == 0 ? "selected" : "" %>>Inactive</option>
-                    </select>
-                </div>
                 <div style="clear: both"></div>
             </div>
             <div style="background-color: #D5E7E9; padding: 5px; text-align: right">

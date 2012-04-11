@@ -50,7 +50,7 @@
     <body>
     <table> 
       <tr>
-        <td width="355px"style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
+        <td width="355px" style="background-image: url('../resources/images/header_left.jpg'); background-repeat: no-repeat;">&nbsp;</td>
         <td width="900px" style="background-image: url('../resources/images/header_bg.jpg'); background-repeat: repeat;">
           <a href="/PRJ666-Implementation/pages/Home.jsp" style="color: black;"><center><h2>WELCOME TO PRJ566<br/> Project Planning and Management</h2></center></a>
         </td>
@@ -204,11 +204,7 @@
             <%}            
         }
         %>
-        <% if(team!=null && team.getTeamId()!=0){%>
-        <p>Assigned Team: <a href="#"><%=team.getTeamName()%></a></p>
-        <%}else{%>
-        <p><strong>Currently no team assigned</strong></p>
-        <%}
+        <%
           if(proj.getStatus().equals("PA")){
         %><a href="AddProjectComment.jsp?id=<%=id%>">Click Here to add a comment to this project</a><%
           }

@@ -41,8 +41,12 @@ public class Validation {
         boolean value = true;
         
         try {
-            PersistenceController pc = new PersistenceController();
-            if(pc.getAccount(username) != null) {
+            if(username.matches("^\\w+$")) {
+                PersistenceController pc = new PersistenceController();
+                if(pc.getAccount(username) != null) {
+                    value = false;
+                }
+            } else {
                 value = false;
             }
         }
@@ -96,11 +100,11 @@ public class Validation {
         return value;
     }
     
-    public static String getPRJ566SemesterUsername() {
+    public static String getPRJ566SemesterUsername(String section) {
         String value = "";
         Integer i = 1;
         do {
-            value = getSemesterToday().replace("PRJ6", "PRJ5") + "_" + i + "A";
+            value = getSemesterToday().replace("PRJ6", "PRJ5") + "_" + i + section;
             i++;
         } while(isValidUsername(value) == false);
         return value;
