@@ -130,7 +130,13 @@
         <tr>
                 <td><%= proj.getStatus() %></td>
                 <td><a href="ViewProjectDetails.jsp?id=<%=proj.getProjectId()%>"><%= proj.getPrjName() %></a></td>
-                <td><%= proj.getDescription() %></td>
+                <%
+                String desc = proj.getDescription();
+                if (desc.length() > 50){
+                    desc = proj.getDescription().substring(0, 50) + "...";
+                }
+                %>
+                <td><%=desc%></td>
         </tr>
         <%
             }

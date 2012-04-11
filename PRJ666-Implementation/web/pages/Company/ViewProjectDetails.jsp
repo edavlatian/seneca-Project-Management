@@ -156,7 +156,23 @@
                 %>                               
             </strong>    
         <h1><%=proj.getPrjName()%></h1>
-        <h2>Status: <%=proj.getStatus()%></h2>
+        <%
+            String status = proj.getStatus();
+            
+            if(status.equals("PE"))
+                status = "Pending";
+            else if(status.equals("AP"))
+                status = "Approved";
+            else if(status.equals("AV"))
+                status = "Available";
+            else if(status.equals("MA"))
+                status = "Matched";
+            else if(status.equals("PR"))
+                status = "Proceeded";
+            else if(status.equals("PA"))
+                status = "Past";
+        %>
+        <h2>Status: <%=status%></h2>
         <%
         if(proj.getStatus().equals("PE")){
             %>

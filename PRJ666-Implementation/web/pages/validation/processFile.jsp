@@ -52,11 +52,9 @@
             errorFound = true;
             errors += "&ffile=2";
         }else{
-            if(!mTheFile.startsWith("http://")){
-                if(!mTheFile.startsWith("ftp://")){
+            if(!mTheFile.startsWith("http://") && !mTheFile.startsWith("https://")  && !mTheFile.startsWith("ftp://")){
                 String temp = "http://" + mTheFile;
                 mTheFile = temp;
-                }
             }
             projFile.setTheFile(mTheFile);
         }
@@ -106,11 +104,9 @@
             errorFound = true;
             errors += "&ffile=2";
         }else{
-             if(!mTheFile.startsWith("http://")){
-                if(!mTheFile.startsWith("ftp://")){
+             if(!mTheFile.startsWith("http://") && !mTheFile.startsWith("https://") && !mTheFile.startsWith("ftp://") ){
                 String temp = "http://" + mTheFile;
                 mTheFile = temp;
-                }
             }
             projFile.setTheFile(mTheFile);
         }
