@@ -52,6 +52,12 @@
             errorFound = true;
             errors += "&ffile=2";
         }else{
+            if(!mTheFile.startsWith("http://")){
+                if(!mTheFile.startsWith("ftp://")){
+                String temp = "http://" + mTheFile;
+                mTheFile = temp;
+                }
+            }
             projFile.setTheFile(mTheFile);
         }
         
@@ -86,7 +92,7 @@
         if(mDescription == null || mDescription.isEmpty() ){
             errorFound = true;
             errors += "&fdesc=1";
-        }else if(mDescription.length() > 6500){
+        }else if(mDescription.length() > 65000){
             errorFound = true;
             errors += "&fdesc=2";
         }else{
@@ -100,6 +106,12 @@
             errorFound = true;
             errors += "&ffile=2";
         }else{
+             if(!mTheFile.startsWith("http://")){
+                if(!mTheFile.startsWith("ftp://")){
+                String temp = "http://" + mTheFile;
+                mTheFile = temp;
+                }
+            }
             projFile.setTheFile(mTheFile);
         }
         if(!errorFound){

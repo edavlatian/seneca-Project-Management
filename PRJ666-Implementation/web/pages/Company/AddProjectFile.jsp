@@ -166,7 +166,7 @@
                 </tr>
                 <tr style="vertical-align: top;">
                     <td>File Location:</br><em style="color: gray; font-size: 12px;">The full URL of the file.<br/>http://web.com/files/conn.doc</em></td>
-                    <td style="vertical-align: top;"><input type="text" size="40" name="projectfileTheFile" /></td>
+                    <td style="vertical-align: top;"><input type="text" size="40" name="projectfileTheFile" value="http://" /></td>
                     <td>
                         <strong style="color:red;">
                             <%
